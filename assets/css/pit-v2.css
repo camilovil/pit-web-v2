@@ -1,0 +1,99 @@
+/* PIT v2 — piel Docshield compartida (nav pill, footer gradiente, tokens navy) */
+
+/* ---- remap de tokens: navy + blanco + radios suaves ---- */
+:root:root {
+  --v2-navy: #000B33;
+  --v2-navy-80: #1A2447;
+  --v2-slate: #5A6773;
+  --v2-blue: #2563EB;
+  --v2-blue-soft: #5B7FDE;
+  --v2-tint: #EFF4FE;
+  --pit-ink: #000B33;
+  --pit-ink-80: #1A2447;
+  --pit-ink-60: #55616D;
+  --pit-ink-40: #5F6C78;
+  --pit-paper: #FFFFFF;
+  --pit-paper-pure: #FFFFFF;
+  --pit-radius: 16px;
+}
+body { padding-top: 84px; background: #FFFFFF; }
+
+/* ---- botones pill ---- */
+.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: 15px; line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+.v2-btn:hover { transform: translateY(-2px); }
+.v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
+.v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
+.v2-btn--white { background: #FFFFFF; color: var(--v2-navy); box-shadow: 0 4px 16px rgba(0,11,51,0.12); }
+.v2-btn--white:hover { color: var(--v2-blue); box-shadow: 0 12px 28px rgba(0,11,51,0.18); }
+.v2-btn--blue { background: var(--v2-blue); color: #FFFFFF; }
+.v2-btn--blue:hover { background: #1E4FC4; color: #FFFFFF; box-shadow: 0 12px 28px rgba(37,99,235,0.3); }
+
+/* los botones del DS heredan la forma pill */
+.pit-btn { border-radius: 999px !important; }
+
+/* ---- nav pill flotante ---- */
+.v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
+.v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+.v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; }
+.v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
+.v2-nav-links a.active { opacity: 1; color: var(--v2-blue); }
+.v2-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 10px; box-sizing: border-box; background: none; border: none; cursor: pointer; }
+.v2-burger span { display: block; height: 2px; background: var(--v2-navy); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+.v2-drawer { display: none; }
+
+@media (max-width: 860px) {
+  .v2-nav { gap: 12px; padding: 8px 8px 8px 20px; }
+  .v2-nav-links, .v2-nav .v2-nav-cta { display: none; }
+  .v2-burger { display: flex; margin-left: auto; }
+  .v2-drawer { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 490; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); padding: 110px 32px 40px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; counter-reset: v2nav; }
+  .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
+  .v2-drawer a { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
+  .v2-drawer a::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
+  .v2-drawer .v2-btn { margin-top: auto; }
+  .v2-drawer .v2-btn::before { content: none; }
+  .v2-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .v2-burger.open span:nth-child(2) { opacity: 0; }
+  .v2-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* ---- footer gradiente ---- */
+.v2-footer { position: relative; background: linear-gradient(150deg, #3D5AA8 0%, #5B76B8 28%, #7E96CC 55%, #8F98B4 80%, #A98F79 100%); color: #FFFFFF; border-radius: 28px; margin: 24px; padding: clamp(44px, 5vw, 64px) clamp(28px, 4vw, 56px); display: flex; flex-direction: column; min-height: 540px; box-sizing: border-box; overflow: hidden; }
+.v2-footer::before { content: ''; position: absolute; inset: 0; background: linear-gradient(150deg, transparent 40%, rgba(0,11,51,0.28) 100%); pointer-events: none; }
+.v2-footer > * { position: relative; z-index: 1; }
+.v2-footer a { color: #FFFFFF; transition: opacity 0.2s ease; }
+.v2-footer a:hover { color: #FFFFFF; opacity: 0.75; }
+.v2-footer-top { display: flex; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
+.v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: 15px; font-weight: 500; }
+.v2-footer-claim { max-width: 380px; }
+.v2-footer-claim h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 18px; color: #FFFFFF; }
+.v2-footer-avatars { display: flex; }
+.v2-footer-avatars img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); margin-left: -10px; }
+.v2-footer-avatars img:first-child { margin-left: 0; }
+.v2-footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-top: auto; padding-top: clamp(48px, 8vw, 120px); }
+.v2-footer-brand { font-weight: 700; font-size: clamp(44px, 5.5vw, 72px); letter-spacing: -0.03em; color: #FFFFFF; line-height: 1; display: flex; align-items: center; gap: 18px; }
+.v2-footer-brand .pipe { width: 6px; height: 0.85em; background: #FFFFFF; border-radius: 3px; opacity: 0.9; }
+.v2-footer-contact { display: grid; gap: 8px; font-size: 15px; text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+.v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+@media (max-width: 700px) { .v2-footer-contact { text-align: left; } .v2-footer { margin: 12px; } }
+
+/* ================= Docshield-ización de las subpáginas ================= */
+
+/* la regla negra editorial no existe en la nueva estética */
+.pit-ruler.pit-ruler { display: none; }
+
+/* eyebrow → pill chip suave */
+.pit-eyebrow { display: inline-flex; align-items: center; background: var(--v2-tint); color: var(--v2-blue) !important; border: 1px solid rgba(37,99,235,0.18); border-radius: 999px; padding: 7px 14px; font-size: 10px !important; letter-spacing: 0.14em !important; }
+[style*="background: var(--pit-ink);"] .pit-eyebrow, [style*="background:var(--pit-ink);"] .pit-eyebrow { background: rgba(255,255,255,0.10); color: #AFC4F5 !important; border-color: rgba(255,255,255,0.18); }
+
+/* títulos más compactos, estilo Docshield */
+.pit-section-title, .pit-title, .pit-display { letter-spacing: -0.028em !important; font-weight: 600 !important; }
+
+/* hero de subpágina: degradado azul suave arriba (no aplica a heros oscuros con texto claro) */
+section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: linear-gradient(180deg, #DCE6FB 0%, #F2F6FE 55%, #FFFFFF 100%) !important; border-radius: 0 0 28px 28px; }
+
+/* chips pill */
+.pit-chip { border-radius: 999px !important; }
+
+/* detalles/acordeones y cards heredan radio suave del token 16px; sombra flotante al hover */
+details { transition: box-shadow 0.3s ease; }
+details[open] { box-shadow: 0 16px 40px rgba(0,11,51,0.08); }

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Curso introductorio gratuito de PIT (neuroproloterapia) por el Dr. Ricardo D. Frusso. Sin costo y sin registro.">
+  <meta name="robots" content="noindex, nofollow"><!-- staging: quitar al conectar dominio -->
+  <meta name="author" content="Dr. Ricardo D. Frusso">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Curso de Introducción a PIT — gratis · Dr. Frusso">
+  <meta property="og:description" content="El método explicado por el Dr. Frusso. Sin costo y sin registro.">
+  <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="PIT · Dr. Frusso">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Curso de Introducción a PIT — gratis · Dr. Frusso</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#000B33">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/ds.css">
+  <link rel="stylesheet" href="assets/css/pit-mobile.css">
+  <link rel="stylesheet" href="assets/css/pit-motion.css">
+  <style>
+    /* remap de tokens v2 (esta página no usa la nav pill: barra de aula propia) */
+    :root:root { --pit-ink: #000B33; --pit-ink-80: #1A2447; --pit-ink-60: #55616D; --pit-ink-40: #5F6C78; --pit-paper: #FFFFFF; --pit-paper-pure: #FFFFFF; --pit-radius: 16px; }
+    .pit-btn { border-radius: 999px !important; }
+    body { margin: 0; background: #FAFAF7; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1E3A8A; }
+  </style>
+</head>
+<body>
+
+<div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper); min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- ============ BARRA SUPERIOR (aula) ============ -->
+  <header style="background: var(--pit-ink); color: var(--pit-paper); position: sticky; top: 0; z-index: 50;">
+    <div style="max-width: 1360px; margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 12px 24px;">
+      <a href="index.html" style="text-transform: uppercase; color: var(--pit-paper); flex-shrink: 0;">
+        <span class="pit-logo pit-logo--on-dark"><span class="pit-logo-dr" style="color: #FFFFFF;">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span style="color: #FFFFFF;">Ricardo D.</span><span style="color: #FFFFFF;">Frusso</span></span></span>
+      </a>
+      <span class="m-hide" style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+        <span class="pit-pipe pit-pipe--blue" style="display: inline-block; width: 4px; height: 28px; background: var(--pit-blue, #2563EB); border-radius: 2px;"></span>
+        <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;">Curso gratuito · Introducción a PIT</span>
+      </span>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
+        <span id="ci-progress-label" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); white-space: nowrap;">0/4 · 0%</span>
+        <div class="m-bar" style="width: 160px; height: 6px; background: rgba(255,255,255,0.18); border-radius: 999px; overflow: hidden;">
+          <div id="ci-progress-fill" style="height: 100%; background: #2563EB; border-radius: 999px; width: 0%; transition: width .3s ease;"></div>
+        </div>
+        <a class="m-hide" href="index.html#contenido" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">← Volver al sitio</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ AULA: sidebar + contenido ============ -->
+  <div class="m-stack0" style="max-width: 1360px; margin: 0 auto; width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 360px 1fr; gap: 0; align-items: start; flex: 1;">
+
+    <!-- ---- Sidebar de lecciones ---- -->
+    <aside class="m-order2" style="border-right: 1px solid var(--pit-ink-10); background: var(--pit-paper-pure); align-self: stretch;">
+      <div style="padding: 28px 24px 18px; border-bottom: 1px solid var(--pit-ink-10);">
+        <p class="pit-eyebrow">Contenido del curso</p>
+        <h2 style="font-size: 21px; font-weight: 600; margin: 10px 0 6px;"><span class="hover-underline">Introducción a PIT</span></h2>
+        <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 0;">2 videos · 2 autoevaluaciones · gratis</p>
+      </div>
+      <div id="ci-lessons" style="display: grid;"></div>
+      <div id="ci-alldone" style="padding: 20px 24px; display: none;">
+        <div style="background: var(--pit-blue-tint); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 16px 18px;">
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Curso completado</span>
+          <p style="font-size: 14px; line-height: 1.5; color: var(--pit-ink-60); margin: 8px 0 0;">¿Querés profundizar? El Módulo I (Lumbalgia y Rodilla) te espera.</p>
+          <a href="curso-modulo-1.html" style="display: inline-block; margin-top: 10px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Ver el curso completo →</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ---- Contenido de la lección ---- -->
+    <main id="ci-main" class="m-pad2" style="padding: 36px 48px 64px; min-width: 0;"></main>
+  </div>
+</div>
+
+<script>
+// Aula del curso intro — vanilla JS (portado del diseño reactivo)
+(function () {
+  var LESSONS = [
+    {
+      kind: 'video',
+      title: 'Bienvenida: qué es PIT y qué vas a aprender',
+      meta: 'VIDEO · 06 MIN',
+      poster: 'https://drricardofrusso.com/img/DSC_0086.jpg',
+      videoNote: 'Video pendiente de carga',
+      desc: 'El Dr. Frusso presenta el método: por qué el dolor crónico muchas veces nace en un nervio periférico sensibilizado, qué hace PIT para desinflamarlo y qué vas a encontrar en este curso gratuito.'
+    },
+    {
+      kind: 'video',
+      title: 'Materiales necesarios para PIT',
+      meta: 'VIDEO · 12 MIN',
+      poster: 'https://drricardofrusso.com/img/DSC_0098.jpg',
+      videoNote: 'Video pendiente de carga',
+      desc: 'Instructivo filmado en consultorio: qué materiales se necesitan para aplicar PIT, cómo se prepara la solución de glucosa al 5% y cómo se organiza la mesa de trabajo antes de una sesión.'
+    },
+    {
+      kind: 'quiz',
+      title: 'Autoevaluación · Conceptos de PIT',
+      meta: '3 PREGUNTAS',
+      desc: 'Verificá que los conceptos del video de bienvenida quedaron claros. Elegí una opción por pregunta y corregí al final. Necesitás al menos 2 correctas para aprobar.',
+      questions: [
+        { text: '¿Qué solución se utiliza en las inyecciones de PIT?', options: ['Corticoides', 'Glucosa al 5%', 'Ácido hialurónico'], correct: 1 },
+        { text: '¿Dónde actúa principalmente el tratamiento?', options: ['En la articulación', 'En el músculo', 'En el nervio periférico sensibilizado'], correct: 2 },
+        { text: '¿Cuántas sesiones tiene un tratamiento típico?', options: ['Una sola sesión', 'Entre 4 y 8 sesiones', 'Más de 20 sesiones'], correct: 1 }
+      ]
+    },
+    {
+      kind: 'quiz',
+      title: 'Autoevaluación · Materiales y preparación',
+      meta: '3 PREGUNTAS',
+      desc: 'Repasá el instructivo de materiales antes de responder. Elegí una opción por pregunta y corregí al final. Necesitás al menos 2 correctas para aprobar.',
+      questions: [
+        { text: 'Las inyecciones de PIT son:', options: ['Intraarticulares profundas', 'Subcutáneas y superficiales', 'Intramusculares'], correct: 1 },
+        { text: '¿Qué tipo de aguja se utiliza habitualmente?', options: ['Aguja fina de uso subcutáneo', 'Trocar de biopsia', 'Cualquier aguja disponible'], correct: 0 },
+        { text: '¿PIT es compatible con otros tratamientos en curso?', options: ['No, hay que suspenderlos', 'Sí, es un tratamiento complementario', 'Solo con cirugía previa'], correct: 1 }
+      ]
+    }
+  ];
+
+  var STORAGE_KEY = 'pit-curso-intro-v1';
+  var state = { active: 0, done: [false, false, false, false], answers: {}, submitted: {} };
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (saved && Array.isArray(saved.done)) {
+      state.active = saved.active || 0;
+      state.done = saved.done;
+    }
+  } catch (e) {}
+
+  function persist() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ active: state.active, done: state.done })); } catch (e) {}
+  }
+  function setDone(idx, val) { state.done[idx] = val; persist(); render(); }
+  function go(idx) {
+    if (idx < 0 || idx >= LESSONS.length) return;
+    state.active = idx; persist(); render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  function renderSidebar() {
+    var el = document.getElementById('ci-lessons');
+    el.innerHTML = '';
+    LESSONS.forEach(function (l, i) {
+      var isActive = i === state.active;
+      var isDone = state.done[i];
+      var row = document.createElement('div');
+      row.style.cssText = 'display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 18px 24px; cursor: pointer; border-bottom: 1px solid var(--pit-ink-05); border-left: 3px solid ' +
+        (isActive ? 'var(--pit-blue)' : 'transparent') + '; background: ' + (isActive ? 'var(--pit-blue-tint)' : 'transparent') + ';';
+      var numStyle = 'width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 12px; margin-top: 2px; ' +
+        (isDone ? 'background: var(--pit-blue); color: #FFFFFF;'
+          : 'border: 1px solid ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-20)') + '; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + ';');
+      row.innerHTML =
+        '<span style="' + numStyle + '">' + (isDone ? '✓' : String(i + 1).padStart(2, '0')) + '</span>' +
+        '<span style="min-width: 0;">' +
+          '<span style="display: block; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + '; margin-bottom: 4px;">' + (l.kind === 'video' ? 'Video' : 'Autoevaluación') + '</span>' +
+          '<span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3;">' + esc(l.title) + '</span>' +
+          '<span style="display: block; font-family: var(--pit-font-mono); font-size: 11px; color: var(--pit-ink-40); margin-top: 4px;">' + l.meta + '</span>' +
+        '</span>';
+      row.addEventListener('click', function () { go(i); });
+      el.appendChild(row);
+    });
+  }
+
+  function bottomNav() {
+    var a = state.active;
+    var html = '<div style="display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; border-top: 1px solid var(--pit-ink-10); padding-top: 20px;">';
+    html += a > 0
+      ? '<span data-go="' + (a - 1) + '" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); cursor: pointer;">← ' + esc(LESSONS[a - 1].title) + '</span>'
+      : '<span></span>';
+    if (a < LESSONS.length - 1) {
+      html += '<span data-go="' + (a + 1) + '" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; text-align: right;">' + esc(LESSONS[a + 1].title) + ' →</span>';
+    }
+    return html + '</div>';
+  }
+
+  function renderMain() {
+    var main = document.getElementById('ci-main');
+    var a = state.active;
+    var cur = LESSONS[a];
+    var isDone = state.done[a];
+    var html = '';
+
+    html += '<div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">';
+    html += '<p class="pit-eyebrow" style="margin: 0;">Lección ' + String(a + 1).padStart(2, '0') + ' · ' + (cur.kind === 'video' ? 'Video' : 'Autoevaluación') + '</p>';
+    if (isDone) html += '<span class="pit-chip pit-chip--blue">✓ Completada</span>';
+    html += '</div>';
+    html += '<h1 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.12; margin: 14px 0 24px; max-width: 26ch;">' + esc(cur.title) + '</h1>';
+
+    if (cur.kind === 'video') {
+      html += '<div style="position: relative; aspect-ratio: 16 / 9; background: var(--pit-ink); border-radius: var(--pit-radius); overflow: hidden;">' +
+        '<img src="' + cur.poster + '" alt="Fotograma del video" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.45;">' +
+        '<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;">' +
+          '<span style="width: 84px; height: 84px; border-radius: 50%; background: var(--pit-blue); display: flex; align-items: center; justify-content: center; cursor: pointer;">' +
+            '<span style="width: 0; height: 0; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 22px solid #FFFFFF; margin-left: 6px;"></span>' +
+          '</span>' +
+          '<span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85);">' + cur.videoNote + '</span>' +
+        '</div>' +
+        '<span style="position: absolute; right: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: 12px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.5); border-radius: var(--pit-radius); padding: 3px 8px;">' + cur.meta + '</span>' +
+      '</div>';
+      html += '<p style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--pit-ink-40); margin: 12px 0 0;">Reproductor listo: cuando tengas el archivo final (o el link de Vimeo/YouTube), se conecta acá.</p>';
+      html += '<p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 24px 0 0; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
+      html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 32px;">';
+      if (!isDone) {
+        html += '<button data-act="done" class="pit-btn pit-btn--primary" type="button">Marcar como completada →</button>';
+      } else if (a < LESSONS.length - 1) {
+        html += '<button data-go="' + (a + 1) + '" class="pit-btn pit-btn--primary" type="button">Siguiente lección →</button>';
+      }
+      html += '</div>';
+    } else {
+      // quiz
+      var qa = state.answers[a] || {};
+      var submitted = !!state.submitted[a];
+      var score = 0;
+      html += '<p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 28px; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
+      html += '<div style="display: grid; gap: 20px; max-width: 720px;">';
+      cur.questions.forEach(function (q, qi) {
+        var picked = qa[qi];
+        if (submitted && picked === q.correct) score++;
+        html += '<div style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 24px 26px;">';
+        html += '<span style="font-family: var(--pit-font-mono); font-size: 12px; color: var(--pit-blue);">PREGUNTA ' + (qi + 1) + ' DE ' + cur.questions.length + '</span>';
+        html += '<h3 style="font-size: 18px; font-weight: 600; line-height: 1.35; margin: 8px 0 16px;">' + esc(q.text) + '</h3>';
+        html += '<div style="display: grid; gap: 10px;">';
+        q.options.forEach(function (label, oi) {
+          var isPicked = picked === oi;
+          var isCorrect = q.correct === oi;
+          var border = 'var(--pit-ink-10)', bg = 'transparent', tag = '', tagColor = 'var(--pit-ink-40)';
+          if (!submitted && isPicked) { border = 'var(--pit-blue)'; bg = 'var(--pit-blue-tint)'; }
+          if (submitted && isCorrect) { border = 'var(--pit-blue)'; bg = 'var(--pit-blue-tint)'; tag = isPicked ? '✓ Correcta' : 'Respuesta correcta'; tagColor = 'var(--pit-blue)'; }
+          if (submitted && isPicked && !isCorrect) { border = 'var(--pit-ink-40)'; tag = 'Tu respuesta'; }
+          var letterStyle = isPicked || (submitted && isCorrect)
+            ? 'background: var(--pit-blue); color: #FFFFFF;'
+            : 'border: 1px solid var(--pit-ink-20); color: var(--pit-ink-40);';
+          html += '<div data-pick="' + qi + ':' + oi + '" style="display: flex; gap: 14px; align-items: center; padding: 13px 16px; border: 1px solid ' + border + '; border-radius: var(--pit-radius); background: ' + bg + '; cursor: ' + (submitted ? 'default' : 'pointer') + ';">' +
+            '<span style="flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 12px; ' + letterStyle + '">' + String.fromCharCode(65 + oi) + '</span>' +
+            '<span style="font-size: 15px; line-height: 1.45;">' + esc(label) + '</span>' +
+            (tag ? '<span style="margin-left: auto; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: ' + tagColor + '; white-space: nowrap;">' + tag + '</span>' : '') +
+          '</div>';
+        });
+        html += '</div></div>';
+      });
+      html += '</div>';
+
+      var answeredCount = Object.keys(qa).length;
+      if (!submitted) {
+        html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 28px;">';
+        html += '<button data-act="submit" class="pit-btn pit-btn--primary" type="button">Corregir respuestas</button>';
+        html += '<span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">' + answeredCount + ' de ' + cur.questions.length + ' respondidas</span>';
+        html += '</div>';
+      } else {
+        var passed = score >= 2;
+        html += '<div style="margin-top: 28px; max-width: 720px; border-radius: var(--pit-radius); padding: 22px 26px; ' +
+          (passed ? 'background: var(--pit-blue-tint); border: 1px solid var(--pit-blue);' : 'background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-20);') + '">';
+        html += '<span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: ' + (passed ? 'var(--pit-blue)' : 'var(--pit-ink-60)') + ';">' + (passed ? 'Autoevaluación aprobada' : 'Todavía no') + '</span>';
+        html += '<p style="font-size: 16px; font-weight: 600; margin: 8px 0 4px;">' + score + ' de ' + cur.questions.length + ' correctas</p>';
+        html += '<p style="font-size: 14px; line-height: 1.55; color: var(--pit-ink-60); margin: 0;">' +
+          (passed ? 'Quedó registrada como completada. Podés seguir con la próxima lección.' : 'Repasá el video correspondiente y volvé a intentarlo — no hay límite de intentos.') + '</p>';
+        html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 18px;">';
+        if (passed && a < LESSONS.length - 1) {
+          html += '<button data-go="' + (a + 1) + '" class="pit-btn pit-btn--primary" type="button">Siguiente lección →</button>';
+        }
+        html += '<span data-act="retry" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Reintentar</span>';
+        html += '</div></div>';
+      }
+    }
+
+    html += bottomNav();
+    main.innerHTML = html;
+  }
+
+  function renderHeader() {
+    var doneCount = state.done.filter(Boolean).length;
+    var pct = Math.round((doneCount / LESSONS.length) * 100);
+    document.getElementById('ci-progress-label').textContent = doneCount + '/' + LESSONS.length + ' · ' + pct + '%';
+    document.getElementById('ci-progress-fill').style.width = pct + '%';
+    document.getElementById('ci-alldone').style.display = doneCount === LESSONS.length ? 'block' : 'none';
+  }
+
+  function render() { renderSidebar(); renderMain(); renderHeader(); }
+
+  // delegación de eventos del contenido
+  document.getElementById('ci-main').addEventListener('click', function (e) {
+    var goEl = e.target.closest('[data-go]');
+    if (goEl) { go(parseInt(goEl.getAttribute('data-go'), 10)); return; }
+    var act = e.target.closest('[data-act]');
+    if (act) {
+      var kind = act.getAttribute('data-act');
+      var a = state.active;
+      var cur = LESSONS[a];
+      if (kind === 'done') { setDone(a, true); return; }
+      if (kind === 'submit') {
+        var qa = state.answers[a] || {};
+        if (Object.keys(qa).length < cur.questions.length) return;
+        var sc = 0;
+        cur.questions.forEach(function (q, qi) { if (qa[qi] === q.correct) sc++; });
+        state.submitted[a] = true;
+        if (sc >= 2) { state.done[a] = true; persist(); }
+        render();
+        return;
+      }
+      if (kind === 'retry') {
+        state.answers[a] = {};
+        state.submitted[a] = false;
+        render();
+        return;
+      }
+    }
+    var pick = e.target.closest('[data-pick]');
+    if (pick) {
+      var aI = state.active;
+      if (state.submitted[aI]) return;
+      var parts = pick.getAttribute('data-pick').split(':');
+      state.answers[aI] = state.answers[aI] || {};
+      state.answers[aI][parseInt(parts[0], 10)] = parseInt(parts[1], 10);
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+
+<script src="assets/js/pit-motion.js"></script>
+<script src="assets/js/pit-chat.js"></script>
+<script src="assets/js/pit-lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<style data-page>
+    .fld { display: grid; gap: 6px; }
+    .fld label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
+    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 15px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    .fld input:focus, .fld select:focus, .fld textarea:focus { border-color: var(--pit-blue); }
+    .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
+</style>
+<section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Ruler" accent="end" hint-size="100%,6px"></x-import>
+      <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: start; padding-top: 40px;">
+        <div>
+          <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="220px,18px">Contacto y turnos</x-import>
+          <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px; max-width: 18ch;" hint-size="100%,80px">El consultorio queda en Belgrano.</x-import>
+          <div style="display: grid; gap: 0; border-top: 2px solid var(--pit-ink); margin-top: 28px;">
+            <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
+              <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Dirección</span>
+              <div style="font-size: 17px; font-weight: 600; margin-top: 4px;">Amenabar 2446, Belgrano, CABA</div>
+            </div>
+            <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
+              <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Email</span>
+              <div style="font-size: 17px; font-weight: 600; margin-top: 4px;"><a href="mailto:ricardo.frusso@hospitalitaliano.org.ar" style="color: var(--pit-ink);">ricardo.frusso@hospitalitaliano.org.ar</a></div>
+            </div>
+            <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
+              <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">WhatsApp</span>
+              <div style="font-size: 15px; margin-top: 4px;"><span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Placeholder · Número a confirmar con Ricardo</span></div>
+            </div>
+            <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
+              <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Horarios</span>
+              <div style="font-size: 15px; margin-top: 4px;"><span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Placeholder · Días y horarios de atención</span></div>
+            </div>
+          </div>
+          <div style="margin-top: 24px;"><div class="ph" style="min-height: 220px;"><span>Placeholder · Mapa del consultorio (Google Maps embed)</span></div></div>
+        </div>
+
+        <form id="contacto-form" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 34px 36px;">
+          <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 6px;">Escribinos</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0 0 24px;">Contanos brevemente tu caso o tu consulta y te respondemos por email.</p>
+          <div style="display: grid; gap: 18px;">
+            <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+              <div class="fld"><label for="ct-nombre">Nombre</label><input id="ct-nombre" type="text" placeholder="Tu nombre"></div>
+              <div class="fld"><label for="ct-email">Email</label><input id="ct-email" type="email" placeholder="tu@email.com"></div>
+            </div>
+            <div class="fld">
+              <label for="ct-soy">Soy</label>
+              <select id="ct-soy"><option>Paciente</option><option>Profesional de la salud</option><option>Otro</option></select>
+            </div>
+            <div class="fld"><label for="ct-msg">Mensaje</label><textarea id="ct-msg" rows="5" placeholder="Contanos tu caso o consulta"></textarea></div>
+            <div class="m-col" style="display: flex; align-items: center; gap: 16px;">
+              <button type="submit" class="pit-btn pit-btn--primary">Enviar mensaje →</button>
+              <span style="font-size: 12px; color: var(--pit-ink-40); line-height: 1.5;">Al enviar aceptás la <a href="Privacidad PIT.dc.html">política de privacidad</a>.</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Form de contacto (sin backend aún): abre el cliente de mail con el mensaje precargado
+    (function () {
+      var f = document.getElementById('contacto-form');
+      if (!f) return;
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var nombre = document.getElementById('ct-nombre').value.trim();
+        var email = document.getElementById('ct-email').value.trim();
+        var soy = document.getElementById('ct-soy').value;
+        var msg = document.getElementById('ct-msg').value.trim();
+        var subject = encodeURIComponent('Consulta desde la web — ' + (nombre || 'Sin nombre'));
+        var body = encodeURIComponent('Nombre: ' + nombre + '\nEmail: ' + email + '\nSoy: ' + soy + '\n\n' + msg);
+        window.location.href = 'mailto:ricardo.frusso@hospitalitaliano.org.ar?subject=' + subject + '&body=' + body;
+      });
+    })();
+  </script>

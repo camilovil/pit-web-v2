@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PIT — Neuroproloterapia del Dr. Ricardo D. Frusso. Tratamiento mínimamente invasivo del dolor crónico que actúa desde el nervio. Alivio desde la primera sesión.">
+  <meta name="robots" content="noindex, nofollow"><!-- staging: quitar al conectar dominio -->
+  <meta name="author" content="Dr. Ricardo D. Frusso">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://drricardofrusso.com/">
+  <meta property="og:title" content="PIT · Aliviar el dolor crónico desde el nervio — Dr. Frusso">
+  <meta property="og:description" content="PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. Alivio desde la primera sesión.">
+  <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="PIT · Dr. Frusso">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PIT · Aliviar el dolor crónico desde el nervio — Dr. Frusso">
+  <meta name="twitter:description" content="Tratamiento mínimamente invasivo del dolor crónico. Alivio desde la primera sesión.">
+  <meta name="twitter:image" content="https://drricardofrusso.com/img/og-image.png">
+
+  <title>PIT · Aliviar el dolor crónico desde el nervio — Dr. Ricardo D. Frusso</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="icons/favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="icons/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="icons/favicon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#000B33">
+
+  <link rel="stylesheet" href="assets/css/fonts.css">
+
+  <!-- Preload hero image -->
+  <link rel="preload" as="image" href="https://drricardofrusso.com/img/DSC_0016.jpg" fetchpriority="high">
+
+  <style>
+    /* ---- design-system font tokens (from pit-design-system) ---- */
+    :root {
+      --pit-font-sans: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      --pit-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    /* ---- FrussoDS.Logo lockup ---- */
+    .pit-logo { display: inline-flex; align-items: center; gap: 10px; }
+    .pit-logo-dr { font-family: var(--pit-font-sans); font-weight: 700; font-size: 13px; letter-spacing: .08em; line-height: 1; color: var(--v2-navy); }
+    .pit-logo-pipe { display: inline-block; width: 3px; height: 28px; background: var(--v2-blue); border-radius: 2px; flex-shrink: 0; }
+    .pit-logo-name { display: flex; flex-direction: column; gap: 0; }
+    .pit-logo-name span { font-family: var(--pit-font-sans); font-weight: 700; font-size: 13px; letter-spacing: .04em; line-height: 1.3; color: var(--v2-navy); }
+
+    :root {
+      --v2-navy: #000B33;
+      --v2-navy-80: #1A2447;
+      --v2-slate: #5A6773;
+      --v2-blue: #2563EB;
+      --v2-blue-soft: #5B7FDE;
+      --v2-tint: #EFF4FE;
+      --v2-radius: 20px;
+      --v2-radius-sm: 12px;
+    }
+    body { margin: 0; background: #FFFFFF; color: var(--v2-navy); font-family: var(--pit-font-sans); }
+    a { color: var(--v2-blue); text-decoration: none; }
+    a:hover { color: var(--v2-navy); }
+
+    /* ---- pill buttons ---- */
+    .v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: 15px; line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+    .v2-btn:hover { transform: translateY(-2px); }
+    .v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
+    .v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
+    .v2-btn--white { background: #FFFFFF; color: var(--v2-navy); box-shadow: 0 4px 16px rgba(0,11,51,0.12); }
+    .v2-btn--white:hover { color: var(--v2-blue); box-shadow: 0 12px 28px rgba(0,11,51,0.18); }
+    .v2-btn--ghost { background: rgba(255,255,255,0.35); color: var(--v2-navy); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); }
+    .v2-btn--ghost:hover { background: rgba(255,255,255,0.55); color: var(--v2-navy); }
+    .v2-btn--blue { background: var(--v2-blue); color: #FFFFFF; }
+    .v2-btn--blue:hover { background: #1E4FC4; color: #FFFFFF; box-shadow: 0 12px 28px rgba(37,99,235,0.3); }
+
+    .v2-eyebrow { font-family: var(--pit-font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+    .v2-title { font-weight: 600; font-size: clamp(30px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.025em; margin: 0; text-wrap: pretty; }
+
+    /* ---- nav pill ---- */
+    .v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
+    .v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+    .v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; }
+    .v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
+    .v2-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 10px; box-sizing: border-box; background: none; border: none; cursor: pointer; }
+    .v2-burger span { display: block; height: 2px; background: var(--v2-navy); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+    .v2-drawer { display: none; }
+
+    /* ---- hero ---- */
+    .v2-hero { position: relative; min-height: 92vh; background: linear-gradient(165deg, #4A6ED0 0%, #7D9AE6 34%, #C7D5F5 62%, #FFFFFF 100%); overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 150px 24px 0; }
+    .v2-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255,255,255,0.14) 0%, transparent 70%); pointer-events: none; }
+    .v2-hero-eyebrow { color: rgba(255,255,255,0.85); margin-bottom: 22px; }
+    .v2-hero h1 { color: #FFFFFF; font-weight: 600; font-size: clamp(40px, 6.2vw, 72px); line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 20px; max-width: 20ch; text-wrap: balance; }
+    .v2-hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6; max-width: 56ch; margin: 0 0 34px; }
+    .v2-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2; }
+    .v2-hero-photo { position: relative; z-index: 1; width: min(520px, 80vw); margin-top: 12px; }
+    .v2-hero-photo img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; object-position: center 20%; display: block; border-radius: 28px 28px 0 0; -webkit-mask-image: linear-gradient(to bottom, black 62%, transparent 100%); mask-image: linear-gradient(to bottom, black 62%, transparent 100%); }
+    .v2-hero-badge { position: absolute; top: 18px; right: -14px; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border-radius: 999px; padding: 10px 18px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--v2-navy); box-shadow: 0 8px 24px rgba(0,11,51,0.15); }
+
+    /* ---- trust strip ---- */
+    .v2-trust { background: #FFFFFF; padding: 34px 24px 44px; text-align: center; }
+    .v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
+    .v2-trust-row { display: flex; align-items: center; justify-content: center; gap: clamp(28px, 5vw, 64px); flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+    .v2-trust-item { font-family: var(--pit-font-sans); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; color: var(--v2-slate); opacity: 0.85; display: flex; align-items: center; gap: 10px; filter: grayscale(1); transition: opacity 0.25s ease, color 0.25s ease; }
+    .v2-trust-item:hover { opacity: 1; color: var(--v2-navy); }
+    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; text-align: left; line-height: 1.4; }
+
+    /* ---- layout ---- */
+    .v2-section { padding: clamp(56px, 7vw, 100px) 24px; }
+    .v2-wrap { max-width: 1180px; margin: 0 auto; }
+    .v2-card { background: #FFFFFF; border: 1px solid rgba(0,11,51,0.08); border-radius: var(--v2-radius); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.25s ease; }
+    .v2-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(0,11,51,0.10); border-color: rgba(37,99,235,0.35); }
+
+    /* ---- data module ---- */
+    .v2-data { background: var(--v2-tint); border-radius: 28px; padding: clamp(32px, 4vw, 56px); }
+    .v2-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 26px 0 0; }
+    .v2-tab { font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(0,11,51,0.15); background: #FFFFFF; color: var(--v2-navy); cursor: pointer; transition: all 0.25s ease; }
+    .v2-tab:hover { border-color: var(--v2-blue); color: var(--v2-blue); }
+    .v2-tab.active { background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
+    .v2-data-panel { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; margin-top: 36px; }
+    .v2-stat-row { padding: 18px 0; border-bottom: 1px solid rgba(0,11,51,0.08); }
+    .v2-stat-label { font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin-bottom: 8px; }
+    .v2-stat-value { font-weight: 600; font-size: 24px; letter-spacing: -0.02em; }
+    .v2-bar-track { height: 8px; background: rgba(0,11,51,0.08); border-radius: 999px; overflow: hidden; margin-top: 10px; }
+    .v2-bar-fill { height: 100%; background: linear-gradient(90deg, var(--v2-blue), var(--v2-blue-soft)); border-radius: 999px; width: 0; transition: width 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .v2-data-desc { font-size: 16px; line-height: 1.7; color: var(--v2-slate); }
+    .v2-data-desc strong { color: var(--v2-navy); }
+
+    /* ---- counters ---- */
+    .v2-counters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .v2-counter { text-align: center; padding: 34px 16px; }
+    .v2-counter-num { font-weight: 700; font-size: clamp(38px, 4.4vw, 56px); letter-spacing: -0.03em; line-height: 1; color: var(--v2-navy); }
+    .v2-counter-num em { font-style: normal; color: var(--v2-blue); }
+    .v2-counter-label { font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--v2-slate); margin-top: 12px; }
+
+    /* ---- navy sections ---- */
+    .v2-dark { background: var(--v2-navy); color: #FFFFFF; }
+    .v2-dark .v2-title { color: #FFFFFF; }
+
+    /* ---- testimonios: texto gigante + cards inclinadas ---- */
+    .v2-testi { position: relative; padding: clamp(64px, 8vw, 120px) 24px; overflow: hidden; }
+    .v2-testi-giant { font-weight: 600; font-size: clamp(56px, 9vw, 150px); line-height: 0.98; letter-spacing: -0.04em; text-align: center; color: var(--v2-navy); margin: 0; text-wrap: balance; }
+    .v2-testi-cards { position: absolute; inset: 0; pointer-events: none; }
+    .v2-testi-card { position: absolute; width: 250px; border-radius: 18px; padding: 26px 24px 20px; box-shadow: 0 20px 48px rgba(0,11,51,0.12); pointer-events: auto; transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+    .v2-testi-card:hover { transform: rotate(0deg) translateY(-6px) !important; }
+    .v2-testi-card p { font-size: 16px; line-height: 1.45; letter-spacing: -0.01em; color: var(--v2-navy); margin: 0 0 22px; }
+    .v2-testi-author { display: flex; align-items: center; gap: 10px; }
+    .v2-testi-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--v2-navy); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 11px; flex-shrink: 0; }
+    .v2-testi-name { font-weight: 600; font-size: 13px; }
+    .v2-testi-role { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); }
+    .v2-testi-ph { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-blue); background: rgba(37,99,235,0.08); border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 10px; }
+    @media (max-width: 1050px) {
+      .v2-testi-cards { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+      .v2-testi-card { position: static; width: auto; transform: none !important; }
+    }
+    @media (max-width: 560px) { .v2-testi-cards { grid-template-columns: 1fr; } }
+
+    /* ---- FAQ minimal ---- */
+    .v2-faq { max-width: 820px; margin: 0 auto; }
+    .v2-faq details { border-bottom: 1px solid rgba(0,11,51,0.1); }
+    .v2-faq details:first-of-type { border-top: 1px solid rgba(0,11,51,0.1); }
+    .v2-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 4px; font-size: 17px; font-weight: 500; color: var(--v2-navy); transition: color 0.2s ease; }
+    .v2-faq summary:hover { color: var(--v2-blue); }
+    .v2-faq summary::-webkit-details-marker { display: none; }
+    .v2-faq summary::after { content: '+'; width: 26px; height: 26px; border: 1.5px solid rgba(0,11,51,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 400; color: var(--v2-navy); flex-shrink: 0; transition: transform 0.3s ease, background 0.2s ease, color 0.2s ease; }
+    .v2-faq details[open] summary::after { transform: rotate(45deg); background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
+    .v2-faq details > div { padding: 0 4px 24px; font-size: 15px; line-height: 1.7; color: var(--v2-slate); max-width: 66ch; }
+
+    /* ---- footer rico ---- */
+    .v2-footer { position: relative; background: linear-gradient(150deg, #3D5AA8 0%, #5B76B8 28%, #7E96CC 55%, #8F98B4 80%, #A98F79 100%); color: #FFFFFF; border-radius: 28px; margin: 24px; padding: clamp(44px, 5vw, 64px) clamp(28px, 4vw, 56px); display: flex; flex-direction: column; min-height: 540px; box-sizing: border-box; overflow: hidden; }
+    .v2-footer::before { content: ''; position: absolute; inset: 0; background: linear-gradient(150deg, transparent 40%, rgba(0,11,51,0.28) 100%); pointer-events: none; }
+    .v2-footer > * { position: relative; z-index: 1; }
+    .v2-footer a { color: #FFFFFF; transition: opacity 0.2s ease; }
+    .v2-footer a:hover { color: #FFFFFF; opacity: 0.75; }
+    .v2-footer-top { display: flex; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
+    .v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: 15px; font-weight: 500; }
+    .v2-footer-claim { max-width: 380px; }
+    .v2-footer-claim h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 18px; color: #FFFFFF; }
+    .v2-footer-avatars { display: flex; }
+    .v2-footer-avatars img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); margin-left: -10px; }
+    .v2-footer-avatars img:first-child { margin-left: 0; }
+    .v2-footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-top: auto; padding-top: clamp(48px, 8vw, 120px); }
+    .v2-footer-brand { font-weight: 700; font-size: clamp(44px, 5.5vw, 72px); letter-spacing: -0.03em; color: #FFFFFF; line-height: 1; display: flex; align-items: center; gap: 18px; }
+    .v2-footer-brand .pipe { width: 6px; height: 0.85em; background: #FFFFFF; border-radius: 3px; opacity: 0.9; }
+    .v2-footer-contact { display: grid; gap: 8px; font-size: 15px; text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+    .v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+    @media (max-width: 700px) { .v2-footer-contact { text-align: left; } .v2-footer { margin: 12px; } }
+
+    /* ---- reveals coreografiados ---- */
+    @media (prefers-reduced-motion: no-preference) {
+      .v2-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+      .v2-reveal.in { opacity: 1; transform: none; }
+      .v2-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+      .v2-stagger.in > * { opacity: 1; transform: none; }
+      .v2-stagger.in > *:nth-child(1) { transition-delay: 0s; }
+      .v2-stagger.in > *:nth-child(2) { transition-delay: 0.1s; }
+      .v2-stagger.in > *:nth-child(3) { transition-delay: 0.2s; }
+      .v2-stagger.in > *:nth-child(4) { transition-delay: 0.3s; }
+      .v2-stagger.in > *:nth-child(5) { transition-delay: 0.4s; }
+      .v2-stagger.in > *:nth-child(6) { transition-delay: 0.5s; }
+      .v2-hero-eyebrow, .v2-hero h1, .v2-hero-sub, .v2-hero-ctas, .v2-hero-photo { opacity: 0; transform: translateY(24px); animation: v2-up 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
+      .v2-hero h1 { animation-delay: 0.12s; }
+      .v2-hero-sub { animation-delay: 0.24s; }
+      .v2-hero-ctas { animation-delay: 0.36s; }
+      .v2-hero-photo { animation-delay: 0.5s; }
+      @keyframes v2-up { to { opacity: 1; transform: none; } }
+    }
+
+    /* ---- mobile ---- */
+    @media (max-width: 860px) {
+      .v2-nav { gap: 12px; padding: 8px 8px 8px 20px; }
+      .v2-nav-links, .v2-nav .v2-nav-cta { display: none; }
+      .v2-burger { display: flex; margin-left: auto; }
+      .v2-drawer { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 490; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); padding: 110px 32px 40px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; }
+      .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
+      .v2-drawer a { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
+      .v2-drawer a::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
+      .v2-drawer { counter-reset: v2nav; }
+      .v2-drawer .v2-btn { margin-top: auto; }
+      .v2-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .v2-burger.open span:nth-child(2) { opacity: 0; }
+      .v2-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      .v2-data-panel { grid-template-columns: 1fr; }
+      .v2-counters { grid-template-columns: 1fr 1fr; }
+      .m2-stack { grid-template-columns: 1fr !important; }
+      .v2-hero { min-height: auto; padding-top: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV PILL ============ -->
+  <header class="v2-nav">
+    <a href="index.html" style="text-transform: uppercase; color: inherit; display: flex;" aria-label="Dr. Ricardo D. Frusso — inicio">
+      <span class="pit-logo">
+        <span class="pit-logo-dr">Dr.</span>
+        <span class="pit-logo-pipe" aria-hidden="true"></span>
+        <span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span>
+      </span>
+    </a>
+    <nav class="v2-nav-links">
+      <a href="que-es-pit.html">Qué es PIT</a>
+      <a href="#contenido">Contenido</a>
+      <a href="foro.html">Foro</a>
+      <a href="curso-modulo-1.html">Curso</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
+  </header>
+  <nav class="v2-drawer" id="v2-drawer">
+    <a href="que-es-pit.html">Qué es PIT</a>
+    <a href="#contenido">Contenido</a>
+    <a href="foro.html">Foro</a>
+    <a href="curso-modulo-1.html">Curso</a>
+    <a href="contacto.html">Contacto</a>
+    <a class="v2-btn v2-btn--navy" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="v2-hero">
+    <span class="v2-eyebrow v2-hero-eyebrow">PIT · Neuroproloterapia · Dr. Ricardo D. Frusso</span>
+    <h1>Aliviar el dolor crónico desde el nervio</h1>
+    <p class="v2-hero-sub">PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. Alivio desde la primera sesión, sin interferir con otros tratamientos en curso.</p>
+    <div class="v2-hero-ctas">
+      <a class="v2-btn v2-btn--white" href="que-es-pit.html">Qué es PIT</a>
+      <a class="v2-btn v2-btn--ghost" href="contacto.html">Pedir una consulta</a>
+    </div>
+    <div class="v2-hero-photo">
+      <span class="v2-hero-badge">30+ años · Hospital Italiano</span>
+      <img src="https://drricardofrusso.com/img/DSC_0016.jpg" alt="El Dr. Ricardo D. Frusso">
+    </div>
+  </section>
+
+  <!-- ============ TRUST STRIP ============ -->
+  <section class="v2-trust">
+    <p class="v2-trust-label">Formación y práctica respaldadas por</p>
+    <div class="v2-trust-row v2-stagger">
+      <span class="v2-trust-item">Hospital Italiano<small>Buenos Aires · 30+ años</small></span>
+      <span class="v2-trust-item">UBA<small>Medicina · 1992</small></span>
+      <span class="v2-trust-item">Lyftogt PIT<small>Instructor autorizado</small></span>
+      <span class="v2-trust-item">M.N. 86.498<small>Medicina familiar</small></span>
+    </div>
+  </section>
+
+  <!-- ============ COUNTERS ============ -->
+  <section class="v2-section" style="padding-top: 24px;">
+    <div class="v2-wrap">
+      <div class="v2-counters v2-stagger">
+        <div class="v2-counter"><div class="v2-counter-num"><span data-count="30">0</span><em>+</em></div><div class="v2-counter-label">Años de práctica clínica</div></div>
+        <div class="v2-counter"><div class="v2-counter-num"><span data-count="2015">0</span></div><div class="v2-counter-label">Instructor autorizado desde</div></div>
+        <div class="v2-counter"><div class="v2-counter-num"><span data-count="8">0</span></div><div class="v2-counter-label">Regiones del cuerpo tratadas</div></div>
+        <div class="v2-counter"><div class="v2-counter-num"><span data-count="80">0</span><em>pg</em></div><div class="v2-counter-label">De apuntes, gratis</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BIFURCACIÓN ============ -->
+  <section class="v2-section" style="padding-top: 12px;">
+    <div class="v2-wrap">
+      <div class="v2-reveal" style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
+        <span class="v2-eyebrow" style="color: var(--v2-blue);">¿Quién sos?</span>
+        <h2 class="v2-title" style="margin-top: 14px;">La misma técnica, explicada para vos</h2>
+      </div>
+      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px;">
+        <a class="v2-card" href="que-es-pit.html#pacientes" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Para pacientes</span>
+          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Tengo dolor crónico</h3>
+          <p style="font-size: 15px; line-height: 1.65; color: var(--v2-slate); margin: 0 0 20px;">Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.</p>
+          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Entender mi dolor →</span>
+        </a>
+        <a class="v2-card" href="que-es-pit.html#profesionales" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Para profesionales</span>
+          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Soy profesional de la salud</h3>
+          <p style="font-size: 15px; line-height: 1.65; color: var(--v2-slate); margin: 0 0 20px;">Mecanismo de acción, evidencia publicada y técnica — con casos clínicos reales filmados en consultorio.</p>
+          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Conocer la técnica →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATA MODULE ============ -->
+  <section class="v2-section" id="patologias" style="padding-top: 12px;">
+    <div class="v2-wrap">
+      <div class="v2-data v2-reveal">
+        <div style="max-width: 620px;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Qué trata PIT</span>
+          <h2 class="v2-title" style="margin-top: 14px;">Elegí dónde te duele</h2>
+        </div>
+        <div class="v2-tabs" id="v2-tabs">
+          <button class="v2-tab active" data-pat="lumbalgia" type="button">Lumbalgia</button>
+          <button class="v2-tab" data-pat="rodilla" type="button">Rodilla</button>
+          <button class="v2-tab" data-pat="cervical" type="button">Cervical</button>
+          <button class="v2-tab" data-pat="hombro" type="button">Hombro</button>
+        </div>
+        <div class="v2-data-panel">
+          <div>
+            <div class="v2-stat-row">
+              <div class="v2-stat-label">Sesiones típicas</div>
+              <div class="v2-stat-value" id="v2-sesiones">4–6</div>
+              <div class="v2-bar-track"><div class="v2-bar-fill" id="v2-bar-sesiones" style="width: 60%;"></div></div>
+            </div>
+            <div class="v2-stat-row">
+              <div class="v2-stat-label">Duración de cada sesión</div>
+              <div class="v2-stat-value" id="v2-duracion">20–30 min</div>
+            </div>
+            <div class="v2-stat-row" style="border-bottom: none;">
+              <div class="v2-stat-label">Primer alivio</div>
+              <div class="v2-stat-value" style="color: var(--v2-blue);">En la misma sesión</div>
+            </div>
+          </div>
+          <div>
+            <p class="v2-data-desc" id="v2-desc"><strong>Lumbalgia crónica.</strong> Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.</p>
+            <a href="que-es-pit.html#pacientes" style="display: inline-block; margin-top: 18px; font-weight: 600; font-size: 15px;">Cómo es una sesión →</a>
+          </div>
+        </div>
+        <p style="font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin: 26px 0 0;">Valores orientativos · Cada caso requiere evaluación individual</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENIDO GRATUITO ============ -->
+  <section class="v2-section" id="contenido" style="padding-top: 12px;">
+    <div class="v2-wrap">
+      <div class="v2-reveal" style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 40px;">
+        <div style="flex: 1; min-width: 260px;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Contenido gratuito</span>
+          <h2 class="v2-title" style="margin-top: 14px;">Aprendé sobre PIT, sin costo</h2>
+        </div>
+      </div>
+      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px;">
+        <a class="v2-card" href="curso-intro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Curso gratis</span>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Introducción a PIT</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">El método explicado por el Dr. Frusso. Sin costo y sin registro.</p>
+          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Empezar ahora →</span>
+        </a>
+        <a class="v2-card" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 34px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">80 páginas</span>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Anatomía, técnica y puntos de inyección para cada región.</p>
+          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Descargar →</span>
+        </a>
+        <a class="v2-card" href="foro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Enviá tu pregunta: se modera y se publica sin datos personales.</p>
+          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Ir al foro →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIOS ============ -->
+  <section class="v2-testi v2-reveal">
+    <h2 class="v2-testi-giant">La diferencia<br>de tratar el nervio</h2>
+    <div class="v2-testi-cards">
+      <div class="v2-testi-card" style="background: #EFF4FE; top: 6%; left: 6%; transform: rotate(-7deg);">
+        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+        <p>“Después de años de infiltraciones, con PIT el dolor cedió desde la primera sesión.”</p>
+        <div class="v2-testi-author"><span class="v2-testi-avatar">MG</span><div><div class="v2-testi-name">Paciente · Lumbalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      </div>
+      <div class="v2-testi-card" style="background: #F4F4F4; top: 40%; left: 22%; transform: rotate(4deg);">
+        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+        <p>“El curso me dio una herramienta que uso todas las semanas en el consultorio.”</p>
+        <div class="v2-testi-author"><span class="v2-testi-avatar">DR</span><div><div class="v2-testi-name">Médico de familia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      </div>
+      <div class="v2-testi-card" style="background: #FCEEE3; top: 12%; right: 6%; transform: rotate(6deg);">
+        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+        <p>“Volví a caminar sin pensar en la rodilla. Cinco sesiones.”</p>
+        <div class="v2-testi-author"><span class="v2-testi-avatar">JC</span><div><div class="v2-testi-name">Paciente · Gonalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      </div>
+      <div class="v2-testi-card" style="background: #FFFFFF; bottom: 4%; right: 20%; transform: rotate(-4deg); border: 1px solid rgba(0,11,51,0.08);">
+        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+        <p>“La formación más clara que hice en años: casos reales, sin cortes.”</p>
+        <div class="v2-testi-author"><span class="v2-testi-avatar">TR</span><div><div class="v2-testi-name">Traumatóloga</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="v2-section" style="padding-top: 12px;">
+    <div class="v2-wrap v2-reveal">
+      <h2 class="v2-title" style="text-align: center; margin-bottom: 44px;">Preguntas frecuentes</h2>
+      <div class="v2-faq">
+        <details>
+          <summary>¿Duelen las inyecciones?</summary>
+          <div>Se usa una aguja muy fina y la aplicación es justo debajo de la piel: la molestia es mínima y breve. La mayoría de los pacientes nota alivio en la misma sesión.</div>
+        </details>
+        <details>
+          <summary>¿Cuántas sesiones voy a necesitar?</summary>
+          <div>El tratamiento típico es de 4 a 8 sesiones según la región y el tiempo de evolución del dolor. El alivio suele sentirse desde la primera sesión.</div>
+        </details>
+        <details>
+          <summary>¿Es compatible con otros tratamientos?</summary>
+          <div>Sí. PIT es complementario: no interfiere con medicación, kinesiología ni otros procedimientos en curso, y no requiere suspender nada.</div>
+        </details>
+        <details>
+          <summary>¿Tiene efectos secundarios?</summary>
+          <div>La glucosa al 5% es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección.</div>
+        </details>
+      </div>
+      <div style="text-align: center; margin-top: 32px;">
+        <a href="faq.html" style="font-weight: 600; font-size: 15px;">Ver todas las preguntas →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURSO (NAVY) ============ -->
+  <section class="v2-section v2-dark" style="border-radius: 36px; max-width: 1228px; margin: 0 auto; box-sizing: border-box;">
+    <div class="v2-wrap">
+      <div class="m2-stack v2-reveal" style="display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center;">
+        <div>
+          <span class="v2-eyebrow" style="color: #8FAAF0;">¿Querés profundizar?</span>
+          <h2 class="v2-title" style="margin: 16px 0 14px;">Curso PIT · Módulo I<br>Lumbalgia y Rodilla</h2>
+          <p style="font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 30px; max-width: 54ch;">Casos clínicos reales filmados en consultorio, sin cortes. Acceso permanente y certificado emitido por un instructor autorizado.</p>
+          <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+            <a class="v2-btn v2-btn--white" href="curso-modulo-1.html">Ver el curso →</a>
+            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.55);">USD 97.99 · PAGO ÚNICO</span>
+          </div>
+        </div>
+        <img src="https://drricardofrusso.com/img/DSC_thigh01.jpg" alt="Mapa de ramas nerviosas marcado para tratamiento" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--v2-radius); display: block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER GRADIENTE ============ -->
+  <footer class="v2-footer">
+    <div class="v2-footer-top">
+      <nav class="v2-footer-links">
+        <a href="que-es-pit.html">Qué es PIT</a>
+        <a href="curso-intro.html">Curso gratis</a>
+        <a href="evidencia.html">Evidencia científica</a>
+        <a href="curso-modulo-1.html">Curso Módulo I</a>
+        <a href="foro.html">Foro semanal</a>
+        <a href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </nav>
+      <div class="v2-footer-claim">
+        <h3>Tratamiento del dolor crónico, desde el nervio, en cada etapa</h3>
+        <div class="v2-footer-avatars">
+          <img src="https://drricardofrusso.com/img/DSC_0016.jpg" alt="Dr. Frusso">
+          <img src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="Consultorio">
+          <img src="https://drricardofrusso.com/img/DSC_knee01.jpg" alt="Sesión de PIT">
+        </div>
+      </div>
+    </div>
+    <div class="v2-footer-bottom">
+      <div class="v2-footer-brand"><span class="pipe"></span>Dr. Frusso</div>
+      <div class="v2-footer-contact">
+        <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>
+        <a href="https://www.instagram.com/drfrussoricardo">@drfrussoricardo</a>
+        <span style="color: #FFFFFF;">Amenabar 2446, Belgrano, CABA</span>
+      </div>
+    </div>
+    <div class="v2-footer-legal">
+      <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
+      <a href="privacidad.html">Privacidad y aviso médico</a>
+      <a href="https://drricardofrusso.com/" style="margin-left: auto;">Ver versión actual</a>
+    </div>
+  </footer>
+
+  <script>
+    // v2 — interacciones autónomas (drawer, tabs de patologías, contadores, reveals)
+    (function () {
+      // ---- drawer mobile (delegado) ----
+      document.addEventListener('click', function (e) {
+        var burger = e.target.closest && e.target.closest('#v2-burger');
+        var drawer = document.getElementById('v2-drawer');
+        if (burger && drawer) {
+          var open = drawer.classList.toggle('open');
+          burger.classList.toggle('open', open);
+          return;
+        }
+        if (drawer && drawer.classList.contains('open') && e.target.closest('#v2-drawer a')) {
+          drawer.classList.remove('open');
+          var b = document.getElementById('v2-burger');
+          if (b) b.classList.remove('open');
+        }
+      });
+
+      // ---- data module: patologías (delegado) ----
+      var DATA = {
+        lumbalgia: { sesiones: '4–6', pct: 60, duracion: '20–30 min', desc: '<strong>Lumbalgia crónica.</strong> Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.' },
+        rodilla: { sesiones: '4–6', pct: 60, duracion: '15–25 min', desc: '<strong>Gonalgia (rodilla).</strong> Muy frecuente en deportistas y en artrosis. Se abordan los puntos peripatelares y las ramas del safeno; el alivio en la misma sesión es parte del diagnóstico.' },
+        cervical: { sesiones: '5–8', pct: 80, duracion: '20–30 min', desc: '<strong>Cervicalgia.</strong> Dolor de cuello persistente, con o sin irradiación. El mapeo incluye las ramas del plexo cervical superficial y la región occipital.' },
+        hombro: { sesiones: '4–7', pct: 70, duracion: '15–25 min', desc: '<strong>Hombro.</strong> Dolor crónico de manguito o post-quirúrgico. Se tratan las ramas superficiales supraclaviculares y axilares sensibilizadas.' }
+      };
+      document.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.v2-tab');
+        if (!b) return;
+        var tabs = b.closest('.v2-tabs');
+        if (tabs) tabs.querySelectorAll('.v2-tab').forEach(function (t) { t.classList.remove('active'); });
+        b.classList.add('active');
+        var d = DATA[b.getAttribute('data-pat')];
+        if (!d) return;
+        var s = document.getElementById('v2-sesiones');
+        var du = document.getElementById('v2-duracion');
+        var de = document.getElementById('v2-desc');
+        var bar = document.getElementById('v2-bar-sesiones');
+        if (s) s.textContent = d.sesiones;
+        if (du) du.textContent = d.duracion;
+        if (de) de.innerHTML = d.desc;
+        if (bar) bar.style.width = d.pct + '%';
+      });
+
+      // ---- reveals + counters ----
+      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasIO = 'IntersectionObserver' in window;
+
+      var rio = hasIO ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); rio.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }) : null;
+
+      function runCounter(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        if (reduced || !hasIO) { el.textContent = target; return; }
+        var t0 = null, dur = 1400;
+        function step(t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      var cio = hasIO ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { runCounter(en.target); cio.unobserve(en.target); }
+        });
+      }, { threshold: 0.5 }) : null;
+
+      var seenR = [], seenC = [];
+      function scan() {
+        document.querySelectorAll('.v2-reveal, .v2-stagger').forEach(function (el) {
+          if (seenR.indexOf(el) !== -1) return;
+          seenR.push(el);
+          if (reduced || !hasIO) { el.classList.add('in'); return; }
+          var r = el.getBoundingClientRect();
+          if (r.top < innerHeight && r.bottom > 0) { el.classList.add('in'); return; }
+          rio.observe(el);
+        });
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+          if (seenC.indexOf(el) !== -1) return;
+          seenC.push(el);
+          if (reduced || !hasIO) { el.textContent = el.getAttribute('data-count'); return; }
+          cio.observe(el);
+        });
+      }
+      scan();
+
+      // red de seguridad: nada queda oculto ni en 0
+      setTimeout(function () {
+        document.querySelectorAll('.v2-reveal:not(.in), .v2-stagger:not(.in)').forEach(function (el) { el.classList.add('in'); });
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+          if (el.textContent === '0') el.textContent = el.getAttribute('data-count');
+        });
+      }, 6000);
+    })();
+  </script>
+
+<script src="assets/js/pit-chat.js"></script>
+<script src="assets/js/pit-lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Ruler" hint-size="100%,6px"></x-import>
+      <div style="padding-top: 48px; max-width: 760px;">
+        <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="300px,18px">Foro PIT · Publicación semanal</x-import>
+        <x-import component-from-global-scope="FrussoDS.Display" style="margin-top: 18px;" hint-size="100%,140px">Cada semana, una respuesta.</x-import>
+        <x-import component-from-global-scope="FrussoDS.Lead" style="margin-top: 24px; max-width: 56ch;" hint-size="100%,80px">El Dr. Frusso publica todas las semanas: responde preguntas de la comunidad, comenta casos clínicos y comparte evidencia nueva. Las preguntas se moderan antes de publicarse.</x-import>
+      </div>
+      <div style="display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; align-items: center;">
+        <x-import component-from-global-scope="FrussoDS.Chip" variant="filled" hint-size="90px,26px">Todo</x-import>
+        <x-import component-from-global-scope="FrussoDS.Chip" hint-size="220px,26px">Preguntas y respuestas</x-import>
+        <x-import component-from-global-scope="FrussoDS.Chip" hint-size="150px,26px">Casos clínicos</x-import>
+        <x-import component-from-global-scope="FrussoDS.Chip" hint-size="110px,26px">Evidencia</x-import>
+        <x-import component-from-global-scope="FrussoDS.Chip" hint-size="110px,26px">Consejos</x-import>
+        <span style="margin-left: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
+          <span>Audiencia</span>
+          <x-import component-from-global-scope="FrussoDS.Chip" variant="blue" hint-size="110px,26px">Pacientes</x-import>
+          <x-import component-from-global-scope="FrussoDS.Chip" hint-size="140px,26px">Profesionales</x-import>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PUBLICACION DE LA SEMANA ============ -->
+  <section style="padding: var(--pit-section-padding); background: var(--pit-blue-tint);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="180px,18px">Esta semana</x-import>
+      <article class="m-stack0" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); margin-top: 24px; display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; gap: 0;">
+        <div class="m-pad" style="padding: 40px 44px;">
+          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px;">
+            <x-import component-from-global-scope="FrussoDS.Chip" variant="blue" hint-size="220px,26px">Preguntas y respuestas</x-import>
+            <x-import component-from-global-scope="FrussoDS.Chip" hint-size="110px,26px">Pacientes</x-import>
+            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">SEMANA 28 · 10 JUL 2026</span>
+          </div>
+          <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">"Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?"</span></h2>
+          <p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">Una pregunta muy frecuente en el consultorio. Ricardo explica la diferencia entre infiltrar la articulación y tratar el nervio sensibilizado — y por qué no son excluyentes.</p>
+          <div style="display: flex; gap: 20px; align-items: center;">
+            <x-import component-from-global-scope="FrussoDS.Button" variant="primary" href="Publicacion Foro PIT.dc.html" hint-size="200px,48px">Leer la respuesta →</x-import>
+            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">5 MIN DE LECTURA</span>
+          </div>
+        </div>
+        <img class="m-first" src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="El Dr. Frusso en consultorio" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ARCHIVO ============ -->
+  <section style="padding: var(--pit-section-padding); background: var(--pit-paper-pure);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <div style="display: flex; align-items: baseline; gap: 24px;">
+        <div style="flex: 1;">
+          <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="220px,18px">Publicaciones anteriores</x-import>
+          <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px;" hint-size="100%,60px"><span class="hover-underline">Una por semana, desde marzo.</span></x-import>
+        </div>
+        <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">18 publicaciones</span>
+      </div>
+
+      <div style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
+        <a href="Publicacion Foro PIT.dc.html" class="m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);" style-hover="background: var(--pit-ink-05); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S27 · 03 JUL</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
+          <span style="font-size: 17px; font-weight: 600;">Gonalgia bilateral en corredor de 52 años: mapeo y evolución en 5 sesiones</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+        <a href="Publicacion Foro PIT.dc.html" class="m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);" style-hover="background: var(--pit-ink-05); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S26 · 26 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Consejos · Pacientes</span>
+          <span style="font-size: 17px; font-weight: 600;">Qué hacer (y qué no) el día después de una sesión de PIT</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+        <a href="Publicacion Foro PIT.dc.html" class="m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);" style-hover="background: var(--pit-ink-05); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S25 · 19 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Evidencia · Prof.</span>
+          <span style="font-size: 17px; font-weight: 600;">Nueva revisión sistemática sobre glucosa perineural: qué dice y qué no dice</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+        <a href="Publicacion Foro PIT.dc.html" class="m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);" style-hover="background: var(--pit-ink-05); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S24 · 12 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
+          <span style="font-size: 17px; font-weight: 600;">"¿Cuántas sesiones necesito antes de saber si PIT funciona para mí?"</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+        <a href="Publicacion Foro PIT.dc.html" class="m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);" style-hover="background: var(--pit-ink-05); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S23 · 05 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
+          <span style="font-size: 17px; font-weight: 600;">Cervicalgia post-latigazo: abordaje del plexo cervical superficial</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+        <a href="Publicacion Foro PIT.dc.html" class="m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);" style-hover="background: var(--pit-ink-05); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S22 · 29 MAY</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
+          <span style="font-size: 17px; font-weight: 600;">"¿PIT sirve si ya tengo artrosis avanzada?"</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+      </div>
+      <div style="margin-top: 32px;">
+        <a href="#" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;">Ver archivo completo →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENVIA TU PREGUNTA (vanilla JS, sin backend aún) ============ -->
+  <section id="pregunta" style="padding: var(--pit-section-padding); background: var(--pit-ink); color: var(--pit-paper);">
+    <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start;">
+      <div>
+        <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="200px,18px">Participá</x-import>
+        <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 14px; color: var(--pit-paper);"><span class="hover-underline">Enviá tu pregunta al foro.</span></h2>
+        <p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Ricardo selecciona y responde preguntas cada semana. Todas se revisan antes de publicarse y se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.</p>
+        <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+          <x-import component-from-global-scope="FrussoDS.Chip" variant="ghost" hint-size="170px,26px">Sin registro</x-import>
+          <x-import component-from-global-scope="FrussoDS.Chip" variant="ghost" hint-size="150px,26px">Anónimas</x-import>
+          <x-import component-from-global-scope="FrussoDS.Chip" variant="ghost" hint-size="160px,26px">Moderadas</x-import>
+        </div>
+      </div>
+      <form id="foro-form" style="display: grid; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 32px;">
+        <div style="display: flex; gap: 10px;">
+          <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="paciente" checked style="accent-color: #2563EB;"> Soy paciente</label>
+          <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="profesional" style="accent-color: #2563EB;"> Soy profesional</label>
+        </div>
+        <textarea id="foro-q" placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="font-family: var(--pit-font-sans); font-size: 15px; line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
+        <div>
+          <label style="display: block; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); margin-bottom: 8px;">Tu email — te avisamos cuando Ricardo responda</label>
+          <input id="foro-email" type="email" placeholder="tu@email.com" style="width: 100%; box-sizing: border-box; font-family: var(--pit-font-mono); font-size: 13px; padding: 13px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none;">
+        </div>
+        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.55; color: var(--pit-ink-20); cursor: pointer;">
+          <input id="foro-nl" type="checkbox" checked style="accent-color: #2563EB; margin-top: 2px;">
+          <span>Sumarme también al newsletter: novedades del método y del foro, sin spam. Te podés dar de baja cuando quieras.</span>
+        </label>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <button type="submit" class="pit-btn pit-btn--white">Enviar pregunta</button>
+          <span id="foro-hint" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--pit-ink-40);"></span>
+        </div>
+        <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-40); margin: 4px 0 0;">Tu email no se publica ni se comparte: se usa solo para avisarte de la respuesta<span id="foro-nlnote"> y enviarte el newsletter</span>. Las respuestas del foro son informativas y no reemplazan una consulta médica.</p>
+      </form>
+      <div id="foro-ok" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 40px 36px;">
+        <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 20px;">✓</span>
+        <h3 style="font-size: 26px; font-weight: 600; margin: 18px 0 10px; color: var(--pit-paper);">Pregunta recibida.</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Pasa a moderación y, si Ricardo la selecciona, se publica sin tus datos. Te va a llegar un aviso a <span id="foro-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-paper);"></span> cuando esté la respuesta.</p>
+        <p id="foro-sent-nl" style="display: none; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--pit-blue); margin: 16px 0 0;">✓ QUEDASTE SUSCRIPTO AL NEWSLETTER</p>
+        <span id="foro-reset" style="display: inline-block; margin-top: 22px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); cursor: pointer; border-bottom: 1px solid var(--pit-ink-80); padding-bottom: 2px;">Enviar otra pregunta →</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Formulario del foro (front-only: conectar backend/endpoint cuando esté definido)
+    (function () {
+      var form = document.getElementById('foro-form');
+      var ok = document.getElementById('foro-ok');
+      if (!form || !ok) return;
+      var q = document.getElementById('foro-q');
+      var email = document.getElementById('foro-email');
+      var nl = document.getElementById('foro-nl');
+      var hint = document.getElementById('foro-hint');
+      var nlnote = document.getElementById('foro-nlnote');
+      nl.addEventListener('change', function () { nlnote.style.display = nl.checked ? '' : 'none'; });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+        if (!q.value.trim()) { hint.textContent = 'ESCRIBÍ TU PREGUNTA'; return; }
+        if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
+        hint.textContent = '';
+        document.getElementById('foro-sent-email').textContent = email.value.trim();
+        document.getElementById('foro-sent-nl').style.display = nl.checked ? '' : 'none';
+        form.style.display = 'none';
+        ok.style.display = 'block';
+        q.value = ''; email.value = '';
+      });
+      document.getElementById('foro-reset').addEventListener('click', function () {
+        ok.style.display = 'none';
+        form.style.display = 'grid';
+      });
+    })();
+  </script>

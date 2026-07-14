@@ -1,0 +1,15 @@
+{
+  "name": "Curso PIT · Dr. Ricardo D. Frusso",
+  "short_name": "Curso PIT",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    { "src": "icons/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "theme_color": "#1e3a5f",
+  "background_color": "#0A0A0A",
+  "display": "standalone"
+}

@@ -1,0 +1,63 @@
+<style data-page>
+    .faq details { border-bottom: 1px solid var(--pit-ink-10); }
+    .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 20px 4px; font-size: 18px; font-weight: 600; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-family: var(--pit-font-mono); color: var(--pit-blue); font-size: 18px; flex-shrink: 0; }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details > div { padding: 0 4px 22px; font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); max-width: 70ch; }
+</style>
+<section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Ruler" accent="end" hint-size="100%,6px"></x-import>
+      <div style="padding-top: 40px;">
+        <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="260px,18px">Preguntas frecuentes</x-import>
+        <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px; max-width: 20ch;" hint-size="100%,80px">Lo que más nos preguntan.</x-import>
+        <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 16px 0 0;">Textos base de drricardofrusso.com · A validar con Ricardo</p>
+      </div>
+
+      <h3 style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue); margin: 44px 0 0;">Para pacientes</h3>
+      <div class="faq" style="border-top: 2px solid var(--pit-ink); margin-top: 10px;">
+        <details>
+          <summary>¿Duelen las inyecciones?</summary>
+          <div>Se usa una aguja muy fina y la aplicación es justo debajo de la piel: la molestia es mínima y breve. La mayoría de los pacientes la tolera sin problema y nota alivio en la misma sesión.</div>
+        </details>
+        <details>
+          <summary>¿Cuántas sesiones voy a necesitar?</summary>
+          <div>El tratamiento típico es de 4 a 8 sesiones, según la región y el tiempo de evolución del dolor. El alivio suele sentirse desde la primera sesión y se consolida entre sesiones.</div>
+        </details>
+        <details>
+          <summary>¿Tiene efectos secundarios o contraindicaciones?</summary>
+          <div>La glucosa al 5% es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección. Cada caso se evalúa individualmente en la consulta.</div>
+        </details>
+        <details>
+          <summary>¿Es compatible con otros tratamientos que ya estoy haciendo?</summary>
+          <div>Sí. PIT es un tratamiento complementario: no interfiere con medicación, kinesiología ni otros procedimientos en curso, y no requiere suspender nada.</div>
+        </details>
+        <details>
+          <summary>¿Lo cubre mi obra social o prepaga?</summary>
+          <div><span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Placeholder · Respuesta a definir con Ricardo (cobertura y modalidad de pago)</span></div>
+        </details>
+      </div>
+
+      <h3 style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue); margin: 44px 0 0;">Para profesionales</h3>
+      <div class="faq" style="border-top: 2px solid var(--pit-ink); margin-top: 10px;">
+        <details>
+          <summary>¿Necesito formación previa en proloterapia?</summary>
+          <div>No. El Módulo I arranca desde los fundamentos del método y la anatomía aplicada. Sí es requisito ser profesional de la salud habilitado para realizar procedimientos inyectables en tu jurisdicción.</div>
+        </details>
+        <details>
+          <summary>¿Qué materiales necesito para empezar a aplicar PIT?</summary>
+          <div>Insumos estándar de consultorio: glucosa al 5%, jeringas y agujas finas (27–30G), y material de antisepsia. En el curso gratuito hay un video dedicado a materiales.</div>
+        </details>
+        <details>
+          <summary>¿El certificado del curso me habilita a ejercer la técnica?</summary>
+          <div>El certificado acredita la aprobación del curso, emitido por un instructor autorizado. La habilitación profesional depende de tu matrícula y la normativa de tu país o jurisdicción.</div>
+        </details>
+      </div>
+
+      <div class="m-col" style="display: flex; align-items: center; gap: 24px; background: var(--pit-blue-tint); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 26px 30px; margin-top: 48px;">
+        <p style="flex: 1; font-size: 17px; font-weight: 500; line-height: 1.5; margin: 0;">¿Tu pregunta no está acá? Ricardo responde una por semana en el foro.</p>
+        <x-import component-from-global-scope="FrussoDS.Button" variant="primary" href="Foro PIT.dc.html#pregunta" hint-size="230px,48px">Preguntar en el foro →</x-import>
+      </div>
+    </div>
+  </section>

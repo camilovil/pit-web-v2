@@ -1,0 +1,46 @@
+/* PIT — micro-animaciones compartidas (portadas 1:1 del sitio oficial) */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* === LOGO (igual al oficial: pulso del pipe + letter-spacing en hover) === */
+  @keyframes pipe-pulse {
+    0%   { transform: scaleY(1);   opacity: 1; }
+    40%  { transform: scaleY(0.6); opacity: 0.5; }
+    100% { transform: scaleY(1);   opacity: 1; }
+  }
+  .pit-logo:hover .pit-logo-pipe {
+    animation: pipe-pulse 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .pit-logo .pit-logo-dr,
+  .pit-logo .pit-logo-name span {
+    transition: letter-spacing 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+  }
+  .pit-logo:hover .pit-logo-dr { letter-spacing: 0.18em; }
+  .pit-logo:hover .pit-logo-name span { letter-spacing: 0.08em; }
+
+  /* === Subrayado animado en títulos (copiado 1:1 del oficial) === */
+  .hover-underline {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(var(--pit-blue), var(--pit-blue));
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 3px;
+    transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    padding-bottom: 2px;
+  }
+  .hover-underline:hover,
+  h1:hover .hover-underline,
+  h2:hover .hover-underline,
+  h3:hover .hover-underline,
+  .hover-underline.visible {
+    background-size: 100% 3px;
+  }
+
+  /* === Reveal al scroll (curva oficial: 0.7s cubic-bezier(0.22,1,0.36,1)) === */
+  .pit-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pit-reveal.pit-in { opacity: 1; transform: translateY(0); }
+}

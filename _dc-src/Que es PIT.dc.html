@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <script src="./ds-base.js"></script>
+  <link rel="stylesheet" href="./pit-mobile.css">
+  <link rel="stylesheet" href="./pit-motion.css">
+  <link rel="stylesheet" href="./pit-v2.css">
+  <script src="./pit-v2.js"></script>
+  <script src="./pit-motion.js"></script>
+  <script src="./pit-chat.js"></script>
+  <script src="./pit-lang.js"></script>
+  <style>
+    body { margin: 0; background: #FFFFFF; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1E3A8A; }
+    .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
+  </style>
+</helmet>
+
+<div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);" data-screen-label="Qué es PIT">
+
+  <header class="v2-nav">
+    <a href="HomePit v2.dc.html" style="text-transform: uppercase; color: inherit; display: flex;"><x-import component-from-global-scope="FrussoDS.Logo" hint-size="170px,38px"></x-import></a>
+    <nav class="v2-nav-links">
+      <a href="Que es PIT.dc.html" class="active">Qué es PIT</a>
+      <a href="HomePit v2.dc.html#contenido">Contenido</a>
+      <a href="Foro PIT.dc.html">Foro</a>
+      <a href="Curso Modulo I.dc.html">Curso</a>
+      <a href="Contacto PIT.dc.html">Contacto</a>
+    </nav>
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <button class="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
+  </header>
+  <nav class="v2-drawer">
+    <a href="Que es PIT.dc.html">Qué es PIT</a>
+    <a href="HomePit v2.dc.html#contenido">Contenido</a>
+    <a href="Foro PIT.dc.html">Foro</a>
+    <a href="Curso Modulo I.dc.html">Curso</a>
+    <a href="Contacto PIT.dc.html">Contacto</a>
+    <a class="v2-btn v2-btn--navy" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
+  </nav>
+  <script>
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.nav-mobile a')) {
+        var t = document.getElementById('nav-toggle');
+        if (t) { t.checked = false; }
+      }
+    });
+  </script>
+
+  <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Ruler" hint-size="100%,6px"></x-import>
+      <div style="padding-top: 48px; max-width: 900px;">
+        <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="320px,18px">Qué es PIT · Neuroproloterapia</x-import>
+        <x-import component-from-global-scope="FrussoDS.Display" style="margin-top: 18px;" hint-size="100%,180px">El dolor crónico se trata donde nace: en el nervio.</x-import>
+        <x-import component-from-global-scope="FrussoDS.Lead" style="margin-top: 24px; max-width: 58ch;" hint-size="100%,80px">PIT (Perineural Injection Treatment) es un tratamiento mínimamente invasivo del dolor crónico, desarrollado por el Dr. John Lyftogt. Elegí tu camino: la misma técnica, explicada para vos.</x-import>
+        <div class="m-col" style="display: flex; gap: 16px; align-items: center; margin-top: 36px;">
+          <x-import component-from-global-scope="FrussoDS.Button" variant="primary" href="#pacientes" hint-size="190px,48px">Soy paciente ↓</x-import>
+          <a href="#profesionales" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Soy profesional de la salud ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACIENTES -->
+  <section id="pacientes" style="padding: var(--pit-section-padding); background: var(--pit-paper-pure);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="180px,18px">Para pacientes</x-import>
+      <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px; max-width: 22ch;" hint-size="100%,80px"><span class="hover-underline">Entender tu dolor es el primer paso.</span></x-import>
+      <div class="m-stack" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; margin-top: 40px;">
+        <div>
+          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Cuando un dolor persiste durante meses, muchas veces el problema ya no está en el músculo ni en la articulación: está en el nervio que transmite la señal. Ese nervio se inflamó, se volvió hipersensible, y dispara dolor aunque el tejido esté sano.</p>
+          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 24px;">PIT actúa sobre ese nervio con pequeñas inyecciones debajo de la piel de glucosa al 5% — sin corticoides, sin cirugía, y sin interferir con ningún otro tratamiento que estés haciendo.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Lumbalgia</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Rodilla</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Cervical</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Hombro</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Codo</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Tobillo</x-import><x-import component-from-global-scope="FrussoDS.Chip" variant="ghost" hint-size="120px,26px">Y más</x-import>
+          </div>
+        </div>
+        <img src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="Sesión de PIT en consultorio" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--pit-radius); display: block;">
+      </div>
+
+      <h3 style="font-size: 24px; font-weight: 600; margin: 56px 0 0;">Cómo es una sesión</h3>
+      <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; margin-top: 24px;">
+        <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">01</span>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Evaluación y mapeo</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Se identifican por palpación los puntos donde el nervio está sensibilizado.</p>
+        </div>
+        <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">02</span>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Inyecciones subcutáneas</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Glucosa al 5% con aguja fina, justo debajo de la piel. Molestia mínima.</p>
+        </div>
+        <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">03</span>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Alivio inmediato</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">El efecto se verifica en la misma sesión: es parte del diagnóstico.</p>
+        </div>
+        <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">04</span>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Plan de tratamiento</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Típicamente 4 a 8 sesiones, con alivio que se consolida entre sesiones.</p>
+        </div>
+      </div>
+
+      <div class="m-col" style="display: flex; align-items: center; gap: 24px; background: var(--pit-blue-tint); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 26px 30px; margin-top: 40px;">
+        <p style="flex: 1; font-size: 17px; font-weight: 500; line-height: 1.5; margin: 0;">¿No sabés si tu caso es para PIT? Contanos qué te pasa y te orientamos.</p>
+        <a href="Contacto PIT.dc.html" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Pedir una consulta →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFESIONALES -->
+  <section id="profesionales" style="padding: var(--pit-section-padding); background: var(--pit-ink); color: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="320px,18px">Para profesionales de la salud</x-import>
+      <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 0; color: var(--pit-paper); max-width: 24ch;"><span class="hover-underline">El mecanismo, con el rigor que esperás.</span></h2>
+      <div class="m-stack" style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: start; margin-top: 36px;">
+        <div>
+          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-20); margin: 0 0 16px;">PIT aborda la inflamación neurogénica de nervios periféricos superficiales. La glucosa al 5% perineural actúa sobre los canales implicados en la sensibilización del nervi nervorum, restaurando la función del nervio y cortando el círculo de dolor crónico.</p>
+          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-20); margin: 0 0 24px;">La técnica es clínica y palpatoria: mapeo de puntos de Valleix, inyección subcutánea con aguja 27–30G, y verificación del alivio en la misma consulta como criterio diagnóstico-terapéutico.</p>
+          <div style="display: grid; gap: 0; border-top: 1px solid var(--pit-ink-80);">
+            <a href="Evidencia PIT.dc.html" style="display: flex; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--pit-ink-80); color: var(--pit-paper);" style-hover="color: #FFFFFF; background: var(--pit-ink-80);">
+              <span style="font-weight: 600; font-size: 16px;">Evidencia científica publicada</span>
+              <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">→</span>
+            </a>
+            <a href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="display: flex; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--pit-ink-80); color: var(--pit-paper);" style-hover="color: #FFFFFF; background: var(--pit-ink-80);">
+              <span style="font-weight: 600; font-size: 16px;">Apuntes de PIT — 80 páginas, gratis</span>
+              <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">PDF ↓</span>
+            </a>
+            <a href="Curso Intro PIT.dc.html" style="display: flex; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--pit-ink-80); color: var(--pit-paper);" style-hover="color: #FFFFFF; background: var(--pit-ink-80);">
+              <span style="font-weight: 600; font-size: 16px;">Curso introductorio gratuito</span>
+              <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">→</span>
+            </a>
+          </div>
+          <div style="margin-top: 32px;">
+            <x-import component-from-global-scope="FrussoDS.Button" variant="white" href="Curso Modulo I.dc.html" hint-size="200px,48px">Formarme en PIT →</x-import>
+          </div>
+        </div>
+        <figure style="margin: 0;">
+          <img src="https://drricardofrusso.com/img/DSC_0098.jpg" alt="Mapa anatómico de nervios periféricos" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--pit-radius); display: block;">
+          <figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 10px;">REFERENCIAS ANATÓMICAS · MATERIAL DEL CURSO</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="260px,18px">La técnica, en imágenes</x-import>
+      <div class="m-2col" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-top: 28px;">
+        <figure style="margin: 0;"><img src="https://drricardofrusso.com/img/DSC_knee01.jpg" alt="PIT en rodilla" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">RODILLA</figcaption></figure>
+        <figure style="margin: 0;"><img src="https://drricardofrusso.com/img/DSC_lumbar01.jpg" alt="PIT en zona lumbar" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">LUMBAR</figcaption></figure>
+        <figure style="margin: 0;"><img src="https://drricardofrusso.com/img/DSC_thigh01.jpg" alt="Mapeo en muslo" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">MAPEO</figcaption></figure>
+        <figure style="margin: 0;"><img src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="Materiales" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">CONSULTORIO</figcaption></figure>
+      </div>
+      <div class="m-col" style="display: flex; gap: 16px; align-items: center; margin-top: 40px;">
+        <x-import component-from-global-scope="FrussoDS.Button" variant="primary" href="FAQ PIT.dc.html" hint-size="230px,48px">Preguntas frecuentes →</x-import>
+        <a href="Foro PIT.dc.html" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">O preguntale a Ricardo en el foro</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="v2-footer">
+    <div class="v2-footer-top">
+      <nav class="v2-footer-links">
+        <a href="Que es PIT.dc.html">Qué es PIT</a>
+        <a href="Curso Intro PIT.dc.html">Curso gratis</a>
+        <a href="Evidencia PIT.dc.html">Evidencia científica</a>
+        <a href="Curso Modulo I.dc.html">Curso Módulo I</a>
+        <a href="Foro PIT.dc.html">Foro semanal</a>
+        <a href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="Sobre el Dr Frusso.dc.html">Sobre el Dr. Frusso</a>
+        <a href="FAQ PIT.dc.html">Preguntas frecuentes</a>
+      </nav>
+      <div class="v2-footer-claim">
+        <h3>Tratamiento del dolor crónico, desde el nervio, en cada etapa</h3>
+        <div class="v2-footer-avatars">
+          <img src="https://drricardofrusso.com/img/DSC_0016.jpg" alt="Dr. Frusso">
+          <img src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="Consultorio">
+          <img src="https://drricardofrusso.com/img/DSC_knee01.jpg" alt="Sesión de PIT">
+        </div>
+      </div>
+    </div>
+    <div class="v2-footer-bottom">
+      <div class="v2-footer-brand"><span class="pipe"></span>Dr. Frusso</div>
+      <div class="v2-footer-contact">
+        <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>
+        <a href="https://www.instagram.com/drfrussoricardo">@drfrussoricardo</a>
+        <span style="color: #FFFFFF;">Amenabar 2446, Belgrano, CABA</span>
+      </div>
+    </div>
+    <div class="v2-footer-legal">
+      <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
+      <a href="Privacidad PIT.dc.html">Privacidad y aviso médico</a>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

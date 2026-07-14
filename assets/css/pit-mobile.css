@@ -1,0 +1,143 @@
+/* PIT — reglas responsive compartidas (mobile ≤ 820px) */
+
+/* ---- fixes de contraste en hover (todas las páginas) ---- */
+/* Botón blanco sobre sección oscura: al hover pasaba a negro sobre negro */
+section[style*="background: var(--pit-ink)"] .pit-btn--white:hover,
+header[style*="background: var(--pit-ink)"] .pit-btn--white:hover,
+div[style*="background: var(--pit-ink)"] .pit-btn--white:hover {
+  background-color: var(--pit-blue);
+  color: #FFFFFF;
+}
+/* Links sobre fondo oscuro: el hover global azul-deep era ilegible */
+footer a:hover,
+section[style*="background: var(--pit-ink)"] a:hover,
+header[style*="background: var(--pit-ink)"] a:hover,
+div[style*="background: var(--pit-ink)"] a:hover {
+  color: #60A5FA;
+}
+/* Links sobre fondo azul: hover a blanco pleno */
+section[style*="background: var(--pit-blue)"] a:hover {
+  color: #FFFFFF;
+}
+/* Los botones conservan siempre su propio color de texto */
+a.pit-btn--primary:hover { color: #FFFFFF; }
+
+.nav-burger { display: none; }
+#nav-toggle { display: none; }
+.nav-mobile { display: none; }
+
+@media (max-width: 820px) {
+
+  /* ---- nav / hamburguesa ---- */
+  .m-hide { display: none !important; }
+
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 0 9px;
+    box-sizing: border-box;
+    margin-left: auto;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 210;
+  }
+  .nav-burger span {
+    display: block;
+    height: 2px;
+    background: var(--pit-ink);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  /* el checkbox va primero dentro del header */
+  #nav-toggle:checked ~ div .nav-burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  #nav-toggle:checked ~ div .nav-burger span:nth-child(2) { opacity: 0; }
+  #nav-toggle:checked ~ div .nav-burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ---- panel a pantalla completa ---- */
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    top: var(--pit-header-h, 61px);
+    z-index: 200;
+    background: var(--pit-paper);
+    padding: 12px 24px 32px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  }
+  #nav-toggle:checked ~ .nav-mobile {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-mobile a {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--pit-font-sans);
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--pit-ink);
+    padding: 18px 0;
+    border-bottom: 1px solid var(--pit-ink-10);
+  }
+  .nav-mobile a::before {
+    counter-increment: navitem;
+    content: "0" counter(navitem);
+    font-family: var(--pit-font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--pit-blue);
+  }
+  .nav-mobile { counter-reset: navitem; }
+  .nav-mobile .nav-mobile-cta {
+    margin-top: auto;
+    padding-top: 28px;
+    display: grid;
+  }
+  .nav-mobile .nav-mobile-cta .pit-btn,
+  .nav-mobile .nav-mobile-cta a { width: 100%; box-sizing: border-box; justify-content: center; text-align: center; }
+
+  /* bloquear scroll de fondo con el menú abierto */
+  body:has(#nav-toggle:checked) { overflow: hidden; }
+
+  /* ---- layout ---- */
+  .m-stack { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .m-stack0 { grid-template-columns: 1fr !important; }
+  .m-2col { grid-template-columns: 1fr 1fr !important; }
+  .m-col { flex-direction: column !important; align-items: stretch !important; }
+  .m-first { order: -1; }
+  .m-list {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+  .m-pad { padding: 26px 24px !important; }
+  .m-pad2 { padding: 28px 20px 48px !important; }
+  .m-ml0 { margin-left: 0 !important; text-align: left !important; }
+  .m-bar { width: 80px !important; }
+  .m-order2 {
+    order: 2;
+    border-right: none !important;
+    border-top: 1px solid var(--pit-ink-10) !important;
+  }
+
+  /* ---- tipografía ---- */
+  .m-title { font-size: clamp(26px, 7.5vw, 34px) !important; line-height: 1.15 !important; }
+  .pit-lead { font-size: 18px !important; }
+}
