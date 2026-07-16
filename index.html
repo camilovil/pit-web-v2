@@ -130,12 +130,6 @@
     .v2-data-desc { font-size: 16px; line-height: 1.7; color: var(--v2-slate); }
     .v2-data-desc strong { color: var(--v2-navy); }
 
-    /* ---- counters ---- */
-    .v2-counters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .v2-counter { text-align: center; padding: 34px 16px; }
-    .v2-counter-num { font-weight: 700; font-size: clamp(38px, 4.4vw, 56px); letter-spacing: -0.03em; line-height: 1; color: var(--v2-navy); }
-    .v2-counter-num em { font-style: normal; color: var(--v2-blue); }
-    .v2-counter-label { font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--v2-slate); margin-top: 12px; }
 
     /* ---- navy sections ---- */
     .v2-dark { background: var(--v2-navy); color: #FFFFFF; }
@@ -225,7 +219,6 @@
       .v2-burger.open span:nth-child(2) { opacity: 0; }
       .v2-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
       .v2-data-panel { grid-template-columns: 1fr; }
-      .v2-counters { grid-template-columns: 1fr 1fr; }
       .m2-stack { grid-template-columns: 1fr !important; }
       .v2-hero { min-height: auto; padding-top: 120px; }
     }
@@ -287,14 +280,34 @@
     </div>
   </section>
 
-  <!-- ============ COUNTERS ============ -->
-  <section class="v2-section" style="padding-top: 24px;">
+  <!-- ============ CONTENIDO GRATUITO ============ -->
+  <section class="v2-section" id="contenido" style="padding-top: 12px;">
     <div class="v2-wrap">
-      <div class="v2-counters v2-stagger">
-        <div class="v2-counter"><div class="v2-counter-num"><span data-count="30">0</span><em>+</em></div><div class="v2-counter-label">Años de práctica clínica</div></div>
-        <div class="v2-counter"><div class="v2-counter-num"><span data-count="2015">0</span></div><div class="v2-counter-label">Instructor autorizado desde</div></div>
-        <div class="v2-counter"><div class="v2-counter-num"><span data-count="8">0</span></div><div class="v2-counter-label">Regiones del cuerpo tratadas</div></div>
-        <div class="v2-counter"><div class="v2-counter-num"><span data-count="80">0</span><em>pg</em></div><div class="v2-counter-label">De apuntes, gratis</div></div>
+      <div class="v2-reveal" style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 40px;">
+        <div style="flex: 1; min-width: 260px;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Contenido gratuito</span>
+          <h2 class="v2-title" style="margin-top: 14px;">Aprendé sobre PIT, sin costo</h2>
+        </div>
+      </div>
+      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px;">
+        <a class="v2-card" href="curso-intro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Curso gratis</span>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Introducción a PIT</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">El método explicado por el Dr. Frusso. Sin costo y sin registro.</p>
+          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Empezar ahora →</span>
+        </a>
+        <a class="v2-card" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 34px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">80 páginas</span>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Anatomía, técnica y puntos de inyección para cada región.</p>
+          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Descargar →</span>
+        </a>
+        <a class="v2-card" href="foro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Enviá tu pregunta: se modera y se publica sin datos personales.</p>
+          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Ir al foro →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -359,38 +372,6 @@
           </div>
         </div>
         <p style="font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin: 26px 0 0;">Valores orientativos · Cada caso requiere evaluación individual</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTENIDO GRATUITO ============ -->
-  <section class="v2-section" id="contenido" style="padding-top: 12px;">
-    <div class="v2-wrap">
-      <div class="v2-reveal" style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 40px;">
-        <div style="flex: 1; min-width: 260px;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Contenido gratuito</span>
-          <h2 class="v2-title" style="margin-top: 14px;">Aprendé sobre PIT, sin costo</h2>
-        </div>
-      </div>
-      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px;">
-        <a class="v2-card" href="curso-intro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Curso gratis</span>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Introducción a PIT</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">El método explicado por el Dr. Frusso. Sin costo y sin registro.</p>
-          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Empezar ahora →</span>
-        </a>
-        <a class="v2-card" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 34px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">80 páginas</span>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Anatomía, técnica y puntos de inyección para cada región.</p>
-          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Descargar →</span>
-        </a>
-        <a class="v2-card" href="foro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Enviá tu pregunta: se modera y se publica sin datos personales.</p>
-          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Ir al foro →</span>
-        </a>
       </div>
     </div>
   </section>
