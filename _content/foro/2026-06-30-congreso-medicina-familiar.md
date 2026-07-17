@@ -10,7 +10,7 @@ fechaLabel: 30 JUN 2026
 lectura: 4
 tags: Congresos, Noticias
 resumen: Resumen de la presentación sobre neuroproloterapia en el congreso: qué interesó a los colegas, qué preguntas se repitieron y qué se viene.
-portada: https://drricardofrusso.com/img/DSC_0016.jpg
+portada: /img/DSC_0016.jpg
 ---
 [[placeholder: Crónica de Ricardo sobre la presentación — 3–4 párrafos, fotos del congreso]]
 

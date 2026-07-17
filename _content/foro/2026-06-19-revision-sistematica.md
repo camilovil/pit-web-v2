@@ -10,7 +10,7 @@ fechaLabel: 19 JUN 2026
 lectura: 6
 tags: Evidencia, Glucosa 5%
 resumen: Lectura crítica de la revisión: qué respalda, cuáles son los límites metodológicos y cómo se traduce (o no) al consultorio.
-portada: https://drricardofrusso.com/img/DSC_0098.jpg
+portada: /img/DSC_0098.jpg
 ---
 [[placeholder: Cita completa de la revisión (autores, revista, año, DOI)]]
 

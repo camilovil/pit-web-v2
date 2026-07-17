@@ -10,7 +10,7 @@ fechaLabel: 12 JUN 2026
 lectura: 4
 tags: Sesiones, Tratamiento
 resumen: La respuesta corta — desde la primera sesión ya hay información. La larga, con matices, acá.
-portada: https://drricardofrusso.com/img/DSC_syringe02.jpg
+portada: /img/DSC_syringe02.jpg
 ---
 La respuesta corta: desde la primera sesión ya tenemos información valiosa, porque el alivio inmediato es parte del diagnóstico.
 

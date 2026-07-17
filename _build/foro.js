@@ -88,7 +88,7 @@ const NAV = (pre) => `  <header class="v2-nav">
       <a href="${pre}curso-modulo-1.html">Curso</a>
       <a href="${pre}contacto.html">Contacto</a>
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
     <button class="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
   </header>
   <nav class="v2-drawer">
@@ -97,7 +97,7 @@ const NAV = (pre) => `  <header class="v2-nav">
     <a href="${pre}foro.html">Foro</a>
     <a href="${pre}curso-modulo-1.html">Curso</a>
     <a href="${pre}contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--navy" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
+    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
   </nav>`;
 
 const FOOTER = (pre) => `  <footer class="v2-footer">
@@ -108,16 +108,16 @@ const FOOTER = (pre) => `  <footer class="v2-footer">
         <a href="${pre}evidencia.html">Evidencia científica</a>
         <a href="${pre}curso-modulo-1.html">Curso Módulo I</a>
         <a href="${pre}foro.html">Foro semanal</a>
-        <a href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
         <a href="${pre}sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
         <a href="${pre}faq.html">Preguntas frecuentes</a>
       </nav>
       <div class="v2-footer-claim">
         <h3>Tratamiento del dolor crónico, desde el nervio, en cada etapa</h3>
         <div class="v2-footer-avatars">
-          <img src="https://drricardofrusso.com/img/DSC_0016.jpg" alt="Dr. Frusso">
-          <img src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="Consultorio">
-          <img src="https://drricardofrusso.com/img/DSC_knee01.jpg" alt="Sesión de PIT">
+          <img src="/img/DSC_0016.jpg" alt="Dr. Frusso">
+          <img src="/img/DSC_0086.jpg" alt="Consultorio">
+          <img src="/img/DSC_knee01.jpg" alt="Sesión de PIT">
         </div>
       </div>
     </div>
@@ -154,6 +154,8 @@ const HEAD = (pre, title, desc, extraCss = '') => `<!DOCTYPE html>
   <link rel="icon" href="${pre}favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="${pre}apple-touch-icon.png">
   <meta name="theme-color" content="#000B33">
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <link rel="stylesheet" href="${pre}assets/css/fonts.css">
   <link rel="stylesheet" href="${pre}assets/css/ds.css">
   <link rel="stylesheet" href="${pre}assets/css/pit-mobile.css">
