@@ -130,6 +130,26 @@
     .v2-data-desc { font-size: 16px; line-height: 1.7; color: var(--v2-slate); }
     .v2-data-desc strong { color: var(--v2-navy); }
 
+    /* ---- contenido gratuito destacado ---- */
+    .v2-free { background: var(--v2-tint); border-radius: 28px; padding: clamp(32px, 4vw, 56px); }
+    .v2-free-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-blue); background: #FFFFFF; border: 1px solid rgba(37,99,235,0.25); border-radius: 999px; padding: 8px 16px; }
+    .v2-free-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--v2-blue); }
+    .v2-free-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; align-items: stretch; }
+    .v2-free-feature { display: flex; flex-direction: column; overflow: hidden; color: var(--v2-navy); }
+    .v2-free-media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; }
+    .v2-free-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .v2-free-feature:hover .v2-free-media img { transform: scale(1.04); }
+    .v2-free-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 50%; background: rgba(37,99,235,0.92); box-shadow: 0 12px 32px rgba(0,11,51,0.3); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
+    .v2-free-play::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-38%, -50%); width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 19px solid #FFFFFF; }
+    .v2-free-feature:hover .v2-free-play { transform: translate(-50%, -50%) scale(1.08); background: var(--v2-blue); }
+    .v2-free-badge { position: absolute; left: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 14px; }
+    .v2-free-body { display: flex; flex-direction: column; flex: 1; padding: 28px 32px 30px; }
+    .v2-free-side { display: grid; grid-template-rows: 1fr 1fr; gap: 22px; }
+    @media (max-width: 860px) {
+      .v2-free-grid { grid-template-columns: 1fr; }
+      .v2-free-side { grid-template-rows: none; }
+    }
+
 
     /* ---- navy sections ---- */
     .v2-dark { background: var(--v2-navy); color: #FFFFFF; }
@@ -290,31 +310,42 @@
   <!-- ============ CONTENIDO GRATUITO ============ -->
   <section class="v2-section" id="contenido" style="padding-top: 12px;">
     <div class="v2-wrap">
-      <div class="v2-reveal" style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 40px;">
-        <div style="flex: 1; min-width: 260px;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Contenido gratuito</span>
-          <h2 class="v2-title" style="margin-top: 14px;">Aprendé sobre PIT, sin costo</h2>
+      <div class="v2-free v2-reveal">
+        <div style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 34px;">
+          <div style="flex: 1; min-width: 260px;">
+            <span class="v2-free-tag">Contenido gratuito · Sin registro</span>
+            <h2 class="v2-title" style="margin-top: 16px;">Aprendé sobre PIT, sin costo</h2>
+            <p style="font-size: 16px; line-height: 1.65; color: var(--v2-slate); margin: 12px 0 0; max-width: 52ch;">Todo el material educativo del método es abierto: el curso introductorio, los apuntes completos y el foro semanal.</p>
+          </div>
         </div>
-      </div>
-      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px;">
-        <a class="v2-card" href="curso-intro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Curso gratis</span>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Introducción a PIT</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">El método explicado por el Dr. Frusso. Sin costo y sin registro.</p>
-          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Empezar ahora →</span>
-        </a>
-        <a class="v2-card" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 34px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">80 páginas</span>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Anatomía, técnica y puntos de inyección para cada región.</p>
-          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Descargar →</span>
-        </a>
-        <a class="v2-card" href="foro.html" style="padding: 34px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 16px;">Enviá tu pregunta: se modera y se publica sin datos personales.</p>
-          <span style="font-weight: 600; font-size: 14px; color: var(--v2-blue);">Ir al foro →</span>
-        </a>
+        <div class="v2-free-grid">
+          <a class="v2-card v2-free-feature" href="curso-intro.html">
+            <span class="v2-free-media">
+              <img src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="El Dr. Frusso en consultorio — curso de introducción a PIT" loading="lazy">
+              <span class="v2-free-play" aria-hidden="true"></span>
+              <span class="v2-free-badge">Curso gratis · 2 videos + autoevaluaciones</span>
+            </span>
+            <span class="v2-free-body">
+              <h3 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px;">Introducción a PIT</h3>
+              <p style="font-size: 15px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 20px;">El método explicado por el Dr. Frusso, con autoevaluaciones y progreso guardado. Sin costo y sin registro.</p>
+              <span class="v2-btn v2-btn--blue" style="align-self: flex-start;">Empezar el curso →</span>
+            </span>
+          </a>
+          <div class="v2-free-side">
+            <a class="v2-card" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
+              <span class="v2-eyebrow" style="color: var(--v2-blue);">PDF · 80 páginas</span>
+              <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
+              <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
+              <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: 14px; margin-top: auto;">Descargar gratis →</span>
+            </a>
+            <a class="v2-card" href="foro.html" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
+              <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
+              <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
+              <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
+              <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue); margin-top: auto;">Ir al foro →</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
