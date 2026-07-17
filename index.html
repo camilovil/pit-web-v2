@@ -139,17 +139,24 @@
     .v2-testi { position: relative; padding: clamp(64px, 8vw, 120px) 24px; overflow: hidden; }
     .v2-testi-giant { font-weight: 600; font-size: clamp(56px, 9vw, 150px); line-height: 0.98; letter-spacing: -0.04em; text-align: center; color: var(--v2-navy); margin: 0; text-wrap: balance; }
     .v2-testi-cards { position: absolute; inset: 0; pointer-events: none; }
-    .v2-testi-card { position: absolute; width: 250px; border-radius: 18px; padding: 26px 24px 20px; box-shadow: 0 20px 48px rgba(0,11,51,0.12); pointer-events: auto; transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
-    .v2-testi-card:hover { transform: rotate(0deg) translateY(-6px) !important; }
+    /* desfile continuo (ref. Docshield): el wrapper .v2-testi-fly desplaza, la card rota */
+    .v2-testi-fly { position: absolute; top: var(--top, 20%); left: 100%; pointer-events: auto; will-change: transform; animation: v2-drift 34s linear infinite; animation-delay: var(--delay, 0s); }
+    .v2-testi-fly:hover { animation-play-state: paused; z-index: 5; }
+    @keyframes v2-drift { to { transform: translateX(calc(-100vw - 320px)); } }
+    .v2-testi-card { width: 250px; border-radius: 18px; padding: 26px 24px 20px; box-shadow: 0 20px 48px rgba(0,11,51,0.12); transform: rotate(var(--rot, 0deg)); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+    .v2-testi-fly:hover .v2-testi-card { transform: rotate(0deg); }
     .v2-testi-card p { font-size: 16px; line-height: 1.45; letter-spacing: -0.01em; color: var(--v2-navy); margin: 0 0 22px; }
     .v2-testi-author { display: flex; align-items: center; gap: 10px; }
     .v2-testi-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--v2-navy); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 11px; flex-shrink: 0; }
     .v2-testi-name { font-weight: 600; font-size: 13px; }
     .v2-testi-role { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); }
     .v2-testi-ph { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-blue); background: rgba(37,99,235,0.08); border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 10px; }
-    @media (max-width: 1050px) {
+    /* fallback estático: mobile y usuarios con animaciones reducidas */
+    @media (max-width: 1050px), (prefers-reduced-motion: reduce) {
       .v2-testi-cards { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
-      .v2-testi-card { position: static; width: auto; transform: none !important; }
+      .v2-testi-fly { position: static; animation: none; }
+      .v2-testi-fly.dup { display: none; }
+      .v2-testi-card { width: auto; transform: none; }
     }
     @media (max-width: 560px) { .v2-testi-cards { grid-template-columns: 1fr; } }
 
@@ -380,25 +387,47 @@
   <section class="v2-testi v2-reveal">
     <h2 class="v2-testi-giant">La diferencia<br>de tratar el nervio</h2>
     <div class="v2-testi-cards">
-      <div class="v2-testi-card" style="background: #EFF4FE; top: 6%; left: 6%; transform: rotate(-7deg);">
-        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
-        <p>“Después de años de infiltraciones, con PIT el dolor cedió desde la primera sesión.”</p>
-        <div class="v2-testi-author"><span class="v2-testi-avatar">MG</span><div><div class="v2-testi-name">Paciente · Lumbalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      <div class="v2-testi-fly" style="--top: 10%; --delay: 0s;">
+        <div class="v2-testi-card" style="background: #EFF4FE; --rot: -7deg;">
+          <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+          <p>“Después de años de infiltraciones, con PIT el dolor cedió desde la primera sesión.”</p>
+          <div class="v2-testi-author"><span class="v2-testi-avatar">MG</span><div><div class="v2-testi-name">Paciente · Lumbalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+        </div>
       </div>
-      <div class="v2-testi-card" style="background: #F4F4F4; top: 40%; left: 22%; transform: rotate(4deg);">
-        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
-        <p>“El curso me dio una herramienta que uso todas las semanas en el consultorio.”</p>
-        <div class="v2-testi-author"><span class="v2-testi-avatar">DR</span><div><div class="v2-testi-name">Médico de familia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      <div class="v2-testi-fly" style="--top: 46%; --delay: -5.7s;">
+        <div class="v2-testi-card" style="background: #F4F4F4; --rot: 4deg;">
+          <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+          <p>“El curso me dio una herramienta que uso todas las semanas en el consultorio.”</p>
+          <div class="v2-testi-author"><span class="v2-testi-avatar">DR</span><div><div class="v2-testi-name">Médico de familia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+        </div>
       </div>
-      <div class="v2-testi-card" style="background: #FCEEE3; top: 12%; right: 6%; transform: rotate(6deg);">
-        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
-        <p>“Volví a caminar sin pensar en la rodilla. Cinco sesiones.”</p>
-        <div class="v2-testi-author"><span class="v2-testi-avatar">JC</span><div><div class="v2-testi-name">Paciente · Gonalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      <div class="v2-testi-fly" style="--top: 18%; --delay: -11.3s;">
+        <div class="v2-testi-card" style="background: #FCEEE3; --rot: 6deg;">
+          <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+          <p>“Volví a caminar sin pensar en la rodilla. Cinco sesiones.”</p>
+          <div class="v2-testi-author"><span class="v2-testi-avatar">JC</span><div><div class="v2-testi-name">Paciente · Gonalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+        </div>
       </div>
-      <div class="v2-testi-card" style="background: #FFFFFF; bottom: 4%; right: 20%; transform: rotate(-4deg); border: 1px solid rgba(0,11,51,0.08);">
-        <span class="v2-testi-ph">Placeholder · Testimonio real</span>
-        <p>“La formación más clara que hice en años: casos reales, sin cortes.”</p>
-        <div class="v2-testi-author"><span class="v2-testi-avatar">TR</span><div><div class="v2-testi-name">Traumatóloga</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+      <div class="v2-testi-fly" style="--top: 50%; --delay: -17s;">
+        <div class="v2-testi-card" style="background: #FFFFFF; --rot: -4deg; border: 1px solid rgba(0,11,51,0.08);">
+          <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+          <p>“La formación más clara que hice en años: casos reales, sin cortes.”</p>
+          <div class="v2-testi-author"><span class="v2-testi-avatar">TR</span><div><div class="v2-testi-name">Traumatóloga</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+        </div>
+      </div>
+      <div class="v2-testi-fly dup" aria-hidden="true" style="--top: 30%; --delay: -22.7s;">
+        <div class="v2-testi-card" style="background: #EFF4FE; --rot: 5deg;">
+          <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+          <p>“Después de años de infiltraciones, con PIT el dolor cedió desde la primera sesión.”</p>
+          <div class="v2-testi-author"><span class="v2-testi-avatar">MG</span><div><div class="v2-testi-name">Paciente · Lumbalgia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+        </div>
+      </div>
+      <div class="v2-testi-fly dup" aria-hidden="true" style="--top: 54%; --delay: -28.3s;">
+        <div class="v2-testi-card" style="background: #F4F4F4; --rot: -5deg;">
+          <span class="v2-testi-ph">Placeholder · Testimonio real</span>
+          <p>“El curso me dio una herramienta que uso todas las semanas en el consultorio.”</p>
+          <div class="v2-testi-author"><span class="v2-testi-avatar">DR</span><div><div class="v2-testi-name">Médico de familia</div><div class="v2-testi-role">A validar con Ricardo</div></div></div>
+        </div>
       </div>
     </div>
   </section>
