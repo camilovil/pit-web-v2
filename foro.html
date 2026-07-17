@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Preguntas de pacientes y profesionales sobre PIT, respondidas cada semana por el Dr. Ricardo D. Frusso.">
+  <meta name="description" content="Portal del foro PIT: preguntas respondidas, casos clínicos, evidencia y noticias del método, por el Dr. Ricardo D. Frusso.">
   <meta name="robots" content="noindex, nofollow"><!-- staging: quitar al conectar dominio -->
   <meta name="author" content="Dr. Ricardo D. Frusso">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Foro PIT — Ricardo responde, todas las semanas">
-  <meta property="og:description" content="Preguntas de pacientes y profesionales sobre PIT, respondidas cada semana por el Dr. Ricardo D. Frusso.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Foro PIT — noticias, casos y respuestas · Dr. Frusso">
+  <meta property="og:description" content="Portal del foro PIT: preguntas respondidas, casos clínicos, evidencia y noticias del método, por el Dr. Ricardo D. Frusso.">
   <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Foro PIT — Ricardo responde, todas las semanas</title>
+  <title>Foro PIT — noticias, casos y respuestas · Dr. Frusso</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#000B33">
@@ -26,16 +26,17 @@
     body { margin: 0; background: #FFFFFF; }
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }
-/* hover generados */
-.sh-4:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
-.sh-5:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
-.sh-6:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
-.sh-7:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
-.sh-8:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
-.sh-9:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
+    .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
+    .foro-filter { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
+    .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
+    .foro-filter.on { background: var(--pit-ink); border-color: var(--pit-ink); color: #FFFFFF; }
+    .foro-row:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
+    .foro-row.hide { display: none !important; }
   </style>
 </head>
 <body>
+
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
   <header class="v2-nav">
@@ -59,24 +60,26 @@
     <a class="v2-btn v2-btn--navy" href="https://drricardofrusso.com/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
   </nav>
 
+  <!-- ============ HERO ============ -->
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <div class="pit-ruler"><span class="pit-ruler-seg pit-ruler-seg--blue"></span></div>
       <div style="padding-top: 48px; max-width: 760px;">
-        <p class="pit-eyebrow">Foro PIT · Publicación semanal</p>
+        <p class="pit-eyebrow">Foro PIT · Noticias, casos y respuestas</p>
         <h1 class="pit-display" style="margin-top: 18px;">Cada semana, una respuesta.</h1>
-        <p class="pit-lead" style="margin-top: 24px; max-width: 56ch;">El Dr. Frusso publica todas las semanas: responde preguntas de la comunidad, comenta casos clínicos y comparte evidencia nueva. Las preguntas se moderan antes de publicarse.</p>
+        <p class="pit-lead" style="margin-top: 24px; max-width: 56ch;">El Dr. Frusso publica todas las semanas: responde preguntas de la comunidad, comenta casos clínicos, comparte evidencia nueva y novedades del método. Las preguntas se moderan antes de publicarse.</p>
       </div>
-      <div style="display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; align-items: center;">
-        <span class="pit-chip pit-chip--filled">Todo</span>
-        <span class="pit-chip">Preguntas y respuestas</span>
-        <span class="pit-chip">Casos clínicos</span>
-        <span class="pit-chip">Evidencia</span>
-        <span class="pit-chip">Consejos</span>
+      <div style="display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap; align-items: center;">
+        <button type="button" class="foro-filter on" data-fcat="todo">Todo</button>
+        <button type="button" class="foro-filter" data-fcat="pyr">Preguntas y respuestas</button>
+        <button type="button" class="foro-filter" data-fcat="caso">Casos clínicos</button>
+        <button type="button" class="foro-filter" data-fcat="evidencia">Evidencia</button>
+        <button type="button" class="foro-filter" data-fcat="consejos">Consejos</button>
+        <button type="button" class="foro-filter" data-fcat="noticias">Noticias</button>
         <span style="margin-left: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
           <span>Audiencia</span>
-          <span class="pit-chip pit-chip--blue">Pacientes</span>
-          <span class="pit-chip">Profesionales</span>
+          <button type="button" class="foro-filter" data-faud="pacientes">Pacientes</button>
+          <button type="button" class="foro-filter" data-faud="profesionales">Profesionales</button>
         </span>
       </div>
     </div>
@@ -88,19 +91,19 @@
       <p class="pit-eyebrow">Esta semana</p>
       <article class="m-stack0" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); margin-top: 24px; display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; gap: 0;">
         <div class="m-pad" style="padding: 40px 44px;">
-          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px;">
+          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
             <span class="pit-chip pit-chip--blue">Preguntas y respuestas</span>
             <span class="pit-chip">Pacientes</span>
-            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">SEMANA 28 · 10 JUL 2026</span>
+            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">SEMANA 28 · 09 JUL 2026</span>
           </div>
-          <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">"Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?"</span></h2>
+          <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?</span></h2>
           <p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">Una pregunta muy frecuente en el consultorio. Ricardo explica la diferencia entre infiltrar la articulación y tratar el nervio sensibilizado — y por qué no son excluyentes.</p>
           <div style="display: flex; gap: 20px; align-items: center;">
-            <a class="pit-btn pit-btn--primary" href="foro-publicacion.html">Leer la respuesta →</a>
+            <a class="pit-btn pit-btn--primary" href="foro/corticoides-y-pit.html">Leer la respuesta →</a>
             <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">5 MIN DE LECTURA</span>
           </div>
         </div>
-        <img class="m-first" src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="El Dr. Frusso en consultorio" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img class="m-first" src="https://drricardofrusso.com/img/DSC_0086.jpg" alt="Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </article>
     </div>
   </section>
@@ -111,56 +114,60 @@
       <div style="display: flex; align-items: baseline; gap: 24px;">
         <div style="flex: 1;">
           <p class="pit-eyebrow">Publicaciones anteriores</p>
-          <h2 class="pit-section-title" style="margin-top: 12px;"><span class="hover-underline">Una por semana, desde marzo.</span></h2>
+          <h2 class="pit-section-title" style="margin-top: 12px;"><span class="hover-underline">El archivo del foro.</span></h2>
         </div>
-        <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">18 publicaciones</span>
+        <span id="foro-count" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">8 publicaciones</span>
       </div>
 
-      <div style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
-        <a href="foro-publicacion.html" class="sh-4 m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+      <div id="foro-archivo" style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
+        <a href="foro/gonalgia-corredor-52.html" class="m-list foro-row" data-cat="caso" data-aud="profesionales" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
           <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S27 · 03 JUL</span>
           <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
           <span style="font-size: 17px; font-weight: 600;">Gonalgia bilateral en corredor de 52 años: mapeo y evolución en 5 sesiones</span>
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
         </a>
-        <a href="foro-publicacion.html" class="sh-5 m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+        <a href="foro/congreso-medicina-familiar-2026.html" class="m-list foro-row" data-cat="noticias" data-aud="todos" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S26b · 30 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Noticias · Para todos</span>
+          <span style="font-size: 17px; font-weight: 600;">PIT en el Congreso de Medicina Familiar 2026: qué se presentó</span>
+          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+        </a>
+        <a href="foro/dia-despues-sesion.html" class="m-list foro-row" data-cat="consejos" data-aud="pacientes" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
           <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S26 · 26 JUN</span>
           <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Consejos · Pacientes</span>
           <span style="font-size: 17px; font-weight: 600;">Qué hacer (y qué no) el día después de una sesión de PIT</span>
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
         </a>
-        <a href="foro-publicacion.html" class="sh-6 m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+        <a href="foro/revision-glucosa-perineural.html" class="m-list foro-row" data-cat="evidencia" data-aud="profesionales" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
           <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S25 · 19 JUN</span>
           <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Evidencia · Prof.</span>
           <span style="font-size: 17px; font-weight: 600;">Nueva revisión sistemática sobre glucosa perineural: qué dice y qué no dice</span>
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
         </a>
-        <a href="foro-publicacion.html" class="sh-7 m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+        <a href="foro/cuantas-sesiones.html" class="m-list foro-row" data-cat="pyr" data-aud="pacientes" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
           <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S24 · 12 JUN</span>
           <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
-          <span style="font-size: 17px; font-weight: 600;">"¿Cuántas sesiones necesito antes de saber si PIT funciona para mí?"</span>
+          <span style="font-size: 17px; font-weight: 600;">¿Cuántas sesiones necesito antes de saber si PIT funciona para mí?</span>
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
         </a>
-        <a href="foro-publicacion.html" class="sh-8 m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+        <a href="foro/cervicalgia-latigazo.html" class="m-list foro-row" data-cat="caso" data-aud="profesionales" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
           <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S23 · 05 JUN</span>
           <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
           <span style="font-size: 17px; font-weight: 600;">Cervicalgia post-latigazo: abordaje del plexo cervical superficial</span>
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
         </a>
-        <a href="foro-publicacion.html" class="sh-9 m-list" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+        <a href="foro/pit-artrosis-avanzada.html" class="m-list foro-row" data-cat="pyr" data-aud="pacientes" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
           <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S22 · 29 MAY</span>
           <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
-          <span style="font-size: 17px; font-weight: 600;">"¿PIT sirve si ya tengo artrosis avanzada?"</span>
+          <span style="font-size: 17px; font-weight: 600;">¿PIT sirve si ya tengo artrosis avanzada?</span>
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
         </a>
       </div>
-      <div style="margin-top: 32px;">
-        <a href="#" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;">Ver archivo completo →</a>
-      </div>
+      <p id="foro-empty" style="display: none; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); padding: 28px 8px;">No hay publicaciones con este filtro todavía.</p>
     </div>
   </section>
 
-  <!-- ============ ENVIA TU PREGUNTA (vanilla JS, sin backend aún) ============ -->
+  <!-- ============ ENVIA TU PREGUNTA ============ -->
   <section id="pregunta" style="padding: var(--pit-section-padding); background: var(--pit-ink); color: var(--pit-paper);">
     <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start;">
       <div>
@@ -203,37 +210,6 @@
     </div>
   </section>
 
-  <script>
-    // Formulario del foro (front-only: conectar backend/endpoint cuando esté definido)
-    (function () {
-      var form = document.getElementById('foro-form');
-      var ok = document.getElementById('foro-ok');
-      if (!form || !ok) return;
-      var q = document.getElementById('foro-q');
-      var email = document.getElementById('foro-email');
-      var nl = document.getElementById('foro-nl');
-      var hint = document.getElementById('foro-hint');
-      var nlnote = document.getElementById('foro-nlnote');
-      nl.addEventListener('change', function () { nlnote.style.display = nl.checked ? '' : 'none'; });
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
-        if (!q.value.trim()) { hint.textContent = 'ESCRIBÍ TU PREGUNTA'; return; }
-        if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
-        hint.textContent = '';
-        document.getElementById('foro-sent-email').textContent = email.value.trim();
-        document.getElementById('foro-sent-nl').style.display = nl.checked ? '' : 'none';
-        form.style.display = 'none';
-        ok.style.display = 'block';
-        q.value = ''; email.value = '';
-      });
-      document.getElementById('foro-reset').addEventListener('click', function () {
-        ok.style.display = 'none';
-        form.style.display = 'grid';
-      });
-    })();
-  </script>
-
   <footer class="v2-footer">
     <div class="v2-footer-top">
       <nav class="v2-footer-links">
@@ -270,6 +246,75 @@
   </footer>
 
 </div>
+
+<script>
+  // Filtros del archivo (categoría + audiencia)
+  (function () {
+    var cat = 'todo';
+    var aud = null;
+    function apply() {
+      var rows = document.querySelectorAll('.foro-row');
+      var visible = 0;
+      rows.forEach(function (r) {
+        var okCat = cat === 'todo' || r.getAttribute('data-cat') === cat;
+        var rAud = r.getAttribute('data-aud');
+        var okAud = !aud || rAud === aud || rAud === 'todos';
+        var show = okCat && okAud;
+        r.classList.toggle('hide', !show);
+        if (show) visible++;
+      });
+      document.getElementById('foro-empty').style.display = visible ? 'none' : 'block';
+      document.getElementById('foro-count').textContent = (cat === 'todo' && !aud)
+        ? 8 + ' publicaciones'
+        : visible + ' de 7 en el archivo';
+    }
+    document.querySelectorAll('[data-fcat]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        cat = b.getAttribute('data-fcat');
+        document.querySelectorAll('[data-fcat]').forEach(function (x) { x.classList.toggle('on', x === b); });
+        apply();
+      });
+    });
+    document.querySelectorAll('[data-faud]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.getAttribute('data-faud');
+        aud = (aud === k) ? null : k;
+        document.querySelectorAll('[data-faud]').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-faud') === aud); });
+        apply();
+      });
+    });
+  })();
+
+  // Formulario del foro (front-only: conectar backend cuando esté definido)
+  (function () {
+    var form = document.getElementById('foro-form');
+    var ok = document.getElementById('foro-ok');
+    if (!form || !ok) return;
+    var q = document.getElementById('foro-q');
+    var email = document.getElementById('foro-email');
+    var nl = document.getElementById('foro-nl');
+    var hint = document.getElementById('foro-hint');
+    var nlnote = document.getElementById('foro-nlnote');
+    nl.addEventListener('change', function () { nlnote.style.display = nl.checked ? '' : 'none'; });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+      if (!q.value.trim()) { hint.textContent = 'ESCRIBÍ TU PREGUNTA'; return; }
+      if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
+      hint.textContent = '';
+      document.getElementById('foro-sent-email').textContent = email.value.trim();
+      document.getElementById('foro-sent-nl').style.display = nl.checked ? '' : 'none';
+      form.style.display = 'none';
+      ok.style.display = 'block';
+      q.value = ''; email.value = '';
+    });
+    document.getElementById('foro-reset').addEventListener('click', function () {
+      ok.style.display = 'none';
+      form.style.display = 'grid';
+    });
+  })();
+</script>
+
 <script src="assets/js/pit-v2.js"></script>
 <script src="assets/js/pit-motion.js"></script>
 <script src="assets/js/pit-chat.js"></script>

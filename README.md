@@ -19,6 +19,23 @@ Quitar ambos al conectar el dominio.
   (`node _build/convert.js`). `index.html` y `curso-intro.html` son manuales
   (el aula del curso intro es una app vanilla JS portada del diseño reactivo).
 
+## Foro (portal de contenido)
+
+El foro es un portal generado desde archivos markdown — **no se edita el HTML a mano**:
+
+- `_content/foro/*.md` — una publicación por archivo, con frontmatter (`titulo`, `slug`,
+  `tipo: qa|caso|articulo`, `categoria: pyr|caso|evidencia|consejos|noticias`,
+  `audiencia: pacientes|profesionales|todos`, `semana`, `fecha`, `fechaLabel`, `lectura`,
+  `tags`, `resumen`, `portada`) y cuerpo en markdown mínimo (`##` títulos, `**negrita**`,
+  `![img](url "CAPTION")`, `> idea clave`, `[[placeholder: pendiente]]`).
+- `node _build/foro.js` regenera todo: `foro.html` (índice con destacado automático =
+  la publicación más nueva, archivo completo, filtros funcionales por categoría y
+  audiencia) y `foro/<slug>.html` (una página por publicación, con "Seguí leyendo" y
+  link a la anterior generados solos).
+
+**Publicar algo nuevo** = crear el `.md`, correr `node _build/foro.js`, commit y push
+(el deploy sale automático). Convención de nombre: `AAAA-MM-DD-titulo-corto.md`.
+
 ## Pendientes de contenido (placeholders en el diseño)
 - Testimonios reales (home y curso) — "A validar con Ricardo".
 - Videos del curso intro (posters listos, falta conectar Vimeo/YouTube).
