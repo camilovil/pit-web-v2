@@ -174,6 +174,7 @@ ${extraCss}
 `;
 
 const FOOT = (pre) => `
+<script src="${pre}assets/js/pit-forms.js"></script>
 <script src="${pre}assets/js/pit-v2.js"></script>
 <script src="${pre}assets/js/pit-motion.js"></script>
 <script src="${pre}assets/js/pit-chat.js"></script>
@@ -462,7 +463,7 @@ ${FOOTER(pre)}
     });
   })();
 
-  // Formulario del foro (front-only: conectar backend cuando esté definido)
+  // Formulario del foro (envío vía pit-forms.js → Formspree; modo demo hasta configurar endpoint)
   (function () {
     var form = document.getElementById('foro-form');
     var ok = document.getElementById('foro-ok');
@@ -472,6 +473,7 @@ ${FOOTER(pre)}
     var nl = document.getElementById('foro-nl');
     var hint = document.getElementById('foro-hint');
     var nlnote = document.getElementById('foro-nlnote');
+    var btn = form.querySelector('button[type="submit"]');
     nl.addEventListener('change', function () { nlnote.style.display = nl.checked ? '' : 'none'; });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -479,11 +481,27 @@ ${FOOTER(pre)}
       if (!q.value.trim()) { hint.textContent = 'ESCRIBÍ TU PREGUNTA'; return; }
       if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
       hint.textContent = '';
-      document.getElementById('foro-sent-email').textContent = email.value.trim();
-      document.getElementById('foro-sent-nl').style.display = nl.checked ? '' : 'none';
-      form.style.display = 'none';
-      ok.style.display = 'block';
-      q.value = ''; email.value = '';
+      var aud = form.querySelector('input[name="audiencia"]:checked');
+      var payload = {
+        _subject: 'Foro PIT — nueva pregunta',
+        tipo: 'pregunta-foro',
+        audiencia: aud ? aud.value : '',
+        pregunta: q.value.trim(),
+        email: email.value.trim(),
+        newsletter: nl.checked ? 'sí' : 'no'
+      };
+      var wasNl = nl.checked, sentEmail = payload.email;
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      var send = window.pitSubmit ? window.pitSubmit('foro', payload) : Promise.resolve({ ok: true, demo: true });
+      send.then(function (r) {
+        btn.disabled = false; btn.textContent = 'Enviar pregunta';
+        if (!r.ok) { hint.textContent = 'NO SE PUDO ENVIAR — PROBÁ DE NUEVO'; return; }
+        document.getElementById('foro-sent-email').textContent = sentEmail;
+        document.getElementById('foro-sent-nl').style.display = wasNl ? '' : 'none';
+        form.style.display = 'none';
+        ok.style.display = 'block';
+        form.reset(); nlnote.style.display = '';
+      });
     });
     document.getElementById('foro-reset').addEventListener('click', function () {
       ok.style.display = 'none';

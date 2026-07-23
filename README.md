@@ -36,12 +36,26 @@ El foro es un portal generado desde archivos markdown — **no se edita el HTML 
 **Publicar algo nuevo** = crear el `.md`, correr `node _build/foro.js`, commit y push
 (el deploy sale automático). Convención de nombre: `AAAA-MM-DD-titulo-corto.md`.
 
+## Formularios (Formspree)
+Foro y contacto envían vía `assets/js/pit-forms.js` → Formspree (AJAX, sin recargar,
+manteniendo el estado de éxito en la página). El endpoint está en el objeto `ENDPOINTS`
+de ese archivo — hoy apunta al form del sitio actual (`f/xykvrdad`), compartido por
+foro y contacto; se distinguen por el `_subject` y el campo `tipo` de cada envío.
+Si el endpoint contiene `REEMPLAZAR`, los forms andan en **modo demo** (muestran éxito
+sin enviar) — útil para staging. Para separarlos, crear un segundo form en Formspree y
+cambiar una línea. El newsletter hoy es el checkbox del form del foro (llega como campo
+`newsletter: sí/no`); si más adelante se quiere lista propia, migrar a Brevo/Mailchimp.
+
+**Seguridad pendiente para cuando escale:** `_build/foro.js` genera HTML desde markdown
+sin sanitizar (`inline()`/`mdToHtml`). Hoy es seguro porque el contenido lo escribe el
+autor del sitio; si el foro llegara a aceptar contenido de terceros, escapar antes de insertar.
+
 ## Pendientes de contenido (placeholders en el diseño)
 - Testimonios reales (home y curso) — "A validar con Ricardo".
 - Videos del curso intro (posters listos, falta conectar Vimeo/YouTube).
-- Citas de evidencia científica + PDF de referencias.
+- Citas de evidencia científica (el PDF de referencias ya está enlazado).
 - WhatsApp y horarios en Contacto; mapa embed.
-- Backend de formularios (foro y contacto): hoy foro es front-only y contacto abre mailto.
+- Asistente IA (`pit-chat.js`): en modo demo; conectar backend con la API key fuera del front.
 
 ## Deploy
 Vercel (proyecto separado del sitio live). Cuando esté aprobado: mover el dominio

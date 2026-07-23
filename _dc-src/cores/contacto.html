@@ -49,28 +49,63 @@
             <div class="fld"><label for="ct-msg">Mensaje</label><textarea id="ct-msg" rows="5" placeholder="Contanos tu caso o consulta"></textarea></div>
             <div class="m-col" style="display: flex; align-items: center; gap: 16px;">
               <button type="submit" class="pit-btn pit-btn--primary">Enviar mensaje →</button>
-              <span style="font-size: 12px; color: var(--pit-ink-40); line-height: 1.5;">Al enviar aceptás la <a href="Privacidad PIT.dc.html">política de privacidad</a>.</span>
+              <span id="ct-hint" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--pit-ink-40);"></span>
             </div>
+            <span style="font-size: 12px; color: var(--pit-ink-40); line-height: 1.5;">Al enviar aceptás la <a href="Privacidad PIT.dc.html">política de privacidad</a>.</span>
           </div>
         </form>
+        <div id="contacto-ok" style="display: none; background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 34px 36px;">
+          <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 20px;">✓</span>
+          <h3 style="font-size: 24px; font-weight: 600; margin: 18px 0 10px;">Mensaje enviado.</h3>
+          <p style="font-size: 15px; line-height: 1.65; color: var(--pit-ink-60); margin: 0; max-width: 46ch;">Gracias por escribir. Te respondemos por email a la brevedad, a <span id="ct-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-ink);"></span>.</p>
+          <span id="ct-reset" style="display: inline-block; margin-top: 22px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Enviar otro mensaje →</span>
+        </div>
       </div>
     </div>
   </section>
 
   <script>
-    // Form de contacto (sin backend aún): abre el cliente de mail con el mensaje precargado
+    // Form de contacto (envío vía pit-forms.js → Formspree; modo demo hasta configurar endpoint)
     (function () {
-      var f = document.getElementById('contacto-form');
-      if (!f) return;
-      f.addEventListener('submit', function (e) {
+      var form = document.getElementById('contacto-form');
+      var ok = document.getElementById('contacto-ok');
+      if (!form || !ok) return;
+      var nombre = document.getElementById('ct-nombre');
+      var email = document.getElementById('ct-email');
+      var soy = document.getElementById('ct-soy');
+      var msg = document.getElementById('ct-msg');
+      var hint = document.getElementById('ct-hint');
+      var btn = form.querySelector('button[type="submit"]');
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var nombre = document.getElementById('ct-nombre').value.trim();
-        var email = document.getElementById('ct-email').value.trim();
-        var soy = document.getElementById('ct-soy').value;
-        var msg = document.getElementById('ct-msg').value.trim();
-        var subject = encodeURIComponent('Consulta desde la web — ' + (nombre || 'Sin nombre'));
-        var body = encodeURIComponent('Nombre: ' + nombre + '\nEmail: ' + email + '\nSoy: ' + soy + '\n\n' + msg);
-        window.location.href = 'mailto:ricardo.frusso@hospitalitaliano.org.ar?subject=' + subject + '&body=' + body;
+        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+        if (!nombre.value.trim()) { hint.textContent = 'FALTA TU NOMBRE'; return; }
+        if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
+        if (!msg.value.trim()) { hint.textContent = 'ESCRIBÍ TU MENSAJE'; return; }
+        hint.textContent = '';
+        var payload = {
+          _subject: 'Contacto PIT — ' + nombre.value.trim(),
+          tipo: 'contacto',
+          nombre: nombre.value.trim(),
+          email: email.value.trim(),
+          soy: soy.value,
+          mensaje: msg.value.trim()
+        };
+        var sentEmail = payload.email;
+        btn.disabled = true; btn.textContent = 'Enviando…';
+        var send = window.pitSubmit ? window.pitSubmit('contacto', payload) : Promise.resolve({ ok: true, demo: true });
+        send.then(function (r) {
+          btn.disabled = false; btn.textContent = 'Enviar mensaje →';
+          if (!r.ok) { hint.textContent = 'NO SE PUDO ENVIAR — PROBÁ DE NUEVO'; return; }
+          document.getElementById('ct-sent-email').textContent = sentEmail;
+          form.style.display = 'none';
+          ok.style.display = 'block';
+          form.reset();
+        });
+      });
+      document.getElementById('ct-reset').addEventListener('click', function () {
+        ok.style.display = 'none';
+        form.style.display = 'block';
       });
     })();
   </script>

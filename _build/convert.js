@@ -241,6 +241,7 @@ ${extraCss}
 `;
 
 const FOOT = `
+<script src="assets/js/pit-forms.js"></script>
 <script src="assets/js/pit-v2.js"></script>
 <script src="assets/js/pit-motion.js"></script>
 <script src="assets/js/pit-chat.js"></script>
