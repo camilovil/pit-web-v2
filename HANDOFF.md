@@ -39,11 +39,17 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
 - **Grafo de conocimiento** del proyecto en `../graphify-out/` (graph.html, GRAPH_REPORT.md).
 
 ## Pendiente
-1. **Asistente IA** (`assets/js/pit-chat.js`) — hoy en modo demo. Falta una función
-   serverless en Vercel que llame a la API de Anthropic con la key server-side
-   (NUNCA en el frontend). La API es una cuenta **separada** de la suscripción de
-   claude.ai; se paga por uso. Recomendado: modelo Haiku + tope de gasto mensual en
-   console.anthropic.com. **La sesión anterior quedó por acá.**
+1. **Asistente IA** — **código listo, esperando la key.** Ya está la función
+   serverless `api/chat.js` (llama a Claude Haiku con la key server-side) y el
+   widget `assets/js/pit-chat.js` ya la consume vía `fetch('/api/chat')`. El
+   prompt de sistema y los límites (max_tokens 500, 12 turnos, largo por mensaje)
+   viven en el servidor, no en el frontend. Mientras no haya key, el asistente
+   responde en modo demo (no rompe nada). **Para activarlo:**
+   - Crear cuenta de API **separada** de claude.ai en console.anthropic.com
+     (se paga por uso), poner un tope de gasto mensual (~USD 10) y generar una key.
+   - En Vercel → proyecto pit-web-v2 → Settings → Environment Variables:
+     agregar `ANTHROPIC_API_KEY` con el valor de la key. Redeploy → queda andando.
+   - Modelo actual: `claude-haiku-4-5` (barato y rápido). Se cambia en `api/chat.js`.
 2. **Activar Analytics** en Vercel → proyecto pit-web-v2 → pestaña Analytics → Enable.
 3. **Contenido de Ricardo** (placeholders marcados en el sitio): 2-3 testimonios reales,
    video de bienvenida del curso + subir el de materiales, preguntas definitivas de las

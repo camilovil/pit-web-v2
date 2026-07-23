@@ -3,3 +3,11 @@ node_modules/
 .DS_Store
 
 .vercel
+
+# Variables de entorno locales — nunca commitear la key real.
+# (.env.example SÍ se commitea; solo documenta los nombres.)
+.env
+.env*.local
+
+# Salida del grafo de conocimiento (graphify) — herramienta de análisis, no es parte del sitio.
+graphify-out/

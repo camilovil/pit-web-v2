@@ -1,15 +1,10 @@
-// PIT — Asistente IA flotante (window.claude.complete)
+// PIT — Asistente IA flotante (consume /api/chat, función serverless de Vercel)
 (function () {
   if (window.__pitChat) return;
   window.__pitChat = true;
 
-  var SYSTEM = [
-    'Sos el asistente del sitio web del Dr. Ricardo D. Frusso sobre PIT (Perineural Injection Treatment / neuroproloterapia).',
-    'Tu rol: responder dudas generales sobre el método, el sitio y sus recursos, en lenguaje claro y cercano (español rioplatense; si te escriben en inglés, respondé en inglés).',
-    'Datos del sitio: PIT trata el dolor crónico actuando sobre nervios periféricos sensibilizados con inyecciones subcutáneas de glucosa al 5%; alivio desde la primera sesión; tratamiento típico 4–8 sesiones; compatible con otros tratamientos. El Dr. Frusso es Médico de Familia (UBA 1992, M.N. 86.498), 30+ años en el Hospital Italiano de Buenos Aires, formado por el Dr. John Lyftogt (creador del método), instructor autorizado para América Latina desde 2015. Consultorio: Amenabar 2446, Belgrano, CABA.',
-    'Recursos gratuitos: apuntes PDF de 80 páginas (sin registro), curso introductorio gratuito online, foro semanal donde Ricardo responde preguntas. Curso pago para profesionales: Módulo I — Lumbalgia y Rodilla, USD 97.99 pago único en Hotmart, certificado, garantía de 7 días, cupón PIT10OFF (10% off).',
-    'Reglas ESTRICTAS: (1) Nunca diagnostiques ni des indicaciones médicas personales. Si la pregunta es sobre un caso personal, respondé lo general y derivá: "para tu caso puntual, lo mejor es una consulta" (página Contacto) o "podés enviar tu pregunta al foro semanal". (2) Aclarà cuando corresponda que la info es educativa y no reemplaza una consulta médica. (3) Si no sabés algo del sitio, decilo honestamente. (4) Respuestas cortas: máximo ~100 palabras, sin listas largas.'
-  ].join('\n');
+  // El prompt de sistema del asistente vive en la función serverless
+  // (api/chat.js), no acá — así no se puede manipular desde el navegador.
 
   var SUGERIDAS = ['¿Qué es PIT?', '¿Duelen las inyecciones?', '¿Cómo empiezo el curso gratis?'];
 
@@ -121,22 +116,29 @@
         input.focus();
       };
 
-      if (!window.claude || !window.claude.complete) {
-        setTimeout(function () {
-          done('(Demo) Acá respondería la IA. En esta vista previa el asistente no está conectado.');
-        }, 500);
-        return;
-      }
-
-      window.claude.complete({
-        system: SYSTEM,
-        messages: history.slice(-12),
-        max_tokens: 500
-      }).then(done).catch(function () {
+      // Llama a la función serverless (/api/chat), que a su vez llama a la API
+      // de Anthropic con la key server-side. El prompt de sistema y los límites
+      // viven en el servidor; acá solo mandamos el historial de la charla.
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history.slice(-12) })
+      }).then(function (r) {
+        return r.json().then(function (data) {
+          return { ok: r.ok, data: data };
+        });
+      }).then(function (res) {
+        if (!res.ok || !res.data || !res.data.reply) {
+          throw new Error('bad_response');
+        }
+        done(res.data.reply);
+      }).catch(function () {
         typing.remove();
         add('bot', 'Uy, no pude responder en este momento. Probá de nuevo en unos segundos.');
+        history.pop(); // quitamos el turno del usuario que no llegó a responderse
         busy = false;
         sendBtn.disabled = false;
+        input.focus();
       });
     }
 
