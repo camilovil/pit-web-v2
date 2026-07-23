@@ -41,7 +41,8 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-burger span { display: block; height: 2px; background: var(--v2-navy); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
 .v2-drawer { display: none; }
 
-@media (max-width: 860px) {
+/* Nav → menú hamburguesa: colapsa a 1080px para que los 7 ítems no queden apretados */
+@media (max-width: 1080px) {
   .v2-nav { gap: 12px; padding: 8px 8px 8px 20px; }
   .v2-nav-links, .v2-nav .v2-nav-cta { display: none; }
   .v2-burger { display: flex; margin-left: auto; }

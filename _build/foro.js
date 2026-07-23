@@ -83,6 +83,8 @@ const NAV = (pre) => `  <header class="v2-nav">
     <a href="${pre}index.html" style="text-transform: uppercase; color: inherit; display: flex;">${LOGO}</a>
     <nav class="v2-nav-links">
       <a href="${pre}que-es-pit.html">Qué es PIT</a>
+      <a href="${pre}evidencia.html">Evidencia</a>
+      <a href="${pre}sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
       <a href="${pre}index.html#contenido">Contenido</a>
       <a href="${pre}foro.html" class="active">Foro</a>
       <a href="${pre}curso-modulo-1.html">Curso</a>
@@ -93,6 +95,8 @@ const NAV = (pre) => `  <header class="v2-nav">
   </header>
   <nav class="v2-drawer">
     <a href="${pre}que-es-pit.html">Qué es PIT</a>
+    <a href="${pre}evidencia.html">Evidencia</a>
+    <a href="${pre}sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
     <a href="${pre}index.html#contenido">Contenido</a>
     <a href="${pre}foro.html">Foro</a>
     <a href="${pre}curso-modulo-1.html">Curso</a>

@@ -139,6 +139,8 @@ const BASE_PAGE_CSS = `    body { margin: 0; background: #FFFFFF; }
 const NAV = (active) => {
   const links = [
     ['que-es-pit.html', 'Qué es PIT'],
+    ['evidencia.html', 'Evidencia'],
+    ['sobre-el-dr-frusso.html', 'Sobre el Dr. Frusso'],
     ['index.html#contenido', 'Contenido'],
     ['foro.html', 'Foro'],
     ['curso-modulo-1.html', 'Curso'],
