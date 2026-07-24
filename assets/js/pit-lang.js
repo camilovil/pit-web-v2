@@ -267,40 +267,8 @@
     if (b) setLang(b.getAttribute('data-lang'));
   });
 
-  // aplicar al cargar (con reintentos: los componentes se renderizan async)
-  function injectToggle() {
-    if (document.querySelector('.lang-btn')) return;
-    var mk = function () {
-      var s = document.createElement('span');
-      s.style.cssText = 'display:inline-flex;gap:2px;border:1px solid var(--pit-ink-20);border-radius:999px;padding:2px;';
-      s.innerHTML = '<button class="lang-btn lang-active" data-lang="es" type="button" style="font-family:var(--pit-font-mono);font-size:11px;letter-spacing:0.08em;background:none;border:none;color:var(--pit-ink-40);padding:9px 12px;min-height:36px;border-radius:999px;cursor:pointer;">ES</button><button class="lang-btn" data-lang="en" type="button" style="font-family:var(--pit-font-mono);font-size:11px;letter-spacing:0.08em;background:none;border:none;color:var(--pit-ink-40);padding:9px 12px;min-height:36px;border-radius:999px;cursor:pointer;">EN</button>';
-      return s;
-    };
-    if (!document.getElementById('pit-lang-style')) {
-      var st = document.createElement('style');
-      st.id = 'pit-lang-style';
-      st.textContent = '.lang-btn.lang-active{background:#2563EB !important;color:#FFFFFF !important;}';
-      document.head.appendChild(st);
-    }
-    var burger = document.querySelector('header .nav-burger, header .v2-burger');
-    if (burger && burger.parentNode) {
-      var d = mk();
-      d.className = 'm-hide v2-nav-cta';
-      burger.parentNode.insertBefore(d, burger);
-    }
-    var navM = document.querySelector('header .nav-mobile, .v2-drawer');
-    if (navM) {
-      var m = mk();
-      m.style.marginTop = '14px';
-      m.style.alignSelf = 'flex-start';
-      navM.appendChild(m);
-    }
-  }
-
-  var n = 0;
-  var t = setInterval(function () {
-    injectToggle();
-    apply(current());
-    if (++n > 10) clearInterval(t);
-  }, 500);
+  // El botón ES/EN ya viene en el HTML (ver _build/nav.js) — acá solo
+  // aplicamos el idioma guardado. Sin polling ni inyección: nada que
+  // aparezca "de la nada" ni mueva el layout después de pintar la página.
+  apply(current());
 })();

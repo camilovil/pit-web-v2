@@ -42,6 +42,18 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
 - **Home:** contenido gratuito como panel destacado, testimonios en desfile animado
   (ref. Docshield), logo animado en todas las páginas, sin contadores.
 - **Grafo de conocimiento** del proyecto en `../graphify-out/` (graph.html, GRAPH_REPORT.md).
+- **Toggle ES/EN** (`assets/js/pit-lang.js`): markup estático (viene en el HTML desde
+  `_build/nav.js`, no se inyecta por JS) — antes causaba un "pop-in" visible y corría
+  el riesgo de quedar visible fuera de sync con el resto del nav en mobile.
+- **Nav sin wrap**: `white-space: nowrap` en logo/links/CTA/toggle — el texto nunca se
+  parte ni se comprime. Breakpoint a hamburguesa en **1180px**, calculado como el ancho
+  mínimo real medido (con nowrap) + margen. Si se agrega/saca un ítem del nav, remedir
+  con `nav.style.width='fit-content'` en devtools y ajustar el `@media` en
+  `assets/css/pit-v2.css` + `index.html` (ambos deben quedar iguales).
+- **Botón "volver arriba"** (`assets/js/pit-scrolltop.js`): aparece al bajar scroll,
+  apilado sobre el FAB del asistente IA en todas las páginas.
+- **Ancla `#contenido`**: tiene `scroll-margin-top` para no quedar tapada por el nav
+  fijo al navegar desde el link "Contenido" del menú.
 
 ## Pendiente
 1. **Asistente IA** — **código listo, esperando la key.** Ya está la función

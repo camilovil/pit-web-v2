@@ -12,7 +12,9 @@ Quitar ambos al conectar el dominio.
   (tokens + componentes del design system `pit-design-system`), `pit-v2.css` (piel v2:
   nav pill, footer gradiente), `pit-mobile.css`, `pit-motion.css`.
 - `assets/js/` — drawer (`pit-v2.js`), reveals (`pit-motion.js`), asistente IA
-  (`pit-chat.js`, requiere backend: hoy responde en modo demo), toggle ES/EN (`pit-lang.js`).
+  (`pit-chat.js`, backend listo en `api/chat.js`, esperando `ANTHROPIC_API_KEY` —
+  ver HANDOFF.md), toggle ES/EN (`pit-lang.js`, markup estático desde `_build/nav.js`),
+  botón volver arriba (`pit-scrolltop.js`).
 - `_dc-src/` — fuentes originales del proyecto de diseño (`.dc.html` completos y
   `cores/` con el contenido único por página).
 - `_build/convert.js` — conversor determinístico `.dc.html` → HTML standalone.
@@ -63,7 +65,8 @@ autor del sitio; si el foro llegara a aceptar contenido de terceros, escapar ant
 - Videos del curso intro (posters listos, falta conectar Vimeo/YouTube).
 - Citas de evidencia científica (el PDF de referencias ya está enlazado).
 - WhatsApp y horarios en Contacto; mapa embed.
-- Asistente IA (`pit-chat.js`): en modo demo; conectar backend con la API key fuera del front.
+- Asistente IA: código listo (`api/chat.js` + `pit-chat.js`), solo falta cargar
+  `ANTHROPIC_API_KEY` en Vercel — ver HANDOFF.md → Pendiente.
 
 ## Deploy
 Vercel (proyecto separado del sitio live). Cuando esté aprobado: mover el dominio

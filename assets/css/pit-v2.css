@@ -32,17 +32,31 @@ body { padding-top: 84px; background: #FFFFFF; }
 .pit-btn { border-radius: 999px !important; }
 
 /* ---- nav pill flotante ---- */
+/* white-space:nowrap en los hijos de texto: el texto nunca se envuelve ni se
+   comprime por debajo de su ancho natural (min-content de un nodo nowrap es su
+   ancho completo) — el navegador prefiere desbordar antes que partir el texto.
+   Combinado con el breakpoint de abajo (calculado para que quepa todo sin
+   nowrap), el desborde nunca llega a verse: se pasa a hamburguesa antes. */
 .v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
+.v2-nav > a { flex-shrink: 0; white-space: nowrap; }
 .v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-.v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; }
+.v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
 .v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
 .v2-nav-links a.active { opacity: 1; color: var(--v2-blue); }
-.v2-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 10px; box-sizing: border-box; background: none; border: none; cursor: pointer; }
+.v2-nav .v2-nav-cta { flex-shrink: 0; white-space: nowrap; }
+.v2-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 10px; box-sizing: border-box; background: none; border: none; cursor: pointer; flex-shrink: 0; }
 .v2-burger span { display: block; height: 2px; background: var(--v2-navy); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
 .v2-drawer { display: none; }
 
-/* Nav → menú hamburguesa: colapsa a 1080px para que los 7 ítems no queden apretados */
-@media (max-width: 1080px) {
+/* Toggle ES/EN — markup estático (ver _build/nav.js), no inyectado por JS */
+.v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--pit-ink-20); border-radius: 999px; padding: 2px; }
+.lang-btn { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; background: none; border: none; color: var(--pit-ink-40); padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
+
+/* Nav → menú hamburguesa. Breakpoint = ancho mínimo medido (nowrap) para que
+   quepan los 7 links + logo + CTA + toggle ES/EN sin comprimirse, + margen.
+   Ver HANDOFF.md / README.md para cómo remedir si se agrega/saca un ítem. */
+@media (max-width: 1180px) {
   .v2-nav { gap: 12px; padding: 8px 8px 8px 20px; }
   .v2-nav-links, .v2-nav .v2-nav-cta { display: none; }
   .v2-burger { display: flex; margin-left: auto; }
@@ -52,6 +66,7 @@ body { padding-top: 84px; background: #FFFFFF; }
   .v2-drawer a::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
   .v2-drawer .v2-btn { margin-top: auto; }
   .v2-drawer .v2-btn::before { content: none; }
+  .v2-lang-toggle--drawer { margin-top: 14px; align-self: flex-start; }
   .v2-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .v2-burger.open span:nth-child(2) { opacity: 0; }
   .v2-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }

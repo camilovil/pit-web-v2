@@ -6,6 +6,14 @@ const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><s
 
 const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Apuntes gratis' };
 
+// Toggle de idioma ES/EN. Markup ESTÁTICO a propósito (antes se inyectaba por JS
+// con setInterval, causando un "pop-in" visible y layout shift en la barra —
+// ver assets/js/pit-lang.js, que ya no inyecta nada, solo aplica el idioma).
+const LANG_TOGGLE = (extraClass) => `<span class="v2-lang-toggle${extraClass ? ' ' + extraClass : ''}">
+      <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
+      <button class="lang-btn" data-lang="en" type="button">EN</button>
+    </span>`;
+
 // 7 items canónicos, en orden. href = URL final relativa (sin prefijo).
 // El item 'contenido' usa ancla local (#contenido) cuando home === true.
 const NAV_ITEMS = [
@@ -44,11 +52,13 @@ function renderNav({ active = null, prefix = '', home = false } = {}) {
 ${headerLinks}
     </nav>
     <a class="v2-btn v2-btn--navy v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: 14px;">${CTA.label}</a>
+    ${LANG_TOGGLE('v2-nav-cta')}
     <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
   </header>
   <nav class="v2-drawer" id="v2-drawer">
 ${drawerLinks}
     <a class="v2-btn v2-btn--navy" href="${CTA.href}" style="border-bottom: none;">${CTA.label}</a>
+    ${LANG_TOGGLE('v2-lang-toggle--drawer')}
   </nav>`;
 }
 

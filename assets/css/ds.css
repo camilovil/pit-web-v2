@@ -147,6 +147,7 @@
   letter-spacing: 0.08em;
   line-height: 1;
   color: var(--pit-ink);
+  white-space: nowrap;
 }
 .pit-logo-pipe {
   display: inline-block;
@@ -168,6 +169,7 @@
   letter-spacing: 0.04em;
   line-height: 1.3;
   color: var(--pit-ink);
+  white-space: nowrap;
 }
 .pit-logo--on-dark .pit-logo-dr,
 .pit-logo--on-dark .pit-logo-name span { color: var(--pit-paper); }

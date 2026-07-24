@@ -156,6 +156,7 @@ const FOOT = (pre) => `
 <script src="${pre}assets/js/pit-v2.js"></script>
 <script src="${pre}assets/js/pit-motion.js"></script>
 <script src="${pre}assets/js/pit-chat.js"></script>
+<script src="${pre}assets/js/pit-scrolltop.js"></script>
 <script src="${pre}assets/js/pit-lang.js"></script>
 </body>
 </html>
