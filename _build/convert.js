@@ -8,6 +8,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, '_dc-src');
+const { renderNav, LOGO_HTML } = require('./nav');
 
 const LINKS = {
   'HomePit v2.dc.html': 'index.html',
@@ -25,10 +26,10 @@ const LINKS = {
 };
 
 const PAGES = [
-  { mode: 'raw', src: 'Que es PIT.dc.html', out: 'que-es-pit.html',
+  { mode: 'raw', src: 'Que es PIT.dc.html', out: 'que-es-pit.html', active: 'que-es-pit',
     title: 'Qué es PIT · Neuroproloterapia — Dr. Ricardo D. Frusso',
     desc: 'PIT (Perineural Injection Treatment) explicado para pacientes y profesionales: cómo funciona, cómo es una sesión y qué patologías trata.' },
-  { mode: 'raw', src: 'Curso Modulo I.dc.html', out: 'curso-modulo-1.html',
+  { mode: 'raw', src: 'Curso Modulo I.dc.html', out: 'curso-modulo-1.html', active: 'curso',
     title: 'Curso PIT · Módulo I — Lumbalgia y Rodilla · Dr. Frusso',
     desc: 'Curso online de PIT con casos clínicos reales filmados en consultorio. Acceso permanente y certificado emitido por un instructor autorizado.' },
   { mode: 'core', src: 'cores/evidencia.html', out: 'evidencia.html', active: null,
@@ -37,7 +38,7 @@ const PAGES = [
   { mode: 'core', src: 'cores/faq.html', out: 'faq.html', active: null,
     title: 'Preguntas frecuentes sobre PIT — Dr. Ricardo D. Frusso',
     desc: 'Respuestas claras sobre PIT: dolor, cantidad de sesiones, seguridad, compatibilidad con otros tratamientos y formación profesional.' },
-  { mode: 'core', src: 'cores/contacto.html', out: 'contacto.html', active: 'contacto.html',
+  { mode: 'core', src: 'cores/contacto.html', out: 'contacto.html', active: 'contacto',
     title: 'Contacto y turnos — Dr. Ricardo D. Frusso',
     desc: 'Consultorio en Belgrano, CABA (Amenabar 2446). Pedí una consulta con el Dr. Ricardo D. Frusso.' },
   { mode: 'core', src: 'cores/sobre-el-dr-frusso.html', out: 'sobre-el-dr-frusso.html', active: null,
@@ -47,8 +48,6 @@ const PAGES = [
     title: 'Privacidad y aviso médico — Dr. Ricardo D. Frusso',
     desc: 'Política de privacidad y aviso médico del sitio del Dr. Ricardo D. Frusso.' },
 ];
-
-const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span>';
 
 const COMPONENTS = {
   Logo: () => LOGO_HTML,
@@ -132,36 +131,15 @@ function remapLinks(html) {
   return html;
 }
 
+function replaceNavBlock(html, navHtml) {
+  const re = /<header class="v2-nav">[\s\S]*?<\/header>\s*<nav class="v2-drawer">[\s\S]*?<\/nav>/;
+  if (!re.test(html)) throw new Error('replaceNavBlock: bloque nav v2 (header+drawer) no encontrado en fuente raw');
+  return html.replace(re, () => navHtml.trim());   // función replacer: evita interpretar $ en navHtml
+}
+
 const BASE_PAGE_CSS = `    body { margin: 0; background: #FFFFFF; }
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }`;
-
-const NAV = (active) => {
-  const links = [
-    ['que-es-pit.html', 'Qué es PIT'],
-    ['evidencia.html', 'Evidencia'],
-    ['sobre-el-dr-frusso.html', 'Sobre el Dr. Frusso'],
-    ['index.html#contenido', 'Contenido'],
-    ['foro.html', 'Foro'],
-    ['curso-modulo-1.html', 'Curso'],
-    ['contacto.html', 'Contacto'],
-  ];
-  const navLinks = links.map(([href, label]) =>
-    `      <a href="${href}"${href === active ? ' class="active"' : ''}>${label}</a>`).join('\n');
-  const drawerLinks = links.map(([href, label]) => `    <a href="${href}">${label}</a>`).join('\n');
-  return `  <header class="v2-nav">
-    <a href="index.html" style="text-transform: uppercase; color: inherit; display: flex;">${LOGO_HTML}</a>
-    <nav class="v2-nav-links">
-${navLinks}
-    </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
-    <button class="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
-  </header>
-  <nav class="v2-drawer">
-${drawerLinks}
-    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
-  </nav>`;
-};
 
 const FOOTER = `  <footer class="v2-footer">
     <div class="v2-footer-top">
@@ -264,14 +242,14 @@ for (const p of PAGES) {
     if (p.mode === 'raw') {
       const ex = extract(raw);
       styles = ex.styles;
-      body = ex.body;
+      body = replaceNavBlock(ex.body, renderNav({ active: p.active }));
     } else {
       // core: extraer <style data-page> opcional y envolver con chrome común
       let core = raw;
       const pageStyle = core.match(/<style data-page>([\s\S]*?)<\/style>/);
       styles = BASE_PAGE_CSS + (pageStyle ? '\n' + pageStyle[1] : '');
       if (pageStyle) core = core.replace(pageStyle[0], '');
-      body = `<div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">\n\n${NAV(p.active)}\n\n  ${core.trim()}\n\n${FOOTER}\n\n</div>`;
+      body = `<div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">\n\n${renderNav({ active: p.active })}\n\n  ${core.trim()}\n\n${FOOTER}\n\n</div>`;
     }
 
     body = replaceImports(body, warnings);

@@ -11,6 +11,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const CONTENT = path.join(ROOT, '_content', 'foro');
 const OUTDIR = path.join(ROOT, 'foro');
+const { renderNav } = require('./nav');
 
 const CAT = {
   pyr: 'Preguntas y respuestas',
@@ -77,33 +78,6 @@ function mdToHtml(body) {
 }
 
 // ---------- chrome compartido ----------
-const LOGO = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span>';
-
-const NAV = (pre) => `  <header class="v2-nav">
-    <a href="${pre}index.html" style="text-transform: uppercase; color: inherit; display: flex;">${LOGO}</a>
-    <nav class="v2-nav-links">
-      <a href="${pre}que-es-pit.html">Qué es PIT</a>
-      <a href="${pre}evidencia.html">Evidencia</a>
-      <a href="${pre}sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
-      <a href="${pre}index.html#contenido">Contenido</a>
-      <a href="${pre}foro.html" class="active">Foro</a>
-      <a href="${pre}curso-modulo-1.html">Curso</a>
-      <a href="${pre}contacto.html">Contacto</a>
-    </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
-    <button class="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
-  </header>
-  <nav class="v2-drawer">
-    <a href="${pre}que-es-pit.html">Qué es PIT</a>
-    <a href="${pre}evidencia.html">Evidencia</a>
-    <a href="${pre}sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
-    <a href="${pre}index.html#contenido">Contenido</a>
-    <a href="${pre}foro.html">Foro</a>
-    <a href="${pre}curso-modulo-1.html">Curso</a>
-    <a href="${pre}contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
-  </nav>`;
-
 const FOOTER = (pre) => `  <footer class="v2-footer">
     <div class="v2-footer-top">
       <nav class="v2-footer-links">
@@ -204,7 +178,7 @@ function renderPost(post, posts, idx) {
   return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen) + `
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
-${NAV(pre)}
+${renderNav({ active: 'foro', prefix: pre })}
 
   <!-- breadcrumb -->
   <div style="border-bottom: 1px solid var(--pit-ink-10); background: var(--pit-paper);">
@@ -320,7 +294,7 @@ function renderIndex(posts) {
     'Portal del foro PIT: preguntas respondidas, casos clínicos, evidencia y noticias del método, por el Dr. Ricardo D. Frusso.', filterCss) + `
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
-${NAV(pre)}
+${renderNav({ active: 'foro', prefix: pre })}
 
   <!-- ============ HERO ============ -->
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">

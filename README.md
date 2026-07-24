@@ -15,9 +15,17 @@ Quitar ambos al conectar el dominio.
   (`pit-chat.js`, requiere backend: hoy responde en modo demo), toggle ES/EN (`pit-lang.js`).
 - `_dc-src/` — fuentes originales del proyecto de diseño (`.dc.html` completos y
   `cores/` con el contenido único por página).
-- `_build/convert.js` — conversor determinístico `.dc.html` → HTML standalone
-  (`node _build/convert.js`). `index.html` y `curso-intro.html` son manuales
-  (el aula del curso intro es una app vanilla JS portada del diseño reactivo).
+- `_build/convert.js` — conversor determinístico `.dc.html` → HTML standalone.
+  `index.html` y `curso-intro.html` son manuales (el aula del curso intro es una
+  app vanilla JS portada del diseño reactivo).
+- `_build/nav.js` — **fuente ÚNICA del nav del sitio** (header + drawer). Para
+  cambiar el menú se edita SOLO este archivo; `convert.js`, `foro.js` y `sync-nav.js`
+  lo consumen. (Las fuentes `.dc.html` conservan un bloque de nav que el build
+  reemplaza automáticamente — no editar el nav ahí, no tiene efecto.)
+- `_build/sync-nav.js` — inyecta el nav en las páginas manuales (`index.html`) entre
+  los marcadores `<!-- PIT-NAV:START/END -->`, sin tocar su CSS inline.
+- **Build completo: `node _build/build.js`** (corre convert.js → foro.js → sync-nav.js
+  en orden; es idempotente). También se pueden correr sueltos si hace falta.
 
 ## Foro (portal de contenido)
 
