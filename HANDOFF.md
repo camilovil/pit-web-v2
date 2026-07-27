@@ -54,6 +54,19 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
   apilado sobre el FAB del asistente IA en todas las páginas.
 - **Ancla `#contenido`**: tiene `scroll-margin-top` para no quedar tapada por el nav
   fijo al navegar desde el link "Contenido" del menú.
+- **Animaciones** (`assets/css/pit-motion.css` + `pit-motion.js`): hover de filas del
+  foro, zoom de imágenes (`.pit-media`), stagger de listas (`.pit-stagger`) y foco
+  visible por teclado. Reglas:
+  - Todo lo que es movimiento va dentro de `@media (prefers-reduced-motion: no-preference)`.
+    `:focus-visible` va FUERA a propósito (accesibilidad, no animación).
+  - Solo se anima `transform`/`opacity`/`shadow`/`color` — nunca medidas que
+    reflowen (evita reintroducir layout shift).
+  - **El nav no lleva animación de entrada a propósito**: una barra que se mueve al
+    cargar se lee como bug (ya pasó), no como animación.
+  - `.pit-stagger` oculta a sus hijos hasta recibir `.pit-in`. `pit-motion.js` lo
+    maneja con observer propio + 3 redes de seguridad (visible-al-cargar, timeouts
+    1200/3500ms, y sin IntersectionObserver) para que el contenido NUNCA quede
+    invisible.
 
 ## Pendiente
 1. **Asistente IA** — **código listo, esperando la key.** Ya está la función

@@ -1,5 +1,89 @@
 /* PIT — micro-animaciones compartidas (portadas 1:1 del sitio oficial) */
+
+/* ══ Foco visible por teclado ═══════════════════════════════════════════
+   FUERA del bloque prefers-reduced-motion a propósito: la accesibilidad no
+   es una animación, tiene que funcionar siempre. Sin esto, quien navega con
+   Tab no ve dónde está parado. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--pit-blue, #2563EB);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* En fondos oscuros el azul pierde contraste: usamos blanco */
+.v2-footer a:focus-visible,
+[style*="background: var(--pit-ink)"] a:focus-visible,
+.pit-section--dark a:focus-visible {
+  outline-color: #FFFFFF;
+}
+
 @media (prefers-reduced-motion: no-preference) {
+
+  /* ══ Resaltamiento: filas del archivo del foro ══════════════════════
+     Solo transform/background/shadow → sin reflow, sin layout shift. */
+  .foro-row {
+    transition: background-color 0.25s ease,
+                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .foro-row:hover {
+    background-color: var(--pit-blue-tint, #EFF4FE);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0, 11, 51, 0.07);
+  }
+
+  /* ══ Resaltamiento: tarjetas genéricas ══════════════════════════════ */
+  .pit-card {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0, 11, 51, 0.09);
+  }
+
+  /* ══ Resaltamiento: zoom sutil en imágenes de tarjeta ═══════════════
+     Requiere overflow:hidden en el contenedor (.pit-media) para recortar. */
+  .pit-media { overflow: hidden; }
+  .pit-media img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .pit-media:hover img,
+  a:hover .pit-media img { transform: scale(1.04); }
+
+  /* ══ Desplazamiento: stagger de hijos al revelarse la sección ═══════
+     Se apoya en el .pit-in que ya agrega pit-motion.js. */
+  .pit-stagger > * {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pit-stagger.pit-in > *,
+  .pit-in .pit-stagger > * { opacity: 1; transform: none; }
+  .pit-stagger.pit-in > *:nth-child(1),  .pit-in .pit-stagger > *:nth-child(1)  { transition-delay: 0.00s; }
+  .pit-stagger.pit-in > *:nth-child(2),  .pit-in .pit-stagger > *:nth-child(2)  { transition-delay: 0.06s; }
+  .pit-stagger.pit-in > *:nth-child(3),  .pit-in .pit-stagger > *:nth-child(3)  { transition-delay: 0.12s; }
+  .pit-stagger.pit-in > *:nth-child(4),  .pit-in .pit-stagger > *:nth-child(4)  { transition-delay: 0.18s; }
+  .pit-stagger.pit-in > *:nth-child(5),  .pit-in .pit-stagger > *:nth-child(5)  { transition-delay: 0.24s; }
+  .pit-stagger.pit-in > *:nth-child(6),  .pit-in .pit-stagger > *:nth-child(6)  { transition-delay: 0.30s; }
+  .pit-stagger.pit-in > *:nth-child(7),  .pit-in .pit-stagger > *:nth-child(7)  { transition-delay: 0.36s; }
+  .pit-stagger.pit-in > *:nth-child(n+8), .pit-in .pit-stagger > *:nth-child(n+8) { transition-delay: 0.42s; }
+
+  /* ══ Carga: entrada del contenido al abrir la página ════════════════
+     Solo el contenido — NUNCA la barra de navegación (una barra que se
+     mueve al cargar se lee como bug, no como animación). */
+  @keyframes pit-enter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .pit-enter { animation: pit-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .pit-enter-1 { animation-delay: 0.05s; }
+  .pit-enter-2 { animation-delay: 0.13s; }
+  .pit-enter-3 { animation-delay: 0.21s; }
+
 
   /* === LOGO (igual al oficial: pulso del pipe + letter-spacing en hover) === */
   @keyframes pipe-pulse {

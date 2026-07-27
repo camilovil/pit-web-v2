@@ -253,7 +253,8 @@ ${renderNav({ active: 'foro', prefix: pre })}
       </a>
     </div>
   </section>
-  <style>.sh-post:hover, .sh-post:hover div { color: var(--pit-blue); }</style>
+  <style>.sh-post, .sh-post div { transition: color 0.22s ease; }
+    .sh-post:hover, .sh-post:hover div { color: var(--pit-blue); }</style>
 
   <!-- descargo -->
   <div style="background: var(--pit-ink-05); padding: 18px 24px;">
@@ -290,8 +291,11 @@ function renderIndex(posts) {
   const filterCss = `    .foro-filter { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
     .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
     .foro-filter.on { background: var(--pit-ink); border-color: var(--pit-ink); color: #FFFFFF; }
-    .foro-row:hover { background: var(--pit-ink-05); color: var(--pit-ink); }
+    .foro-row:hover { color: var(--pit-ink); }
     .foro-row.hide { display: none !important; }`;
+  // Nota: el resto del hover de .foro-row (fondo, lift, sombra) vive en
+  // assets/css/pit-motion.css — una sola fuente, y ahí respeta
+  // prefers-reduced-motion. Acá solo queda el color del texto.
 
   return HEAD(pre, 'Foro PIT — noticias, casos y respuestas · Dr. Frusso',
     'Portal del foro PIT: preguntas respondidas, casos clínicos, evidencia y noticias del método, por el Dr. Ricardo D. Frusso.', filterCss) + `
@@ -352,7 +356,7 @@ ${renderNav({ active: 'foro', prefix: pre })}
         <span id="foro-count" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">${posts.length} publicaciones</span>
       </div>
 
-      <div id="foro-archivo" style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
+      <div id="foro-archivo" class="pit-stagger" style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
 ${rows}
       </div>
       <p id="foro-empty" style="display: none; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); padding: 28px 8px;">No hay publicaciones con este filtro todavía.</p>
