@@ -123,10 +123,25 @@
     /* ---- trust strip ---- */
     .v2-trust { background: #FFFFFF; padding: 34px 24px 44px; text-align: center; }
     .v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
-    .v2-trust-row { display: flex; align-items: center; justify-content: center; gap: clamp(28px, 5vw, 64px); flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
-    .v2-trust-item { font-family: var(--pit-font-sans); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; color: var(--v2-slate); opacity: 0.85; display: flex; align-items: center; gap: 10px; filter: grayscale(1); transition: opacity 0.25s ease, color 0.25s ease; }
-    .v2-trust-item:hover { opacity: 1; color: var(--v2-navy); }
-    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; text-align: left; line-height: 1.4; }
+    .v2-trust-row { display: flex; align-items: flex-start; justify-content: center; gap: clamp(24px, 4vw, 54px); flex-wrap: wrap; max-width: 1060px; margin: 0 auto; }
+    /* Cada respaldo = logo arriba + credencial abajo, en columna centrada. */
+    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 190px; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    .v2-trust-item:hover { transform: translateY(-3px); }
+    /* Caja de altura fija: alinea todos los logos por su centro óptico,
+       sin importar que uno sea circular y otro un wordmark horizontal. */
+    .v2-trust-logo { height: 48px; display: flex; align-items: center; justify-content: center; }
+    .v2-trust-logo img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; display: block; }
+    /* ALTURA ÓPTICA: misma altura en px NO se ve igual según la forma.
+       Un sello circular concentra su masa y necesita más alto para pesar
+       lo mismo que un wordmark horizontal, que se lee por su ancho. */
+    .v2-trust-logo--wide   img { max-height: 28px; }  /* wordmarks horizontales */
+    .v2-trust-logo--square img { max-height: 34px; }  /* marcas cuadradas */
+    .v2-trust-logo--circle img { max-height: 46px; }  /* sellos circulares */
+    .v2-trust-logo--tall   img { max-height: 46px; }  /* marcas verticales */
+    /* UBA trae fondo navy sólido: es su marca oficial, no un error. Redondeado
+       lee como insignia intencional en vez de bloque suelto sobre el blanco. */
+    .v2-trust-logo--chip img { border-radius: 8px; }
+    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; text-align: center; line-height: 1.45; color: var(--v2-slate); }
 
     /* ---- layout ---- */
     .v2-section { padding: clamp(56px, 7vw, 100px) 24px; }
@@ -334,11 +349,33 @@
   <!-- ============ TRUST STRIP ============ -->
   <section class="v2-trust">
     <p class="v2-trust-label">Formación y práctica respaldadas por</p>
+    <!-- Los logos viven en img/logos/. El modificador --wide/--square/--circle/--tall
+         define la altura óptica según la forma (ver CSS arriba), no el archivo.
+         M.N. 86.498 no está acá a propósito: ya figura en el footer legal. -->
     <div class="v2-trust-row v2-stagger">
-      <span class="v2-trust-item">Hospital Italiano<small>Buenos Aires · 30+ años</small></span>
-      <span class="v2-trust-item">UBA<small>Medicina · 1992</small></span>
-      <span class="v2-trust-item">Lyftogt PIT<small>Instructor autorizado</small></span>
-      <span class="v2-trust-item">M.N. 86.498<small>Medicina familiar</small></span>
+      <span class="v2-trust-item">
+        <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/hospital-italiano.png" alt="Hospital Italiano de Buenos Aires" width="180" height="56" decoding="async"></span>
+        <small>Buenos Aires · 30+ años</small>
+      </span>
+      <span class="v2-trust-item">
+        <span class="v2-trust-logo v2-trust-logo--circle"><img src="/img/logos/hospital-de-clinicas.png" alt="Hospital de Clínicas José de San Martín" width="92" height="92" decoding="async"></span>
+        <small>UBA · Docencia</small>
+      </span>
+      <span class="v2-trust-item">
+        <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
+        <small>Medicina · 1992</small>
+      </span>
+      <span class="v2-trust-item">
+        <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/lyftogt.png" alt="Lyftogt Perineural Injection Treatment" width="195" height="56" decoding="async"></span>
+        <small>Instructor autorizado</small>
+      </span>
+      <!-- FALTA el archivo de Escuela de PIT (no estaba en el disco). Cuando esté
+           en img/logos/escuela-de-pit.png, descomentar este bloque:
+      <span class="v2-trust-item">
+        <span class="v2-trust-logo v2-trust-logo--tall"><img src="/img/logos/escuela-de-pit.png" alt="Escuela de PIT" decoding="async"></span>
+        <small>Formación en Latinoamérica</small>
+      </span>
+      -->
     </div>
   </section>
 
