@@ -134,6 +134,8 @@ const HEAD = (pre, title, desc, extraCss = '') => `<!DOCTYPE html>
   <meta name="theme-color" content="#000B33">
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
   <link rel="stylesheet" href="${pre}assets/css/fonts.css">
   <link rel="stylesheet" href="${pre}assets/css/ds.css">
   <link rel="stylesheet" href="${pre}assets/css/pit-mobile.css">

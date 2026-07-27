@@ -32,7 +32,7 @@ const PAGES = [
   { mode: 'raw', src: 'Curso Modulo I.dc.html', out: 'curso-modulo-1.html', active: 'curso',
     title: 'Curso PIT · Módulo I — Lumbalgia y Rodilla · Dr. Frusso',
     desc: 'Curso online de PIT con casos clínicos reales filmados en consultorio. Acceso permanente y certificado emitido por un instructor autorizado.' },
-  { mode: 'core', src: 'cores/evidencia.html', out: 'evidencia.html', active: null,
+  { mode: 'core', src: 'cores/evidencia.html', out: 'evidencia.html', active: 'evidencia',
     title: 'Evidencia científica de PIT — Dr. Ricardo D. Frusso',
     desc: 'Ensayos, estudios comparativos y revisiones sobre PIT (neuroproloterapia), con la lectura clínica del Dr. Frusso.' },
   { mode: 'core', src: 'cores/faq.html', out: 'faq.html', active: null,
@@ -41,7 +41,7 @@ const PAGES = [
   { mode: 'core', src: 'cores/contacto.html', out: 'contacto.html', active: 'contacto',
     title: 'Contacto y turnos — Dr. Ricardo D. Frusso',
     desc: 'Consultorio en Belgrano, CABA (Amenabar 2446). Pedí una consulta con el Dr. Ricardo D. Frusso.' },
-  { mode: 'core', src: 'cores/sobre-el-dr-frusso.html', out: 'sobre-el-dr-frusso.html', active: null,
+  { mode: 'core', src: 'cores/sobre-el-dr-frusso.html', out: 'sobre-el-dr-frusso.html', active: 'sobre',
     title: 'Sobre el Dr. Ricardo D. Frusso — 30+ años en dolor crónico',
     desc: 'Médico de Familia (UBA, 1992), 30+ años en el Hospital Italiano de Buenos Aires, instructor autorizado de PIT para América Latina desde 2015.' },
   { mode: 'core', src: 'cores/privacidad.html', out: 'privacidad.html', active: null,
@@ -208,6 +208,8 @@ const HEAD = (p, extraCss) => `<!DOCTYPE html>
   <meta name="theme-color" content="#000B33">
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/ds.css">
   <link rel="stylesheet" href="assets/css/pit-mobile.css">
