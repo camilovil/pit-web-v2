@@ -157,9 +157,19 @@
     /* ---- trust strip ---- */
     .v2-trust { background: #FFFFFF; padding: clamp(20px, 2.6vh, 34px) 24px clamp(30px, 4vh, 44px); text-align: center; }
     .v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
-    .v2-trust-row { display: flex; align-items: flex-start; justify-content: center; gap: clamp(24px, 4vw, 54px); flex-wrap: wrap; max-width: 1060px; margin: 0 auto; }
+    /* flex-wrap: nowrap — la franja es UNA fila, siempre. Con wrap, cualquier
+       cosa que ensanche los ítems (una credencial más larga, un cuerpo de letra
+       más grande) tiraba el último logo a una segunda fila, solo y centrado:
+       se leía como error de maqueta y encima dejaba el separador huérfano al
+       final de la primera fila. Ahora los ítems se encogen (min-width: 0 abajo)
+       y por debajo de ~1000px la credencial parte en dos líneas, que es una
+       degradación mucho más tranquila que perder la fila.
+       El max-width sube a 1160 para que los 5 entren holgados en desktop. */
+    .v2-trust-row { display: flex; align-items: flex-start; justify-content: center; gap: clamp(18px, 2.6vw, 40px); flex-wrap: nowrap; max-width: 1160px; margin: 0 auto; }
     /* Cada respaldo = logo arriba + credencial abajo, en columna centrada. */
-    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 190px; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    /* min-width: 0 es lo que habilita el encogido: sin él, un ítem flex no baja
+       de su min-content (el largo de la credencial) y la fila desborda. */
+    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
     .v2-trust-item:hover { transform: translateY(-3px); }
     /* Caja de altura fija: alinea todos los logos por su centro óptico,
        sin importar que uno sea circular y otro un wordmark horizontal. */
