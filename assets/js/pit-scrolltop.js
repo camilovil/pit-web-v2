@@ -7,11 +7,17 @@
   var SHOW_AFTER_PX = 480; // aprox. una pantalla de scroll
 
   var css = [
-    '.pit-scrolltop { position: fixed; right: 28px; bottom: 96px; width: 48px; height: 48px; border-radius: 50%; background: #000B33; border: none; cursor: pointer; z-index: 949; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0,11,51,0.3); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, box-shadow 0.2s ease; }',
+    // Las dos declaraciones de right/bottom son a propósito: la primera es el
+    // valor de siempre y la segunda le suma el área segura del dispositivo
+    // (indicador de gesto del iPhone, esquinas redondeadas). Un navegador sin
+    // env() descarta la segunda y se queda con la primera; si dejáramos SOLO
+    // la versión con env(), ese navegador tiraría la declaración entera y el
+    // botón se iría al borde superior.
+    '.pit-scrolltop { position: fixed; right: 28px; right: calc(28px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); width: 48px; height: 48px; border-radius: 50%; background: #000B33; border: none; cursor: pointer; z-index: 949; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0,11,51,0.3); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, box-shadow 0.2s ease; }',
     '.pit-scrolltop.show { opacity: 1; visibility: visible; transform: none; }',
     '.pit-scrolltop:hover { box-shadow: 0 16px 40px rgba(0,11,51,0.4); }',
     '.pit-scrolltop svg { width: 18px; height: 18px; }',
-    '@media (max-width: 480px) { .pit-scrolltop { right: 20px; bottom: 92px; width: 44px; height: 44px; } }'
+    '@media (max-width: 480px) { .pit-scrolltop { right: 20px; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: 92px; bottom: calc(92px + env(safe-area-inset-bottom, 0px)); width: 44px; height: 44px; } }'
   ].join('\n');
 
   function boot() {
