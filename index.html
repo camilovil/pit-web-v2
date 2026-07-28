@@ -60,10 +60,21 @@
     :root {
       --v2-navy: #000B33;
       --v2-navy-80: #1A2447;
-      --v2-slate: #5A6773;
+      /* Slate más oscuro que el original (#5A6773): es el color de TODO el texto
+         de párrafo del sitio. A 15-16px sobre blanco, #4B5766 da 7.4:1 de
+         contraste (AAA) contra los 5.4:1 de antes, que apenas pasaba AA. */
+      --v2-slate: #4B5766;
       --v2-blue: #2563EB;
       --v2-blue-soft: #5B7FDE;
       --v2-tint: #EFF4FE;
+      /* Violeta: acento secundario, NO reemplaza al azul. El azul sigue siendo
+         el color de acción (links, botones, CTAs); el violeta solo aparece en
+         los dos degradés que abren y cierran la página (hero y cierre del curso)
+         y en la barra de datos. Si se empieza a usar en botones o links, se
+         pierde la señal de "esto es clickeable". */
+      --v2-violet: #5B3FD1;
+      --v2-violet-deep: #2E1E6B;
+      --v2-violet-tint: #F0ECFD;
       --v2-radius: 20px;
       --v2-radius-sm: 12px;
     }
@@ -116,7 +127,12 @@
        daba 842 (78vh) + 119 (padding) = 961px de hero, con 167px de aire
        forzado debajo de la foto. Eso era lo que empujaba los logos fuera de
        pantalla, no el tamaño del contenido. */
-    .v2-hero { position: relative; box-sizing: border-box; min-height: 78vh; background: linear-gradient(165deg, #4A6ED0 0%, #7D9AE6 34%, #C7D5F5 62%, #FFFFFF 100%); overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(96px, 11vh, 150px) 24px 0; }
+    /* El degradé arranca en violeta y baja al azul del sitio. El violeta ocupa
+       solo el primer tercio a propósito: da el aire "escuela/formación" sin
+       desplazar al azul médico, que es el que sostiene la credibilidad. Además
+       el violeta es más oscuro que el azul anterior, así que el titular blanco
+       gana contraste arriba (7.9:1 sobre #5340B8). */
+    .v2-hero { position: relative; box-sizing: border-box; min-height: 78vh; background: linear-gradient(165deg, #5340B8 0%, #4A6ED0 30%, #7D9AE6 52%, #C7D5F5 72%, #FFFFFF 100%); overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(96px, 11vh, 150px) 24px 0; }
     .v2-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255,255,255,0.14) 0%, transparent 70%); pointer-events: none; }
     .v2-hero-eyebrow { color: rgba(255,255,255,0.85); margin-bottom: clamp(14px, 2vh, 22px); }
     /* El titular también se mide contra la altura: en laptops bajas 72px se
@@ -174,7 +190,9 @@
          distinción que hace el separador en desktop, y evita el huérfano. */
       .v2-trust-row > .v2-trust-item:last-child { grid-column: 1 / -1; }
     }
-    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; text-align: center; line-height: 1.45; color: var(--v2-slate); }
+    /* 9px en mono uppercase era ilegible en pantalla: la credencial es la que
+       explica QUÉ es cada logo, así que tiene que poder leerse sin esfuerzo. */
+    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
 
     /* ---- layout ---- */
     .v2-section { padding: clamp(56px, 7vw, 100px) 24px; }
@@ -190,10 +208,10 @@
     .v2-tab.active { background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
     .v2-data-panel { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; margin-top: 36px; }
     .v2-stat-row { padding: 18px 0; border-bottom: 1px solid rgba(0,11,51,0.08); }
-    .v2-stat-label { font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin-bottom: 8px; }
+    .v2-stat-label { font-family: var(--pit-font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin-bottom: 8px; }
     .v2-stat-value { font-weight: 600; font-size: 24px; letter-spacing: -0.02em; }
     .v2-bar-track { height: 8px; background: rgba(0,11,51,0.08); border-radius: 999px; overflow: hidden; margin-top: 10px; }
-    .v2-bar-fill { height: 100%; background: linear-gradient(90deg, var(--v2-blue), var(--v2-blue-soft)); border-radius: 999px; width: 0; transition: width 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .v2-bar-fill { height: 100%; background: linear-gradient(90deg, var(--v2-blue), var(--v2-violet)); border-radius: 999px; width: 0; transition: width 0.9s cubic-bezier(0.22,1,0.36,1); }
     .v2-data-desc { font-size: 16px; line-height: 1.7; color: var(--v2-slate); }
     .v2-data-desc strong { color: var(--v2-navy); }
 
@@ -219,7 +237,10 @@
 
 
     /* ---- navy sections ---- */
-    .v2-dark { background: var(--v2-navy); color: #FFFFFF; }
+    /* El violeta vuelve acá, en el cierre: la página abre y cierra con él y
+       queda enmarcada. Del navy sólido pasa a degradé, pero el 60% del bloque
+       sigue siendo navy para que el texto blanco no pierda contraste. */
+    .v2-dark { background: linear-gradient(145deg, var(--v2-violet-deep) 0%, var(--v2-navy) 62%, #101B44 100%); color: #FFFFFF; }
     .v2-dark .v2-title { color: #FFFFFF; }
 
     /* ---- testimonios: texto gigante + cards inclinadas ---- */
@@ -401,15 +422,45 @@
         <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/lyftogt.png" alt="Lyftogt Perineural Injection Treatment" width="195" height="56" decoding="async"></span>
         <small>Instructor autorizado</small>
       </span>
+      <!-- La Escuela de PIT es de Ricardo: la fundó él, no es una institución
+           que lo respalda desde afuera como las otras tres. Por eso la
+           credencial dice "Fundador" y no una cobertura geográfica. -->
       <span class="v2-trust-item">
         <span class="v2-trust-logo v2-trust-logo--tall"><img src="/img/logos/escuela-de-pit.png" alt="Escuela de PIT" width="75" height="92" decoding="async"></span>
-        <small>Formación en Latinoamérica</small>
+        <small>Fundador · Formación en PIT</small>
       </span>
       <span class="v2-trust-sep" aria-hidden="true"></span>
       <span class="v2-trust-item">
         <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
         <small>Formación · 1992</small>
       </span>
+    </div>
+  </section>
+
+  <!-- ============ BIFURCACIÓN ============ -->
+  <!-- Va ANTES del contenido gratuito a propósito: el visitante primero se
+       identifica (paciente o profesional) y recién después se le ofrece el
+       material. Al revés, la oferta llegaba antes de saber a quién le habla. -->
+  <section class="v2-section" style="padding-top: 12px;">
+    <div class="v2-wrap">
+      <div class="v2-reveal" style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
+        <span class="v2-eyebrow" style="color: var(--v2-blue);">¿Quién sos?</span>
+        <h2 class="v2-title" style="margin-top: 14px;">La misma técnica, explicada para vos</h2>
+      </div>
+      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px;">
+        <a class="v2-card" href="que-es-pit.html#pacientes" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Para pacientes</span>
+          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Tengo dolor crónico</h3>
+          <p style="font-size: 16.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.</p>
+          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Entender mi dolor →</span>
+        </a>
+        <a class="v2-card" href="que-es-pit.html#profesionales" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
+          <span class="v2-eyebrow" style="color: var(--v2-blue);">Para profesionales</span>
+          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Soy profesional de la salud</h3>
+          <p style="font-size: 16.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Mecanismo de acción, evidencia publicada y técnica — con casos clínicos reales filmados en consultorio.</p>
+          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Conocer la técnica →</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -423,7 +474,7 @@
           <div style="flex: 1; min-width: 260px;">
             <span class="v2-free-tag">Contenido gratuito · Sin registro</span>
             <h2 class="v2-title" style="margin-top: 16px;">Aprendé sobre PIT, sin costo</h2>
-            <p style="font-size: 16px; line-height: 1.65; color: var(--v2-slate); margin: 12px 0 0; max-width: 52ch;">Todo el material educativo del método es abierto: el curso introductorio, los apuntes completos y el foro semanal.</p>
+            <p style="font-size: 17px; line-height: 1.7; color: var(--v2-slate); margin: 12px 0 0; max-width: 56ch;">Todo el material educativo del método es abierto: el curso introductorio, los apuntes completos y el foro semanal.</p>
           </div>
         </div>
         <div class="v2-free-grid">
@@ -435,7 +486,7 @@
             </span>
             <span class="v2-free-body">
               <h3 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px;">Introducción a PIT</h3>
-              <p style="font-size: 15px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 20px;">El método explicado por el Dr. Frusso, con autoevaluaciones y progreso guardado. Sin costo y sin registro.</p>
+              <p style="font-size: 16.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">El método explicado por el Dr. Frusso, con autoevaluaciones y progreso guardado. Sin costo y sin registro.</p>
               <span class="v2-btn v2-btn--blue" style="align-self: flex-start;">Empezar el curso →</span>
             </span>
           </a>
@@ -443,41 +494,17 @@
             <a class="v2-card" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">PDF · 80 páginas</span>
               <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
-              <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
+              <p style="font-size: 15.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
               <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: 14px; margin-top: auto;">Descargar gratis →</span>
             </a>
             <a class="v2-card" href="foro.html" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
               <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
-              <p style="font-size: 14px; line-height: 1.6; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
+              <p style="font-size: 15.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
               <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue); margin-top: auto;">Ir al foro →</span>
             </a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ BIFURCACIÓN ============ -->
-  <section class="v2-section" style="padding-top: 12px;">
-    <div class="v2-wrap">
-      <div class="v2-reveal" style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
-        <span class="v2-eyebrow" style="color: var(--v2-blue);">¿Quién sos?</span>
-        <h2 class="v2-title" style="margin-top: 14px;">La misma técnica, explicada para vos</h2>
-      </div>
-      <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px;">
-        <a class="v2-card" href="que-es-pit.html#pacientes" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Para pacientes</span>
-          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Tengo dolor crónico</h3>
-          <p style="font-size: 15px; line-height: 1.65; color: var(--v2-slate); margin: 0 0 20px;">Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.</p>
-          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Entender mi dolor →</span>
-        </a>
-        <a class="v2-card" href="que-es-pit.html#profesionales" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
-          <span class="v2-eyebrow" style="color: var(--v2-blue);">Para profesionales</span>
-          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Soy profesional de la salud</h3>
-          <p style="font-size: 15px; line-height: 1.65; color: var(--v2-slate); margin: 0 0 20px;">Mecanismo de acción, evidencia publicada y técnica — con casos clínicos reales filmados en consultorio.</p>
-          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Conocer la técnica →</span>
-        </a>
       </div>
     </div>
   </section>

@@ -4,10 +4,17 @@
 :root:root {
   --v2-navy: #000B33;
   --v2-navy-80: #1A2447;
-  --v2-slate: #5A6773;
+  /* Más oscuro que el #5A6773 original: es el color de todo el texto de
+     párrafo. A 15-16px sobre blanco da 7.4:1 (AAA) contra los 5.4:1 de antes.
+     Tiene que quedar IGUAL al de index.html, que define su copia inline. */
+  --v2-slate: #4B5766;
   --v2-blue: #2563EB;
   --v2-blue-soft: #5B7FDE;
   --v2-tint: #EFF4FE;
+  /* Acento secundario: solo degradés, nunca links ni botones (ver index.html) */
+  --v2-violet: #5B3FD1;
+  --v2-violet-deep: #2E1E6B;
+  --v2-violet-tint: #F0ECFD;
   --pit-ink: #000B33;
   --pit-ink-80: #1A2447;
   --pit-ink-60: #55616D;
@@ -105,7 +112,10 @@ body { padding-top: 84px; background: #FFFFFF; }
 .pit-section-title, .pit-title, .pit-display { letter-spacing: -0.028em !important; font-weight: 600 !important; }
 
 /* hero de subpágina: degradado azul suave arriba (no aplica a heros oscuros con texto claro) */
-section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: linear-gradient(180deg, #DCE6FB 0%, #F2F6FE 55%, #FFFFFF 100%) !important; border-radius: 0 0 28px 28px; }
+/* Arranca con un violeta muy lavado y cae al azul de siempre: es la versión
+   suave del degradé del hero de la home, para que las 17 subpáginas abran con
+   el mismo color y no queden desafinadas respecto de la portada. */
+section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: linear-gradient(180deg, #DDD9F7 0%, #E4EAFC 38%, #F2F6FE 68%, #FFFFFF 100%) !important; border-radius: 0 0 28px 28px; }
 
 /* chips pill */
 .pit-chip { border-radius: 999px !important; }
