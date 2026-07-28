@@ -167,6 +167,10 @@
       .v2-trust-sep { display: none; }
       .v2-trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 12px; }
       .v2-trust-item { max-width: none; }
+      /* Los 4 que representa quedan en 2x2 y la formación (UBA, el último)
+         ocupa el ancho completo abajo. Es la versión mobile de la misma
+         distinción que hace el separador en desktop, y evita el huérfano. */
+      .v2-trust-row > .v2-trust-item:last-child { grid-column: 1 / -1; }
     }
     .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; text-align: center; line-height: 1.45; color: var(--v2-slate); }
 
@@ -396,18 +400,15 @@
         <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/lyftogt.png" alt="Lyftogt Perineural Injection Treatment" width="195" height="56" decoding="async"></span>
         <small>Instructor autorizado</small>
       </span>
+      <span class="v2-trust-item">
+        <span class="v2-trust-logo v2-trust-logo--tall"><img src="/img/logos/escuela-de-pit.png" alt="Escuela de PIT" width="75" height="92" decoding="async"></span>
+        <small>Formación en Latinoamérica</small>
+      </span>
       <span class="v2-trust-sep" aria-hidden="true"></span>
       <span class="v2-trust-item">
         <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
         <small>Formación · 1992</small>
       </span>
-      <!-- FALTA el archivo de Escuela de PIT (no estaba en el disco). Cuando esté
-           en img/logos/escuela-de-pit.png, descomentar este bloque:
-      <span class="v2-trust-item">
-        <span class="v2-trust-logo v2-trust-logo--tall"><img src="/img/logos/escuela-de-pit.png" alt="Escuela de PIT" decoding="async"></span>
-        <small>Formación en Latinoamérica</small>
-      </span>
-      -->
     </div>
   </section>
 
