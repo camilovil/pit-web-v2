@@ -1,6 +1,6 @@
 # Handoff — Proyecto Web PIT v2
 
-_Última actualización: 2026-07-23_
+_Última actualización: 2026-07-28_
 
 Resumen de estado para retomar el proyecto en una sesión nueva sin perder contexto.
 
@@ -41,6 +41,37 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
 - **Analytics de Vercel** instalado en las 18 páginas (falta activarlo en el dashboard).
 - **Home:** contenido gratuito como panel destacado, testimonios en desfile animado
   (ref. Docshield), logo animado en todas las páginas, sin contadores.
+- **Franja de respaldos** (`.v2-trust` en `index.html`): los 5 logos institucionales
+  reales — Hospital Italiano, Hospital de Clínicas, Lyftogt, Escuela de PIT y UBA.
+  Archivos en `img/logos/` (procesados con Pillow: fondo a transparente, recorte y
+  escala 2x; 64 KB en total). Reglas que conviene no romper:
+  - **Altura óptica, no altura igual**: los modificadores `--wide` (28px, wordmarks),
+    `--square` (34px), `--circle`/`--tall` (46px) existen porque un sello circular
+    concentra su masa y necesita más alto para pesar lo mismo que un wordmark.
+    Igualar la altura en px hace que el círculo se vea gigante y el wordmark enano.
+  - **El orden significa algo**: primero las 4 instituciones que Ricardo representa
+    (ejerce/enseña), después el separador tenue `.v2-trust-sep`, y al final la UBA
+    (donde se formó). En mobile la misma distinción se hace con grilla 2x2 + el
+    último ítem a ancho completo. Si se agrega un logo, va del lado que corresponda.
+  - El fondo navy de la UBA es su marca oficial: se le da `border-radius` (`--chip`)
+    para que lea como insignia, no como bloque suelto.
+  - Los logos van **sin** `loading="lazy"` a propósito (están casi en el pliegue y
+    pesan poco; diferirlos causaba pop-in) y con `width`/`height` explícitos.
+  - M.N. 86.498 no está en la franja a propósito: ya figura en el footer legal.
+- **Hero de la home**: los logos institucionales entran arriba del pliegue en desktop
+  y laptop (en mobile quedan abajo a propósito). Dos cosas que hay que respetar si se
+  vuelve a tocar:
+  - `.v2-hero` **necesita** `box-sizing: border-box`. Sin eso, `min-height` aplica solo
+    a la caja de contenido y el `padding-top` se suma encima (en 1080px daba 961px de
+    hero con 167px de aire muerto, que era lo que empujaba los logos fuera de pantalla).
+  - El hero se mide contra la **altura** de pantalla (`vh` en padding, márgenes,
+    titular y foto), no solo contra el ancho; medido en px/vw desbordaba en laptops
+    bajas. Margen actual de los logos sobre el pliegue: 16px en 1366x768, 65px en
+    1440x900, 100px en 1920x1080.
+  - **Nada de tamaño fijo encima de la foto**: el badge "30+ años · Hospital Italiano"
+    se quitó porque, al pasar la foto a escalar con `vh`, la píldora (238px fijos)
+    tapaba más de la mitad del ancho justo donde va la cara. Esa info ya la dice la
+    franja de respaldos.
 - **Grafo de conocimiento** del proyecto en `../graphify-out/` (graph.html, GRAPH_REPORT.md).
 - **Toggle ES/EN** (`assets/js/pit-lang.js`): markup estático (viene en el HTML desde
   `_build/nav.js`, no se inyecta por JS) — antes causaba un "pop-in" visible y corría

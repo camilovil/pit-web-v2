@@ -64,7 +64,7 @@ autor del sitio; si el foro llegara a aceptar contenido de terceros, escapar ant
 - Testimonios reales (home y curso) — "A validar con Ricardo".
 - Videos del curso intro (posters listos, falta conectar Vimeo/YouTube).
 - Citas de evidencia científica (el PDF de referencias ya está enlazado).
-- WhatsApp y horarios en Contacto; mapa embed.
+- WhatsApp y horarios en Contacto (el mapa ya está embebido).
 - Asistente IA: código listo (`api/chat.js` + `pit-chat.js`), solo falta cargar
   `ANTHROPIC_API_KEY` en Vercel — ver HANDOFF.md → Pendiente.
 
