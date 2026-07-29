@@ -174,7 +174,9 @@
     /* Cada respaldo = logo arriba + credencial abajo, en columna centrada. */
     /* min-width: 0 es lo que habilita el encogido: sin él, un ítem flex no baja
        de su min-content (el largo de la credencial) y la fila desborda. */
-    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    /* color: inherit porque estos ítems son <a> (enlazan a cada institución) y
+       sin eso heredan el azul de link. */
+    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
     .v2-trust-item:hover { transform: translateY(-3px); }
     /* Caja de altura fija: alinea todos los logos por su centro óptico,
        sin importar que uno sea circular y otro un wordmark horizontal. */
@@ -427,18 +429,24 @@
          (práctica actual), después del separador la de FORMACIÓN (dónde estudió).
          No es lo mismo representar una institución que haberse recibido en ella. -->
     <div class="v2-trust-row v2-stagger">
-      <span class="v2-trust-item">
+      <!-- Cada logo enlaza al sitio de su institución, en pestaña nueva para no
+           sacar al visitante del sitio. Las URLs están verificadas (HTTP 200).
+           Lyftogt es lyftogtMED.com, no lyftogt.com — este último no resuelve;
+           el dominio correcto es el que dice el propio wordmark del logo.
+           La Escuela de PIT queda SIN enlazar a propósito: es la escuela que
+           Ricardo acaba de fundar y todavía no tenemos su URL. -->
+      <a class="v2-trust-item" href="https://www.hospitalitaliano.org.ar" target="_blank" rel="noopener noreferrer">
         <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/hospital-italiano.png" alt="Hospital Italiano de Buenos Aires" width="180" height="56" decoding="async"></span>
         <small>Práctica clínica · 30+ años</small>
-      </span>
-      <span class="v2-trust-item">
+      </a>
+      <a class="v2-trust-item" href="https://www.hospitaldeclinicas.uba.ar" target="_blank" rel="noopener noreferrer">
         <span class="v2-trust-logo v2-trust-logo--circle"><img src="/img/logos/hospital-de-clinicas.png" alt="Hospital de Clínicas José de San Martín" width="92" height="92" decoding="async"></span>
         <small>Área de dolor · Cursos PIT</small>
-      </span>
-      <span class="v2-trust-item">
+      </a>
+      <a class="v2-trust-item" href="https://www.lyftogtmed.com" target="_blank" rel="noopener noreferrer">
         <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/lyftogt.png" alt="Lyftogt Perineural Injection Treatment" width="195" height="56" decoding="async"></span>
         <small>Instructor autorizado</small>
-      </span>
+      </a>
       <!-- La Escuela de PIT es de Ricardo: la fundó él, no es una institución
            que lo respalda desde afuera como las otras tres. Por eso la
            credencial dice "Fundador" y no una cobertura geográfica. -->
@@ -447,10 +455,10 @@
         <small>Fundador · Formación en PIT</small>
       </span>
       <span class="v2-trust-sep" aria-hidden="true"></span>
-      <span class="v2-trust-item">
+      <a class="v2-trust-item" href="https://www.uba.ar" target="_blank" rel="noopener noreferrer">
         <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
         <small>Formación · 1992</small>
-      </span>
+      </a>
     </div>
   </section>
 
