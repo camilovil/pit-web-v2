@@ -154,7 +154,12 @@
        La info no se pierde: la franja de respaldos de abajo dice
        "Hospital Italiano · Práctica clínica · 30+ años". */
 
-    /* ---- trust strip ---- */
+    /* ---- trust strip ----
+       ATENCIÓN: este componente existe DOS veces. Esta copia inline es la de
+       la home (index.html no carga pit-v2.css, usa CSS propio); la otra vive
+       en assets/css/pit-v2.css y la usan las subpáginas (hoy,
+       sobre-el-dr-frusso). Si tocás una altura, un gap o el orden acá,
+       replicalo allá y al revés. */
     .v2-trust { background: #FFFFFF; padding: clamp(20px, 2.6vh, 34px) 24px clamp(30px, 4vh, 44px); text-align: center; }
     .v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
     /* flex-wrap: nowrap — la franja es UNA fila, siempre. Con wrap, cualquier

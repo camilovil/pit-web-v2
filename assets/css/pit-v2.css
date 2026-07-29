@@ -120,6 +120,46 @@ section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: 
 /* chips pill */
 .pit-chip { border-radius: 999px !important; }
 
+/* ---- franja de respaldos (logos institucionales) ----
+   ATENCIÓN: este componente existe DOS veces y las dos copias tienen que
+   moverse juntas. Esta es la de las subpáginas; la otra está inline en
+   index.html, porque la home no carga este stylesheet (usa CSS propio).
+   Si tocás una altura, un gap o el orden acá, replicalo allá y al revés.
+
+   Las tres reglas que no son obvias mirando el código:
+   1. ALTURA ÓPTICA por forma, no altura igual: un sello circular concentra su
+      masa y necesita 46px para pesar lo mismo que un wordmark horizontal a
+      28px. Con altura idéntica el círculo se ve gigante y el wordmark enano.
+   2. flex-wrap: nowrap — es UNA fila por definición. Con wrap, cualquier cosa
+      que ensanche los ítems tira el último logo a una segunda fila, solo y
+      centrado, y deja el separador huérfano. min-width: 0 permite el encogido.
+   3. El orden significa algo: primero donde ejerce y enseña, después el
+      separador, y al final donde se formó (UBA). */
+.v2-trust-strip { text-align: center; }
+.v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
+.v2-trust-row { display: flex; align-items: flex-start; justify-content: center; gap: clamp(18px, 2.6vw, 40px); flex-wrap: nowrap; max-width: 1160px; margin: 0 auto; }
+.v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+.v2-trust-item:hover { transform: translateY(-3px); }
+.v2-trust-logo { height: 48px; display: flex; align-items: center; justify-content: center; }
+.v2-trust-logo img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; display: block; }
+.v2-trust-logo--wide   img { max-height: 28px; }  /* wordmarks horizontales */
+.v2-trust-logo--square img { max-height: 34px; }  /* marcas cuadradas */
+.v2-trust-logo--circle img { max-height: 46px; }  /* sellos circulares */
+.v2-trust-logo--tall   img { max-height: 46px; }  /* marcas verticales */
+/* La UBA trae fondo navy sólido: es su marca oficial, no un error. El radio
+   hace que lea como insignia intencional y no como bloque suelto. */
+.v2-trust-logo--chip img { border-radius: 8px; }
+.v2-trust-sep { width: 1px; height: 48px; background: rgba(0,11,51,0.10); flex-shrink: 0; align-self: flex-start; }
+.v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
+/* En mobile: grilla 2x2 fija y el último a ancho completo. Con flex el largo
+   desigual de las credenciales dejaba huérfanos. */
+@media (max-width: 760px) {
+  .v2-trust-sep { display: none; }
+  .v2-trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 12px; }
+  .v2-trust-item { max-width: none; }
+  .v2-trust-row > .v2-trust-item:last-child { grid-column: 1 / -1; }
+}
+
 /* detalles/acordeones y cards heredan radio suave del token 16px; sombra flotante al hover */
 details { transition: box-shadow 0.3s ease; }
 details[open] { box-shadow: 0 16px 40px rgba(0,11,51,0.08); }

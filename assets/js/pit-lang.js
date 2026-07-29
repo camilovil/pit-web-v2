@@ -194,7 +194,12 @@
     'PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. Alivio desde la primera sesión, sin interferir con otros tratamientos en curso.': 'PIT is a minimally invasive treatment that acts where pain originates. Relief from the first session, without interfering with any ongoing treatment.',
     'Pedir una consulta': 'Request a consultation',
     // Franja de respaldos: el rótulo y las credenciales de cada logo.
+    // Hay dos rótulos porque la franja aparece en dos contextos: en la home
+    // habla de respaldos; en la biografía describe el vínculo de Ricardo.
     'Práctica y formación respaldadas por': 'Practice and training backed by',
+    'Dónde ejerce, enseña y se formó': 'Where he practices, teaches and trained',
+    'Fundador · Escuela de PIT': 'Founder · Escuela de PIT',
+    'Funda la Escuela de PIT': 'Founds Escuela de PIT',
     'Práctica clínica · 30+ años': 'Clinical practice · 30+ years',
     'Área de dolor · Cursos PIT': 'Pain unit · PIT courses',
     'Instructor autorizado': 'Certified instructor',
