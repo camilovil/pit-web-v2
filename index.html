@@ -52,10 +52,10 @@
 
     /* ---- FrussoDS.Logo lockup ---- */
     .pit-logo { display: inline-flex; align-items: center; gap: 10px; }
-    .pit-logo-dr { font-family: var(--pit-font-sans); font-weight: 700; font-size: 13px; letter-spacing: .08em; line-height: 1; color: var(--v2-navy); white-space: nowrap; }
+    .pit-logo-dr { font-family: var(--pit-font-sans); font-weight: 700; font-size: var(--txt-xs); letter-spacing: .08em; line-height: 1; color: var(--v2-navy); white-space: nowrap; }
     .pit-logo-pipe { display: inline-block; width: 3px; height: 28px; background: var(--v2-blue); border-radius: 2px; flex-shrink: 0; }
     .pit-logo-name { display: flex; flex-direction: column; gap: 0; }
-    .pit-logo-name span { font-family: var(--pit-font-sans); font-weight: 700; font-size: 13px; letter-spacing: .04em; line-height: 1.3; color: var(--v2-navy); white-space: nowrap; }
+    .pit-logo-name span { font-family: var(--pit-font-sans); font-weight: 700; font-size: var(--txt-xs); letter-spacing: .04em; line-height: 1.3; color: var(--v2-navy); white-space: nowrap; }
 
     :root {
       --v2-navy: #000B33;
@@ -77,13 +77,31 @@
       --v2-violet-tint: #F0ECFD;
       --v2-radius: 20px;
       --v2-radius-sm: 12px;
+      /* ---- escala tipográfica ----
+         Antes había 22 tamaños distintos en esta sola página (9, 10, 10.5, 11,
+         11.5, 12, 13, 14, 15, 15.5, 16, 16.5, 17, 19, 21, 24, 26, 32 y los
+         display). Sin escala, cada bloque nuevo inventaba su tamaño.
+         Estos 7 pasos los absorben todos; los display siguen siendo clamps
+         fluidos porque dependen del viewport, no de la escala.
+         REGLA: no agregar un font-size suelto. Si hace falta un paso nuevo,
+         se agrega acá y se usa en los dos lugares (index.html y pit-v2.css). */
+      --txt-2xs: 11px;   /* etiquetas mono en mayúsculas */
+      --txt-xs: 13px;    /* metadatos, pies */
+      --txt-sm: 15px;    /* texto de apoyo, botones */
+      --txt-md: 17px;    /* texto de lectura */
+      --txt-lg: 21px;    /* h3 secundario */
+      --txt-xl: 24px;    /* h3 principal */
     }
+    /* Suavizado de fuentes: en macOS el texto renderiza más pesado de lo
+       diseñado y Space Grotesk en 600 se engorda. Va una sola vez en la raíz.
+       (Las subpáginas lo reciben desde pit-v2.css, que esta página no carga.) */
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     body { margin: 0; background: #FFFFFF; color: var(--v2-navy); font-family: var(--pit-font-sans); }
     a { color: var(--v2-blue); text-decoration: none; }
     a:hover { color: var(--v2-navy); }
 
     /* ---- pill buttons ---- */
-    .v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: 15px; line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+    .v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
     .v2-btn:hover { transform: translateY(-2px); }
     .v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
     .v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
@@ -94,8 +112,11 @@
     .v2-btn--blue { background: var(--v2-blue); color: #FFFFFF; }
     .v2-btn--blue:hover { background: #1E4FC4; color: #FFFFFF; box-shadow: 0 12px 28px rgba(37,99,235,0.3); }
 
-    .v2-eyebrow { font-family: var(--pit-font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
-    .v2-title { font-weight: 600; font-size: clamp(30px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.025em; margin: 0; text-wrap: pretty; }
+    .v2-eyebrow { font-family: var(--pit-font-mono); font-weight: 500; font-size: var(--txt-2xs); letter-spacing: 0.16em; text-transform: uppercase; }
+    /* balance, no pretty: en un título corto de 2 líneas balance reparte parejo
+       las dos. pretty es para descripciones — solo evita la palabra huérfana
+       en la última línea, que en un h2 de 2 líneas no hace nada. */
+    .v2-title { font-weight: 600; font-size: clamp(30px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
 
     /* ---- nav pill ---- */
     /* white-space:nowrap: el texto nunca se envuelve ni se comprime por debajo
@@ -103,7 +124,7 @@
     .v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
     .v2-nav > a { flex-shrink: 0; white-space: nowrap; }
     .v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-    .v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
+    .v2-nav-links a { font-size: var(--txt-sm); font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
     .v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
     .v2-nav .v2-nav-cta { flex-shrink: 0; white-space: nowrap; }
     .v2-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 10px; box-sizing: border-box; background: none; border: none; cursor: pointer; flex-shrink: 0; }
@@ -114,7 +135,7 @@
        #737373/#BFBFBF son los mismos hex de --pit-ink-40/--pit-ink-20 en ds.css
        (esta página no carga ds.css) — así el toggle se ve igual en todo el sitio. */
     .v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid #BFBFBF; border-radius: 999px; padding: 2px; }
-    .lang-btn { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: .08em; background: none; border: none; color: #737373; padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+    .lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: .08em; background: none; border: none; color: #737373; padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
     .lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
 
     /* ---- hero ---- */
@@ -161,7 +182,7 @@
        sobre-el-dr-frusso). Si tocás una altura, un gap o el orden acá,
        replicalo allá y al revés. */
     .v2-trust { background: #FFFFFF; padding: clamp(20px, 2.6vh, 34px) 24px clamp(30px, 4vh, 44px); text-align: center; }
-    .v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
+    .v2-trust-label { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
     /* flex-wrap: nowrap — la franja es UNA fila, siempre. Con wrap, cualquier
        cosa que ensanche los ítems (una credencial más larga, un cuerpo de letra
        más grande) tiraba el último logo a una segunda fila, solo y centrado:
@@ -209,7 +230,7 @@
     }
     /* 9px en mono uppercase era ilegible en pantalla: la credencial es la que
        explica QUÉ es cada logo, así que tiene que poder leerse sin esfuerzo. */
-    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
+    .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: var(--txt-2xs); letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
 
     /* ---- layout ---- */
     .v2-section { padding: clamp(56px, 7vw, 100px) 24px; }
@@ -222,21 +243,24 @@
     /* 12px es el piso para controles con borde y fondo: a 10px las pastillas
        se leían como una tira continua en vez de cuatro opciones. */
     .v2-tabs { display: flex; gap: 12px; flex-wrap: wrap; margin: 26px 0 0; }
-    .v2-tab { font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(0,11,51,0.15); background: #FFFFFF; color: var(--v2-navy); cursor: pointer; transition: all 0.25s ease; }
+    .v2-tab { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(0,11,51,0.15); background: #FFFFFF; color: var(--v2-navy); cursor: pointer; transition: all 0.25s ease; }
     .v2-tab:hover { border-color: var(--v2-blue); color: var(--v2-blue); }
     .v2-tab.active { background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
     .v2-data-panel { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; margin-top: 36px; }
     .v2-stat-row { padding: 18px 0; border-bottom: 1px solid rgba(0,11,51,0.08); }
-    .v2-stat-label { font-family: var(--pit-font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin-bottom: 8px; }
-    .v2-stat-value { font-weight: 600; font-size: 24px; letter-spacing: -0.02em; }
+    .v2-stat-label { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin-bottom: 8px; }
+    /* tabular-nums: estos valores CAMBIAN al tocar las pestañas de patología
+       (4–6 → 5–8, 20–30 min → 15–25 min). Con cifras proporcionales los dígitos
+       tienen anchos distintos y el número se corre al cambiar de pestaña. */
+    .v2-stat-value { font-weight: 600; font-size: var(--txt-xl); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
     .v2-bar-track { height: 8px; background: rgba(0,11,51,0.08); border-radius: 999px; overflow: hidden; margin-top: 10px; }
     .v2-bar-fill { height: 100%; background: linear-gradient(90deg, var(--v2-blue), var(--v2-violet)); border-radius: 999px; width: 0; transition: width 0.9s cubic-bezier(0.22,1,0.36,1); }
-    .v2-data-desc { font-size: 16px; line-height: 1.7; color: var(--v2-slate); }
+    .v2-data-desc { font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); }
     .v2-data-desc strong { color: var(--v2-navy); }
 
     /* ---- contenido gratuito destacado ---- */
     .v2-free { background: var(--v2-tint); border-radius: 28px; padding: clamp(32px, 4vw, 56px); }
-    .v2-free-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-blue); background: #FFFFFF; border: 1px solid rgba(37,99,235,0.25); border-radius: 999px; padding: 8px 16px; }
+    .v2-free-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-weight: 500; font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-blue); background: #FFFFFF; border: 1px solid rgba(37,99,235,0.25); border-radius: 999px; padding: 8px 16px; }
     .v2-free-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--v2-blue); }
     .v2-free-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; align-items: stretch; }
     .v2-free-feature { display: flex; flex-direction: column; overflow: hidden; color: var(--v2-navy); }
@@ -246,7 +270,7 @@
     .v2-free-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 50%; background: rgba(37,99,235,0.92); box-shadow: 0 12px 32px rgba(0,11,51,0.3); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
     .v2-free-play::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-38%, -50%); width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 19px solid #FFFFFF; }
     .v2-free-feature:hover .v2-free-play { transform: translate(-50%, -50%) scale(1.08); background: var(--v2-blue); }
-    .v2-free-badge { position: absolute; left: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 14px; }
+    .v2-free-badge { position: absolute; left: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 14px; }
     .v2-free-body { display: flex; flex-direction: column; flex: 1; padding: 28px 32px 30px; }
     .v2-free-side { display: grid; grid-template-rows: 1fr 1fr; gap: 22px; }
     @media (max-width: 860px) {
@@ -272,12 +296,12 @@
     @keyframes v2-drift { to { transform: translateX(calc(-100vw - 320px)); } }
     .v2-testi-card { width: 250px; border-radius: 18px; padding: 26px 24px 20px; box-shadow: 0 20px 48px rgba(0,11,51,0.12); transform: rotate(var(--rot, 0deg)); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
     .v2-testi-fly:hover .v2-testi-card { transform: rotate(0deg); }
-    .v2-testi-card p { font-size: 16px; line-height: 1.45; letter-spacing: -0.01em; color: var(--v2-navy); margin: 0 0 22px; }
+    .v2-testi-card p { font-size: var(--txt-md); line-height: 1.45; letter-spacing: -0.01em; color: var(--v2-navy); margin: 0 0 22px; }
     .v2-testi-author { display: flex; align-items: center; gap: 10px; }
-    .v2-testi-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--v2-navy); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 11px; flex-shrink: 0; }
-    .v2-testi-name { font-weight: 600; font-size: 13px; }
-    .v2-testi-role { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); }
-    .v2-testi-ph { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-blue); background: rgba(37,99,235,0.08); border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 10px; }
+    .v2-testi-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--v2-navy); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); flex-shrink: 0; }
+    .v2-testi-name { font-weight: 600; font-size: var(--txt-xs); }
+    .v2-testi-role { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); }
+    .v2-testi-ph { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-blue); background: rgba(37,99,235,0.08); border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 10px; }
     /* fallback estático: mobile y usuarios con animaciones reducidas */
     @media (max-width: 1050px), (prefers-reduced-motion: reduce) {
       .v2-testi-cards { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
@@ -291,12 +315,12 @@
     .v2-faq { max-width: 820px; margin: 0 auto; }
     .v2-faq details { border-bottom: 1px solid rgba(0,11,51,0.1); }
     .v2-faq details:first-of-type { border-top: 1px solid rgba(0,11,51,0.1); }
-    .v2-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 4px; font-size: 17px; font-weight: 500; color: var(--v2-navy); transition: color 0.2s ease; }
+    .v2-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 4px; font-size: var(--txt-md); font-weight: 500; color: var(--v2-navy); transition: color 0.2s ease; }
     .v2-faq summary:hover { color: var(--v2-blue); }
     .v2-faq summary::-webkit-details-marker { display: none; }
-    .v2-faq summary::after { content: '+'; width: 26px; height: 26px; border: 1.5px solid rgba(0,11,51,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 400; color: var(--v2-navy); flex-shrink: 0; transition: transform 0.3s ease, background 0.2s ease, color 0.2s ease; }
+    .v2-faq summary::after { content: '+'; width: 26px; height: 26px; border: 1.5px solid rgba(0,11,51,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--txt-md); font-weight: 400; color: var(--v2-navy); flex-shrink: 0; transition: transform 0.3s ease, background 0.2s ease, color 0.2s ease; }
     .v2-faq details[open] summary::after { transform: rotate(45deg); background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
-    .v2-faq details > div { padding: 0 4px 24px; font-size: 15px; line-height: 1.7; color: var(--v2-slate); max-width: 66ch; }
+    .v2-faq details > div { padding: 0 4px 24px; font-size: var(--txt-sm); line-height: 1.7; color: var(--v2-slate); max-width: 66ch; }
 
     /* ---- footer rico ---- */
     .v2-footer { position: relative; background: linear-gradient(150deg, #3D5AA8 0%, #5B76B8 28%, #7E96CC 55%, #8F98B4 80%, #A98F79 100%); color: #FFFFFF; border-radius: 28px; margin: 24px; padding: clamp(44px, 5vw, 64px) clamp(28px, 4vw, 56px); display: flex; flex-direction: column; min-height: 540px; box-sizing: border-box; overflow: hidden; }
@@ -305,7 +329,7 @@
     .v2-footer a { color: #FFFFFF; transition: opacity 0.2s ease; }
     .v2-footer a:hover { color: #FFFFFF; opacity: 0.75; }
     .v2-footer-top { display: flex; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
-    .v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: 15px; font-weight: 500; }
+    .v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: var(--txt-sm); font-weight: 500; }
     .v2-footer-claim { max-width: 380px; }
     .v2-footer-claim h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 18px; color: #FFFFFF; }
     .v2-footer-avatars { display: flex; }
@@ -314,8 +338,8 @@
     .v2-footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-top: auto; padding-top: clamp(48px, 8vw, 120px); }
     .v2-footer-brand { font-weight: 700; font-size: clamp(44px, 5.5vw, 72px); letter-spacing: -0.03em; color: #FFFFFF; line-height: 1; display: flex; align-items: center; gap: 18px; }
     .v2-footer-brand .pipe { width: 6px; height: 0.85em; background: #FFFFFF; border-radius: 3px; opacity: 0.9; }
-    .v2-footer-contact { display: grid; gap: 8px; font-size: 15px; text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
-    .v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+    .v2-footer-contact { display: grid; gap: 8px; font-size: var(--txt-sm); text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+    .v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
     @media (max-width: 700px) { .v2-footer-contact { text-align: left; } .v2-footer { margin: 12px; } }
 
     /* ---- reveals coreografiados ---- */
@@ -352,8 +376,8 @@
          especificidad (0,2,0 contra 0,1,0) al color blanco de .v2-btn--navy y
          pinta el CTA "Apuntes gratis" de navy sobre fondo navy: contraste
          1.00, texto invisible. La misma regla está en pit-v2.css. */
-      .v2-drawer a:not(.v2-btn) { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
-      .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
+      .v2-drawer a:not(.v2-btn) { font-size: var(--txt-xl); font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
+      .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
       .v2-drawer { counter-reset: v2nav; }
       .v2-drawer .v2-btn { margin-top: auto; }
       .v2-drawer .v2-btn::before { content: none; }  /* el botón "Apuntes gratis" no lleva número */
@@ -385,7 +409,9 @@
       <a href="curso-modulo-1.html">Curso</a>
       <a href="contacto.html">Contacto</a>
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Apuntes gratis</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -479,15 +505,15 @@
       <div class="v2-stagger m2-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px;">
         <a class="v2-card" href="que-es-pit.html#pacientes" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
           <span class="v2-eyebrow" style="color: var(--v2-blue);">Para pacientes</span>
-          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Tengo dolor crónico</h3>
-          <p style="font-size: 16.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.</p>
-          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Entender mi dolor →</span>
+          <h3 style="font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Tengo dolor crónico</h3>
+          <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.</p>
+          <span style="font-weight: 600; font-size: var(--txt-sm); color: var(--v2-blue);">Entender mi dolor →</span>
         </a>
         <a class="v2-card" href="que-es-pit.html#profesionales" style="padding: 40px 40px 36px; color: var(--v2-navy); display: block;">
           <span class="v2-eyebrow" style="color: var(--v2-blue);">Para profesionales</span>
-          <h3 style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Soy profesional de la salud</h3>
-          <p style="font-size: 16.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Mecanismo de acción, evidencia publicada y técnica — con casos clínicos reales filmados en consultorio.</p>
-          <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue);">Conocer la técnica →</span>
+          <h3 style="font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 10px;">Soy profesional de la salud</h3>
+          <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Mecanismo de acción, evidencia publicada y técnica — con casos clínicos reales filmados en consultorio.</p>
+          <span style="font-weight: 600; font-size: var(--txt-sm); color: var(--v2-blue);">Conocer la técnica →</span>
         </a>
       </div>
     </div>
@@ -503,7 +529,7 @@
           <div style="flex: 1; min-width: 260px;">
             <span class="v2-free-tag">Contenido gratuito · Sin registro</span>
             <h2 class="v2-title" style="margin-top: 16px;">Aprendé sobre PIT, sin costo</h2>
-            <p style="font-size: 17px; line-height: 1.7; color: var(--v2-slate); margin: 12px 0 0; max-width: 56ch;">Todo el material educativo del método es abierto: el curso introductorio, los apuntes completos y el foro semanal.</p>
+            <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 12px 0 0; max-width: 56ch;">Todo el material educativo del método es abierto: el curso introductorio, los apuntes completos y el foro semanal.</p>
           </div>
         </div>
         <div class="v2-free-grid">
@@ -514,23 +540,23 @@
               <span class="v2-free-badge">Curso gratis · 2 videos + autoevaluaciones</span>
             </span>
             <span class="v2-free-body">
-              <h3 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px;">Introducción a PIT</h3>
-              <p style="font-size: 16.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">El método explicado por el Dr. Frusso, con autoevaluaciones y progreso guardado. Sin costo y sin registro.</p>
+              <h3 style="font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px;">Introducción a PIT</h3>
+              <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">El método explicado por el Dr. Frusso, con autoevaluaciones y progreso guardado. Sin costo y sin registro.</p>
               <span class="v2-btn v2-btn--blue" style="align-self: flex-start;">Empezar el curso →</span>
             </span>
           </a>
           <div class="v2-free-side">
             <a class="v2-card" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">PDF · 80 páginas</span>
-              <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
-              <p style="font-size: 15.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
-              <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: 14px; margin-top: auto;">Descargar gratis →</span>
+              <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
+              <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
+              <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: var(--txt-sm); margin-top: auto;">Descargar gratis →</span>
             </a>
             <a class="v2-card" href="foro.html" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
-              <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
-              <p style="font-size: 15.5px; line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
-              <span style="font-weight: 600; font-size: 15px; color: var(--v2-blue); margin-top: auto;">Ir al foro →</span>
+              <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
+              <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
+              <span style="font-weight: 600; font-size: var(--txt-sm); color: var(--v2-blue); margin-top: auto;">Ir al foro →</span>
             </a>
           </div>
         </div>
@@ -570,10 +596,10 @@
           </div>
           <div>
             <p class="v2-data-desc" id="v2-desc"><strong>Lumbalgia crónica.</strong> Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.</p>
-            <a href="que-es-pit.html#pacientes" style="display: inline-block; margin-top: 18px; font-weight: 600; font-size: 15px;">Cómo es una sesión →</a>
+            <a href="que-es-pit.html#pacientes" style="display: inline-block; margin-top: 18px; font-weight: 600; font-size: var(--txt-sm);">Cómo es una sesión →</a>
           </div>
         </div>
-        <p style="font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin: 26px 0 0;">Valores orientativos · Cada caso requiere evaluación individual</p>
+        <p style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); margin: 26px 0 0;">Valores orientativos · Cada caso requiere evaluación individual</p>
       </div>
     </div>
   </section>
@@ -650,7 +676,7 @@
         </details>
       </div>
       <div style="text-align: center; margin-top: 32px;">
-        <a href="faq.html" style="font-weight: 600; font-size: 15px;">Ver todas las preguntas →</a>
+        <a href="faq.html" style="font-weight: 600; font-size: var(--txt-sm);">Ver todas las preguntas →</a>
       </div>
     </div>
   </section>
@@ -662,10 +688,10 @@
         <div>
           <span class="v2-eyebrow" style="color: #8FAAF0;">¿Querés profundizar?</span>
           <h2 class="v2-title" style="margin: 16px 0 14px;">Curso PIT · Módulo I<br>Lumbalgia y Rodilla</h2>
-          <p style="font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 30px; max-width: 54ch;">Casos clínicos reales filmados en consultorio, sin cortes. Acceso permanente y certificado emitido por un instructor autorizado.</p>
+          <p style="font-size: var(--txt-md); line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 30px; max-width: 54ch;">Casos clínicos reales filmados en consultorio, sin cortes. Acceso permanente y certificado emitido por un instructor autorizado.</p>
           <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
             <a class="v2-btn v2-btn--white" href="curso-modulo-1.html">Ver el curso →</a>
-            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.55);">USD 97.99 · PAGO ÚNICO</span>
+            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.08em; color: rgba(255,255,255,0.55);">USD 97.99 · PAGO ÚNICO</span>
           </div>
         </div>
         <img src="/img/DSC_thigh01.jpg" alt="Mapa de ramas nerviosas marcado para tratamiento" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--v2-radius); display: block;">

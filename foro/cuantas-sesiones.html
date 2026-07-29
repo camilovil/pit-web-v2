@@ -50,7 +50,9 @@
       <a href="../curso-modulo-1.html">Curso</a>
       <a href="../contacto.html">Contacto</a>
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Apuntes gratis</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>

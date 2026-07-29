@@ -1,7 +1,12 @@
 <style data-page>
     .fld { display: grid; gap: 6px; }
     .fld label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
-    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 15px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    /* 16px NO es un capricho de diseño: iOS Safari hace zoom a toda la página
+       cuando el texto de un input mide menos de 16px, y el usuario queda con la
+       página ampliada en medio del formulario. Recién arriba de 640px (donde no
+       hay iPhone en vertical) se baja al tamaño compacto de la escala. */
+    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 16px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    @media (min-width: 640px) { .fld input, .fld select, .fld textarea { font-size: var(--txt-sm); } }
     .fld input:focus, .fld select:focus, .fld textarea:focus { border-color: var(--pit-blue); }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }

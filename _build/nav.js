@@ -51,7 +51,9 @@ function renderNav({ active = null, prefix = '', home = false } = {}) {
     <nav class="v2-nav-links">
 ${headerLinks}
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: 14px;">${CTA.label}</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">${CTA.label}</a>
     ${LANG_TOGGLE('v2-nav-cta')}
     <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
   </header>

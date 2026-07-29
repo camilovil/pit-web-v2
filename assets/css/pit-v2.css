@@ -2,6 +2,23 @@
 
 /* ---- remap de tokens: navy + blanco + radios suaves ---- */
 :root:root {
+  /* ---- escala tipográfica (misma que index.html) ----
+     Los 7 pasos que absorben todos los tamaños del sitio. REGLA: no agregar un
+     font-size suelto; si hace falta un paso nuevo se agrega acá Y en la copia
+     inline de index.html, que no carga este stylesheet. */
+  --txt-2xs: 11px;   /* etiquetas mono en mayúsculas */
+  --txt-xs: 13px;    /* metadatos, pies */
+  --txt-sm: 15px;    /* texto de apoyo, botones */
+  --txt-md: 17px;    /* texto de lectura */
+  --txt-lg: 21px;    /* h3 secundario */
+  --txt-xl: 24px;    /* h3 principal */
+}
+
+/* Suavizado de fuentes: en macOS el texto renderiza más pesado de lo diseñado
+   y Space Grotesk en 600 se engorda. Va una sola vez en la raíz. */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+:root:root {
   --v2-navy: #000B33;
   --v2-navy-80: #1A2447;
   /* Más oscuro que el #5A6773 original: es el color de todo el texto de
@@ -26,7 +43,7 @@
 body { padding-top: 84px; background: #FFFFFF; }
 
 /* ---- botones pill ---- */
-.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: 15px; line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
 .v2-btn:hover { transform: translateY(-2px); }
 .v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
 .v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
@@ -47,7 +64,7 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
 .v2-nav > a { flex-shrink: 0; white-space: nowrap; }
 .v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-.v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
+.v2-nav-links a { font-size: var(--txt-sm); font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
 .v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
 .v2-nav-links a.active { opacity: 1; color: var(--v2-blue); }
 .v2-nav .v2-nav-cta { flex-shrink: 0; white-space: nowrap; }
@@ -57,7 +74,7 @@ body { padding-top: 84px; background: #FFFFFF; }
 
 /* Toggle ES/EN — markup estático (ver _build/nav.js), no inyectado por JS */
 .v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--pit-ink-20); border-radius: 999px; padding: 2px; }
-.lang-btn { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; background: none; border: none; color: var(--pit-ink-40); padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; background: none; border: none; color: var(--pit-ink-40); padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 .lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
 
 /* Nav → menú hamburguesa. Breakpoint = ancho mínimo medido (nowrap) para que
@@ -73,8 +90,8 @@ body { padding-top: 84px; background: #FFFFFF; }
      (0,2,0 contra 0,1,0) al color blanco de .v2-btn--navy y pinta el CTA
      "Apuntes gratis" de navy sobre fondo navy: contraste 1.00, texto
      invisible. La misma regla está inline en index.html. */
-  .v2-drawer a:not(.v2-btn) { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
-  .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
+  .v2-drawer a:not(.v2-btn) { font-size: var(--txt-xl); font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
+  .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
   .v2-drawer .v2-btn { margin-top: auto; }
   .v2-drawer .v2-btn::before { content: none; }
   .v2-lang-toggle--drawer { margin-top: 14px; align-self: flex-start; }
@@ -90,7 +107,7 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-footer a { color: #FFFFFF; transition: opacity 0.2s ease; }
 .v2-footer a:hover { color: #FFFFFF; opacity: 0.75; }
 .v2-footer-top { display: flex; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
-.v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: 15px; font-weight: 500; }
+.v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: var(--txt-sm); font-weight: 500; }
 .v2-footer-claim { max-width: 380px; }
 .v2-footer-claim h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 18px; color: #FFFFFF; }
 .v2-footer-avatars { display: flex; }
@@ -99,8 +116,8 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-top: auto; padding-top: clamp(48px, 8vw, 120px); }
 .v2-footer-brand { font-weight: 700; font-size: clamp(44px, 5.5vw, 72px); letter-spacing: -0.03em; color: #FFFFFF; line-height: 1; display: flex; align-items: center; gap: 18px; }
 .v2-footer-brand .pipe { width: 6px; height: 0.85em; background: #FFFFFF; border-radius: 3px; opacity: 0.9; }
-.v2-footer-contact { display: grid; gap: 8px; font-size: 15px; text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
-.v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+.v2-footer-contact { display: grid; gap: 8px; font-size: var(--txt-sm); text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+.v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
 @media (max-width: 700px) { .v2-footer-contact { text-align: left; } .v2-footer { margin: 12px; } }
 
 /* ================= Docshield-ización de las subpáginas ================= */
@@ -109,7 +126,7 @@ body { padding-top: 84px; background: #FFFFFF; }
 .pit-ruler.pit-ruler { display: none; }
 
 /* eyebrow → pill chip suave */
-.pit-eyebrow { display: inline-flex; align-items: center; background: var(--v2-tint); color: var(--v2-blue) !important; border: 1px solid rgba(37,99,235,0.18); border-radius: 999px; padding: 7px 14px; font-size: 10px !important; letter-spacing: 0.14em !important; }
+.pit-eyebrow { display: inline-flex; align-items: center; background: var(--v2-tint); color: var(--v2-blue) !important; border: 1px solid rgba(37,99,235,0.18); border-radius: 999px; padding: 7px 14px; font-size: var(--txt-2xs) !important; letter-spacing: 0.14em !important; }
 [style*="background: var(--pit-ink);"] .pit-eyebrow, [style*="background:var(--pit-ink);"] .pit-eyebrow { background: rgba(255,255,255,0.10); color: #AFC4F5 !important; border-color: rgba(255,255,255,0.18); }
 
 /* títulos más compactos, estilo Docshield */
@@ -120,6 +137,17 @@ body { padding-top: 84px; background: #FFFFFF; }
    suave del degradé del hero de la home, para que las 17 subpáginas abran con
    el mismo color y no queden desafinadas respecto de la portada. */
 section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: linear-gradient(180deg, #DDD9F7 0%, #E4EAFC 38%, #F2F6FE 68%, #FFFFFF 100%) !important; border-radius: 0 0 28px 28px; }
+
+/* ---- campos de formulario ----
+   16px en mobile NO es una decisión estética: iOS Safari hace zoom a toda la
+   página cuando el texto de un input mide menos de 16px, y el visitante queda
+   con la página ampliada en medio del formulario. Recién arriba de 640px
+   (donde ya no hay iPhone en vertical) se baja al paso compacto de la escala.
+   Vale para el foro y para cualquier form que se agregue después. Contacto
+   tiene su propia copia en su <style data-page>: su selector .fld gana por
+   especificidad y esta regla sola no lo alcanzaría. */
+input, select, textarea { font-size: 16px; }
+@media (min-width: 640px) { input, select, textarea { font-size: var(--txt-sm); } }
 
 /* chips pill */
 .pit-chip { border-radius: 999px !important; }
@@ -140,7 +168,7 @@ section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: 
    3. El orden significa algo: primero donde ejerce y enseña, después el
       separador, y al final donde se formó (UBA). */
 .v2-trust-strip { text-align: center; }
-.v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
+.v2-trust-label { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
 .v2-trust-row { display: flex; align-items: flex-start; justify-content: center; gap: clamp(18px, 2.6vw, 40px); flex-wrap: nowrap; max-width: 1160px; margin: 0 auto; }
 /* color: inherit porque estos ítems son <a> (enlazan a cada institución) y
    sin eso heredan el azul de link. Hoy no se ve porque la credencial declara
@@ -157,7 +185,7 @@ section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: 
    hace que lea como insignia intencional y no como bloque suelto. */
 .v2-trust-logo--chip img { border-radius: 8px; }
 .v2-trust-sep { width: 1px; height: 48px; background: rgba(0,11,51,0.10); flex-shrink: 0; align-self: flex-start; }
-.v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
+.v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: var(--txt-2xs); letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
 /* En mobile: grilla 2x2 fija y el último a ancho completo. Con flex el largo
    desigual de las credenciales dejaba huérfanos. */
 @media (max-width: 760px) {

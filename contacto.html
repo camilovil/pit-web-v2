@@ -33,7 +33,12 @@
 
     .fld { display: grid; gap: 6px; }
     .fld label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
-    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 15px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    /* 16px NO es un capricho de diseño: iOS Safari hace zoom a toda la página
+       cuando el texto de un input mide menos de 16px, y el usuario queda con la
+       página ampliada en medio del formulario. Recién arriba de 640px (donde no
+       hay iPhone en vertical) se baja al tamaño compacto de la escala. */
+    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 16px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    @media (min-width: 640px) { .fld input, .fld select, .fld textarea { font-size: var(--txt-sm); } }
     .fld input:focus, .fld select:focus, .fld textarea:focus { border-color: var(--pit-blue); }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
@@ -54,7 +59,9 @@
       <a href="curso-modulo-1.html">Curso</a>
       <a href="contacto.html" class="active">Contacto</a>
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Apuntes gratis</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
