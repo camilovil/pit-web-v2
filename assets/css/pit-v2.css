@@ -12,6 +12,17 @@
   --txt-md: 17px;    /* texto de lectura */
   --txt-lg: 21px;    /* h3 secundario */
   --txt-xl: 24px;    /* h3 principal */
+
+  /* ---- ritmo vertical (mismo token que index.html) ----
+     El aire entre dos secciones es 2x este valor: ~128px en desktop, ~72px en
+     mobile. Antes las subpáginas medían 173px fijos — consistente pero
+     generoso — y la home iba de 12 a 229px. */
+  --sec-y: clamp(36px, 4.4vw, 64px);
+  /* Se pisa SOLO la parte vertical de --pit-section-padding (ds.css la define
+     como "vertical horizontal"). La horizontal queda igual a propósito: es la
+     que alinea todo el contenido de las subpáginas, incluida la franja de
+     logos de Sobre el Dr. Frusso. */
+  --pit-section-padding: var(--sec-y) clamp(24px, 6vw, 120px);
 }
 
 /* Suavizado de fuentes: en macOS el texto renderiza más pesado de lo diseñado

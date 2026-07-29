@@ -91,6 +91,16 @@
       --txt-md: 17px;    /* texto de lectura */
       --txt-lg: 21px;    /* h3 secundario */
       --txt-xl: 24px;    /* h3 principal */
+      /* ---- ritmo vertical ----
+         UN solo paso para separar secciones. El aire que ve el ojo entre dos
+         secciones es 2x este valor (el padding de abajo de una + el de arriba
+         de la otra): ~128px en desktop, ~72px en mobile.
+         Antes la home iba de 12 a 229px entre secciones porque tres niveles de
+         padding se apilaban sin que ninguno restara — sección (100) + panel
+         (56) + tarjeta (28) — y encima había parches de padding-top: 12px
+         inline para pelear contra eso. REGLA: la sección define la separación
+         ENTRE secciones; el panel solo su espacio interno. No se suman. */
+      --sec-y: clamp(36px, 4.4vw, 64px);
     }
     /* Suavizado de fuentes: en macOS el texto renderiza más pesado de lo
        diseñado y Space Grotesk en 600 se engorda. Va una sola vez en la raíz.
@@ -181,7 +191,9 @@
        en assets/css/pit-v2.css y la usan las subpáginas (hoy,
        sobre-el-dr-frusso). Si tocás una altura, un gap o el orden acá,
        replicalo allá y al revés. */
-    .v2-trust { background: #FFFFFF; padding: clamp(20px, 2.6vh, 34px) 24px clamp(30px, 4vh, 44px); text-align: center; }
+    /* El padding de ARRIBA es chico a proposito: los logos son parte del primer
+       vistazo junto al hero, no una seccion aparte. El de ABAJO sigue el ritmo. */
+    .v2-trust { background: #FFFFFF; padding: clamp(20px, 2.6vh, 34px) 24px var(--sec-y); text-align: center; }
     .v2-trust-label { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
     /* flex-wrap: nowrap — la franja es UNA fila, siempre. Con wrap, cualquier
        cosa que ensanche los ítems (una credencial más larga, un cuerpo de letra
@@ -233,7 +245,7 @@
     .v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: var(--txt-2xs); letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
 
     /* ---- layout ---- */
-    .v2-section { padding: clamp(56px, 7vw, 100px) 24px; }
+    .v2-section { padding: var(--sec-y) 24px; }
     .v2-wrap { max-width: 1180px; margin: 0 auto; }
     .v2-card { background: #FFFFFF; border: 1px solid rgba(0,11,51,0.08); border-radius: var(--v2-radius); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.25s ease; }
     .v2-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(0,11,51,0.10); border-color: rgba(37,99,235,0.35); }
@@ -287,7 +299,7 @@
     .v2-dark .v2-title { color: #FFFFFF; }
 
     /* ---- testimonios: texto gigante + cards inclinadas ---- */
-    .v2-testi { position: relative; padding: clamp(64px, 8vw, 120px) 24px; overflow: hidden; }
+    .v2-testi { position: relative; padding: var(--sec-y) 24px; overflow: hidden; }
     .v2-testi-giant { font-weight: 600; font-size: clamp(56px, 9vw, 150px); line-height: 0.98; letter-spacing: -0.04em; text-align: center; color: var(--v2-navy); margin: 0; text-wrap: balance; }
     .v2-testi-cards { position: absolute; inset: 0; pointer-events: none; }
     /* desfile continuo (ref. Docshield): el wrapper .v2-testi-fly desplaza, la card rota */
@@ -496,7 +508,7 @@
   <!-- Va ANTES del contenido gratuito a propósito: el visitante primero se
        identifica (paciente o profesional) y recién después se le ofrece el
        material. Al revés, la oferta llegaba antes de saber a quién le habla. -->
-  <section class="v2-section" style="padding-top: 12px;">
+  <section class="v2-section">
     <div class="v2-wrap">
       <div class="v2-reveal" style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
         <span class="v2-eyebrow" style="color: var(--v2-blue);">¿Quién sos?</span>
@@ -522,7 +534,7 @@
   <!-- ============ CONTENIDO GRATUITO ============ -->
   <!-- scroll-margin-top: la nav es fixed y flota por encima; sin esto el link
        "Contenido" del menú deja la sección tapada/pegada contra la barra -->
-  <section class="v2-section" id="contenido" style="padding-top: 12px; scroll-margin-top: 130px;">
+  <section class="v2-section" id="contenido" style="scroll-margin-top: 130px;">
     <div class="v2-wrap">
       <div class="v2-free v2-reveal">
         <div style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 34px;">
@@ -565,7 +577,7 @@
   </section>
 
   <!-- ============ DATA MODULE ============ -->
-  <section class="v2-section" id="patologias" style="padding-top: 12px;">
+  <section class="v2-section" id="patologias">
     <div class="v2-wrap">
       <div class="v2-data v2-reveal">
         <div style="max-width: 620px;">
@@ -582,7 +594,7 @@
           <div>
             <div class="v2-stat-row">
               <div class="v2-stat-label">Sesiones típicas</div>
-              <div class="v2-stat-value" id="v2-sesiones">4–6</div>
+              <div class="v2-stat-value" id="v2-sesiones">6–8</div>
               <div class="v2-bar-track"><div class="v2-bar-fill" id="v2-bar-sesiones" style="width: 60%;"></div></div>
             </div>
             <div class="v2-stat-row">
@@ -654,7 +666,7 @@
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="v2-section" style="padding-top: 12px;">
+  <section class="v2-section">
     <div class="v2-wrap v2-reveal">
       <h2 class="v2-title" style="text-align: center; margin-bottom: 44px;">Preguntas frecuentes</h2>
       <div class="v2-faq">
@@ -664,7 +676,7 @@
         </details>
         <details>
           <summary>¿Cuántas sesiones voy a necesitar?</summary>
-          <div>El tratamiento típico es de 4 a 8 sesiones según la región y el tiempo de evolución del dolor. El alivio suele sentirse desde la primera sesión.</div>
+          <div>El tratamiento típico es de 6 a 8 sesiones según la región y el tiempo de evolución del dolor. El alivio suele sentirse desde la primera sesión.</div>
         </details>
         <details>
           <summary>¿Es compatible con otros tratamientos?</summary>
@@ -757,10 +769,10 @@
 
       // ---- data module: patologías (delegado) ----
       var DATA = {
-        lumbalgia: { sesiones: '4–6', pct: 60, duracion: '20–30 min', desc: '<strong>Lumbalgia crónica.</strong> Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.' },
-        rodilla: { sesiones: '4–6', pct: 60, duracion: '15–25 min', desc: '<strong>Gonalgia (rodilla).</strong> Muy frecuente en deportistas y en artrosis. Se abordan los puntos peripatelares y las ramas del safeno; el alivio en la misma sesión es parte del diagnóstico.' },
-        cervical: { sesiones: '5–8', pct: 80, duracion: '20–30 min', desc: '<strong>Cervicalgia.</strong> Dolor de cuello persistente, con o sin irradiación. El mapeo incluye las ramas del plexo cervical superficial y la región occipital.' },
-        hombro: { sesiones: '4–7', pct: 70, duracion: '15–25 min', desc: '<strong>Hombro.</strong> Dolor crónico de manguito o post-quirúrgico. Se tratan las ramas superficiales supraclaviculares y axilares sensibilizadas.' }
+        lumbalgia: { sesiones: '6–8', pct: 80, duracion: '20–30 min', desc: '<strong>Lumbalgia crónica.</strong> Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.' },
+        rodilla: { sesiones: '6–8', pct: 80, duracion: '15–25 min', desc: '<strong>Gonalgia (rodilla).</strong> Muy frecuente en deportistas y en artrosis. Se abordan los puntos peripatelares y las ramas del safeno; el alivio en la misma sesión es parte del diagnóstico.' },
+        cervical: { sesiones: '6–8', pct: 80, duracion: '20–30 min', desc: '<strong>Cervicalgia.</strong> Dolor de cuello persistente, con o sin irradiación. El mapeo incluye las ramas del plexo cervical superficial y la región occipital.' },
+        hombro: { sesiones: '6–8', pct: 80, duracion: '15–25 min', desc: '<strong>Hombro.</strong> Dolor crónico de manguito o post-quirúrgico. Se tratan las ramas superficiales supraclaviculares y axilares sensibilizadas.' }
       };
       document.addEventListener('click', function (e) {
         var b = e.target.closest && e.target.closest('.v2-tab');

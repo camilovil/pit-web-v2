@@ -33,7 +33,7 @@
     'Glucosa al 5%': '5% glucose',
     'Inyecciones subcutáneas mínimamente invasivas desinflaman el nervio sensibilizado y restauran su función.': 'Minimally invasive subcutaneous injections reduce nerve inflammation and restore its function.',
     'El dolor cede': 'Pain subsides',
-    'Alivio desde la primera sesión. Tratamiento típico de 4 a 8 sesiones, compatible con cualquier tratamiento en curso.': 'Relief from the first session. Typical treatment: 4 to 8 sessions, compatible with any ongoing treatment.',
+    'Alivio desde la primera sesión. Tratamiento típico de 6 a 8 sesiones, compatible con cualquier tratamiento en curso.': 'Relief from the first session. Typical treatment: 6 to 8 sessions, compatible with any ongoing treatment.',
     'Lumbalgia': 'Low back pain',
     'Rodilla': 'Knee',
     'Cervical': 'Neck',
