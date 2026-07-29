@@ -136,11 +136,11 @@ const HEAD = (pre, title, desc, extraCss = '') => `<!DOCTYPE html>
   <script defer src="/_vercel/insights/script.js"></script>
   <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
-  <link rel="stylesheet" href="${pre}assets/css/fonts.css">
-  <link rel="stylesheet" href="${pre}assets/css/ds.css">
-  <link rel="stylesheet" href="${pre}assets/css/pit-mobile.css">
-  <link rel="stylesheet" href="${pre}assets/css/pit-motion.css">
-  <link rel="stylesheet" href="${pre}assets/css/pit-v2.css">
+  <link rel="stylesheet" href="${pre}assets/css/fonts.css?v=2">
+  <link rel="stylesheet" href="${pre}assets/css/ds.css?v=2">
+  <link rel="stylesheet" href="${pre}assets/css/pit-mobile.css?v=2">
+  <link rel="stylesheet" href="${pre}assets/css/pit-motion.css?v=2">
+  <link rel="stylesheet" href="${pre}assets/css/pit-v2.css?v=2">
   <style>
     body { margin: 0; background: #FFFFFF; }
     a { color: #2563EB; text-decoration: none; }
@@ -154,12 +154,12 @@ ${extraCss}
 `;
 
 const FOOT = (pre) => `
-<script src="${pre}assets/js/pit-forms.js"></script>
-<script src="${pre}assets/js/pit-v2.js"></script>
-<script src="${pre}assets/js/pit-motion.js"></script>
-<script src="${pre}assets/js/pit-chat.js"></script>
-<script src="${pre}assets/js/pit-scrolltop.js"></script>
-<script src="${pre}assets/js/pit-lang.js"></script>
+<script src="${pre}assets/js/pit-forms.js?v=2"></script>
+<script src="${pre}assets/js/pit-v2.js?v=2"></script>
+<script src="${pre}assets/js/pit-motion.js?v=2"></script>
+<script src="${pre}assets/js/pit-chat.js?v=2"></script>
+<script src="${pre}assets/js/pit-scrolltop.js?v=2"></script>
+<script src="${pre}assets/js/pit-lang.js?v=2"></script>
 </body>
 </html>
 `;

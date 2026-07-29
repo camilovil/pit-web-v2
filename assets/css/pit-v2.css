@@ -69,8 +69,12 @@ body { padding-top: 84px; background: #FFFFFF; }
   .v2-burger { display: flex; margin-left: auto; }
   .v2-drawer { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 490; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); padding: 110px 32px 40px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; counter-reset: v2nav; }
   .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
-  .v2-drawer a { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
-  .v2-drawer a::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
+  /* :not(.v2-btn) es OBLIGATORIO. Sin él esta regla le gana en especificidad
+     (0,2,0 contra 0,1,0) al color blanco de .v2-btn--navy y pinta el CTA
+     "Apuntes gratis" de navy sobre fondo navy: contraste 1.00, texto
+     invisible. La misma regla está inline en index.html. */
+  .v2-drawer a:not(.v2-btn) { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
+  .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
   .v2-drawer .v2-btn { margin-top: auto; }
   .v2-drawer .v2-btn::before { content: none; }
   .v2-lang-toggle--drawer { margin-top: 14px; align-self: flex-start; }
