@@ -4,7 +4,7 @@
 
 const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span>';
 
-const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Apuntes gratis' };
+const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Descargar apuntes' };
 
 // Toggle de idioma ES/EN. Markup ESTÁTICO a propósito (antes se inyectaba por JS
 // con setInterval, causando un "pop-in" visible y layout shift en la barra —
@@ -46,14 +46,28 @@ function renderNav({ active = null, prefix = '', home = false } = {}) {
     `    <a href="${hrefOf(i)}">${i.label}</a>`   // el drawer NO marca active (comportamiento actual)
   ).join('\n');
 
-  return `  <header class="v2-nav">
+  // El salto de navegación tiene que ser el PRIMER elemento enfocable de la
+  // página: con 7 links + CTA + toggle de idioma delante, quien navega con
+  // teclado repetía 10 tabuladas en cada página antes de llegar al contenido.
+  // Destino: <main id="pit-main" tabindex="-1">, que agregan convert.js,
+  // foro.js y las dos páginas manuales (index.html, curso-intro.html).
+  // Visible solo al recibir foco (ver .v2-skip en pit-v2.css / index.html).
+  return `  <a class="v2-skip" href="#pit-main">Saltar al contenido</a>
+  <header class="v2-nav">
     <a href="${prefix}index.html" style="text-transform: uppercase; color: inherit; display: flex;" aria-label="Dr. Ricardo D. Frusso — inicio">${LOGO_HTML}</a>
     <nav class="v2-nav-links">
 ${headerLinks}
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: 14px;">${CTA.label}</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">${CTA.label}</a>
     ${LANG_TOGGLE('v2-nav-cta')}
-    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
+    <!-- aria-controls + aria-expanded: el burger abre y cierra #v2-drawer, pero
+         se anunciaba siempre igual ("Abrir menú") estuviera abierto o cerrado.
+         El JS que alterna la clase .open alterna también estos dos atributos
+         y la etiqueta — está en assets/js/pit-v2.js Y, duplicado, inline en
+         index.html (la home no carga pit-v2.js). Si tocás uno, tocá el otro. -->
+    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" aria-controls="v2-drawer" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
   </header>
   <nav class="v2-drawer" id="v2-drawer">
 ${drawerLinks}

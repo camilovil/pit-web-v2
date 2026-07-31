@@ -27,14 +27,56 @@
   <link rel="stylesheet" href="assets/css/pit-motion.css?v=2">
   <style>
     /* remap de tokens v2 (esta página no usa la nav pill: barra de aula propia) */
+    /* ESCALA TIPOGRÁFICA: los tamaños de esta página usan los 6 pasos
+       (--txt-2xs 11 / --txt-xs 13 / --txt-sm 15 / --txt-md 17 / --txt-lg 21 /
+       --txt-xl 24) que definen index.html y pit-v2.css. Van SIEMPRE con
+       fallback en px porque esta página no carga pit-v2.css y ahí los tokens
+       no existirían. Única excepción: el 34px del titular de la lección, que
+       es display y no parte de la escala de texto. */
     :root:root { --pit-ink: #000B33; --pit-ink-80: #1A2447; --pit-ink-60: #55616D; --pit-ink-40: #5F6C78; --pit-paper: #FFFFFF; --pit-paper-pure: #FFFFFF; --pit-radius: 16px; }
     .pit-btn { border-radius: 999px !important; }
     body { margin: 0; background: #FAFAF7; }
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }
+    /* Salto de navegación — tercera copia del componente: esta página no carga
+       pit-v2.css. Por eso los tokens llevan fallback (ver nota del CTA en
+       _build/nav.js). Fuera de pantalla hasta recibir foco; no se oculta con
+       display/visibility porque así dejaría de ser enfocable, que es
+       justamente para quien existe. z-index 600 > 50 de la barra sticky. */
+    .v2-skip { position: fixed; top: 10px; inset-inline-start: 10px; z-index: 600; background: var(--pit-ink, #000B33); color: #FFFFFF; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm, 15px); line-height: 1; padding: 15px 22px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,11,51,0.25); transform: translateY(-200%); }
+    .v2-skip:focus { transform: none; color: #FFFFFF; }
+    .v2-skip:hover { color: #FFFFFF; }
+    .v2-skip:focus-visible { outline-color: #FFFFFF; }
+
+    /* ---- aula: controles reales en vez de <div> con onclick ----
+       El temario, las opciones de las autoevaluaciones y las flechas
+       anterior/siguiente eran <div>/<span> con listener de click: se veian como
+       controles pero no recibian foco ni respondian a Enter, asi que con
+       teclado el aula entera era intransitable. Ahora son <button> e <input
+       type="radio">, despojados de su apariencia nativa para que se vean
+       exactamente igual que antes. */
+    #ci-lessons button:focus-visible { outline-offset: -3px; }   /* la fila ocupa todo el ancho: el halo va por dentro */
+    /* El radio existe para el teclado y el lector de pantalla, pero no se
+       dibuja: la fila entera es la pastilla. No se usa display:none ni
+       visibility:hidden porque eso lo sacaria del orden de tabulacion, que es
+       justamente lo que se quiere arreglar. */
+    .ci-opt input[type="radio"] { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+    .ci-opt:focus-within { outline: 2px solid var(--pit-blue, #2563EB); outline-offset: 3px; }
+    .ci-qnum { font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); text-transform: uppercase; letter-spacing: 0.06em; color: var(--pit-blue, #2563EB); }
+    .ci-linkbtn { font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); background: none; border: none; padding: 0; cursor: pointer; text-align: start; }
+    .ci-linkbtn--next { color: var(--pit-blue, #2563EB); text-align: end; }
+    .ci-linkbtn--blue { color: var(--pit-blue, #2563EB); border-bottom: 1px solid var(--pit-blue, #2563EB); padding-bottom: 2px; }
+    /* Texto solo para lectores de pantalla: el tilde ✓ de la fila completada es
+       decorativo (aria-hidden) y sin esto el estado no se anunciaba. */
+    .ci-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
   </style>
 </head>
 <body>
+
+<!-- Esta página no usa la nav pill (tiene barra de aula propia), así que el
+     salto de navegación va a mano y apunta a #ci-main, su <main>. El resto del
+     sitio lo recibe desde _build/nav.js apuntando a #pit-main. -->
+<a class="v2-skip" href="#ci-main">Saltar al contenido</a>
 
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper); min-height: 100vh; display: flex; flex-direction: column;">
 
@@ -46,14 +88,17 @@
       </a>
       <span class="m-hide" style="display: flex; align-items: center; gap: 14px; min-width: 0;">
         <span class="pit-pipe pit-pipe--blue" style="display: inline-block; width: 4px; height: 28px; background: var(--pit-blue, #2563EB); border-radius: 2px;"></span>
-        <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;">Curso gratuito · Introducción a PIT</span>
+        <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;">Curso gratuito · Introducción a PIT</span>
       </span>
       <div style="margin-left: auto; display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
-        <span id="ci-progress-label" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); white-space: nowrap;">0/4 · 0%</span>
-        <div class="m-bar" style="width: 160px; height: 6px; background: rgba(255,255,255,0.18); border-radius: 999px; overflow: hidden;">
+        <span id="ci-progress-label" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; color: rgba(255,255,255,0.7); white-space: nowrap;">0/4 · 0%</span>
+        <!-- role="progressbar": la barra era un <div> decorativo y el porcentaje
+             solo existia como texto suelto al lado. Con los aria-value* el
+             avance del curso se puede consultar en cualquier momento. -->
+        <div id="ci-progress" class="m-bar" role="progressbar" aria-label="Avance del curso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 de 4 lecciones completadas" style="width: 160px; height: 6px; background: rgba(255,255,255,0.18); border-radius: 999px; overflow: hidden;">
           <div id="ci-progress-fill" style="height: 100%; background: #2563EB; border-radius: 999px; width: 0%; transition: width .3s ease;"></div>
         </div>
-        <a class="m-hide" href="index.html#contenido" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">← Volver al sitio</a>
+        <a class="m-hide" href="index.html#contenido" style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">← Volver al sitio</a>
       </div>
     </div>
   </header>
@@ -65,21 +110,23 @@
     <aside class="m-order2" style="border-right: 1px solid var(--pit-ink-10); background: var(--pit-paper-pure); align-self: stretch;">
       <div style="padding: 28px 24px 18px; border-bottom: 1px solid var(--pit-ink-10);">
         <p class="pit-eyebrow">Contenido del curso</p>
-        <h2 style="font-size: 21px; font-weight: 600; margin: 10px 0 6px;"><span class="hover-underline">Introducción a PIT</span></h2>
-        <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 0;">2 videos · 2 autoevaluaciones · gratis</p>
+        <h2 style="font-size: var(--txt-lg, 21px); font-weight: 600; margin: 10px 0 6px;"><span class="hover-underline">Introducción a PIT</span></h2>
+        <p style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 0;">2 videos · 2 autoevaluaciones · gratis</p>
       </div>
       <div id="ci-lessons" style="display: grid;"></div>
       <div id="ci-alldone" style="padding: 20px 24px; display: none;">
         <div style="background: var(--pit-blue-tint); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 16px 18px;">
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Curso completado</span>
-          <p style="font-size: 14px; line-height: 1.5; color: var(--pit-ink-60); margin: 8px 0 0;">¿Querés profundizar? El Módulo I (Lumbalgia y Rodilla) te espera.</p>
-          <a href="curso-modulo-1.html" style="display: inline-block; margin-top: 10px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Ver el curso completo →</a>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Curso completado</span>
+          <p style="font-size: var(--txt-sm, 15px); line-height: 1.5; color: var(--pit-ink-60); margin: 8px 0 0;">¿Querés profundizar? El Módulo I (Lumbalgia y Rodilla) te espera.</p>
+          <a href="curso-modulo-1.html" style="display: inline-block; margin-top: 10px; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase;">Ver el curso completo →</a>
         </div>
       </div>
     </aside>
 
     <!-- ---- Contenido de la lección ---- -->
-    <main id="ci-main" class="m-pad2" style="padding: 36px 48px 64px; min-width: 0;"></main>
+    <!-- tabindex="-1": destino del salto de navegación y también del foco al
+         cambiar de lección (el contenido se reemplaza entero por JS). -->
+    <main id="ci-main" class="m-pad2" tabindex="-1" style="padding: 36px 48px 64px; min-width: 0;"></main>
   </div>
 </div>
 
@@ -111,7 +158,7 @@
       questions: [
         { text: '¿Qué solución se utiliza en las inyecciones de PIT?', options: ['Corticoides', 'Glucosa al 5%', 'Ácido hialurónico'], correct: 1 },
         { text: '¿Dónde actúa principalmente el tratamiento?', options: ['En la articulación', 'En el músculo', 'En el nervio periférico sensibilizado'], correct: 2 },
-        { text: '¿Cuántas sesiones tiene un tratamiento típico?', options: ['Una sola sesión', 'Entre 4 y 8 sesiones', 'Más de 20 sesiones'], correct: 1 }
+        { text: '¿Cuántas sesiones tiene un tratamiento típico?', options: ['Una sola sesión', 'Entre 6 y 8 sesiones', 'Más de 20 sesiones'], correct: 1 }
       ]
     },
     {
@@ -145,6 +192,11 @@
   function go(idx) {
     if (idx < 0 || idx >= LESSONS.length) return;
     state.active = idx; persist(); render();
+    // El contenido de <main> se reemplaza entero. Sin mover el foco, quien usa
+    // teclado o lector de pantalla se queda parado en el boton de la leccion
+    // anterior y no se entera de que cambio la pantalla.
+    var main = document.getElementById('ci-main');
+    main.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -156,18 +208,25 @@
     LESSONS.forEach(function (l, i) {
       var isActive = i === state.active;
       var isDone = state.done[i];
-      var row = document.createElement('div');
-      row.style.cssText = 'display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 18px 24px; cursor: pointer; border-bottom: 1px solid var(--pit-ink-05); border-left: 3px solid ' +
+      // <button>, no <div>: estas filas son el unico modo de moverse por el
+      // curso y como <div> con onclick no recibian foco ni respondian a Enter,
+      // asi que con teclado el aula era intransitable. Se le sacan los estilos
+      // nativos del boton para que se vea exactamente igual que antes.
+      var row = document.createElement('button');
+      row.type = 'button';
+      row.setAttribute('aria-current', isActive ? 'true' : 'false');
+      row.style.cssText = 'width: 100%; text-align: start; font: inherit; color: inherit; appearance: none; display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 18px 24px; cursor: pointer; border: none; border-bottom: 1px solid var(--pit-ink-05); border-left: 3px solid ' +
         (isActive ? 'var(--pit-blue)' : 'transparent') + '; background: ' + (isActive ? 'var(--pit-blue-tint)' : 'transparent') + ';';
-      var numStyle = 'width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 12px; margin-top: 2px; ' +
+      var numStyle = 'width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); margin-top: 2px; ' +
         (isDone ? 'background: var(--pit-blue); color: #FFFFFF;'
           : 'border: 1px solid ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-20)') + '; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + ';');
       row.innerHTML =
-        '<span style="' + numStyle + '">' + (isDone ? '✓' : String(i + 1).padStart(2, '0')) + '</span>' +
+        '<span aria-hidden="true" style="' + numStyle + '">' + (isDone ? '✓' : String(i + 1).padStart(2, '0')) + '</span>' +
         '<span style="min-width: 0;">' +
-          '<span style="display: block; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + '; margin-bottom: 4px;">' + (l.kind === 'video' ? 'Video' : 'Autoevaluación') + '</span>' +
-          '<span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3;">' + esc(l.title) + '</span>' +
-          '<span style="display: block; font-family: var(--pit-font-mono); font-size: 11px; color: var(--pit-ink-40); margin-top: 4px;">' + l.meta + '</span>' +
+          '<span style="display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + '; margin-bottom: 4px;">' + (l.kind === 'video' ? 'Video' : 'Autoevaluación') + '</span>' +
+          '<span style="display: block; font-size: var(--txt-sm, 15px); font-weight: 600; line-height: 1.3;">' + esc(l.title) + '</span>' +
+          '<span style="display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); color: var(--pit-ink-40); margin-top: 4px;">' + l.meta + '</span>' +
+          (isDone ? '<span class="ci-sr">Completada</span>' : '') +
         '</span>';
       row.addEventListener('click', function () { go(i); });
       el.appendChild(row);
@@ -177,11 +236,12 @@
   function bottomNav() {
     var a = state.active;
     var html = '<div style="display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; border-top: 1px solid var(--pit-ink-10); padding-top: 20px;">';
+    // <button> y no <span>: eran controles de navegacion sin foco ni Enter.
     html += a > 0
-      ? '<span data-go="' + (a - 1) + '" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); cursor: pointer;">← ' + esc(LESSONS[a - 1].title) + '</span>'
+      ? '<button type="button" data-go="' + (a - 1) + '" class="ci-linkbtn">← ' + esc(LESSONS[a - 1].title) + '</button>'
       : '<span></span>';
     if (a < LESSONS.length - 1) {
-      html += '<span data-go="' + (a + 1) + '" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; text-align: right;">' + esc(LESSONS[a + 1].title) + ' →</span>';
+      html += '<button type="button" data-go="' + (a + 1) + '" class="ci-linkbtn ci-linkbtn--next">' + esc(LESSONS[a + 1].title) + ' →</button>';
     }
     return html + '</div>';
   }
@@ -203,15 +263,19 @@
       html += '<div style="position: relative; aspect-ratio: 16 / 9; background: var(--pit-ink); border-radius: var(--pit-radius); overflow: hidden;">' +
         '<img src="' + cur.poster + '" alt="Fotograma del video" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.45;">' +
         '<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;">' +
-          '<span style="width: 84px; height: 84px; border-radius: 50%; background: var(--pit-blue); display: flex; align-items: center; justify-content: center; cursor: pointer;">' +
+          // Sin cursor:pointer y aria-hidden: el video todavia no esta cargado,
+          // asi que este circulo es decoracion. Con cursor de mano prometia un
+          // clic que no hace nada (mismo criterio que el logo de la Escuela de
+          // PIT en la franja de respaldos).
+          '<span aria-hidden="true" style="width: 84px; height: 84px; border-radius: 50%; background: var(--pit-blue); display: flex; align-items: center; justify-content: center;">' +
             '<span style="width: 0; height: 0; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 22px solid #FFFFFF; margin-left: 6px;"></span>' +
           '</span>' +
-          '<span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85);">' + cur.videoNote + '</span>' +
+          '<span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85);">' + cur.videoNote + '</span>' +
         '</div>' +
-        '<span style="position: absolute; right: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: 12px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.5); border-radius: var(--pit-radius); padding: 3px 8px;">' + cur.meta + '</span>' +
+        '<span style="position: absolute; right: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.5); border-radius: var(--pit-radius); padding: 3px 8px;">' + cur.meta + '</span>' +
       '</div>';
-      html += '<p style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--pit-ink-40); margin: 12px 0 0;">Reproductor listo: cuando tengas el archivo final (o el link de Vimeo/YouTube), se conecta acá.</p>';
-      html += '<p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 24px 0 0; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
+      html += '<p style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.04em; color: var(--pit-ink-40); margin: 12px 0 0;">Reproductor listo: cuando tengas el archivo final (o el link de Vimeo/YouTube), se conecta acá.</p>';
+      html += '<p style="font-size: var(--txt-md, 17px); line-height: 1.65; color: var(--pit-ink-60); margin: 24px 0 0; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
       html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 32px;">';
       if (!isDone) {
         html += '<button data-act="done" class="pit-btn pit-btn--primary" type="button">Marcar como completada →</button>';
@@ -224,14 +288,21 @@
       var qa = state.answers[a] || {};
       var submitted = !!state.submitted[a];
       var score = 0;
-      html += '<p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 28px; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
+      html += '<p style="font-size: var(--txt-md, 17px); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 28px; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
       html += '<div style="display: grid; gap: 20px; max-width: 720px;">';
       cur.questions.forEach(function (q, qi) {
         var picked = qa[qi];
         if (submitted && picked === q.correct) score++;
-        html += '<div style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 24px 26px;">';
-        html += '<span style="font-family: var(--pit-font-mono); font-size: 12px; color: var(--pit-blue);">PREGUNTA ' + (qi + 1) + ' DE ' + cur.questions.length + '</span>';
-        html += '<h3 style="font-size: 18px; font-weight: 600; line-height: 1.35; margin: 8px 0 16px;">' + esc(q.text) + '</h3>';
+        // Cada pregunta es un grupo de radios REALES. Antes las opciones eran
+        // <div data-pick> con onclick: no recibian foco, no respondian a Enter
+        // ni a las flechas, y un lector de pantalla no tenia forma de saber
+        // que eran opciones excluyentes de una misma pregunta. El <input> va
+        // oculto visualmente pero presente para el teclado (.ci-opt input);
+        // el foco se ve en la fila entera con :focus-within.
+        var gid = 'ci-q' + a + '-' + qi;
+        html += '<div role="group" aria-labelledby="' + gid + '-t" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 24px 26px;">';
+        html += '<span class="ci-qnum">Pregunta ' + (qi + 1) + ' de ' + cur.questions.length + '</span>';
+        html += '<h3 id="' + gid + '-t" style="font-size: var(--txt-md, 17px); font-weight: 600; line-height: 1.35; margin: 8px 0 16px;">' + esc(q.text) + '</h3>';
         html += '<div style="display: grid; gap: 10px;">';
         q.options.forEach(function (label, oi) {
           var isPicked = picked === oi;
@@ -243,11 +314,12 @@
           var letterStyle = isPicked || (submitted && isCorrect)
             ? 'background: var(--pit-blue); color: #FFFFFF;'
             : 'border: 1px solid var(--pit-ink-20); color: var(--pit-ink-40);';
-          html += '<div data-pick="' + qi + ':' + oi + '" style="display: flex; gap: 14px; align-items: center; padding: 13px 16px; border: 1px solid ' + border + '; border-radius: var(--pit-radius); background: ' + bg + '; cursor: ' + (submitted ? 'default' : 'pointer') + ';">' +
-            '<span style="flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 12px; ' + letterStyle + '">' + String.fromCharCode(65 + oi) + '</span>' +
-            '<span style="font-size: 15px; line-height: 1.45;">' + esc(label) + '</span>' +
-            (tag ? '<span style="margin-left: auto; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: ' + tagColor + '; white-space: nowrap;">' + tag + '</span>' : '') +
-          '</div>';
+          html += '<label class="ci-opt" style="display: flex; gap: 14px; align-items: center; padding: 13px 16px; border: 1px solid ' + border + '; border-radius: var(--pit-radius); background: ' + bg + '; cursor: ' + (submitted ? 'default' : 'pointer') + ';">' +
+            '<input type="radio" name="' + gid + '" data-pick="' + qi + ':' + oi + '"' + (isPicked ? ' checked' : '') + (submitted ? ' disabled' : '') + '>' +
+            '<span aria-hidden="true" style="flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); ' + letterStyle + '">' + String.fromCharCode(65 + oi) + '</span>' +
+            '<span style="font-size: var(--txt-sm, 15px); line-height: 1.45;">' + esc(label) + '</span>' +
+            (tag ? '<span style="margin-inline-start: auto; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.06em; text-transform: uppercase; color: ' + tagColor + '; white-space: nowrap;">' + tag + '</span>' : '') +
+          '</label>';
         });
         html += '</div></div>';
       });
@@ -257,21 +329,24 @@
       if (!submitted) {
         html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 28px;">';
         html += '<button data-act="submit" class="pit-btn pit-btn--primary" type="button">Corregir respuestas</button>';
-        html += '<span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">' + answeredCount + ' de ' + cur.questions.length + ' respondidas</span>';
+        html += '<span role="status" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; color: var(--pit-ink-40);">' + answeredCount + ' de ' + cur.questions.length + ' respondidas</span>';
         html += '</div>';
       } else {
         var passed = score >= 2;
-        html += '<div style="margin-top: 28px; max-width: 720px; border-radius: var(--pit-radius); padding: 22px 26px; ' +
+        // role="status": el resultado aparece en el DOM al corregir y hasta ahora
+        // no se anunciaba; quien no ve la pantalla apretaba "Corregir" y no
+        // recibia respuesta alguna.
+        html += '<div role="status" style="margin-top: 28px; max-width: 720px; border-radius: var(--pit-radius); padding: 22px 26px; ' +
           (passed ? 'background: var(--pit-blue-tint); border: 1px solid var(--pit-blue);' : 'background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-20);') + '">';
-        html += '<span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: ' + (passed ? 'var(--pit-blue)' : 'var(--pit-ink-60)') + ';">' + (passed ? 'Autoevaluación aprobada' : 'Todavía no') + '</span>';
-        html += '<p style="font-size: 16px; font-weight: 600; margin: 8px 0 4px;">' + score + ' de ' + cur.questions.length + ' correctas</p>';
-        html += '<p style="font-size: 14px; line-height: 1.55; color: var(--pit-ink-60); margin: 0;">' +
+        html += '<span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: ' + (passed ? 'var(--pit-blue)' : 'var(--pit-ink-60)') + ';">' + (passed ? 'Autoevaluación aprobada' : 'Todavía no') + '</span>';
+        html += '<p style="font-size: var(--txt-md, 17px); font-weight: 600; margin: 8px 0 4px;">' + score + ' de ' + cur.questions.length + ' correctas</p>';
+        html += '<p style="font-size: var(--txt-sm, 15px); line-height: 1.55; color: var(--pit-ink-60); margin: 0;">' +
           (passed ? 'Quedó registrada como completada. Podés seguir con la próxima lección.' : 'Repasá el video correspondiente y volvé a intentarlo — no hay límite de intentos.') + '</p>';
         html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 18px;">';
         if (passed && a < LESSONS.length - 1) {
           html += '<button data-go="' + (a + 1) + '" class="pit-btn pit-btn--primary" type="button">Siguiente lección →</button>';
         }
-        html += '<span data-act="retry" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Reintentar</span>';
+        html += '<button type="button" data-act="retry" class="ci-linkbtn ci-linkbtn--blue">Reintentar</button>';
         html += '</div></div>';
       }
     }
@@ -285,6 +360,9 @@
     var pct = Math.round((doneCount / LESSONS.length) * 100);
     document.getElementById('ci-progress-label').textContent = doneCount + '/' + LESSONS.length + ' · ' + pct + '%';
     document.getElementById('ci-progress-fill').style.width = pct + '%';
+    var bar = document.getElementById('ci-progress');
+    bar.setAttribute('aria-valuenow', pct);
+    bar.setAttribute('aria-valuetext', doneCount + ' de ' + LESSONS.length + ' lecciones completadas');
     document.getElementById('ci-alldone').style.display = doneCount === LESSONS.length ? 'block' : 'none';
   }
 
@@ -317,15 +395,25 @@
         return;
       }
     }
-    var pick = e.target.closest('[data-pick]');
-    if (pick) {
-      var aI = state.active;
-      if (state.submitted[aI]) return;
-      var parts = pick.getAttribute('data-pick').split(':');
-      state.answers[aI] = state.answers[aI] || {};
-      state.answers[aI][parseInt(parts[0], 10)] = parseInt(parts[1], 10);
-      render();
-    }
+  });
+
+  // Los radios se escuchan por 'change' y no por 'click': con el teclado se
+  // cambian con las flechas, que no siempre pasan por click. Y como elegir una
+  // opcion vuelve a dibujar el bloque entero, hay que devolverle el foco al
+  // radio recien marcado — si no, cada respuesta expulsa al usuario de teclado
+  // al principio de la pagina.
+  document.getElementById('ci-main').addEventListener('change', function (e) {
+    var pick = e.target.closest('input[data-pick]');
+    if (!pick) return;
+    var aI = state.active;
+    if (state.submitted[aI]) return;
+    var parts = pick.getAttribute('data-pick').split(':');
+    state.answers[aI] = state.answers[aI] || {};
+    state.answers[aI][parseInt(parts[0], 10)] = parseInt(parts[1], 10);
+    var name = pick.name, val = pick.getAttribute('data-pick');
+    render();
+    var again = document.querySelector('input[name="' + name + '"][data-pick="' + val + '"]');
+    if (again) again.focus();
   });
 
   render();

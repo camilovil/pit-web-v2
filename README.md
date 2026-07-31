@@ -10,7 +10,11 @@ Quitar ambos al conectar el dominio.
 - `index.html` + 10 subpáginas — HTML standalone, sin framework ni build para servir.
 - `assets/css/` — `fonts.css` (Space Grotesk + JetBrains Mono self-hosted), `ds.css`
   (tokens + componentes del design system `pit-design-system`), `pit-v2.css` (piel v2:
-  nav pill, footer gradiente), `pit-mobile.css`, `pit-motion.css`.
+  nav pill, footer gradiente, tokens `--txt-*` y `--sec-y`), `pit-mobile.css`,
+  `pit-motion.css`.
+  **`index.html` no carga `pit-v2.css`** (tiene su propio `<style>` inline): los tokens
+  y los componentes compartidos existen en **dos copias que se mueven juntas**. Ver
+  HANDOFF.md → Arquitectura antes de tocar cualquier estilo global.
 - `assets/js/` — drawer (`pit-v2.js`), reveals (`pit-motion.js`), asistente IA
   (`pit-chat.js`, backend listo en `api/chat.js`, esperando `ANTHROPIC_API_KEY` —
   ver HANDOFF.md), toggle ES/EN (`pit-lang.js`, markup estático desde `_build/nav.js`),
@@ -65,9 +69,25 @@ autor del sitio; si el foro llegara a aceptar contenido de terceros, escapar ant
 - Videos del curso intro (posters listos, falta conectar Vimeo/YouTube).
 - Citas de evidencia científica (el PDF de referencias ya está enlazado).
 - WhatsApp y horarios en Contacto (el mapa ya está embebido).
+- URL de la Escuela de PIT (es el único de los 5 logos de la franja de respaldos que
+  queda sin enlazar) y año real de su fundación (hoy figura 2026 por inferencia).
 - Asistente IA: código listo (`api/chat.js` + `pit-chat.js`), solo falta cargar
   `ANTHROPIC_API_KEY` en Vercel — ver HANDOFF.md → Pendiente.
+
+## Cifras del sitio
+La duración del tratamiento es **6 a 8 sesiones** en todo el sitio, incluido el prompt
+de sistema del asistente IA (`api/chat.js`). Si cambia, se cambia en los 9 lugares y en
+el prompt; si no, el bot contesta algo distinto a lo que dice la página.
 
 ## Deploy
 Vercel (proyecto separado del sitio live). Cuando esté aprobado: mover el dominio
 `drricardofrusso.com` a este proyecto desde el dashboard de Vercel y quitar el noindex.
+
+### Caché (`vercel.json`) — no romper
+Los archivos de `assets/css/` y `assets/js/` **no llevan hash en el nombre**, así que van
+con `max-age=0, must-revalidate` (revalidan con ETag → 304, no cuesta ancho de banda).
+Solo `assets/fonts/` conserva la caché de un año con `immutable`. Poner `immutable` sobre
+un archivo sin hash congela la copia del visitante durante un año: recibe el HTML nuevo
+con el CSS y el JS viejos. Los `<link>`/`<script>` llevan `?v=2` para desenvenenar a los
+navegadores afectados por la configuración anterior; no hace falta subir ese número en
+cada cambio.

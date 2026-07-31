@@ -43,6 +43,7 @@
 <body>
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
+  <a class="v2-skip" href="#pit-main">Saltar al contenido</a>
   <header class="v2-nav">
     <a href="index.html" style="text-transform: uppercase; color: inherit; display: flex;" aria-label="Dr. Ricardo D. Frusso — inicio"><span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span></a>
     <nav class="v2-nav-links">
@@ -54,12 +55,19 @@
       <a href="curso-modulo-1.html">Curso</a>
       <a href="contacto.html">Contacto</a>
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Descargar apuntes</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
     </span>
-    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
+    <!-- aria-controls + aria-expanded: el burger abre y cierra #v2-drawer, pero
+         se anunciaba siempre igual ("Abrir menú") estuviera abierto o cerrado.
+         El JS que alterna la clase .open alterna también estos dos atributos
+         y la etiqueta — está en assets/js/pit-v2.js Y, duplicado, inline en
+         index.html (la home no carga pit-v2.js). Si tocás uno, tocá el otro. -->
+    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" aria-controls="v2-drawer" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
   </header>
   <nav class="v2-drawer" id="v2-drawer">
     <a href="que-es-pit.html">Qué es PIT</a>
@@ -69,12 +77,15 @@
     <a href="foro.html">Foro</a>
     <a href="curso-modulo-1.html">Curso</a>
     <a href="contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
+    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Descargar apuntes</a>
     <span class="v2-lang-toggle v2-lang-toggle--drawer">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
     </span>
   </nav>
+
+  <main id="pit-main" tabindex="-1">
+
   <script>
     document.addEventListener('click', function (e) {
       if (e.target.closest('.nav-mobile a')) {
@@ -129,13 +140,13 @@
         </div>
         <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">03</span>
-          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Alivio inmediato</h4>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Verificación del efecto</h4>
           <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">El efecto se verifica en la misma sesión: es parte del diagnóstico.</p>
         </div>
         <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">04</span>
           <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Plan de tratamiento</h4>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Típicamente 4 a 8 sesiones, con alivio que se consolida entre sesiones.</p>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Típicamente 6 a 8 sesiones, con alivio que se consolida entre sesiones.</p>
         </div>
       </div>
 
@@ -143,6 +154,39 @@
         <p style="flex: 1; font-size: 17px; font-weight: 500; line-height: 1.5; margin: 0;">¿No sabés si tu caso es para PIT? Contanos qué te pasa y te orientamos.</p>
         <a href="contacto.html" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Pedir una consulta →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- TRES PILARES ==========================================================
+       Encuadre tomado del sitio de Lyftogt (lyftogtmed.com), la organización
+       del creador del método, pero REDACTADO DE CERO: no se copió texto.
+       Los datos técnicos (glucosa al 5%, pH 7.4, aguja de media pulgada,
+       6-8 sesiones) son del método, no afirmaciones propias del consultorio.
+       PENDIENTE: que Ricardo valide la duración del alivio inicial, que es el
+       único dato acá que promete un resultado. -->
+  <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <p class="pit-eyebrow">Por qué es distinto</p>
+      <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 0; max-width: 22ch;">Tres cosas que conviene saber antes de empezar.</h2>
+      <div class="m-stack pit-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 44px;">
+
+        <div>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">Lo que se inyecta ya está en el hospital</h3>
+          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">La sustancia es glucosa al 5% en agua estéril, la misma solución que se cuelga por vía intravenosa en cualquier guardia del mundo. Acá va debajo de la piel, con una aguja de media pulgada que no llega al músculo ni a la articulación. Por eso es un procedimiento de consultorio: se hace sentado, sin preparación previa y te vas caminando.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">El alivio se construye, no aparece de golpe</h3>
+          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">Después de la primera sesión el dolor suele ceder por un rato y volver. Eso es lo esperable, no una falla: cada sesión semanal alarga ese período y baja el piso de dolor con el que arrancás la siguiente. Un tratamiento típico son 6 a 8 sesiones, y el objetivo es que el dolor deje de volver. Cuánto se logra en cada caso depende de la región, del tiempo de evolución y de la persona.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">No lleva corticoides ni analgésicos</h3>
+          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">No hay antiinflamatorios, no hay corticoides y no hay anestésicos en lo que se inyecta: solo glucosa a un pH neutro de 7.4, cercano al de la sangre. Esto importa si ya pasaste por infiltraciones: PIT no compite con lo que estés tomando ni suma efectos adversos de un fármaco más.</p>
+        </div>
+
+      </div>
+      <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 28px 0 0;">Placeholder · Duración del alivio inicial a validar con Ricardo</p>
     </div>
   </section>
 
@@ -175,7 +219,7 @@
         </div>
         <figure style="margin: 0;">
           <img src="/img/DSC_0098.jpg" alt="Mapa anatómico de nervios periféricos" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--pit-radius); display: block;">
-          <figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 10px;">REFERENCIAS ANATÓMICAS · MATERIAL DEL CURSO</figcaption>
+          <figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">Referencias anatómicas · Material del curso</figcaption>
         </figure>
       </div>
     </div>
@@ -186,17 +230,18 @@
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <p class="pit-eyebrow">La técnica, en imágenes</p>
       <div class="m-2col" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-top: 28px;">
-        <figure style="margin: 0;"><img src="/img/DSC_knee01.jpg" alt="PIT en rodilla" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">RODILLA</figcaption></figure>
-        <figure style="margin: 0;"><img src="/img/DSC_lumbar01.jpg" alt="PIT en zona lumbar" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">LUMBAR</figcaption></figure>
-        <figure style="margin: 0;"><img src="/img/DSC_thigh01.jpg" alt="Mapeo en muslo" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">MAPEO</figcaption></figure>
-        <figure style="margin: 0;"><img src="/img/DSC_0086.jpg" alt="Materiales" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--pit-ink-40); margin-top: 8px;">CONSULTORIO</figcaption></figure>
+        <figure style="margin: 0;"><img src="/img/DSC_knee01.jpg" alt="PIT en rodilla" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 8px;">Rodilla</figcaption></figure>
+        <figure style="margin: 0;"><img src="/img/DSC_lumbar01.jpg" alt="PIT en zona lumbar" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 8px;">Lumbar</figcaption></figure>
+        <figure style="margin: 0;"><img src="/img/DSC_thigh01.jpg" alt="Mapeo en muslo" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 8px;">Mapeo</figcaption></figure>
+        <figure style="margin: 0;"><img src="/img/DSC_0086.jpg" alt="Materiales" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pit-radius); display: block;"><figcaption style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 8px;">Consultorio</figcaption></figure>
       </div>
       <div class="m-col" style="display: flex; gap: 16px; align-items: center; margin-top: 40px;">
         <a class="pit-btn pit-btn--primary" href="faq.html">Preguntas frecuentes →</a>
-        <a href="foro.html" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">O preguntale a Ricardo en el foro</a>
+        <a href="foro.html" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">O preguntale al Dr. Frusso en el foro</a>
       </div>
     </div>
   </section>
+  </main>
 
   <footer class="v2-footer">
     <div class="v2-footer-top">
@@ -206,7 +251,7 @@
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>
-        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes de PIT</a>
         <a href="sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
         <a href="faq.html">Preguntas frecuentes</a>
       </nav>

@@ -6,7 +6,7 @@ categoria: noticias
 audiencia: todos
 semana: S26b
 fecha: 2026-06-30
-fechaLabel: 30 JUN 2026
+fechaLabel: 30 jun 2026
 lectura: 4
 tags: Congresos, Noticias
 resumen: Resumen de la presentación sobre neuroproloterapia en el congreso: qué interesó a los colegas, qué preguntas se repitieron y qué se viene.

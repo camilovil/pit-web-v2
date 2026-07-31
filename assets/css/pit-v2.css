@@ -2,6 +2,34 @@
 
 /* ---- remap de tokens: navy + blanco + radios suaves ---- */
 :root:root {
+  /* ---- escala tipográfica (misma que index.html) ----
+     Los 7 pasos que absorben todos los tamaños del sitio. REGLA: no agregar un
+     font-size suelto; si hace falta un paso nuevo se agrega acá Y en la copia
+     inline de index.html, que no carga este stylesheet. */
+  --txt-2xs: 11px;   /* etiquetas mono en mayúsculas */
+  --txt-xs: 13px;    /* metadatos, pies */
+  --txt-sm: 15px;    /* texto de apoyo, botones */
+  --txt-md: 17px;    /* texto de lectura */
+  --txt-lg: 21px;    /* h3 secundario */
+  --txt-xl: 24px;    /* h3 principal */
+
+  /* ---- ritmo vertical (mismo token que index.html) ----
+     El aire entre dos secciones es 2x este valor: ~128px en desktop, ~72px en
+     mobile. Antes las subpáginas medían 173px fijos — consistente pero
+     generoso — y la home iba de 12 a 229px. */
+  --sec-y: clamp(36px, 4.4vw, 64px);
+  /* Se pisa SOLO la parte vertical de --pit-section-padding (ds.css la define
+     como "vertical horizontal"). La horizontal queda igual a propósito: es la
+     que alinea todo el contenido de las subpáginas, incluida la franja de
+     logos de Sobre el Dr. Frusso. */
+  --pit-section-padding: var(--sec-y) clamp(24px, 6vw, 120px);
+}
+
+/* Suavizado de fuentes: en macOS el texto renderiza más pesado de lo diseñado
+   y Space Grotesk en 600 se engorda. Va una sola vez en la raíz. */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+:root:root {
   --v2-navy: #000B33;
   --v2-navy-80: #1A2447;
   /* Más oscuro que el #5A6773 original: es el color de todo el texto de
@@ -21,12 +49,32 @@
   --pit-ink-40: #5F6C78;
   --pit-paper: #FFFFFF;
   --pit-paper-pure: #FFFFFF;
+  /* ---- radio ----
+     UN solo valor para todo el sitio: antes convivían --pit-radius: 16px acá y
+     --v2-radius: 20px en la home, y la misma tarjeta se veía distinta según la
+     página. Gana 16 porque el token lo usan también los inputs y las cajas
+     chicas, donde 20px deja el campo casi capsular. Los bloques grandes ya
+     tenían su 28px fijo aparte. --v2-radius queda como alias para que las dos
+     hojas nombren lo mismo. Copia inline del token en index.html. */
   --pit-radius: 16px;
+  --v2-radius: var(--pit-radius);
+  --v2-radius-sm: 12px;
+
+  /* ---- color de rol: ERROR ----
+     Token propio, NO uno prestado. Antes los mensajes de error de los
+     formularios usaban --pit-ink-40 (el gris del texto de ayuda): un error
+     pintado del mismo color que una aclaración no se lee como error.
+     --pit-error va sobre fondo claro (6.5:1 sobre blanco) y
+     --pit-error-on-dark sobre el navy de las secciones oscuras, donde el rojo
+     saturado cae por debajo de 4.5:1 (8.4:1 sobre #000B33).
+     Definidos también en la copia inline de index.html. */
+  --pit-error: #B3261E;
+  --pit-error-on-dark: #FF8A80;
 }
 body { padding-top: 84px; background: #FFFFFF; }
 
 /* ---- botones pill ---- */
-.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: 15px; line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
 .v2-btn:hover { transform: translateY(-2px); }
 .v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
 .v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
@@ -38,6 +86,34 @@ body { padding-top: 84px; background: #FFFFFF; }
 /* los botones del DS heredan la forma pill */
 .pit-btn { border-radius: 999px !important; }
 
+/* ---- salto de navegación ----
+   ATENCIÓN: existe DOS veces (esta copia y la inline de index.html).
+   Fuera de pantalla hasta recibir foco. Se saca con translate y no con
+   display/visibility porque un elemento así ocultado no es enfocable y el
+   link dejaría de existir para el teclado, que es justamente su público.
+   z-index 600 > 500 de la nav pill: si no, la barra fija lo tapa. */
+.v2-skip {
+  position: fixed;
+  top: 10px;
+  inset-inline-start: 10px;
+  z-index: 600;
+  background: var(--v2-navy);
+  color: #FFFFFF;
+  font-family: var(--pit-font-sans);
+  font-weight: 600;
+  font-size: var(--txt-sm, 15px);
+  line-height: 1;
+  padding: 15px 22px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 11, 51, 0.25);
+  transform: translateY(-200%);
+}
+.v2-skip:focus { transform: none; color: #FFFFFF; }
+.v2-skip:hover { color: #FFFFFF; }
+/* Sin outline azul propio: el fondo navy ya lo destaca y el azul sobre navy
+   casi no se ve. El offset blanco sí. */
+.v2-skip:focus-visible { outline-color: #FFFFFF; }
+
 /* ---- nav pill flotante ---- */
 /* white-space:nowrap en los hijos de texto: el texto nunca se envuelve ni se
    comprime por debajo de su ancho natural (min-content de un nodo nowrap es su
@@ -46,8 +122,8 @@ body { padding-top: 84px; background: #FFFFFF; }
    nowrap), el desborde nunca llega a verse: se pasa a hamburguesa antes. */
 .v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
 .v2-nav > a { flex-shrink: 0; white-space: nowrap; }
-.v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-.v2-nav-links a { font-size: 14px; font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
+.v2-nav-links { display: flex; align-items: center; gap: 28px; margin-inline-start: auto; }
+.v2-nav-links a { font-size: var(--txt-sm); font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
 .v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
 .v2-nav-links a.active { opacity: 1; color: var(--v2-blue); }
 .v2-nav .v2-nav-cta { flex-shrink: 0; white-space: nowrap; }
@@ -57,7 +133,7 @@ body { padding-top: 84px; background: #FFFFFF; }
 
 /* Toggle ES/EN — markup estático (ver _build/nav.js), no inyectado por JS */
 .v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--pit-ink-20); border-radius: 999px; padding: 2px; }
-.lang-btn { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; background: none; border: none; color: var(--pit-ink-40); padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; background: none; border: none; color: var(--pit-ink-40); padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 .lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
 
 /* Nav → menú hamburguesa. Breakpoint = ancho mínimo medido (nowrap) para que
@@ -66,15 +142,15 @@ body { padding-top: 84px; background: #FFFFFF; }
 @media (max-width: 1180px) {
   .v2-nav { gap: 12px; padding: 8px 8px 8px 20px; }
   .v2-nav-links, .v2-nav .v2-nav-cta { display: none; }
-  .v2-burger { display: flex; margin-left: auto; }
+  .v2-burger { display: flex; margin-inline-start: auto; }
   .v2-drawer { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 490; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); padding: 110px 32px 40px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; counter-reset: v2nav; }
   .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
   /* :not(.v2-btn) es OBLIGATORIO. Sin él esta regla le gana en especificidad
      (0,2,0 contra 0,1,0) al color blanco de .v2-btn--navy y pinta el CTA
-     "Apuntes gratis" de navy sobre fondo navy: contraste 1.00, texto
+     "Descargar apuntes" de navy sobre fondo navy: contraste 1.00, texto
      invisible. La misma regla está inline en index.html. */
-  .v2-drawer a:not(.v2-btn) { font-size: 24px; font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
-  .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
+  .v2-drawer a:not(.v2-btn) { font-size: var(--txt-xl); font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
+  .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
   .v2-drawer .v2-btn { margin-top: auto; }
   .v2-drawer .v2-btn::before { content: none; }
   .v2-lang-toggle--drawer { margin-top: 14px; align-self: flex-start; }
@@ -90,18 +166,18 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-footer a { color: #FFFFFF; transition: opacity 0.2s ease; }
 .v2-footer a:hover { color: #FFFFFF; opacity: 0.75; }
 .v2-footer-top { display: flex; justify-content: space-between; gap: clamp(28px, 5vw, 80px); flex-wrap: wrap; }
-.v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: 15px; font-weight: 500; }
+.v2-footer-links { display: grid; grid-template-columns: auto auto; gap: 14px clamp(32px, 5vw, 72px); align-content: start; font-size: var(--txt-sm); font-weight: 500; }
 .v2-footer-claim { max-width: 380px; }
 .v2-footer-claim h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 18px; color: #FFFFFF; }
 .v2-footer-avatars { display: flex; }
-.v2-footer-avatars img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); margin-left: -10px; }
-.v2-footer-avatars img:first-child { margin-left: 0; }
+.v2-footer-avatars img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); margin-inline-start: -10px; }
+.v2-footer-avatars img:first-child { margin-inline-start: 0; }
 .v2-footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-top: auto; padding-top: clamp(48px, 8vw, 120px); }
 .v2-footer-brand { font-weight: 700; font-size: clamp(44px, 5.5vw, 72px); letter-spacing: -0.03em; color: #FFFFFF; line-height: 1; display: flex; align-items: center; gap: 18px; }
 .v2-footer-brand .pipe { width: 6px; height: 0.85em; background: #FFFFFF; border-radius: 3px; opacity: 0.9; }
-.v2-footer-contact { display: grid; gap: 8px; font-size: 15px; text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
-.v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
-@media (max-width: 700px) { .v2-footer-contact { text-align: left; } .v2-footer { margin: 12px; } }
+.v2-footer-contact { display: grid; gap: 8px; font-size: var(--txt-sm); text-align: end; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+.v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+@media (max-width: 700px) { .v2-footer-contact { text-align: start; } .v2-footer { margin: 12px; } }
 
 /* ================= Docshield-ización de las subpáginas ================= */
 
@@ -109,8 +185,40 @@ body { padding-top: 84px; background: #FFFFFF; }
 .pit-ruler.pit-ruler { display: none; }
 
 /* eyebrow → pill chip suave */
-.pit-eyebrow { display: inline-flex; align-items: center; background: var(--v2-tint); color: var(--v2-blue) !important; border: 1px solid rgba(37,99,235,0.18); border-radius: 999px; padding: 7px 14px; font-size: 10px !important; letter-spacing: 0.14em !important; }
+.pit-eyebrow { display: inline-flex; align-items: center; background: var(--v2-tint); color: var(--v2-blue) !important; border: 1px solid rgba(37,99,235,0.18); border-radius: 999px; padding: 7px 14px; font-size: var(--txt-2xs) !important; letter-spacing: 0.14em !important; }
 [style*="background: var(--pit-ink);"] .pit-eyebrow, [style*="background:var(--pit-ink);"] .pit-eyebrow { background: rgba(255,255,255,0.10); color: #AFC4F5 !important; border-color: rgba(255,255,255,0.18); }
+
+/* ---- texto sobre las secciones navy ----
+   El remap de tokens de arriba tiñe la escala de gris para fondo CLARO:
+   --pit-ink-40 (#5F6C78) da 5.8:1 sobre blanco pero 3.3:1 sobre el navy, y
+   --pit-ink-60 (#55616D) cae a 3.0:1. Medido, fallaban las credenciales del
+   foro ("Sin registro / Anónimas / Moderadas"), la etiqueta del email, el pie
+   de figura de Qué es PIT y la línea "Pago único · Garantía de 7 días" del
+   Módulo I: todas por debajo del 4.5:1 mínimo.
+   Las secciones oscuras declaran su fondo INLINE, y el texto que hereda esos
+   grises también está inline, así que la única forma de corregirlo en un solo
+   lugar es con !important (una declaración !important de hoja de estilo le
+   gana a una declaración inline normal). --pit-ink-20 da 10.4:1 sobre el navy.
+   Mismo patrón de selector que ya usa .pit-eyebrow acá arriba. */
+[style*="background: var(--pit-ink);"] [style*="var(--pit-ink-40)"],
+[style*="background: var(--pit-ink);"] [style*="var(--pit-ink-60)"],
+[style*="background:var(--pit-ink);"] [style*="var(--pit-ink-40)"],
+.pit-section--dark [style*="var(--pit-ink-40)"],
+.pit-section--dark [style*="var(--pit-ink-60)"] { color: var(--pit-ink-20) !important; }
+/* El azul de acción tampoco sobrevive al navy: #2563EB sobre #000B33 da 3.71:1
+   (medido en las flechas "→" de las filas de enlace de Qué es PIT). #8FAAF0 es
+   el azul claro que la home ya usa en su sección oscura y da 8.4:1.
+   El selector busca "color: var(--pit-blue)" y no solo "var(--pit-blue)" para
+   no pisarle el color a los elementos que lo usan de FONDO o de borde. */
+[style*="background: var(--pit-ink);"] [style*="color: var(--pit-blue)"],
+.pit-section--dark [style*="color: var(--pit-blue)"] { color: #8FAAF0 !important; }
+/* Los chips "fantasma" toman --pit-ink-60 de ds.css. Se excluyen las variantes
+   que traen su propio fondo (blue/filled), que ya contrastan solas. */
+[style*="background: var(--pit-ink);"] .pit-chip:not(.pit-chip--blue):not(.pit-chip--filled),
+.pit-section--dark .pit-chip:not(.pit-chip--blue):not(.pit-chip--filled) {
+  color: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.4);
+}
 
 /* títulos más compactos, estilo Docshield */
 .pit-section-title, .pit-title, .pit-display { letter-spacing: -0.028em !important; font-weight: 600 !important; }
@@ -120,6 +228,17 @@ body { padding-top: 84px; background: #FFFFFF; }
    suave del degradé del hero de la home, para que las 17 subpáginas abran con
    el mismo color y no queden desafinadas respecto de la portada. */
 section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: linear-gradient(180deg, #DDD9F7 0%, #E4EAFC 38%, #F2F6FE 68%, #FFFFFF 100%) !important; border-radius: 0 0 28px 28px; }
+
+/* ---- campos de formulario ----
+   16px en mobile NO es una decisión estética: iOS Safari hace zoom a toda la
+   página cuando el texto de un input mide menos de 16px, y el visitante queda
+   con la página ampliada en medio del formulario. Recién arriba de 640px
+   (donde ya no hay iPhone en vertical) se baja al paso compacto de la escala.
+   Vale para el foro y para cualquier form que se agregue después. Contacto
+   tiene su propia copia en su <style data-page>: su selector .fld gana por
+   especificidad y esta regla sola no lo alcanzaría. */
+input, select, textarea { font-size: 16px; }
+@media (min-width: 640px) { input, select, textarea { font-size: var(--txt-sm); } }
 
 /* chips pill */
 .pit-chip { border-radius: 999px !important; }
@@ -140,13 +259,23 @@ section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: 
    3. El orden significa algo: primero donde ejerce y enseña, después el
       separador, y al final donde se formó (UBA). */
 .v2-trust-strip { text-align: center; }
-.v2-trust-label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
+.v2-trust-label { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-slate); margin: 0 0 24px; }
 .v2-trust-row { display: flex; align-items: flex-start; justify-content: center; gap: clamp(18px, 2.6vw, 40px); flex-wrap: nowrap; max-width: 1160px; margin: 0 auto; }
 /* color: inherit porque estos ítems son <a> (enlazan a cada institución) y
    sin eso heredan el azul de link. Hoy no se ve porque la credencial declara
    su propio color, pero cualquier texto que se agregue acá saldría azul. */
-.v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
-.v2-trust-item:hover { transform: translateY(-3px); }
+.v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; }
+/* El hover de elevación va SOLO en los que son <a>. Cuatro de los cinco logos
+   enlazan a su institución; el de la Escuela de PIT es un <span> porque
+   todavía no tenemos su URL (ver nota en el markup). Con el hover en la clase,
+   ese <span> se levantaba igual que los otros: prometía un clic que no existe.
+   El selector va por elemento y no por un modificador para que cualquier ítem
+   que se agregue mañana como <span> herede el comportamiento correcto solo.
+   Sigue alineado con el resto: en reposo son idénticos, solo cambia la
+   respuesta al puntero. Misma regla en la copia inline de index.html. */
+a.v2-trust-item { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+a.v2-trust-item:hover { transform: translateY(-3px); }
+span.v2-trust-item { cursor: default; }
 .v2-trust-logo { height: 48px; display: flex; align-items: center; justify-content: center; }
 .v2-trust-logo img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; display: block; }
 .v2-trust-logo--wide   img { max-height: 28px; }  /* wordmarks horizontales */
@@ -157,7 +286,7 @@ section:first-of-type:not([style*="background: var(--pit-ink);"]) { background: 
    hace que lea como insignia intencional y no como bloque suelto. */
 .v2-trust-logo--chip img { border-radius: 8px; }
 .v2-trust-sep { width: 1px; height: 48px; background: rgba(0,11,51,0.10); flex-shrink: 0; align-self: flex-start; }
-.v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
+.v2-trust-item small { font-family: var(--pit-font-mono); font-weight: 400; font-size: var(--txt-2xs); letter-spacing: 0.07em; text-transform: uppercase; display: block; text-align: center; line-height: 1.5; color: var(--v2-slate); }
 /* En mobile: grilla 2x2 fija y el último a ancho completo. Con flex el largo
    desigual de las credenciales dejaba huérfanos. */
 @media (max-width: 760px) {

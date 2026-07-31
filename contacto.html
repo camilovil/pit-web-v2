@@ -33,8 +33,26 @@
 
     .fld { display: grid; gap: 6px; }
     .fld label { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
-    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 15px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    /* 16px NO es un capricho de diseño: iOS Safari hace zoom a toda la página
+       cuando el texto de un input mide menos de 16px, y el usuario queda con la
+       página ampliada en medio del formulario. Recién arriba de 640px (donde no
+       hay iPhone en vertical) se baja al tamaño compacto de la escala. */
+    .fld input, .fld select, .fld textarea { font-family: var(--pit-font-sans); font-size: 16px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-paper-pure); color: var(--pit-ink); outline: none; }
+    @media (min-width: 640px) { .fld input, .fld select, .fld textarea { font-size: var(--txt-sm); } }
     .fld input:focus, .fld select:focus, .fld textarea:focus { border-color: var(--pit-blue); }
+    .fld input[aria-invalid="true"], .fld textarea[aria-invalid="true"] { border-color: var(--pit-error); }
+    /* El mensaje de error usa el token de rol --pit-error, NO el gris del
+       texto de ayuda (--pit-ink-40) que usaba antes: si el error se pinta del
+       mismo color que una aclaración, no se lee como error. El uppercase vive
+       acá y no en el texto: así el mensaje se escribe en caso natural y sigue
+       siendo legible para un lector de pantalla, que deletrea las mayúsculas
+       literales. :empty lo saca del grid mientras no hay nada que decir. */
+    .ct-hint { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; line-height: 1.5; text-transform: uppercase; color: var(--pit-error); }
+    .ct-hint:empty { display: none; }
+    /* "Enviar otro mensaje" era un <span> con cursor:pointer: se veía como
+       control pero no recibía foco ni respondía a Enter. Es un <button>
+       despojado de su apariencia nativa. */
+    .ct-linkbtn { font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); background: none; border: none; border-bottom: 1px solid var(--pit-blue); padding: 0 0 2px; cursor: pointer; }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
 
@@ -43,6 +61,7 @@
 <body>
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
+  <a class="v2-skip" href="#pit-main">Saltar al contenido</a>
   <header class="v2-nav">
     <a href="index.html" style="text-transform: uppercase; color: inherit; display: flex;" aria-label="Dr. Ricardo D. Frusso — inicio"><span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span></a>
     <nav class="v2-nav-links">
@@ -54,12 +73,19 @@
       <a href="curso-modulo-1.html">Curso</a>
       <a href="contacto.html" class="active">Contacto</a>
     </nav>
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: 14px;">Apuntes gratis</a>
+    <!-- El fallback del token es necesario: curso-intro.html no carga
+         pit-v2.css, así que ahí --txt-sm no estaría definido. -->
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Descargar apuntes</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
     </span>
-    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
+    <!-- aria-controls + aria-expanded: el burger abre y cierra #v2-drawer, pero
+         se anunciaba siempre igual ("Abrir menú") estuviera abierto o cerrado.
+         El JS que alterna la clase .open alterna también estos dos atributos
+         y la etiqueta — está en assets/js/pit-v2.js Y, duplicado, inline en
+         index.html (la home no carga pit-v2.js). Si tocás uno, tocá el otro. -->
+    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" aria-controls="v2-drawer" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
   </header>
   <nav class="v2-drawer" id="v2-drawer">
     <a href="que-es-pit.html">Qué es PIT</a>
@@ -69,19 +95,20 @@
     <a href="foro.html">Foro</a>
     <a href="curso-modulo-1.html">Curso</a>
     <a href="contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
+    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Descargar apuntes</a>
     <span class="v2-lang-toggle v2-lang-toggle--drawer">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
     </span>
   </nav>
 
+  <main id="pit-main" tabindex="-1">
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <div class="pit-ruler"><span class="pit-ruler-seg pit-ruler-seg--blue"></span></div>
       <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: start; padding-top: 40px;">
         <div>
-          <p class="pit-eyebrow">Contacto y turnos</p>
+          <p class="pit-eyebrow">Contacto</p>
           <h2 class="pit-section-title" style="margin-top: 12px; max-width: 18ch;">El consultorio queda en Belgrano.</h2>
           <div style="display: grid; gap: 0; border-top: 2px solid var(--pit-ink); margin-top: 28px;">
             <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
@@ -109,7 +136,7 @@
 
         <form id="contacto-form" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 34px 36px;">
           <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 6px;">Escribinos</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0 0 24px;">Contanos brevemente tu caso o tu consulta y te respondemos por email.</p>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0 0 24px;">Contanos en qué te podemos ayudar y te respondemos por email.</p>
           <div style="display: grid; gap: 18px;">
             <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
               <div class="fld"><label for="ct-nombre">Nombre</label><input id="ct-nombre" type="text" placeholder="Tu nombre"></div>
@@ -119,19 +146,27 @@
               <label for="ct-soy">Soy</label>
               <select id="ct-soy"><option>Paciente</option><option>Profesional de la salud</option><option>Otro</option></select>
             </div>
-            <div class="fld"><label for="ct-msg">Mensaje</label><textarea id="ct-msg" rows="5" placeholder="Contanos tu caso o consulta"></textarea></div>
+            <div class="fld"><label for="ct-msg">Mensaje</label><textarea id="ct-msg" rows="5" placeholder="Escribí tu consulta"></textarea></div>
             <div class="m-col" style="display: flex; align-items: center; gap: 16px;">
               <button type="submit" class="pit-btn pit-btn--primary">Enviar mensaje →</button>
-              <span id="ct-hint" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--pit-ink-40);"></span>
             </div>
+            <!-- role="alert" para que el mensaje se anuncie al escribirse: antes
+                 el error aparecía solo visualmente y quien usa lector de
+                 pantalla se quedaba esperando sin saber que el envío falló.
+                 Está FUERA de la fila del botón para que pueda ocupar el ancho
+                 completo sin empujar el botón. -->
+            <span id="ct-hint" class="ct-hint" role="alert"></span>
             <span style="font-size: 12px; color: var(--pit-ink-40); line-height: 1.5;">Al enviar aceptás la <a href="privacidad.html">política de privacidad</a>.</span>
           </div>
         </form>
-        <div id="contacto-ok" style="display: none; background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 34px 36px;">
+        <!-- tabindex="-1": al enviarse, el formulario desaparece y el foco
+             quedaría en la nada (el <body>). Se le mueve el foco a este panel
+             para que el "Mensaje enviado" se anuncie y el Tab siga desde acá. -->
+        <div id="contacto-ok" tabindex="-1" style="display: none; background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 34px 36px;">
           <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 20px;">✓</span>
           <h3 style="font-size: 24px; font-weight: 600; margin: 18px 0 10px;">Mensaje enviado.</h3>
           <p style="font-size: 15px; line-height: 1.65; color: var(--pit-ink-60); margin: 0; max-width: 46ch;">Gracias por escribir. Te respondemos por email a la brevedad, a <span id="ct-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-ink);"></span>.</p>
-          <span id="ct-reset" style="display: inline-block; margin-top: 22px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Enviar otro mensaje →</span>
+          <button type="button" id="ct-reset" class="ct-linkbtn" style="margin-top: 22px;">Enviar otro mensaje →</button>
         </div>
       </div>
     </div>
@@ -149,13 +184,42 @@
       var msg = document.getElementById('ct-msg');
       var hint = document.getElementById('ct-hint');
       var btn = form.querySelector('button[type="submit"]');
+      var campos = [nombre, email, msg];
+
+      // El hint es UNO solo para los tres campos, así que se apunta con
+      // aria-describedby únicamente al campo que falló y se le mueve el foco.
+      // Antes solo se escribía el texto: quien navega con teclado o lector de
+      // pantalla se enteraba de que faltaba algo pero no de cuál de los tres
+      // campos, y tenía que volver a recorrer el formulario a mano.
+      function limpiarError() {
+        hint.textContent = '';
+        campos.forEach(function (c) {
+          c.removeAttribute('aria-invalid');
+          c.removeAttribute('aria-describedby');
+        });
+      }
+      function marcarError(campo, mensaje) {
+        limpiarError();
+        hint.textContent = mensaje;
+        if (campo) {
+          campo.setAttribute('aria-invalid', 'true');
+          campo.setAttribute('aria-describedby', 'ct-hint');
+          campo.focus();
+        }
+      }
+      campos.forEach(function (c) {
+        c.addEventListener('input', function () { if (c.getAttribute('aria-invalid')) limpiarError(); });
+      });
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
-        if (!nombre.value.trim()) { hint.textContent = 'FALTA TU NOMBRE'; return; }
-        if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
-        if (!msg.value.trim()) { hint.textContent = 'ESCRIBÍ TU MENSAJE'; return; }
-        hint.textContent = '';
+        // Caso natural, no MAYÚSCULAS literales (el uppercase lo pone el CSS) y
+        // redactado como instrucción: qué hacer, no qué falta.
+        if (!nombre.value.trim()) { marcarError(nombre, 'Escribí tu nombre para poder responderte'); return; }
+        if (!emailOk) { marcarError(email, 'Revisá el email: no parece una dirección válida'); return; }
+        if (!msg.value.trim()) { marcarError(msg, 'Contanos tu consulta antes de enviar'); return; }
+        limpiarError();
         var payload = {
           _subject: 'Contacto PIT — ' + nombre.value.trim(),
           tipo: 'contacto',
@@ -166,22 +230,29 @@
         };
         var sentEmail = payload.email;
         btn.disabled = true; btn.textContent = 'Enviando…';
-        var send = window.pitSubmit ? window.pitSubmit('contacto', payload) : Promise.resolve({ ok: true, demo: true });
+        // Si pit-forms.js no cargó, NO se envió nada. Antes este camino resolvía
+        // { ok: true } y la pantalla decía "Mensaje enviado": la única del sitio
+        // capaz de afirmar algo falso. Ahora falla y ofrece el email directo.
+        var send = window.pitSubmit ? window.pitSubmit('contacto', payload) : Promise.resolve({ ok: false });
         send.then(function (r) {
           btn.disabled = false; btn.textContent = 'Enviar mensaje →';
-          if (!r.ok) { hint.textContent = 'NO SE PUDO ENVIAR — PROBÁ DE NUEVO'; return; }
+          if (!r.ok) { marcarError(null, 'No se pudo enviar. Probá de nuevo, o escribinos a ricardo.frusso@hospitalitaliano.org.ar'); btn.focus(); return; }
           document.getElementById('ct-sent-email').textContent = sentEmail;
           form.style.display = 'none';
           ok.style.display = 'block';
+          ok.focus();   // el form desaparece: el foco tiene que ir a algún lado
           form.reset();
         });
       });
       document.getElementById('ct-reset').addEventListener('click', function () {
         ok.style.display = 'none';
         form.style.display = 'block';
+        limpiarError();
+        nombre.focus();
       });
     })();
   </script>
+  </main>
 
   <footer class="v2-footer">
     <div class="v2-footer-top">
@@ -191,7 +262,7 @@
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>
-        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes de PIT</a>
         <a href="sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
         <a href="faq.html">Preguntas frecuentes</a>
       </nav>

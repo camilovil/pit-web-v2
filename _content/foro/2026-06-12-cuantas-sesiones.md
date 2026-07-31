@@ -6,7 +6,7 @@ categoria: pyr
 audiencia: pacientes
 semana: S24
 fecha: 2026-06-12
-fechaLabel: 12 JUN 2026
+fechaLabel: 12 jun 2026
 lectura: 4
 tags: Sesiones, Tratamiento
 resumen: La respuesta corta — desde la primera sesión ya hay información. La larga, con matices, acá.
