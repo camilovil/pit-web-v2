@@ -345,6 +345,28 @@
 
     /* ---- testimonios: texto gigante + cards inclinadas ---- */
     .v2-testi { position: relative; padding: var(--sec-y) 24px; overflow: hidden; }
+    /* min-height SOLO donde el desfile está activo (arriba de 1050px y con
+       movimiento permitido; abajo de eso es una grilla estática y esto le
+       agregaría aire muerto).
+       POR QUÉ HACE FALTA: las tarjetas se ubican con `top` en PORCENTAJE del
+       alto de la sección, así que el alto y la posición se retroalimentan —
+       agrandar la sección también empuja las tarjetas hacia abajo. La banda
+       más baja está en 54%, así que para que una tarjeta de alto A entre
+       entera hace falta 0.54·H + A ≤ H, o sea H ≥ A / 0.46.
+       Con las tarjetas actuales (≈211px) da 460px; 520 deja margen.
+       OJO con las cajas: la sección es content-box, así que min-height 520 da
+       520 + 127 de padding = 647px reales, y las tarjetas se posicionan contra
+       esos 647. Medido: la más baja termina en 558, sobran 89px.
+       Antes esto no se notaba porque la sección tenía 115px de padding propio
+       y quedaba alta de casualidad. Al unificar el ritmo vertical bajó a 64px,
+       la sección quedó en 381px y el overflow:hidden del desfile empezó a
+       cortar 34px de las tarjetas de abajo.
+       OJO si llega el texto real de los testimonios: una cita de largo
+       verosímil lleva la tarjeta a ~390px y esta cuenta pide H ≥ 848px. Ahí
+       conviene revisar los porcentajes de las bandas, no seguir agrandando. */
+    @media (min-width: 1051px) and (prefers-reduced-motion: no-preference) {
+      .v2-testi { min-height: 520px; }
+    }
     .v2-testi-giant { font-weight: 600; font-size: clamp(56px, 9vw, 150px); line-height: 0.98; letter-spacing: -0.04em; text-align: center; color: var(--v2-navy); margin: 0; text-wrap: balance; }
     .v2-testi-cards { position: absolute; inset: 0; pointer-events: none; }
     /* desfile continuo (ref. Docshield): el wrapper .v2-testi-fly desplaza, la card rota */
