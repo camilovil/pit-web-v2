@@ -11,3 +11,11 @@ node_modules/
 
 # Salida del grafo de conocimiento (graphify) — herramienta de análisis, no es parte del sitio.
 graphify-out/
+
+# Trabajo en curso, fuera del sitio. Está acá para que un `git add -A` no lo
+# arrastre a un commit sin querer.
+certificado.html
+
+# Config local de Claude Code (permisos, servidores de preview). Es de la
+# máquina, no del proyecto.
+.claude/
