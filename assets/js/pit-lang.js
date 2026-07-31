@@ -58,6 +58,8 @@
     'Apuntes de PIT': 'PIT study notes',
     'Preguntas frecuentes': 'FAQ',
     'Tratamiento del dolor crónico, desde el nervio, en cada etapa': 'Chronic pain treatment, from the nerve, at every stage',
+    'Instagram del Dr. Frusso · @drfrussoricardo': 'Dr. Frusso on Instagram · @drfrussoricardo',
+    'Instagram de la Escuela de PIT · @escueladepit': 'Escuela de PIT on Instagram · @escueladepit',
     'Privacidad y aviso médico': 'Privacy & medical notice',
     'Ver el sitio anterior': 'View the previous site',
 

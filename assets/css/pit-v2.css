@@ -275,7 +275,6 @@ input, select, textarea { font-size: 16px; }
    respuesta al puntero. Misma regla en la copia inline de index.html. */
 a.v2-trust-item { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
 a.v2-trust-item:hover { transform: translateY(-3px); }
-span.v2-trust-item { cursor: default; }
 .v2-trust-logo { height: 48px; display: flex; align-items: center; justify-content: center; }
 .v2-trust-logo img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; display: block; }
 .v2-trust-logo--wide   img { max-height: 28px; }  /* wordmarks horizontales */
