@@ -327,7 +327,11 @@ function renderIndex(posts) {
        sobre #000B33 daba 3.3:1, por debajo del mínimo. --pit-ink-20 da 10.4:1
        y es el mismo gris claro que ya usa el cuerpo de esa sección. */
     .foro-label { display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-20); margin-bottom: 8px; }
-    .foro-nota { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-20); }`;
+    .foro-nota { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-20); }
+    /* nowrap solo desde 720px: abajo de eso el texto del contador no entra
+       al lado del título y empujaba la página fuera de pantalla. */
+    .foro-count { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); }
+    @media (min-width: 720px) { .foro-count { white-space: nowrap; } }`;
   // Nota: el resto del hover de .foro-row (fondo, lift, sombra) vive en
   // assets/css/pit-motion.css — una sola fuente, y ahí respeta
   // prefers-reduced-motion. Acá solo queda el color del texto.
@@ -386,12 +390,15 @@ ${renderNav({ active: 'foro', prefix: pre })}
   <!-- ============ ARCHIVO ============ -->
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper-pure);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
-      <div style="display: flex; align-items: baseline; gap: 24px;">
-        <div style="flex: 1;">
+      <!-- flex-wrap: el contador es texto variable ("7 publicaciones en el
+           archivo", "1 de 7 publicaciones del archivo"): con nowrap y sin wrap
+           desbordaba 73px a 375px. Ahora baja a su propia línea. -->
+      <div style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 0;">
           <p class="pit-eyebrow">Publicaciones anteriores</p>
           <h2 class="pit-section-title" style="margin-top: 12px;"><span class="hover-underline">El archivo del foro.</span></h2>
         </div>
-        <span id="foro-count" role="status" aria-live="polite" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">${ARCHIVO} publicaciones en el archivo</span>
+        <span id="foro-count" role="status" aria-live="polite" class="foro-count">${ARCHIVO} publicaciones en el archivo</span>
       </div>
 
       <div id="foro-archivo" class="pit-stagger" style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
