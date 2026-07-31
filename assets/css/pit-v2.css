@@ -49,7 +49,16 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   --pit-ink-40: #5F6C78;
   --pit-paper: #FFFFFF;
   --pit-paper-pure: #FFFFFF;
+  /* ---- radio ----
+     UN solo valor para todo el sitio: antes convivían --pit-radius: 16px acá y
+     --v2-radius: 20px en la home, y la misma tarjeta se veía distinta según la
+     página. Gana 16 porque el token lo usan también los inputs y las cajas
+     chicas, donde 20px deja el campo casi capsular. Los bloques grandes ya
+     tenían su 28px fijo aparte. --v2-radius queda como alias para que las dos
+     hojas nombren lo mismo. Copia inline del token en index.html. */
   --pit-radius: 16px;
+  --v2-radius: var(--pit-radius);
+  --v2-radius-sm: 12px;
 
   /* ---- color de rol: ERROR ----
      Token propio, NO uno prestado. Antes los mensajes de error de los

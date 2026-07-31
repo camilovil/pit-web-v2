@@ -75,7 +75,22 @@
       --v2-violet: #5B3FD1;
       --v2-violet-deep: #2E1E6B;
       --v2-violet-tint: #F0ECFD;
-      --v2-radius: 20px;
+      /* ---- radio ----
+         UN solo valor para todo el sitio. Antes convivían --v2-radius: 20px
+         (esta página) y --pit-radius: 16px (las otras 17): la misma tarjeta se
+         veía distinta según dónde estuviera parado el visitante.
+         Gana 16px, no 20px, aunque 20 era el de la home: el token lo usan tanto
+         las tarjetas grandes de acá como los inputs y las cajitas de las
+         subpáginas, y en un campo de 46px de alto un radio de 20 lo deja casi
+         capsular. Bajar 4px en una tarjeta de 400px de ancho, en cambio, casi
+         no se ve. Los bloques realmente grandes (panel de datos, contenido
+         gratuito, footer) ya tenían su propio 28px fijo y no dependen del
+         token, así que la jerarquía chico/grande se mantiene.
+         --pit-radius queda como alias para que las dos hojas nombren lo mismo.
+         REGLA: no agregar un tercer token de radio.
+         La otra copia vive en assets/css/pit-v2.css. */
+      --v2-radius: 16px;
+      --pit-radius: var(--v2-radius);
       --v2-radius-sm: 12px;
       /* ---- color de rol: ERROR ----
          Token propio, no uno prestado: un error pintado del gris del texto de
