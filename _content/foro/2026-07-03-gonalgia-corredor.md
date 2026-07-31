@@ -6,7 +6,7 @@ categoria: caso
 audiencia: profesionales
 semana: S27
 fecha: 2026-07-03
-fechaLabel: 03 JUL 2026
+fechaLabel: 03 jul 2026
 lectura: 7
 tags: Rodilla, Caso clínico
 resumen: Corredor recreativo con dolor bilateral de rodilla de 14 meses de evolución. Mapeo peripatelar, abordaje de las ramas del safeno y evolución sesión a sesión.

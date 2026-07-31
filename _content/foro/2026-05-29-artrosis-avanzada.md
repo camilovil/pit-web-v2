@@ -6,7 +6,7 @@ categoria: pyr
 audiencia: pacientes
 semana: S22
 fecha: 2026-05-29
-fechaLabel: 29 MAY 2026
+fechaLabel: 29 may 2026
 lectura: 4
 tags: Artrosis, Rodilla
 resumen: La artrosis no se revierte — pero buena parte del dolor que la acompaña no viene del cartílago sino del nervio. Ahí es donde PIT tiene algo para ofrecer.

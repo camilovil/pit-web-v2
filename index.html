@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PIT — Neuroproloterapia del Dr. Ricardo D. Frusso. Tratamiento mínimamente invasivo del dolor crónico que actúa desde el nervio. Alivio desde la primera sesión.">
+  <meta name="description" content="PIT — Neuroproloterapia del Dr. Ricardo D. Frusso. Tratamiento mínimamente invasivo del dolor crónico que actúa desde el nervio. El alivio suele sentirse desde la primera sesión.">
   <meta name="robots" content="noindex, nofollow"><!-- staging: quitar al conectar dominio -->
   <meta name="author" content="Dr. Ricardo D. Frusso">
 
@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://drricardofrusso.com/">
   <meta property="og:title" content="PIT · Aliviar el dolor crónico desde el nervio — Dr. Frusso">
-  <meta property="og:description" content="PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. Alivio desde la primera sesión.">
+  <meta property="og:description" content="PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión.">
   <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -21,7 +21,7 @@
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PIT · Aliviar el dolor crónico desde el nervio — Dr. Frusso">
-  <meta name="twitter:description" content="Tratamiento mínimamente invasivo del dolor crónico. Alivio desde la primera sesión.">
+  <meta name="twitter:description" content="Tratamiento mínimamente invasivo del dolor crónico. El alivio suele sentirse desde la primera sesión.">
   <meta name="twitter:image" content="https://drricardofrusso.com/img/og-image.png">
 
   <title>PIT · Aliviar el dolor crónico desde el nervio — Dr. Ricardo D. Frusso</title>
@@ -433,13 +433,13 @@
       .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
       /* :not(.v2-btn) es OBLIGATORIO. Sin él esta regla le gana en
          especificidad (0,2,0 contra 0,1,0) al color blanco de .v2-btn--navy y
-         pinta el CTA "Apuntes gratis" de navy sobre fondo navy: contraste
+         pinta el CTA "Descargar apuntes" de navy sobre fondo navy: contraste
          1.00, texto invisible. La misma regla está en pit-v2.css. */
       .v2-drawer a:not(.v2-btn) { font-size: var(--txt-xl); font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
       .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }
       .v2-drawer { counter-reset: v2nav; }
       .v2-drawer .v2-btn { margin-top: auto; }
-      .v2-drawer .v2-btn::before { content: none; }  /* el botón "Apuntes gratis" no lleva número */
+      .v2-drawer .v2-btn::before { content: none; }  /* el botón "Descargar apuntes" no lleva número */
       .v2-lang-toggle--drawer { margin-top: 14px; align-self: flex-start; }
       .v2-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
       .v2-burger.open span:nth-child(2) { opacity: 0; }
@@ -471,7 +471,7 @@
     </nav>
     <!-- El fallback del token es necesario: curso-intro.html no carga
          pit-v2.css, así que ahí --txt-sm no estaría definido. -->
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Apuntes gratis</a>
+    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Descargar apuntes</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -491,7 +491,7 @@
     <a href="foro.html">Foro</a>
     <a href="curso-modulo-1.html">Curso</a>
     <a href="contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
+    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Descargar apuntes</a>
     <span class="v2-lang-toggle v2-lang-toggle--drawer">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -509,7 +509,7 @@
   <section class="v2-hero">
     <span class="v2-eyebrow v2-hero-eyebrow">PIT · Neuroproloterapia · Dr. Ricardo D. Frusso</span>
     <h1>Aliviar el dolor crónico desde el nervio</h1>
-    <p class="v2-hero-sub">PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. Alivio desde la primera sesión, sin interferir con otros tratamientos en curso.</p>
+    <p class="v2-hero-sub">PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión, sin interferir con otros tratamientos en curso.</p>
     <div class="v2-hero-ctas">
       <a class="v2-btn v2-btn--white" href="que-es-pit.html">Qué es PIT</a>
       <a class="v2-btn v2-btn--ghost" href="contacto.html">Pedir una consulta</a>
@@ -621,11 +621,11 @@
               <span class="v2-eyebrow" style="color: var(--v2-blue);">PDF · 80 páginas</span>
               <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
               <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
-              <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: var(--txt-sm); margin-top: auto;">Descargar gratis →</span>
+              <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: var(--txt-sm); margin-top: auto;">Descargar apuntes →</span>
             </a>
             <a class="v2-card" href="foro.html" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
-              <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Ricardo responde</h3>
+              <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">El Dr. Frusso responde</h3>
               <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
               <span style="font-weight: 600; font-size: var(--txt-sm); color: var(--v2-blue); margin-top: auto;">Ir al foro →</span>
             </a>
@@ -743,7 +743,7 @@
         </details>
         <details>
           <summary>¿Tiene efectos secundarios?</summary>
-          <div>La glucosa al 5% es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección.</div>
+          <div>La glucosa al 5% es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección. Cada caso se evalúa individualmente en la consulta.</div>
         </details>
       </div>
       <div style="text-align: center; margin-top: 32px;">
@@ -762,7 +762,7 @@
           <p style="font-size: var(--txt-md); line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 30px; max-width: 54ch;">Casos clínicos reales filmados en consultorio, sin cortes. Acceso permanente y certificado emitido por un instructor autorizado.</p>
           <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
             <a class="v2-btn v2-btn--white" href="curso-modulo-1.html">Ver el curso →</a>
-            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.08em; color: rgba(255,255,255,0.55);">USD 97.99 · PAGO ÚNICO</span>
+            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55);">USD 97.99 · Pago único</span>
           </div>
         </div>
         <img src="/img/DSC_thigh01.jpg" alt="Mapa de ramas nerviosas marcado para tratamiento" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--v2-radius); display: block;">
@@ -781,7 +781,7 @@
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>
-        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes de PIT</a>
         <a href="sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
         <a href="faq.html">Preguntas frecuentes</a>
       </nav>
@@ -805,7 +805,7 @@
     <div class="v2-footer-legal">
       <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
       <a href="privacidad.html">Privacidad y aviso médico</a>
-      <a href="https://drricardofrusso.com/" style="margin-inline-start: auto;">Ver versión actual</a>
+      <a href="https://drricardofrusso.com/" style="margin-inline-start: auto;">Ver el sitio anterior</a>
     </div>
   </footer>
 

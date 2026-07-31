@@ -147,7 +147,7 @@ body { padding-top: 84px; background: #FFFFFF; }
   .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
   /* :not(.v2-btn) es OBLIGATORIO. Sin él esta regla le gana en especificidad
      (0,2,0 contra 0,1,0) al color blanco de .v2-btn--navy y pinta el CTA
-     "Apuntes gratis" de navy sobre fondo navy: contraste 1.00, texto
+     "Descargar apuntes" de navy sobre fondo navy: contraste 1.00, texto
      invisible. La misma regla está inline en index.html. */
   .v2-drawer a:not(.v2-btn) { font-size: var(--txt-xl); font-weight: 600; color: var(--v2-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,11,51,0.08); display: flex; align-items: baseline; gap: 14px; }
   .v2-drawer a:not(.v2-btn)::before { counter-increment: v2nav; content: "0" counter(v2nav); font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 400; letter-spacing: 0.08em; color: var(--v2-blue); }

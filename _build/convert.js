@@ -168,7 +168,7 @@ const FOOTER = `  <footer class="v2-footer">
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>
-        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes (PDF)</a>
+        <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Apuntes de PIT</a>
         <a href="sobre-el-dr-frusso.html">Sobre el Dr. Frusso</a>
         <a href="faq.html">Preguntas frecuentes</a>
       </nav>

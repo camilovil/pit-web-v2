@@ -163,7 +163,7 @@
         done(res.data.reply);
       }).catch(function () {
         typing.remove();
-        add('bot', 'Uy, no pude responder en este momento. Probá de nuevo en unos segundos.');
+        add('bot', 'No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.');
         history.pop(); // quitamos el turno del usuario que no llegó a responderse
         busy = false;
         sendBtn.disabled = false;

@@ -6,7 +6,7 @@ categoria: consejos
 audiencia: pacientes
 semana: S26
 fecha: 2026-06-26
-fechaLabel: 26 JUN 2026
+fechaLabel: 26 jun 2026
 lectura: 4
 tags: Consejos, Post-sesión
 resumen: Actividad, molestias normales, señales de consulta: guía breve para las 48 horas posteriores a una sesión.

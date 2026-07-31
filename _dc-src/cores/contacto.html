@@ -29,7 +29,7 @@
       <x-import component-from-global-scope="FrussoDS.Ruler" accent="end" hint-size="100%,6px"></x-import>
       <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: start; padding-top: 40px;">
         <div>
-          <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="220px,18px">Contacto y turnos</x-import>
+          <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="220px,18px">Contacto</x-import>
           <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px; max-width: 18ch;" hint-size="100%,80px">El consultorio queda en Belgrano.</x-import>
           <div style="display: grid; gap: 0; border-top: 2px solid var(--pit-ink); margin-top: 28px;">
             <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
@@ -57,7 +57,7 @@
 
         <form id="contacto-form" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 34px 36px;">
           <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 6px;">Escribinos</h3>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0 0 24px;">Contanos brevemente tu caso o tu consulta y te respondemos por email.</p>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0 0 24px;">Contanos en qué te podemos ayudar y te respondemos por email.</p>
           <div style="display: grid; gap: 18px;">
             <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
               <div class="fld"><label for="ct-nombre">Nombre</label><input id="ct-nombre" type="text" placeholder="Tu nombre"></div>
@@ -67,7 +67,7 @@
               <label for="ct-soy">Soy</label>
               <select id="ct-soy"><option>Paciente</option><option>Profesional de la salud</option><option>Otro</option></select>
             </div>
-            <div class="fld"><label for="ct-msg">Mensaje</label><textarea id="ct-msg" rows="5" placeholder="Contanos tu caso o consulta"></textarea></div>
+            <div class="fld"><label for="ct-msg">Mensaje</label><textarea id="ct-msg" rows="5" placeholder="Escribí tu consulta"></textarea></div>
             <div class="m-col" style="display: flex; align-items: center; gap: 16px;">
               <button type="submit" class="pit-btn pit-btn--primary">Enviar mensaje →</button>
             </div>
@@ -151,10 +151,13 @@
         };
         var sentEmail = payload.email;
         btn.disabled = true; btn.textContent = 'Enviando…';
-        var send = window.pitSubmit ? window.pitSubmit('contacto', payload) : Promise.resolve({ ok: true, demo: true });
+        // Si pit-forms.js no cargó, NO se envió nada. Antes este camino resolvía
+        // { ok: true } y la pantalla decía "Mensaje enviado": la única del sitio
+        // capaz de afirmar algo falso. Ahora falla y ofrece el email directo.
+        var send = window.pitSubmit ? window.pitSubmit('contacto', payload) : Promise.resolve({ ok: false });
         send.then(function (r) {
           btn.disabled = false; btn.textContent = 'Enviar mensaje →';
-          if (!r.ok) { marcarError(null, 'No se pudo enviar. Probá de nuevo en un momento'); btn.focus(); return; }
+          if (!r.ok) { marcarError(null, 'No se pudo enviar. Probá de nuevo, o escribinos a ricardo.frusso@hospitalitaliano.org.ar'); btn.focus(); return; }
           document.getElementById('ct-sent-email').textContent = sentEmail;
           form.style.display = 'none';
           ok.style.display = 'block';

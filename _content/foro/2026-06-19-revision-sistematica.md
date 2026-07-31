@@ -6,7 +6,7 @@ categoria: evidencia
 audiencia: profesionales
 semana: S25
 fecha: 2026-06-19
-fechaLabel: 19 JUN 2026
+fechaLabel: 19 jun 2026
 lectura: 6
 tags: Evidencia, Glucosa 5%
 resumen: Lectura crítica de la revisión: qué respalda, cuáles son los límites metodológicos y cómo se traduce (o no) al consultorio.

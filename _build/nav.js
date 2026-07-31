@@ -4,7 +4,7 @@
 
 const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span>';
 
-const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Apuntes gratis' };
+const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Descargar apuntes' };
 
 // Toggle de idioma ES/EN. Markup ESTÁTICO a propósito (antes se inyectaba por JS
 // con setInterval, causando un "pop-in" visible y layout shift en la barra —
