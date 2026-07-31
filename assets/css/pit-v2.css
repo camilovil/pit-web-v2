@@ -223,8 +223,18 @@ input, select, textarea { font-size: 16px; }
 /* color: inherit porque estos ítems son <a> (enlazan a cada institución) y
    sin eso heredan el azul de link. Hoy no se ve porque la credencial declara
    su propio color, pero cualquier texto que se agregue acá saldría azul. */
-.v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
-.v2-trust-item:hover { transform: translateY(-3px); }
+.v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; }
+/* El hover de elevación va SOLO en los que son <a>. Cuatro de los cinco logos
+   enlazan a su institución; el de la Escuela de PIT es un <span> porque
+   todavía no tenemos su URL (ver nota en el markup). Con el hover en la clase,
+   ese <span> se levantaba igual que los otros: prometía un clic que no existe.
+   El selector va por elemento y no por un modificador para que cualquier ítem
+   que se agregue mañana como <span> herede el comportamiento correcto solo.
+   Sigue alineado con el resto: en reposo son idénticos, solo cambia la
+   respuesta al puntero. Misma regla en la copia inline de index.html. */
+a.v2-trust-item { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+a.v2-trust-item:hover { transform: translateY(-3px); }
+span.v2-trust-item { cursor: default; }
 .v2-trust-logo { height: 48px; display: flex; align-items: center; justify-content: center; }
 .v2-trust-logo img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; display: block; }
 .v2-trust-logo--wide   img { max-height: 28px; }  /* wordmarks horizontales */

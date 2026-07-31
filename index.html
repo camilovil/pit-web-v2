@@ -230,8 +230,17 @@
        de su min-content (el largo de la credencial) y la fila desborda. */
     /* color: inherit porque estos ítems son <a> (enlazan a cada institución) y
        sin eso heredan el azul de link. */
-    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
-    .v2-trust-item:hover { transform: translateY(-3px); }
+    .v2-trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; max-width: 190px; color: inherit; text-decoration: none; }
+    /* El hover de elevación va SOLO en los que son <a>. Cuatro de los cinco
+       logos enlazan a su institución; el de la Escuela de PIT es un <span>
+       porque todavía no tenemos su URL. Con el hover en la clase, ese <span>
+       se levantaba igual que los otros: prometía un clic que no existe. El
+       selector va por elemento (no por modificador) para que cualquier ítem
+       futuro sin enlace herede el comportamiento correcto solo. En reposo son
+       idénticos: no se desalinea nada. Misma regla en pit-v2.css. */
+    a.v2-trust-item { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    a.v2-trust-item:hover { transform: translateY(-3px); }
+    span.v2-trust-item { cursor: default; }
     /* Caja de altura fija: alinea todos los logos por su centro óptico,
        sin importar que uno sea circular y otro un wordmark horizontal. */
     .v2-trust-logo { height: 48px; display: flex; align-items: center; justify-content: center; }
