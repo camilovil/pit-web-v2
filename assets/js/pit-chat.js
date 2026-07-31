@@ -9,20 +9,24 @@
   var SUGERIDAS = ['¿Qué es PIT?', '¿Duelen las inyecciones?', '¿Cómo empiezo el curso gratis?'];
 
   var css = [
-    // right/bottom van declarados dos veces a propósito: el valor de siempre y
-    // después el mismo valor + el área segura del dispositivo (indicador de
-    // gesto del iPhone, esquinas redondeadas). Sin esto el FAB — que es el
-    // control flotante permanente del sitio — cae dentro de la zona de swipe
-    // del sistema. Un navegador sin env() descarta la segunda declaración y se
-    // queda con la primera; si dejáramos solo la versión con env(), tiraría la
-    // declaración entera y el botón se iría al borde superior.
-    '.pitchat-fab { position: fixed; bottom: 28px; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); right: 28px; right: calc(28px + env(safe-area-inset-right, 0px)); height: 56px; padding: 0 22px 0 18px; border-radius: 999px; background: #000B33; border: none; cursor: pointer; z-index: 950; display: flex; align-items: center; gap: 10px; box-shadow: 0 16px 40px rgba(0,11,51,0.35); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
+    // inset-inline-end/bottom van declarados dos veces a propósito: el valor de
+    // siempre y después el mismo valor + el área segura del dispositivo
+    // (indicador de gesto del iPhone, esquinas redondeadas). Sin esto el FAB —
+    // que es el control flotante permanente del sitio — cae dentro de la zona
+    // de swipe del sistema. Un navegador sin env() descarta la segunda
+    // declaración y se queda con la primera; si dejáramos solo la versión con
+    // env(), tiraría la declaración entera y el botón se iría al borde superior.
+    // La propiedad es lógica (inset-inline-end) para que en un idioma RTL el
+    // widget se espeje al lado contrario. env(safe-area-inset-right) sigue
+    // siendo físico porque lo define el hardware, no la dirección del texto:
+    // es el recorte de la pantalla y no se espeja.
+    '.pitchat-fab { position: fixed; bottom: 28px; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); inset-inline-end: 28px; inset-inline-end: calc(28px + env(safe-area-inset-right, 0px)); height: 56px; padding: 0 22px 0 18px; border-radius: 999px; background: #000B33; border: none; cursor: pointer; z-index: 950; display: flex; align-items: center; gap: 10px; box-shadow: 0 16px 40px rgba(0,11,51,0.35); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
     '.pitchat-fab:hover { transform: translateY(-3px); box-shadow: 0 22px 52px rgba(0,11,51,0.45); }',
     '.pitchat-fab-dot { width: 8px; height: 8px; border-radius: 50%; background: #5B7FDE; box-shadow: 0 0 0 4px rgba(91,127,222,0.25); }',
     '.pitchat-fab-label { color: #fff; font-weight: 600; font-size: var(--txt-sm, 15px); letter-spacing: -0.01em; }',
     // El max-height también resta el área segura: si el panel sube por el
     // inset pero conserva su alto, el borde de arriba se mete debajo del nav.
-    '.pitchat-panel { position: fixed; bottom: 100px; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); right: 28px; right: calc(28px + env(safe-area-inset-right, 0px)); width: 380px; max-width: calc(100vw - 32px); max-height: min(580px, calc(100vh - 140px)); max-height: min(580px, calc(100vh - 140px - env(safe-area-inset-bottom, 0px))); background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.7); border-radius: 24px; box-shadow: 0 32px 80px rgba(0,11,51,0.22); z-index: 951; display: none; flex-direction: column; overflow: hidden; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
+    '.pitchat-panel { position: fixed; bottom: 100px; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); inset-inline-end: 28px; inset-inline-end: calc(28px + env(safe-area-inset-right, 0px)); width: 380px; max-width: calc(100vw - 32px); max-height: min(580px, calc(100vh - 140px)); max-height: min(580px, calc(100vh - 140px - env(safe-area-inset-bottom, 0px))); background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.7); border-radius: 24px; box-shadow: 0 32px 80px rgba(0,11,51,0.22); z-index: 951; display: none; flex-direction: column; overflow: hidden; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
     '.pitchat-panel.open { display: flex; }',
     '.pitchat-head { background: linear-gradient(140deg, #000B33 0%, #1A2E6B 70%, #2C4BA8 100%); padding: 18px 20px; display: flex; align-items: center; gap: 12px; }',
     '.pitchat-head-pipe { width: 8px; height: 8px; border-radius: 50%; background: #5B7FDE; box-shadow: 0 0 0 4px rgba(91,127,222,0.3); }',
@@ -50,7 +54,7 @@
     '.pitchat-send:hover { background: #1E4FC4; transform: translateY(-1px); }',
     '.pitchat-send:disabled { background: #BFC7D6; cursor: default; transform: none; }',
     '.pitchat-note { font-size: var(--txt-2xs, 11px); color: #8B96A0; text-align: center; padding: 0 12px 10px; background: transparent; border-top: none; }',
-    '@media (max-width: 480px) { .pitchat-panel { right: 16px; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { right: 20px; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab-label { display: none; } .pitchat-fab { padding: 0; width: 56px; justify-content: center; } }'
+    '@media (max-width: 480px) { .pitchat-panel { inset-inline-end: 16px; inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { inset-inline-end: 20px; inset-inline-end: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab-label { display: none; } .pitchat-fab { padding: 0; width: 56px; justify-content: center; } }'
   ].join('\n');
 
   function boot() {

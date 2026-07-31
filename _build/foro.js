@@ -248,11 +248,11 @@ ${renderNav({ active: 'foro', prefix: pre })}
   <!-- anterior / archivo -->
   <section style="background: var(--pit-paper-pure); border-top: 1px solid var(--pit-ink-10); padding: 0 24px;">
     <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
-      ${older ? `<a href="${older.slug}.html" class="sh-post" style="padding: 28px 24px 28px 0; color: var(--pit-ink); border-right: 1px solid var(--pit-ink-10);">
+      ${older ? `<a href="${older.slug}.html" class="sh-post" style="padding-block: 28px; padding-inline: 0 24px; color: var(--pit-ink); border-inline-end: 1px solid var(--pit-ink-10);">
         <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-ink-40);">← Anterior · ${older.semana}</span>
         <div style="font-size: 17px; font-weight: 600; margin-top: 6px;">${older.titulo}</div>
-      </a>` : '<span style="border-right: 1px solid var(--pit-ink-10);"></span>'}
-      <a href="${pre}foro.html" class="sh-post" style="padding: 28px 0 28px 24px; text-align: right; color: var(--pit-ink);">
+      </a>` : '<span style="border-inline-end: 1px solid var(--pit-ink-10);"></span>'}
+      <a href="${pre}foro.html" class="sh-post" style="padding-block: 28px; padding-inline: 24px 0; text-align: end; color: var(--pit-ink);">
         <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-ink-40);">Archivo completo →</span>
         <div style="font-size: 17px; font-weight: 600; margin-top: 6px;">Todas las publicaciones del foro</div>
       </a>
@@ -336,7 +336,7 @@ ${renderNav({ active: 'foro', prefix: pre })}
       </div>
       <div style="display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap; align-items: center;">
         ${catChips}
-        <span style="margin-left: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
+        <span style="margin-inline-start: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
           <span>Audiencia</span>
           ${audChips}
         </span>

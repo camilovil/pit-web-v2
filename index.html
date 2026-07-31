@@ -169,7 +169,7 @@
        de su ancho natural — ver misma nota en assets/css/pit-v2.css */
     .v2-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100vw - 32px)); z-index: 500; background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,11,51,0.10); display: flex; align-items: center; gap: 28px; padding: 10px 12px 10px 24px; box-sizing: border-box; }
     .v2-nav > a { flex-shrink: 0; white-space: nowrap; }
-    .v2-nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+    .v2-nav-links { display: flex; align-items: center; gap: 28px; margin-inline-start: auto; }
     .v2-nav-links a { font-size: var(--txt-sm); font-weight: 500; color: var(--v2-navy); opacity: 0.75; transition: opacity 0.2s ease; white-space: nowrap; }
     .v2-nav-links a:hover { opacity: 1; color: var(--v2-navy); }
     .v2-nav .v2-nav-cta { flex-shrink: 0; white-space: nowrap; }
@@ -327,7 +327,7 @@
     .v2-free-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 50%; background: rgba(37,99,235,0.92); box-shadow: 0 12px 32px rgba(0,11,51,0.3); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
     .v2-free-play::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-38%, -50%); width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 19px solid #FFFFFF; }
     .v2-free-feature:hover .v2-free-play { transform: translate(-50%, -50%) scale(1.08); background: var(--v2-blue); }
-    .v2-free-badge { position: absolute; left: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 14px; }
+    .v2-free-badge { position: absolute; inset-inline-start: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 14px; }
     .v2-free-body { display: flex; flex-direction: column; flex: 1; padding: 28px 32px 30px; }
     .v2-free-side { display: grid; grid-template-rows: 1fr 1fr; gap: 22px; }
     @media (max-width: 860px) {
@@ -390,14 +390,14 @@
     .v2-footer-claim { max-width: 380px; }
     .v2-footer-claim h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 18px; color: #FFFFFF; }
     .v2-footer-avatars { display: flex; }
-    .v2-footer-avatars img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); margin-left: -10px; }
-    .v2-footer-avatars img:first-child { margin-left: 0; }
+    .v2-footer-avatars img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.85); margin-inline-start: -10px; }
+    .v2-footer-avatars img:first-child { margin-inline-start: 0; }
     .v2-footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-top: auto; padding-top: clamp(48px, 8vw, 120px); }
     .v2-footer-brand { font-weight: 700; font-size: clamp(44px, 5.5vw, 72px); letter-spacing: -0.03em; color: #FFFFFF; line-height: 1; display: flex; align-items: center; gap: 18px; }
     .v2-footer-brand .pipe { width: 6px; height: 0.85em; background: #FFFFFF; border-radius: 3px; opacity: 0.9; }
-    .v2-footer-contact { display: grid; gap: 8px; font-size: var(--txt-sm); text-align: right; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
+    .v2-footer-contact { display: grid; gap: 8px; font-size: var(--txt-sm); text-align: end; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
     .v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
-    @media (max-width: 700px) { .v2-footer-contact { text-align: left; } .v2-footer { margin: 12px; } }
+    @media (max-width: 700px) { .v2-footer-contact { text-align: start; } .v2-footer { margin: 12px; } }
 
     /* ---- reveals coreografiados ---- */
     @media (prefers-reduced-motion: no-preference) {
@@ -426,7 +426,7 @@
     @media (max-width: 1180px) {
       .v2-nav { gap: 12px; padding: 8px 8px 8px 20px; }
       .v2-nav-links, .v2-nav .v2-nav-cta { display: none; }
-      .v2-burger { display: flex; margin-left: auto; }
+      .v2-burger { display: flex; margin-inline-start: auto; }
       .v2-drawer { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 490; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); padding: 110px 32px 40px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; }
       .v2-drawer.open { opacity: 1; visibility: visible; transform: none; }
       /* :not(.v2-btn) es OBLIGATORIO. Sin él esta regla le gana en
@@ -803,7 +803,7 @@
     <div class="v2-footer-legal">
       <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
       <a href="privacidad.html">Privacidad y aviso médico</a>
-      <a href="https://drricardofrusso.com/" style="margin-left: auto;">Ver versión actual</a>
+      <a href="https://drricardofrusso.com/" style="margin-inline-start: auto;">Ver versión actual</a>
     </div>
   </footer>
 
