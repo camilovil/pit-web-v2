@@ -27,6 +27,12 @@
   <link rel="stylesheet" href="assets/css/pit-motion.css?v=2">
   <style>
     /* remap de tokens v2 (esta página no usa la nav pill: barra de aula propia) */
+    /* ESCALA TIPOGRÁFICA: los tamaños de esta página usan los 6 pasos
+       (--txt-2xs 11 / --txt-xs 13 / --txt-sm 15 / --txt-md 17 / --txt-lg 21 /
+       --txt-xl 24) que definen index.html y pit-v2.css. Van SIEMPRE con
+       fallback en px porque esta página no carga pit-v2.css y ahí los tokens
+       no existirían. Única excepción: el 34px del titular de la lección, que
+       es display y no parte de la escala de texto. */
     :root:root { --pit-ink: #000B33; --pit-ink-80: #1A2447; --pit-ink-60: #55616D; --pit-ink-40: #5F6C78; --pit-paper: #FFFFFF; --pit-paper-pure: #FFFFFF; --pit-radius: 16px; }
     .pit-btn { border-radius: 999px !important; }
     body { margin: 0; background: #FAFAF7; }
@@ -60,14 +66,14 @@
       </a>
       <span class="m-hide" style="display: flex; align-items: center; gap: 14px; min-width: 0;">
         <span class="pit-pipe pit-pipe--blue" style="display: inline-block; width: 4px; height: 28px; background: var(--pit-blue, #2563EB); border-radius: 2px;"></span>
-        <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;">Curso gratuito · Introducción a PIT</span>
+        <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;">Curso gratuito · Introducción a PIT</span>
       </span>
       <div style="margin-left: auto; display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
-        <span id="ci-progress-label" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); white-space: nowrap;">0/4 · 0%</span>
+        <span id="ci-progress-label" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; color: rgba(255,255,255,0.7); white-space: nowrap;">0/4 · 0%</span>
         <div class="m-bar" style="width: 160px; height: 6px; background: rgba(255,255,255,0.18); border-radius: 999px; overflow: hidden;">
           <div id="ci-progress-fill" style="height: 100%; background: #2563EB; border-radius: 999px; width: 0%; transition: width .3s ease;"></div>
         </div>
-        <a class="m-hide" href="index.html#contenido" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">← Volver al sitio</a>
+        <a class="m-hide" href="index.html#contenido" style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">← Volver al sitio</a>
       </div>
     </div>
   </header>
@@ -79,15 +85,15 @@
     <aside class="m-order2" style="border-right: 1px solid var(--pit-ink-10); background: var(--pit-paper-pure); align-self: stretch;">
       <div style="padding: 28px 24px 18px; border-bottom: 1px solid var(--pit-ink-10);">
         <p class="pit-eyebrow">Contenido del curso</p>
-        <h2 style="font-size: 21px; font-weight: 600; margin: 10px 0 6px;"><span class="hover-underline">Introducción a PIT</span></h2>
-        <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 0;">2 videos · 2 autoevaluaciones · gratis</p>
+        <h2 style="font-size: var(--txt-lg, 21px); font-weight: 600; margin: 10px 0 6px;"><span class="hover-underline">Introducción a PIT</span></h2>
+        <p style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 0;">2 videos · 2 autoevaluaciones · gratis</p>
       </div>
       <div id="ci-lessons" style="display: grid;"></div>
       <div id="ci-alldone" style="padding: 20px 24px; display: none;">
         <div style="background: var(--pit-blue-tint); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 16px 18px;">
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Curso completado</span>
-          <p style="font-size: 14px; line-height: 1.5; color: var(--pit-ink-60); margin: 8px 0 0;">¿Querés profundizar? El Módulo I (Lumbalgia y Rodilla) te espera.</p>
-          <a href="curso-modulo-1.html" style="display: inline-block; margin-top: 10px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Ver el curso completo →</a>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Curso completado</span>
+          <p style="font-size: var(--txt-sm, 15px); line-height: 1.5; color: var(--pit-ink-60); margin: 8px 0 0;">¿Querés profundizar? El Módulo I (Lumbalgia y Rodilla) te espera.</p>
+          <a href="curso-modulo-1.html" style="display: inline-block; margin-top: 10px; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase;">Ver el curso completo →</a>
         </div>
       </div>
     </aside>
@@ -175,15 +181,15 @@
       var row = document.createElement('div');
       row.style.cssText = 'display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 18px 24px; cursor: pointer; border-bottom: 1px solid var(--pit-ink-05); border-left: 3px solid ' +
         (isActive ? 'var(--pit-blue)' : 'transparent') + '; background: ' + (isActive ? 'var(--pit-blue-tint)' : 'transparent') + ';';
-      var numStyle = 'width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 12px; margin-top: 2px; ' +
+      var numStyle = 'width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); margin-top: 2px; ' +
         (isDone ? 'background: var(--pit-blue); color: #FFFFFF;'
           : 'border: 1px solid ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-20)') + '; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + ';');
       row.innerHTML =
         '<span style="' + numStyle + '">' + (isDone ? '✓' : String(i + 1).padStart(2, '0')) + '</span>' +
         '<span style="min-width: 0;">' +
-          '<span style="display: block; font-family: var(--pit-font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + '; margin-bottom: 4px;">' + (l.kind === 'video' ? 'Video' : 'Autoevaluación') + '</span>' +
-          '<span style="display: block; font-size: 15px; font-weight: 600; line-height: 1.3;">' + esc(l.title) + '</span>' +
-          '<span style="display: block; font-family: var(--pit-font-mono); font-size: 11px; color: var(--pit-ink-40); margin-top: 4px;">' + l.meta + '</span>' +
+          '<span style="display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: ' + (isActive ? 'var(--pit-blue)' : 'var(--pit-ink-40)') + '; margin-bottom: 4px;">' + (l.kind === 'video' ? 'Video' : 'Autoevaluación') + '</span>' +
+          '<span style="display: block; font-size: var(--txt-sm, 15px); font-weight: 600; line-height: 1.3;">' + esc(l.title) + '</span>' +
+          '<span style="display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); color: var(--pit-ink-40); margin-top: 4px;">' + l.meta + '</span>' +
         '</span>';
       row.addEventListener('click', function () { go(i); });
       el.appendChild(row);
@@ -194,10 +200,10 @@
     var a = state.active;
     var html = '<div style="display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; border-top: 1px solid var(--pit-ink-10); padding-top: 20px;">';
     html += a > 0
-      ? '<span data-go="' + (a - 1) + '" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); cursor: pointer;">← ' + esc(LESSONS[a - 1].title) + '</span>'
+      ? '<span data-go="' + (a - 1) + '" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); cursor: pointer;">← ' + esc(LESSONS[a - 1].title) + '</span>'
       : '<span></span>';
     if (a < LESSONS.length - 1) {
-      html += '<span data-go="' + (a + 1) + '" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; text-align: right;">' + esc(LESSONS[a + 1].title) + ' →</span>';
+      html += '<span data-go="' + (a + 1) + '" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; text-align: right;">' + esc(LESSONS[a + 1].title) + ' →</span>';
     }
     return html + '</div>';
   }
@@ -222,12 +228,12 @@
           '<span style="width: 84px; height: 84px; border-radius: 50%; background: var(--pit-blue); display: flex; align-items: center; justify-content: center; cursor: pointer;">' +
             '<span style="width: 0; height: 0; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 22px solid #FFFFFF; margin-left: 6px;"></span>' +
           '</span>' +
-          '<span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85);">' + cur.videoNote + '</span>' +
+          '<span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85);">' + cur.videoNote + '</span>' +
         '</div>' +
-        '<span style="position: absolute; right: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: 12px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.5); border-radius: var(--pit-radius); padding: 3px 8px;">' + cur.meta + '</span>' +
+        '<span style="position: absolute; right: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.5); border-radius: var(--pit-radius); padding: 3px 8px;">' + cur.meta + '</span>' +
       '</div>';
-      html += '<p style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--pit-ink-40); margin: 12px 0 0;">Reproductor listo: cuando tengas el archivo final (o el link de Vimeo/YouTube), se conecta acá.</p>';
-      html += '<p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 24px 0 0; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
+      html += '<p style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.04em; color: var(--pit-ink-40); margin: 12px 0 0;">Reproductor listo: cuando tengas el archivo final (o el link de Vimeo/YouTube), se conecta acá.</p>';
+      html += '<p style="font-size: var(--txt-md, 17px); line-height: 1.65; color: var(--pit-ink-60); margin: 24px 0 0; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
       html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 32px;">';
       if (!isDone) {
         html += '<button data-act="done" class="pit-btn pit-btn--primary" type="button">Marcar como completada →</button>';
@@ -240,14 +246,14 @@
       var qa = state.answers[a] || {};
       var submitted = !!state.submitted[a];
       var score = 0;
-      html += '<p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 28px; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
+      html += '<p style="font-size: var(--txt-md, 17px); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 28px; max-width: var(--pit-text-max);">' + esc(cur.desc) + '</p>';
       html += '<div style="display: grid; gap: 20px; max-width: 720px;">';
       cur.questions.forEach(function (q, qi) {
         var picked = qa[qi];
         if (submitted && picked === q.correct) score++;
         html += '<div style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 24px 26px;">';
-        html += '<span style="font-family: var(--pit-font-mono); font-size: 12px; color: var(--pit-blue);">PREGUNTA ' + (qi + 1) + ' DE ' + cur.questions.length + '</span>';
-        html += '<h3 style="font-size: 18px; font-weight: 600; line-height: 1.35; margin: 8px 0 16px;">' + esc(q.text) + '</h3>';
+        html += '<span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); color: var(--pit-blue);">PREGUNTA ' + (qi + 1) + ' DE ' + cur.questions.length + '</span>';
+        html += '<h3 style="font-size: var(--txt-md, 17px); font-weight: 600; line-height: 1.35; margin: 8px 0 16px;">' + esc(q.text) + '</h3>';
         html += '<div style="display: grid; gap: 10px;">';
         q.options.forEach(function (label, oi) {
           var isPicked = picked === oi;
@@ -260,9 +266,9 @@
             ? 'background: var(--pit-blue); color: #FFFFFF;'
             : 'border: 1px solid var(--pit-ink-20); color: var(--pit-ink-40);';
           html += '<div data-pick="' + qi + ':' + oi + '" style="display: flex; gap: 14px; align-items: center; padding: 13px 16px; border: 1px solid ' + border + '; border-radius: var(--pit-radius); background: ' + bg + '; cursor: ' + (submitted ? 'default' : 'pointer') + ';">' +
-            '<span style="flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: 12px; ' + letterStyle + '">' + String.fromCharCode(65 + oi) + '</span>' +
-            '<span style="font-size: 15px; line-height: 1.45;">' + esc(label) + '</span>' +
-            (tag ? '<span style="margin-left: auto; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: ' + tagColor + '; white-space: nowrap;">' + tag + '</span>' : '') +
+            '<span style="flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); ' + letterStyle + '">' + String.fromCharCode(65 + oi) + '</span>' +
+            '<span style="font-size: var(--txt-sm, 15px); line-height: 1.45;">' + esc(label) + '</span>' +
+            (tag ? '<span style="margin-left: auto; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.06em; text-transform: uppercase; color: ' + tagColor + '; white-space: nowrap;">' + tag + '</span>' : '') +
           '</div>';
         });
         html += '</div></div>';
@@ -273,21 +279,21 @@
       if (!submitted) {
         html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 28px;">';
         html += '<button data-act="submit" class="pit-btn pit-btn--primary" type="button">Corregir respuestas</button>';
-        html += '<span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">' + answeredCount + ' de ' + cur.questions.length + ' respondidas</span>';
+        html += '<span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; color: var(--pit-ink-40);">' + answeredCount + ' de ' + cur.questions.length + ' respondidas</span>';
         html += '</div>';
       } else {
         var passed = score >= 2;
         html += '<div style="margin-top: 28px; max-width: 720px; border-radius: var(--pit-radius); padding: 22px 26px; ' +
           (passed ? 'background: var(--pit-blue-tint); border: 1px solid var(--pit-blue);' : 'background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-20);') + '">';
-        html += '<span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: ' + (passed ? 'var(--pit-blue)' : 'var(--pit-ink-60)') + ';">' + (passed ? 'Autoevaluación aprobada' : 'Todavía no') + '</span>';
-        html += '<p style="font-size: 16px; font-weight: 600; margin: 8px 0 4px;">' + score + ' de ' + cur.questions.length + ' correctas</p>';
-        html += '<p style="font-size: 14px; line-height: 1.55; color: var(--pit-ink-60); margin: 0;">' +
+        html += '<span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: ' + (passed ? 'var(--pit-blue)' : 'var(--pit-ink-60)') + ';">' + (passed ? 'Autoevaluación aprobada' : 'Todavía no') + '</span>';
+        html += '<p style="font-size: var(--txt-md, 17px); font-weight: 600; margin: 8px 0 4px;">' + score + ' de ' + cur.questions.length + ' correctas</p>';
+        html += '<p style="font-size: var(--txt-sm, 15px); line-height: 1.55; color: var(--pit-ink-60); margin: 0;">' +
           (passed ? 'Quedó registrada como completada. Podés seguir con la próxima lección.' : 'Repasá el video correspondiente y volvé a intentarlo — no hay límite de intentos.') + '</p>';
         html += '<div style="display: flex; gap: 16px; align-items: center; margin-top: 18px;">';
         if (passed && a < LESSONS.length - 1) {
           html += '<button data-go="' + (a + 1) + '" class="pit-btn pit-btn--primary" type="button">Siguiente lección →</button>';
         }
-        html += '<span data-act="retry" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Reintentar</span>';
+        html += '<span data-act="retry" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); cursor: pointer; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Reintentar</span>';
         html += '</div></div>';
       }
     }

@@ -31,8 +31,8 @@
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
-    .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
-    .foro-filter { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
+    .ph span { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
+    .foro-filter { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
     .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
     .foro-filter.on { background: var(--pit-ink); border-color: var(--pit-ink); color: #FFFFFF; }
     .foro-row:hover { color: var(--pit-ink); }
@@ -47,7 +47,7 @@
     #foro-q[aria-invalid="true"], #foro-email[aria-invalid="true"] { border-color: var(--pit-error-on-dark); }
     /* "Enviar otra pregunta" era un <span> con cursor:pointer: parecía control
        pero no recibía foco ni respondía a Enter. */
-    .foro-linkbtn { font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); background: none; border: none; border-bottom: 1px solid var(--pit-ink-20); padding: 0 0 2px; cursor: pointer; }
+    .foro-linkbtn { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); background: none; border: none; border-bottom: 1px solid var(--pit-ink-20); padding: 0 0 2px; cursor: pointer; }
     .foro-linkbtn:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; }
   </style>
 </head>
@@ -115,7 +115,7 @@
         <button type="button" class="foro-filter" data-fcat="evidencia">Evidencia</button>
         <button type="button" class="foro-filter" data-fcat="consejos">Consejos</button>
         <button type="button" class="foro-filter" data-fcat="noticias">Noticias</button>
-        <span style="margin-inline-start: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
+        <span style="margin-inline-start: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
           <span>Audiencia</span>
           <button type="button" class="foro-filter" data-faud="pacientes">Pacientes</button>
           <button type="button" class="foro-filter" data-faud="profesionales">Profesionales</button>
@@ -133,13 +133,13 @@
           <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
             <span class="pit-chip pit-chip--blue">Preguntas y respuestas</span>
             <span class="pit-chip">Pacientes</span>
-            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">SEMANA 28 · 09 JUL 2026</span>
+            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">SEMANA 28 · 09 JUL 2026</span>
           </div>
           <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?</span></h2>
-          <p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">Una pregunta muy frecuente en el consultorio. Ricardo explica la diferencia entre infiltrar la articulación y tratar el nervio sensibilizado — y por qué no son excluyentes.</p>
+          <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">Una pregunta muy frecuente en el consultorio. Ricardo explica la diferencia entre infiltrar la articulación y tratar el nervio sensibilizado — y por qué no son excluyentes.</p>
           <div style="display: flex; gap: 20px; align-items: center;">
             <a class="pit-btn pit-btn--primary" href="foro/corticoides-y-pit.html">Leer la respuesta →</a>
-            <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">5 MIN DE LECTURA</span>
+            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">5 MIN DE LECTURA</span>
           </div>
         </div>
         <img class="m-first" src="/img/DSC_0086.jpg" alt="Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?" style="width: 100%; height: 100%; object-fit: cover; display: block;">
@@ -155,54 +155,54 @@
           <p class="pit-eyebrow">Publicaciones anteriores</p>
           <h2 class="pit-section-title" style="margin-top: 12px;"><span class="hover-underline">El archivo del foro.</span></h2>
         </div>
-        <span id="foro-count" style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">8 publicaciones</span>
+        <span id="foro-count" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">8 publicaciones</span>
       </div>
 
       <div id="foro-archivo" class="pit-stagger" style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
         <a href="foro/gonalgia-corredor-52.html" class="m-list foro-row" data-cat="caso" data-aud="profesionales" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S27 · 03 JUL</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
-          <span style="font-size: 17px; font-weight: 600;">Gonalgia bilateral en corredor de 52 años: mapeo y evolución en 5 sesiones</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S27 · 03 JUL</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">Gonalgia bilateral en corredor de 52 años: mapeo y evolución en 5 sesiones</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
         <a href="foro/congreso-medicina-familiar-2026.html" class="m-list foro-row" data-cat="noticias" data-aud="todos" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S26b · 30 JUN</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Noticias · Para todos</span>
-          <span style="font-size: 17px; font-weight: 600;">PIT en el Congreso de Medicina Familiar 2026: qué se presentó</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S26b · 30 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Noticias · Para todos</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">PIT en el Congreso de Medicina Familiar 2026: qué se presentó</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
         <a href="foro/dia-despues-sesion.html" class="m-list foro-row" data-cat="consejos" data-aud="pacientes" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S26 · 26 JUN</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Consejos · Pacientes</span>
-          <span style="font-size: 17px; font-weight: 600;">Qué hacer (y qué no) el día después de una sesión de PIT</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S26 · 26 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Consejos · Pacientes</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">Qué hacer (y qué no) el día después de una sesión de PIT</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
         <a href="foro/revision-glucosa-perineural.html" class="m-list foro-row" data-cat="evidencia" data-aud="profesionales" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S25 · 19 JUN</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Evidencia · Prof.</span>
-          <span style="font-size: 17px; font-weight: 600;">Nueva revisión sistemática sobre glucosa perineural: qué dice y qué no dice</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S25 · 19 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Evidencia · Prof.</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">Nueva revisión sistemática sobre glucosa perineural: qué dice y qué no dice</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
         <a href="foro/cuantas-sesiones.html" class="m-list foro-row" data-cat="pyr" data-aud="pacientes" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S24 · 12 JUN</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
-          <span style="font-size: 17px; font-weight: 600;">¿Cuántas sesiones necesito antes de saber si PIT funciona para mí?</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S24 · 12 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">¿Cuántas sesiones necesito antes de saber si PIT funciona para mí?</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
         <a href="foro/cervicalgia-latigazo.html" class="m-list foro-row" data-cat="caso" data-aud="profesionales" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S23 · 05 JUN</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
-          <span style="font-size: 17px; font-weight: 600;">Cervicalgia post-latigazo: abordaje del plexo cervical superficial</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S23 · 05 JUN</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Caso clínico · Prof.</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">Cervicalgia post-latigazo: abordaje del plexo cervical superficial</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
         <a href="foro/pit-artrosis-avanzada.html" class="m-list foro-row" data-cat="pyr" data-aud="pacientes" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--pit-ink-40);">S22 · 29 MAY</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
-          <span style="font-size: 17px; font-weight: 600;">¿PIT sirve si ya tengo artrosis avanzada?</span>
-          <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Leer →</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">S22 · 29 MAY</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">P. y R. · Pacientes</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">¿PIT sirve si ya tengo artrosis avanzada?</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>
       </div>
-      <p id="foro-empty" style="display: none; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); padding: 28px 8px;">No hay publicaciones con este filtro todavía.</p>
+      <p id="foro-empty" style="display: none; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); padding: 28px 8px;">No hay publicaciones con este filtro todavía.</p>
     </div>
   </section>
 
@@ -212,7 +212,7 @@
       <div>
         <p class="pit-eyebrow">Participá</p>
         <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 14px; color: var(--pit-paper);"><span class="hover-underline">Enviá tu pregunta al foro.</span></h2>
-        <p style="font-size: 16px; line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Ricardo selecciona y responde preguntas cada semana. Todas se revisan antes de publicarse y se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.</p>
+        <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Ricardo selecciona y responde preguntas cada semana. Todas se revisan antes de publicarse y se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.</p>
         <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
           <span class="pit-chip pit-chip--ghost">Sin registro</span>
           <span class="pit-chip pit-chip--ghost">Anónimas</span>
@@ -221,18 +221,18 @@
       </div>
       <form id="foro-form" style="display: grid; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 32px;">
         <div style="display: flex; gap: 10px;">
-          <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="paciente" checked style="accent-color: #2563EB;"> Soy paciente</label>
-          <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="profesional" style="accent-color: #2563EB;"> Soy profesional</label>
+          <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="paciente" checked style="accent-color: #2563EB;"> Soy paciente</label>
+          <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="profesional" style="accent-color: #2563EB;"> Soy profesional</label>
         </div>
         <!-- SIN font-size inline: lo maneja la regla de pit-v2.css (16px en
              mobile para que iOS Safari no haga zoom, compacto arriba de 640px).
              Un tamaño inline le ganaría por especificidad a esa regla. -->
         <textarea id="foro-q" placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
         <div>
-          <label style="display: block; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); margin-bottom: 8px;">Tu email — te avisamos cuando Ricardo responda</label>
+          <label style="display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); margin-bottom: 8px;">Tu email — te avisamos cuando Ricardo responda</label>
           <input id="foro-email" type="email" placeholder="tu@email.com" style="width: 100%; box-sizing: border-box; font-family: var(--pit-font-mono); padding: 13px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none;">
         </div>
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.55; color: var(--pit-ink-20); cursor: pointer;">
+        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: var(--txt-xs); line-height: 1.55; color: var(--pit-ink-20); cursor: pointer;">
           <input id="foro-nl" type="checkbox" checked style="accent-color: #2563EB; margin-top: 2px;">
           <span>Sumarme también al newsletter: novedades del método y del foro, sin spam. Te podés dar de baja cuando quieras.</span>
         </label>
@@ -242,15 +242,15 @@
         <!-- role="alert": el mensaje se anuncia al escribirse. Fuera de la fila
              del botón para poder ocupar el ancho completo sin empujarlo. -->
         <span id="foro-hint" class="foro-hint" role="alert"></span>
-        <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-40); margin: 4px 0 0;">Tu email no se publica ni se comparte: se usa solo para avisarte de la respuesta<span id="foro-nlnote"> y enviarte el newsletter</span>. Las respuestas del foro son informativas y no reemplazan una consulta médica.</p>
+        <p style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-40); margin: 4px 0 0;">Tu email no se publica ni se comparte: se usa solo para avisarte de la respuesta<span id="foro-nlnote"> y enviarte el newsletter</span>. Las respuestas del foro son informativas y no reemplazan una consulta médica.</p>
       </form>
       <!-- tabindex="-1": al enviarse, el form desaparece y el foco quedaría en
            el <body>. Se le pasa el foco a este panel. -->
       <div id="foro-ok" tabindex="-1" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 40px 36px;">
-        <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 20px;">✓</span>
-        <h3 style="font-size: 26px; font-weight: 600; margin: 18px 0 10px; color: var(--pit-paper);">Pregunta recibida.</h3>
-        <p style="font-size: 15px; line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Pasa a moderación y, si Ricardo la selecciona, se publica sin tus datos. Te va a llegar un aviso a <span id="foro-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-paper);"></span> cuando esté la respuesta.</p>
-        <p id="foro-sent-nl" style="display: none; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--pit-blue); margin: 16px 0 0;">✓ QUEDASTE SUSCRIPTO AL NEWSLETTER</p>
+        <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: var(--txt-lg);">✓</span>
+        <h3 style="font-size: var(--txt-xl); font-weight: 600; margin: 18px 0 10px; color: var(--pit-paper);">Pregunta recibida.</h3>
+        <p style="font-size: var(--txt-sm); line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Pasa a moderación y, si Ricardo la selecciona, se publica sin tus datos. Te va a llegar un aviso a <span id="foro-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-paper);"></span> cuando esté la respuesta.</p>
+        <p id="foro-sent-nl" style="display: none; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.04em; color: var(--pit-blue); margin: 16px 0 0;">✓ QUEDASTE SUSCRIPTO AL NEWSLETTER</p>
         <button type="button" id="foro-reset" class="foro-linkbtn" style="margin-top: 22px;">Enviar otra pregunta →</button>
       </div>
     </div>
