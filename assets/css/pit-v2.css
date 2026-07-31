@@ -50,6 +50,17 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   --pit-paper: #FFFFFF;
   --pit-paper-pure: #FFFFFF;
   --pit-radius: 16px;
+
+  /* ---- color de rol: ERROR ----
+     Token propio, NO uno prestado. Antes los mensajes de error de los
+     formularios usaban --pit-ink-40 (el gris del texto de ayuda): un error
+     pintado del mismo color que una aclaración no se lee como error.
+     --pit-error va sobre fondo claro (6.5:1 sobre blanco) y
+     --pit-error-on-dark sobre el navy de las secciones oscuras, donde el rojo
+     saturado cae por debajo de 4.5:1 (8.4:1 sobre #000B33).
+     Definidos también en la copia inline de index.html. */
+  --pit-error: #B3261E;
+  --pit-error-on-dark: #FF8A80;
 }
 body { padding-top: 84px; background: #FFFFFF; }
 
@@ -65,6 +76,34 @@ body { padding-top: 84px; background: #FFFFFF; }
 
 /* los botones del DS heredan la forma pill */
 .pit-btn { border-radius: 999px !important; }
+
+/* ---- salto de navegación ----
+   ATENCIÓN: existe DOS veces (esta copia y la inline de index.html).
+   Fuera de pantalla hasta recibir foco. Se saca con translate y no con
+   display/visibility porque un elemento así ocultado no es enfocable y el
+   link dejaría de existir para el teclado, que es justamente su público.
+   z-index 600 > 500 de la nav pill: si no, la barra fija lo tapa. */
+.v2-skip {
+  position: fixed;
+  top: 10px;
+  inset-inline-start: 10px;
+  z-index: 600;
+  background: var(--v2-navy);
+  color: #FFFFFF;
+  font-family: var(--pit-font-sans);
+  font-weight: 600;
+  font-size: var(--txt-sm, 15px);
+  line-height: 1;
+  padding: 15px 22px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 11, 51, 0.25);
+  transform: translateY(-200%);
+}
+.v2-skip:focus { transform: none; color: #FFFFFF; }
+.v2-skip:hover { color: #FFFFFF; }
+/* Sin outline azul propio: el fondo navy ya lo destaca y el azul sobre navy
+   casi no se ve. El offset blanco sí. */
+.v2-skip:focus-visible { outline-color: #FFFFFF; }
 
 /* ---- nav pill flotante ---- */
 /* white-space:nowrap en los hijos de texto: el texto nunca se envuelve ni se

@@ -183,6 +183,11 @@ function renderPost(post, posts, idx) {
 
 ${renderNav({ active: 'foro', prefix: pre })}
 
+  <!-- <main id="pit-main">: destino del link "Saltar al contenido" de nav.js,
+       tiene que existir en las 18 páginas. tabindex="-1" para que el salto
+       mueva el foco y no solo el scroll. -->
+  <main id="pit-main" tabindex="-1">
+
   <!-- breadcrumb -->
   <div style="border-bottom: 1px solid var(--pit-ink-10); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto; display: flex; align-items: center; gap: 20px; padding: 12px 24px; flex-wrap: wrap;">
@@ -258,8 +263,10 @@ ${renderNav({ active: 'foro', prefix: pre })}
 
   <!-- descargo -->
   <div style="background: var(--pit-ink-05); padding: 18px 24px;">
-    <p style="max-width: var(--pit-content-max); margin: 0 auto; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; line-height: 1.8; text-transform: uppercase; color: var(--pit-ink-40);">Este contenido es informativo y no reemplaza una consulta médica. Cada caso requiere evaluación profesional individual.</p>
+    <p style="max-width: var(--pit-content-max); margin: 0 auto; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; line-height: 1.8; text-transform: uppercase; color: var(--pit-ink-40);">Este contenido es informativo y no reemplaza una consulta médica. Cada caso requiere evaluación profesional individual.</p>
   </div>
+
+  </main>
 
 ${FOOTER(pre)}
 
@@ -292,7 +299,19 @@ function renderIndex(posts) {
     .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
     .foro-filter.on { background: var(--pit-ink); border-color: var(--pit-ink); color: #FFFFFF; }
     .foro-row:hover { color: var(--pit-ink); }
-    .foro-row.hide { display: none !important; }`;
+    .foro-row.hide { display: none !important; }
+    /* El error del form del foro va sobre el navy de la sección: el rojo del
+       token claro caería a ~2:1 ahí, así que usa la variante --pit-error-on-dark
+       (8.4:1 sobre #000B33). El uppercase vive en el CSS y no en el texto: así
+       el mensaje se escribe en caso natural y un lector de pantalla no lo
+       deletrea letra por letra. */
+    .foro-hint { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; line-height: 1.5; text-transform: uppercase; color: var(--pit-error-on-dark); }
+    .foro-hint:empty { display: none; }
+    #foro-q[aria-invalid="true"], #foro-email[aria-invalid="true"] { border-color: var(--pit-error-on-dark); }
+    /* "Enviar otra pregunta" era un <span> con cursor:pointer: parecía control
+       pero no recibía foco ni respondía a Enter. */
+    .foro-linkbtn { font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); background: none; border: none; border-bottom: 1px solid var(--pit-ink-20); padding: 0 0 2px; cursor: pointer; }
+    .foro-linkbtn:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; }`;
   // Nota: el resto del hover de .foro-row (fondo, lift, sombra) vive en
   // assets/css/pit-motion.css — una sola fuente, y ahí respeta
   // prefers-reduced-motion. Acá solo queda el color del texto.
@@ -302,6 +321,9 @@ function renderIndex(posts) {
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
 ${renderNav({ active: 'foro', prefix: pre })}
+
+  <!-- <main id="pit-main">: destino del link "Saltar al contenido" de nav.js. -->
+  <main id="pit-main" tabindex="-1">
 
   <!-- ============ HERO ============ -->
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
@@ -395,19 +417,25 @@ ${rows}
         </label>
         <div style="display: flex; gap: 16px; align-items: center;">
           <button type="submit" class="pit-btn pit-btn--white">Enviar pregunta</button>
-          <span id="foro-hint" style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--pit-ink-40);"></span>
         </div>
+        <!-- role="alert": el mensaje se anuncia al escribirse. Fuera de la fila
+             del botón para poder ocupar el ancho completo sin empujarlo. -->
+        <span id="foro-hint" class="foro-hint" role="alert"></span>
         <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-40); margin: 4px 0 0;">Tu email no se publica ni se comparte: se usa solo para avisarte de la respuesta<span id="foro-nlnote"> y enviarte el newsletter</span>. Las respuestas del foro son informativas y no reemplazan una consulta médica.</p>
       </form>
-      <div id="foro-ok" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 40px 36px;">
+      <!-- tabindex="-1": al enviarse, el form desaparece y el foco quedaría en
+           el <body>. Se le pasa el foco a este panel. -->
+      <div id="foro-ok" tabindex="-1" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 40px 36px;">
         <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 20px;">✓</span>
         <h3 style="font-size: 26px; font-weight: 600; margin: 18px 0 10px; color: var(--pit-paper);">Pregunta recibida.</h3>
         <p style="font-size: 15px; line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Pasa a moderación y, si Ricardo la selecciona, se publica sin tus datos. Te va a llegar un aviso a <span id="foro-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-paper);"></span> cuando esté la respuesta.</p>
         <p id="foro-sent-nl" style="display: none; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--pit-blue); margin: 16px 0 0;">✓ QUEDASTE SUSCRIPTO AL NEWSLETTER</p>
-        <span id="foro-reset" style="display: inline-block; margin-top: 22px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); cursor: pointer; border-bottom: 1px solid var(--pit-ink-80); padding-bottom: 2px;">Enviar otra pregunta →</span>
+        <button type="button" id="foro-reset" class="foro-linkbtn" style="margin-top: 22px;">Enviar otra pregunta →</button>
       </div>
     </div>
   </section>
+
+  </main>
 
 ${FOOTER(pre)}
 
@@ -462,13 +490,39 @@ ${FOOTER(pre)}
     var hint = document.getElementById('foro-hint');
     var nlnote = document.getElementById('foro-nlnote');
     var btn = form.querySelector('button[type="submit"]');
+    var campos = [q, email];
     nl.addEventListener('change', function () { nlnote.style.display = nl.checked ? '' : 'none'; });
+
+    // Un solo hint para los dos campos: se apunta con aria-describedby SOLO al
+    // que falló y se le mueve el foco. Antes se escribía el texto y nada más,
+    // así que quien navega con teclado no sabía a qué campo volver.
+    function limpiarError() {
+      hint.textContent = '';
+      campos.forEach(function (c) {
+        c.removeAttribute('aria-invalid');
+        c.removeAttribute('aria-describedby');
+      });
+    }
+    function marcarError(campo, mensaje) {
+      limpiarError();
+      hint.textContent = mensaje;
+      if (campo) {
+        campo.setAttribute('aria-invalid', 'true');
+        campo.setAttribute('aria-describedby', 'foro-hint');
+        campo.focus();
+      }
+    }
+    campos.forEach(function (c) {
+      c.addEventListener('input', function () { if (c.getAttribute('aria-invalid')) limpiarError(); });
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var emailOk = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.value.trim());
-      if (!q.value.trim()) { hint.textContent = 'ESCRIBÍ TU PREGUNTA'; return; }
-      if (!emailOk) { hint.textContent = 'FALTA UN EMAIL VÁLIDO'; return; }
-      hint.textContent = '';
+      // Caso natural (el uppercase lo pone el CSS) y redactado como instrucción.
+      if (!q.value.trim()) { marcarError(q, 'Escribí tu pregunta antes de enviar'); return; }
+      if (!emailOk) { marcarError(email, 'Revisá el email: es adonde te avisamos la respuesta'); return; }
+      limpiarError();
       var aud = form.querySelector('input[name="audiencia"]:checked');
       var payload = {
         _subject: 'Foro PIT — nueva pregunta',
@@ -483,17 +537,20 @@ ${FOOTER(pre)}
       var send = window.pitSubmit ? window.pitSubmit('foro', payload) : Promise.resolve({ ok: true, demo: true });
       send.then(function (r) {
         btn.disabled = false; btn.textContent = 'Enviar pregunta';
-        if (!r.ok) { hint.textContent = 'NO SE PUDO ENVIAR — PROBÁ DE NUEVO'; return; }
+        if (!r.ok) { marcarError(null, 'No se pudo enviar. Probá de nuevo en un momento'); btn.focus(); return; }
         document.getElementById('foro-sent-email').textContent = sentEmail;
         document.getElementById('foro-sent-nl').style.display = wasNl ? '' : 'none';
         form.style.display = 'none';
         ok.style.display = 'block';
+        ok.focus();   // el form desaparece: el foco tiene que ir a algún lado
         form.reset(); nlnote.style.display = '';
       });
     });
     document.getElementById('foro-reset').addEventListener('click', function () {
       ok.style.display = 'none';
       form.style.display = 'grid';
+      limpiarError();
+      q.focus();
     });
   })();
 </script>

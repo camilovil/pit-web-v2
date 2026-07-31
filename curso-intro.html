@@ -32,9 +32,23 @@
     body { margin: 0; background: #FAFAF7; }
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }
+    /* Salto de navegación — tercera copia del componente: esta página no carga
+       pit-v2.css. Por eso los tokens llevan fallback (ver nota del CTA en
+       _build/nav.js). Fuera de pantalla hasta recibir foco; no se oculta con
+       display/visibility porque así dejaría de ser enfocable, que es
+       justamente para quien existe. z-index 600 > 50 de la barra sticky. */
+    .v2-skip { position: fixed; top: 10px; inset-inline-start: 10px; z-index: 600; background: var(--pit-ink, #000B33); color: #FFFFFF; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm, 15px); line-height: 1; padding: 15px 22px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,11,51,0.25); transform: translateY(-200%); }
+    .v2-skip:focus { transform: none; color: #FFFFFF; }
+    .v2-skip:hover { color: #FFFFFF; }
+    .v2-skip:focus-visible { outline-color: #FFFFFF; }
   </style>
 </head>
 <body>
+
+<!-- Esta página no usa la nav pill (tiene barra de aula propia), así que el
+     salto de navegación va a mano y apunta a #ci-main, su <main>. El resto del
+     sitio lo recibe desde _build/nav.js apuntando a #pit-main. -->
+<a class="v2-skip" href="#ci-main">Saltar al contenido</a>
 
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper); min-height: 100vh; display: flex; flex-direction: column;">
 
@@ -79,7 +93,9 @@
     </aside>
 
     <!-- ---- Contenido de la lección ---- -->
-    <main id="ci-main" class="m-pad2" style="padding: 36px 48px 64px; min-width: 0;"></main>
+    <!-- tabindex="-1": destino del salto de navegación y también del foco al
+         cambiar de lección (el contenido se reemplaza entero por JS). -->
+    <main id="ci-main" class="m-pad2" tabindex="-1" style="padding: 36px 48px 64px; min-width: 0;"></main>
   </div>
 </div>
 

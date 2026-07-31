@@ -137,6 +137,25 @@ function replaceNavBlock(html, navHtml) {
   return html.replace(re, () => navHtml.trim());   // función replacer: evita interpretar $ en navHtml
 }
 
+// Envuelve el contenido de una página raw en <main id="pit-main">: es el
+// destino del link "Saltar al contenido" que emite _build/nav.js, y tiene que
+// existir en LAS 18 páginas. En raw el contenido va entre el bloque de nav y
+// el <footer class="v2-footer">, así que se abre después de uno y se cierra
+// antes del otro. tabindex="-1" es necesario: sin él, saltar al ancla mueve el
+// scroll pero no el foco, y la próxima tabulada vuelve al principio del nav.
+function wrapMain(html) {
+  const footIdx = html.indexOf('<footer class="v2-footer">');
+  if (footIdx === -1) throw new Error('wrapMain: no se encontró <footer class="v2-footer"> en fuente raw');
+  const navEnd = html.indexOf('</nav>', html.indexOf('<nav class="v2-drawer"'));
+  if (navEnd === -1) throw new Error('wrapMain: no se encontró el cierre del drawer en fuente raw');
+  const after = navEnd + '</nav>'.length;
+  return html.slice(0, after)
+    + '\n\n  <main id="pit-main" tabindex="-1">\n'
+    + html.slice(after, footIdx).replace(/\s+$/, '')
+    + '\n  </main>\n\n  '
+    + html.slice(footIdx);
+}
+
 const BASE_PAGE_CSS = `    body { margin: 0; background: #FFFFFF; }
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }`;
@@ -245,14 +264,16 @@ for (const p of PAGES) {
     if (p.mode === 'raw') {
       const ex = extract(raw);
       styles = ex.styles;
-      body = replaceNavBlock(ex.body, renderNav({ active: p.active }));
+      body = wrapMain(replaceNavBlock(ex.body, renderNav({ active: p.active })));
     } else {
       // core: extraer <style data-page> opcional y envolver con chrome común
       let core = raw;
       const pageStyle = core.match(/<style data-page>([\s\S]*?)<\/style>/);
       styles = BASE_PAGE_CSS + (pageStyle ? '\n' + pageStyle[1] : '');
       if (pageStyle) core = core.replace(pageStyle[0], '');
-      body = `<div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">\n\n${renderNav({ active: p.active })}\n\n  ${core.trim()}\n\n${FOOTER}\n\n</div>`;
+      // <main id="pit-main">: destino del link "Saltar al contenido" de nav.js.
+      // tabindex="-1" para que el salto mueva el foco y no solo el scroll.
+      body = `<div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">\n\n${renderNav({ active: p.active })}\n\n  <main id="pit-main" tabindex="-1">\n  ${core.trim()}\n  </main>\n\n${FOOTER}\n\n</div>`;
     }
 
     body = replaceImports(body, warnings);

@@ -60,18 +60,29 @@
 
     var fab = document.createElement('button');
     fab.className = 'pitchat-fab';
+    fab.type = 'button';
     fab.setAttribute('aria-label', 'Abrir asistente sobre PIT');
-    fab.innerHTML = '<span class="pitchat-fab-dot"></span><span class="pitchat-fab-label">Preguntale a PIT</span>';
+    fab.setAttribute('aria-expanded', 'false');
+    fab.setAttribute('aria-controls', 'pitchat-panel');
+    fab.innerHTML = '<span class="pitchat-fab-dot" aria-hidden="true"></span><span class="pitchat-fab-label">Preguntale a PIT</span>';
 
     var panel = document.createElement('div');
     panel.className = 'pitchat-panel';
+    panel.id = 'pitchat-panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-label', 'Asistente PIT');
     panel.innerHTML =
       '<div class="pitchat-head">' +
-        '<span class="pitchat-head-pipe"></span>' +
+        '<span class="pitchat-head-pipe" aria-hidden="true"></span>' +
         '<span class="pitchat-head-title">Asistente PIT<small>IA · Respuestas educativas</small></span>' +
-        '<button class="pitchat-close" aria-label="Cerrar">×</button>' +
+        '<button class="pitchat-close" type="button" aria-label="Cerrar el asistente"><span aria-hidden="true">×</span></button>' +
       '</div>' +
-      '<div class="pitchat-msgs"></div>' +
+      // role="log" + aria-live="polite": las respuestas del bot se agregan al
+      // DOM sin ningún aviso. Sin región viva, quien usa lector de pantalla
+      // escribe la pregunta y no se entera nunca de que llegó la respuesta.
+      // aria-relevant="additions" para que solo se anuncie lo nuevo (el
+      // "Escribiendo…" se borra al llegar la respuesta y no debe releerse).
+      '<div class="pitchat-msgs" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversación con el asistente"></div>' +
       '<div class="pitchat-sugs"></div>' +
       '<form class="pitchat-form">' +
         '<input class="pitchat-input" type="text" placeholder="Preguntá sobre PIT…" maxlength="400">' +
@@ -163,16 +174,32 @@
       send(v);
     });
 
+    // El estado abierto/cerrado se refleja en aria-expanded del FAB: sin eso el
+    // botón se anuncia igual esté el panel abierto o cerrado.
+    function setOpen(open) {
+      panel.classList.toggle('open', open);
+      fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+      fab.setAttribute('aria-label', open ? 'Cerrar asistente sobre PIT' : 'Abrir asistente sobre PIT');
+    }
+    function close() {
+      setOpen(false);
+      fab.focus();   // al cerrar, el foco vuelve al botón que abrió el panel
+    }
+
     fab.addEventListener('click', function () {
-      var open = panel.classList.toggle('open');
+      var open = !panel.classList.contains('open');
+      setOpen(open);
       if (open && !msgsEl.children.length) {
         add('bot', 'Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?');
         renderSugs();
       }
       if (open) input.focus();
     });
-    panel.querySelector('.pitchat-close').addEventListener('click', function () {
-      panel.classList.remove('open');
+    panel.querySelector('.pitchat-close').addEventListener('click', close);
+    // Escape cierra: es un panel flotante que tapa contenido y hasta ahora la
+    // única forma de salir era encontrar la × con el mouse o con Tab.
+    panel.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.key === 'Esc') { e.stopPropagation(); close(); }
     });
   }
 

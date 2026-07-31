@@ -39,6 +39,7 @@
 
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
+  <a class="v2-skip" href="#pit-main">Saltar al contenido</a>
   <header class="v2-nav">
     <a href="../index.html" style="text-transform: uppercase; color: inherit; display: flex;" aria-label="Dr. Ricardo D. Frusso — inicio"><span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span></a>
     <nav class="v2-nav-links">
@@ -57,7 +58,12 @@
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
     </span>
-    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" type="button"><span></span><span></span><span></span></button>
+    <!-- aria-controls + aria-expanded: el burger abre y cierra #v2-drawer, pero
+         se anunciaba siempre igual ("Abrir menú") estuviera abierto o cerrado.
+         El JS que alterna la clase .open alterna también estos dos atributos
+         y la etiqueta — está en assets/js/pit-v2.js Y, duplicado, inline en
+         index.html (la home no carga pit-v2.js). Si tocás uno, tocá el otro. -->
+    <button class="v2-burger" id="v2-burger" aria-label="Abrir menú" aria-controls="v2-drawer" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
   </header>
   <nav class="v2-drawer" id="v2-drawer">
     <a href="../que-es-pit.html">Qué es PIT</a>
@@ -73,6 +79,11 @@
       <button class="lang-btn" data-lang="en" type="button">EN</button>
     </span>
   </nav>
+
+  <!-- <main id="pit-main">: destino del link "Saltar al contenido" de nav.js,
+       tiene que existir en las 18 páginas. tabindex="-1" para que el salto
+       mueva el foco y no solo el scroll. -->
+  <main id="pit-main" tabindex="-1">
 
   <!-- breadcrumb -->
   <div style="border-bottom: 1px solid var(--pit-ink-10); background: var(--pit-paper);">
@@ -155,8 +166,10 @@
 
   <!-- descargo -->
   <div style="background: var(--pit-ink-05); padding: 18px 24px;">
-    <p style="max-width: var(--pit-content-max); margin: 0 auto; font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; line-height: 1.8; text-transform: uppercase; color: var(--pit-ink-40);">Este contenido es informativo y no reemplaza una consulta médica. Cada caso requiere evaluación profesional individual.</p>
+    <p style="max-width: var(--pit-content-max); margin: 0 auto; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; line-height: 1.8; text-transform: uppercase; color: var(--pit-ink-40);">Este contenido es informativo y no reemplaza una consulta médica. Cada caso requiere evaluación profesional individual.</p>
   </div>
+
+  </main>
 
   <footer class="v2-footer">
     <div class="v2-footer-top">
