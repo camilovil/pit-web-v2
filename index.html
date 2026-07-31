@@ -358,7 +358,9 @@
     .v2-testi-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--v2-navy); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); flex-shrink: 0; }
     .v2-testi-name { font-weight: 600; font-size: var(--txt-xs); }
     .v2-testi-role { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate); }
-    .v2-testi-ph { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-blue); background: rgba(37,99,235,0.08); border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 10px; }
+    /* Azul PROFUNDO, no el azul de acción: sobre su propio tinte el #2563EB
+       daba 4.2:1 a 11px, por debajo del mínimo. #1E3A8A da 9.1:1. */
+    .v2-testi-ph { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: #1E3A8A; background: rgba(37,99,235,0.08); border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 10px; }
     /* fallback estático: mobile y usuarios con animaciones reducidas */
     @media (max-width: 1050px), (prefers-reduced-motion: reduce) {
       .v2-testi-cards { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }

@@ -296,10 +296,10 @@ function renderIndex(posts) {
         </a>`).join('\n');
 
   const catChips = [['todo', 'Todo'], ['pyr', 'Preguntas y respuestas'], ['caso', 'Casos clínicos'], ['evidencia', 'Evidencia'], ['consejos', 'Consejos'], ['noticias', 'Noticias']]
-    .map(([k, label]) => `<button type="button" class="foro-filter${k === 'todo' ? ' on' : ''}" data-fcat="${k}">${label}</button>`)
+    .map(([k, label]) => `<button type="button" class="foro-filter${k === 'todo' ? ' on' : ''}" data-fcat="${k}" aria-pressed="${k === 'todo'}">${label}</button>`)
     .join('\n        ');
   const audChips = [['pacientes', 'Pacientes'], ['profesionales', 'Profesionales']]
-    .map(([k, label]) => `<button type="button" class="foro-filter" data-faud="${k}">${label}</button>`)
+    .map(([k, label]) => `<button type="button" class="foro-filter" data-faud="${k}" aria-pressed="false">${label}</button>`)
     .join('\n          ');
 
   const filterCss = `    .foro-filter { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
@@ -318,7 +318,13 @@ function renderIndex(posts) {
     /* "Enviar otra pregunta" era un <span> con cursor:pointer: parecía control
        pero no recibía foco ni respondía a Enter. */
     .foro-linkbtn { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); background: none; border: none; border-bottom: 1px solid var(--pit-ink-20); padding: 0 0 2px; cursor: pointer; }
-    .foro-linkbtn:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; }`;
+    .foro-linkbtn:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; }
+    /* Etiquetas y notas del form, que vive sobre el navy de la sección.
+       Antes usaban --pit-ink-40 (#5F6C78), el gris pensado para fondo claro:
+       sobre #000B33 daba 3.3:1, por debajo del mínimo. --pit-ink-20 da 10.4:1
+       y es el mismo gris claro que ya usa el cuerpo de esa sección. */
+    .foro-label { display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-20); margin-bottom: 8px; }
+    .foro-nota { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-20); }`;
   // Nota: el resto del hover de .foro-row (fondo, lift, sombra) vive en
   // assets/css/pit-motion.css — una sola fuente, y ahí respeta
   // prefers-reduced-motion. Acá solo queda el color del texto.
@@ -382,13 +388,13 @@ ${renderNav({ active: 'foro', prefix: pre })}
           <p class="pit-eyebrow">Publicaciones anteriores</p>
           <h2 class="pit-section-title" style="margin-top: 12px;"><span class="hover-underline">El archivo del foro.</span></h2>
         </div>
-        <span id="foro-count" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">${posts.length} publicaciones</span>
+        <span id="foro-count" role="status" aria-live="polite" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); white-space: nowrap;">${posts.length} publicaciones</span>
       </div>
 
       <div id="foro-archivo" class="pit-stagger" style="display: grid; margin-top: 36px; border-top: 2px solid var(--pit-ink);">
 ${rows}
       </div>
-      <p id="foro-empty" style="display: none; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); padding: 28px 8px;">No hay publicaciones con este filtro todavía.</p>
+      <p id="foro-empty" role="status" style="display: none; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); padding: 28px 8px;">No hay publicaciones con este filtro todavía.</p>
     </div>
   </section>
 
@@ -405,17 +411,24 @@ ${rows}
           <span class="pit-chip pit-chip--ghost">Moderadas</span>
         </div>
       </div>
-      <form id="foro-form" style="display: grid; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 32px;">
+      <!-- min-width: 0 + box-sizing: border-box: sin eso este <form> es un item
+           de grilla con min-width auto, su min-content (padding 32px en content-box
+           + ancho intrinseco del textarea) mide mas que la columna, y a 375px
+           empujaba la seccion entera 21px fuera de pantalla. -->
+      <form id="foro-form" style="display: grid; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 32px; box-sizing: border-box; min-width: 0;">
         <div style="display: flex; gap: 10px;">
           <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="paciente" checked style="accent-color: #2563EB;"> Soy paciente</label>
           <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="profesional" style="accent-color: #2563EB;"> Soy profesional</label>
         </div>
-        <!-- SIN font-size inline: lo maneja la regla de pit-v2.css (16px en
+        <!-- El textarea tenia placeholder pero NO etiqueta: el placeholder no
+             es nombre accesible y encima desaparece al empezar a escribir.
+             SIN font-size inline: lo maneja la regla de pit-v2.css (16px en
              mobile para que iOS Safari no haga zoom, compacto arriba de 640px).
              Un tamaño inline le ganaría por especificidad a esa regla. -->
-        <textarea id="foro-q" placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
+        <label for="foro-q" class="foro-label">Tu pregunta</label>
+        <textarea id="foro-q" style="min-width: 0;" placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
         <div>
-          <label style="display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); margin-bottom: 8px;">Tu email — te avisamos cuando Ricardo responda</label>
+          <label for="foro-email" class="foro-label">Tu email — te avisamos cuando el Dr. Frusso responda</label>
           <input id="foro-email" type="email" placeholder="tu@email.com" style="width: 100%; box-sizing: border-box; font-family: var(--pit-font-mono); padding: 13px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none;">
         </div>
         <label style="display: flex; align-items: flex-start; gap: 10px; font-size: var(--txt-xs); line-height: 1.55; color: var(--pit-ink-20); cursor: pointer;">
@@ -428,11 +441,11 @@ ${rows}
         <!-- role="alert": el mensaje se anuncia al escribirse. Fuera de la fila
              del botón para poder ocupar el ancho completo sin empujarlo. -->
         <span id="foro-hint" class="foro-hint" role="alert"></span>
-        <p style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.04em; line-height: 1.7; color: var(--pit-ink-40); margin: 4px 0 0;">Tu email no se publica ni se comparte: se usa solo para avisarte de la respuesta<span id="foro-nlnote"> y enviarte el newsletter</span>. Las respuestas del foro son informativas y no reemplazan una consulta médica.</p>
+        <p class="foro-nota" style="margin: 4px 0 0;">Tu email no se publica ni se comparte: se usa solo para avisarte de la respuesta<span id="foro-nlnote"> y enviarte el newsletter</span>. Las respuestas del foro son informativas y no reemplazan una consulta médica.</p>
       </form>
       <!-- tabindex="-1": al enviarse, el form desaparece y el foco quedaría en
            el <body>. Se le pasa el foco a este panel. -->
-      <div id="foro-ok" tabindex="-1" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 40px 36px;">
+      <div id="foro-ok" tabindex="-1" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); padding: 40px 36px; box-sizing: border-box; min-width: 0;">
         <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--pit-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: var(--txt-lg);">✓</span>
         <h3 style="font-size: var(--txt-xl); font-weight: 600; margin: 18px 0 10px; color: var(--pit-paper);">Pregunta recibida.</h3>
         <p style="font-size: var(--txt-sm); line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">Pasa a moderación y, si Ricardo la selecciona, se publica sin tus datos. Te va a llegar un aviso a <span id="foro-sent-email" style="font-family: var(--pit-font-mono); color: var(--pit-paper);"></span> cuando esté la respuesta.</p>
@@ -472,7 +485,11 @@ ${FOOTER(pre)}
     document.querySelectorAll('[data-fcat]').forEach(function (b) {
       b.addEventListener('click', function () {
         cat = b.getAttribute('data-fcat');
-        document.querySelectorAll('[data-fcat]').forEach(function (x) { x.classList.toggle('on', x === b); });
+        document.querySelectorAll('[data-fcat]').forEach(function (x) {
+          var on = x === b;
+          x.classList.toggle('on', on);
+          x.setAttribute('aria-pressed', on ? 'true' : 'false');   // la clase .on es la señal visual; aria-pressed, la accesible
+        });
         apply();
       });
     });
@@ -480,7 +497,11 @@ ${FOOTER(pre)}
       b.addEventListener('click', function () {
         var k = b.getAttribute('data-faud');
         aud = (aud === k) ? null : k;
-        document.querySelectorAll('[data-faud]').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-faud') === aud); });
+        document.querySelectorAll('[data-faud]').forEach(function (x) {
+          var on = x.getAttribute('data-faud') === aud;
+          x.classList.toggle('on', on);
+          x.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
         apply();
       });
     });

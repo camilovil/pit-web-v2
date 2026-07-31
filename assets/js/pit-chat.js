@@ -53,7 +53,7 @@
     '.pitchat-send { background: #2563EB; color: #fff; border: none; font-family: inherit; font-weight: 600; font-size: var(--txt-sm, 15px); width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }',
     '.pitchat-send:hover { background: #1E4FC4; transform: translateY(-1px); }',
     '.pitchat-send:disabled { background: #BFC7D6; cursor: default; transform: none; }',
-    '.pitchat-note { font-size: var(--txt-2xs, 11px); color: #8B96A0; text-align: center; padding: 0 12px 10px; background: transparent; border-top: none; }',
+    '.pitchat-note { font-size: var(--txt-2xs, 11px); color: #5F6C78; text-align: center; padding: 0 12px 10px; background: transparent; border-top: none; }',
     '@media (max-width: 480px) { .pitchat-panel { inset-inline-end: 16px; inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { inset-inline-end: 20px; inset-inline-end: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab-label { display: none; } .pitchat-fab { padding: 0; width: 56px; justify-content: center; } }'
   ].join('\n');
 
@@ -89,7 +89,7 @@
       '<div class="pitchat-msgs" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversación con el asistente"></div>' +
       '<div class="pitchat-sugs"></div>' +
       '<form class="pitchat-form">' +
-        '<input class="pitchat-input" type="text" placeholder="Preguntá sobre PIT…" maxlength="400">' +
+        '<input class="pitchat-input" type="text" aria-label="Escribí tu pregunta sobre PIT" placeholder="Preguntá sobre PIT…" maxlength="400">' +
         '<button class="pitchat-send" type="submit">→</button>' +
       '</form>' +
       '<div class="pitchat-note">No reemplaza una consulta médica</div>';

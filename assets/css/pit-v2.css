@@ -188,6 +188,38 @@ body { padding-top: 84px; background: #FFFFFF; }
 .pit-eyebrow { display: inline-flex; align-items: center; background: var(--v2-tint); color: var(--v2-blue) !important; border: 1px solid rgba(37,99,235,0.18); border-radius: 999px; padding: 7px 14px; font-size: var(--txt-2xs) !important; letter-spacing: 0.14em !important; }
 [style*="background: var(--pit-ink);"] .pit-eyebrow, [style*="background:var(--pit-ink);"] .pit-eyebrow { background: rgba(255,255,255,0.10); color: #AFC4F5 !important; border-color: rgba(255,255,255,0.18); }
 
+/* ---- texto sobre las secciones navy ----
+   El remap de tokens de arriba tiñe la escala de gris para fondo CLARO:
+   --pit-ink-40 (#5F6C78) da 5.8:1 sobre blanco pero 3.3:1 sobre el navy, y
+   --pit-ink-60 (#55616D) cae a 3.0:1. Medido, fallaban las credenciales del
+   foro ("Sin registro / Anónimas / Moderadas"), la etiqueta del email, el pie
+   de figura de Qué es PIT y la línea "Pago único · Garantía de 7 días" del
+   Módulo I: todas por debajo del 4.5:1 mínimo.
+   Las secciones oscuras declaran su fondo INLINE, y el texto que hereda esos
+   grises también está inline, así que la única forma de corregirlo en un solo
+   lugar es con !important (una declaración !important de hoja de estilo le
+   gana a una declaración inline normal). --pit-ink-20 da 10.4:1 sobre el navy.
+   Mismo patrón de selector que ya usa .pit-eyebrow acá arriba. */
+[style*="background: var(--pit-ink);"] [style*="var(--pit-ink-40)"],
+[style*="background: var(--pit-ink);"] [style*="var(--pit-ink-60)"],
+[style*="background:var(--pit-ink);"] [style*="var(--pit-ink-40)"],
+.pit-section--dark [style*="var(--pit-ink-40)"],
+.pit-section--dark [style*="var(--pit-ink-60)"] { color: var(--pit-ink-20) !important; }
+/* El azul de acción tampoco sobrevive al navy: #2563EB sobre #000B33 da 3.71:1
+   (medido en las flechas "→" de las filas de enlace de Qué es PIT). #8FAAF0 es
+   el azul claro que la home ya usa en su sección oscura y da 8.4:1.
+   El selector busca "color: var(--pit-blue)" y no solo "var(--pit-blue)" para
+   no pisarle el color a los elementos que lo usan de FONDO o de borde. */
+[style*="background: var(--pit-ink);"] [style*="color: var(--pit-blue)"],
+.pit-section--dark [style*="color: var(--pit-blue)"] { color: #8FAAF0 !important; }
+/* Los chips "fantasma" toman --pit-ink-60 de ds.css. Se excluyen las variantes
+   que traen su propio fondo (blue/filled), que ya contrastan solas. */
+[style*="background: var(--pit-ink);"] .pit-chip:not(.pit-chip--blue):not(.pit-chip--filled),
+.pit-section--dark .pit-chip:not(.pit-chip--blue):not(.pit-chip--filled) {
+  color: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 /* títulos más compactos, estilo Docshield */
 .pit-section-title, .pit-title, .pit-display { letter-spacing: -0.028em !important; font-weight: 600 !important; }
 
