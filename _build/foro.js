@@ -442,7 +442,13 @@ ${rows}
              mobile para que iOS Safari no haga zoom, compacto arriba de 640px).
              Un tamaño inline le ganaría por especificidad a esa regla. -->
         <label for="foro-q" class="foro-label">Tu pregunta</label>
-        <textarea id="foro-q" style="min-width: 0;" data-ph-paciente="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." data-ph-profesional="Escribí tu pregunta acá. Sumá el contexto clínico que ayude (región, hallazgos, qué probaste)." placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
+        <!-- UN SOLO atributo style. Había dos (min-width por un lado, el resto
+             por otro) y el navegador se queda con el PRIMERO y descarta el
+             segundo: el campo perdía borde, fondo, color y tipografía, y
+             aparecía con el aspecto por defecto del navegador sobre el fondo
+             navy. min-width: 0 es necesario acá: sin él, el item de grilla no
+             baja de su min-content y desbordaba la página a 375px. -->
+        <textarea id="foro-q" data-ph-paciente="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." data-ph-profesional="Escribí tu pregunta acá. Sumá el contexto clínico que ayude (región, hallazgos, qué probaste)." placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="min-width: 0; font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
         <div>
           <label for="foro-email" class="foro-label">Tu email — te avisamos cuando el Dr. Frusso responda</label>
           <input id="foro-email" type="email" placeholder="tu@email.com" style="width: 100%; box-sizing: border-box; font-family: var(--pit-font-mono); padding: 13px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none;">
