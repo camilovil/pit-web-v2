@@ -6,18 +6,24 @@
 // El diccionario se REGENERA contra el HTML ya construido, nunca a ojo: la
 // traducción se aplica por coincidencia exacta del texto recortado, así que
 // cualquier cambio de una coma en el copy deja la clave huérfana y el texto sin
-// traducir, sin que nada avise. Para revisarlo, en la consola de una página del
-// sitio:
+// traducir, sin que nada avise.
 //
-//   const t=new Set(); const w=document.createTreeWalker(document.body,
-//     NodeFilter.SHOW_TEXT); let n; while((n=w.nextNode())) {
-//     const s=n.nodeValue.trim(); if(s) t.add(s); }
-//   document.querySelectorAll('[placeholder]').forEach(e=>t.add(e.placeholder));
-//   document.querySelectorAll('[aria-label]').forEach(e=>t.add(e.getAttribute('aria-label')));
+// Eso ya no se revisa a mano: **`_build/check-lang.js` corre en cada build**
+// (`node _build/build.js`) y compara estas claves contra el texto visible de las
+// 18 páginas construidas — nodos de texto, `placeholder` y `aria-label`, lo
+// mismo que mira `apply()` acá abajo. Si una clave dejó de coincidir, el build
+// falla nombrando la clave y su línea. Para correrlo suelto:
+//   node _build/check-lang.js
 //
-// y comparar contra Object.keys(DICT).
+// LISTA BLANCA: el comentario RUNTIME
+// Las cadenas que solo existen cuando el JS las escribe (widget del chat, botón
+// "volver arriba", "Cerrar menú", estado vacío del archivo del foro, errores de
+// formulario, opciones de las autoevaluaciones del curso) no están en el HTML
+// servido: para el verificador serían huérfanas y no lo son. Van marcadas con
+// `// RUNTIME` al final de su línea, y check-lang.js lee esas marcas del fuente.
+// Si agregás una cadena que escribe el JS, marcala acá — no hay lista aparte.
 //
-// DOS TRAMPAS DEL FORMATO
+// DOS TRAMPAS DEL FORMATO (check-lang.js también las vigila)
 // 1. Es un objeto literal: una clave repetida NO da error, la última pisa a la
 //    anterior en silencio. (Había tres: "Instructor autorizado", "Curso gratis"
 //    y "Evidencia científica".)
@@ -64,14 +70,17 @@
     'Ver el sitio anterior': 'View the previous site',
 
     // ── Chrome compartido: asistente IA y botón volver arriba ─────────────
-    'Abrir asistente sobre PIT': 'Open the PIT assistant',
+    // El widget del chat lo arma entero pit-chat.js y el botón de volver arriba
+    // lo arma pit-scrolltop.js: NINGUNA de estas cadenas está en el HTML
+    // servido, todas son RUNTIME.
+    'Abrir asistente sobre PIT': 'Open the PIT assistant',   // RUNTIME
     'Cerrar asistente sobre PIT': 'Close the PIT assistant',   // RUNTIME
-    'Asistente PIT': 'PIT assistant',
-    'Cerrar el asistente': 'Close the assistant',
-    'Conversación con el asistente': 'Conversation with the assistant',
-    'Escribí tu pregunta sobre PIT': 'Type your question about PIT',
-    'Preguntá sobre PIT…': 'Ask about PIT…',
-    'Volver arriba': 'Back to top',
+    'Asistente PIT': 'PIT assistant',   // RUNTIME
+    'Cerrar el asistente': 'Close the assistant',   // RUNTIME
+    'Conversación con el asistente': 'Conversation with the assistant',   // RUNTIME
+    'Escribí tu pregunta sobre PIT': 'Type your question about PIT',   // RUNTIME
+    'Preguntá sobre PIT…': 'Ask about PIT…',   // RUNTIME
+    'Volver arriba': 'Back to top',   // RUNTIME
 
     // ══ HOME ══════════════════════════════════════════════════════════════
     // Hero
@@ -340,7 +349,9 @@
     // ══ RESTO DEL SITIO ═══════════════════════════════════════════════════
     // Cobertura PARCIAL: son las claves que seguían siendo válidas contra el
     // HTML actual. Estas páginas todavía no están traducidas al 100%.
-    'Glucosa al 5%': '5% glucose',
+    // Opción de una autoevaluación del curso intro: el aula la escribe desde su
+    // array de preguntas, no está en el HTML servido.
+    'Glucosa al 5%': '5% glucose',   // RUNTIME
     'Cómo es una sesión': 'What a session is like',
     'Evaluación y mapeo': 'Assessment and mapping',
     'Inyecciones subcutáneas': 'Subcutaneous injections',
