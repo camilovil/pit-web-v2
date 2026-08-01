@@ -19,7 +19,6 @@ const LINKS = {
   'Evidencia PIT.dc.html': 'evidencia.html',
   'FAQ PIT.dc.html': 'faq.html',
   'Foro PIT.dc.html': 'foro.html',
-  'Publicacion Foro PIT.dc.html': 'foro/corticoides-y-pit.html',
   'Contacto PIT.dc.html': 'contacto.html',
   'Sobre el Dr Frusso.dc.html': 'sobre-el-dr-frusso.html',
   'Privacidad PIT.dc.html': 'privacidad.html',
