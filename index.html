@@ -180,10 +180,22 @@
     .v2-drawer { display: none; }
 
     /* Toggle ES/EN — markup estático (ver _build/nav.js), no inyectado por JS.
-       #737373/#BFBFBF son los mismos hex de --pit-ink-40/--pit-ink-20 en ds.css
-       (esta página no carga ds.css) — así el toggle se ve igual en todo el sitio. */
+
+       Esta página no carga ds.css ni pit-v2.css, así que los tokens van en hex
+       literal. Hay que copiar el valor que RESUELVEN las otras 17 páginas, que
+       no siempre es el que declara ds.css:
+         color  #5F6C78 = --pit-ink-40, el de pit-v2.css:49, que SOMBREA el
+                 #737373 de ds.css. Es el que ve el visitante en las 17.
+         borde  #BFBFBF = --pit-ink-20, el de ds.css. pit-v2.css hoy no lo
+                 redefine; si algún día lo hace, este hex hay que moverlo también.
+
+       Este comentario decía que los dos hex salían de ds.css, y era cierto
+       cuando se escribió. Después pit-v2.css sombreó --pit-ink-40 y el toggle
+       quedó gris #737373 en la home y #5F6C78 en las otras 17, en producción,
+       sin que nada avisara. Es la trampa de las dos copias en su forma más
+       silenciosa: acá no alcanza con mirar ds.css. */
     .v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid #BFBFBF; border-radius: 999px; padding: 2px; }
-    .lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: .08em; background: none; border: none; color: #737373; padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+    .lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: .08em; background: none; border: none; color: #5F6C78; padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
     .lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
 
     /* ---- hero ---- */
