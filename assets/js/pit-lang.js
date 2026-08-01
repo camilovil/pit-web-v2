@@ -405,11 +405,32 @@
     'Contanos tu consulta antes de enviar': 'Tell us your enquiry before sending'   // RUNTIME
   };
 
-  var REV = {};
-  Object.keys(DICT).forEach(function (k) { REV[DICT[k]] = k; });
+  // El mapa inverso (EN→ES) se arma recién cuando hace falta: solo se usa para
+  // volver a español DESPUÉS de haber traducido. En la carga normal —visitante
+  // en español, que es el caso de casi todas las visitas— no se construye
+  // nunca, y nos ahorramos recorrer las 313 claves del diccionario.
+  var REV = null;
+  function reverse() {
+    if (!REV) {
+      REV = {};
+      Object.keys(DICT).forEach(function (k) { REV[DICT[k]] = k; });
+    }
+    return REV;
+  }
+
+  // Marcar el idioma activo es barato (un atributo + dos botones) y hay que
+  // hacerlo siempre. Traducir el documento es caro y solo hace falta cuando
+  // el idioma pedido difiere del que ya está escrito en el HTML.
+  function markActive(lang) {
+    document.documentElement.lang = lang;
+    var btns = document.querySelectorAll('.lang-btn');
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].classList.toggle('lang-active', btns[j].getAttribute('data-lang') === lang);
+    }
+  }
 
   function apply(lang) {
-    var map = lang === 'en' ? DICT : REV;
+    var map = lang === 'en' ? DICT : reverse();
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
     var node;
     while ((node = walker.nextNode())) {

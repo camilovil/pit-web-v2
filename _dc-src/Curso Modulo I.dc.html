@@ -51,15 +51,6 @@
     <a href="Contacto PIT.dc.html">Contacto</a>
     <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Apuntes gratis</a>
   </nav>
-  <script>
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('.nav-mobile a')) {
-        var t = document.getElementById('nav-toggle');
-        if (t) { t.checked = false; }
-      }
-    });
-  </script>
-
   <section style="padding: var(--pit-section-padding); background: var(--pit-ink); color: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <x-import component-from-global-scope="FrussoDS.Ruler" hint-size="100%,6px"></x-import>
