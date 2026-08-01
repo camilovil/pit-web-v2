@@ -19,6 +19,7 @@ const ROOT = path.join(__dirname, '..');
 const CONTENT = path.join(ROOT, '_content', 'foro');
 const OUTDIR = path.join(ROOT, 'foro');
 const { renderNav } = require('./nav');
+const { NOINDEX_META } = require('./site');   // palanca del noindex: _build/site.js
 
 const CAT = {
   pyr: 'Preguntas y respuestas',
@@ -127,8 +128,7 @@ const HEAD = (pre, title, desc, extraCss = '') => `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="${desc}">
-  <meta name="robots" content="noindex, nofollow"><!-- staging: quitar al conectar dominio -->
-  <meta name="author" content="Dr. Ricardo D. Frusso">
+${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="article">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${desc}">

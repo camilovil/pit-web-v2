@@ -9,6 +9,7 @@ const STEPS = [
   { file: 'convert.js', label: 'convert.js' },
   { file: 'foro.js', label: 'foro.js' },
   { file: 'sync-nav.js', label: 'sync-nav.js' },
+  { file: 'sync-staging.js', label: 'sync-staging.js  (bandera noindex)' },
   { file: 'check-lang.js', label: 'check-lang.js  (diccionario ES/EN)' },
 ];
 

@@ -9,6 +9,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, '_dc-src');
 const { renderNav, LOGO_HTML } = require('./nav');
+const { NOINDEX_META } = require('./site');   // palanca del noindex: _build/site.js
 
 const LINKS = {
   'HomePit v2.dc.html': 'index.html',
@@ -213,8 +214,7 @@ const HEAD = (p, extraCss) => `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="${p.desc}">
-  <meta name="robots" content="noindex, nofollow"><!-- staging: quitar al conectar dominio -->
-  <meta name="author" content="Dr. Ricardo D. Frusso">
+${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${p.title}">
   <meta property="og:description" content="${p.desc}">

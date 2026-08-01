@@ -267,7 +267,8 @@ necesitan chequeo visual.
    Es previo a los cambios recientes; solo se agregaron las cadenas de componentes ya
    traducidos.
 7. **Al final:** mover el dominio drricardofrusso.com a este proyecto en Vercel y
-   quitar el `noindex` (meta + vercel.json). Sin downtime, rollback instantáneo.
+   quitar el `noindex`: **`STAGING = false` en `_build/site.js` + `node _build/build.js`**.
+   Es un solo valor — antes había que tocar cinco lugares. Sin downtime, rollback instantáneo.
 
 ## Decisiones que NO son bugs
 - El h2 gigante de testimonios (129px contra el h1 de 68px) es decisión de diseño.

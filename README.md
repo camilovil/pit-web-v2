@@ -4,7 +4,23 @@ Sitio estático del Dr. Ricardo D. Frusso (PIT · Neuroproloterapia), implementa
 proyecto de Claude Design "PIT" (`HomePit v2` + subpáginas, estética "Docshield").
 
 **Estado: staging.** Todas las páginas llevan `noindex` (meta + header en `vercel.json`).
-Quitar ambos al conectar el dominio.
+
+### La palanca del lanzamiento
+El `noindex` sale de **una sola constante**: `STAGING` en **`_build/site.js`**.
+Para publicar el sitio: poner `STAGING = false`, correr `node _build/build.js`, commit y push.
+Eso quita el `<meta name="robots">` de las 18 páginas y el header `X-Robots-Tag` de
+`vercel.json` de una sola vez.
+
+Antes vivía en cinco lugares (los dos generadores, las dos páginas manuales y `vercel.json`)
+y había que acordarse de los cinco; olvidarse de uno no rompe nada visible, simplemente esa
+parte del sitio sigue invisible para Google. Ahora:
+`convert.js` y `foro.js` piden `NOINDEX_META` al armar el `<head>`; `_build/sync-staging.js`
+inyecta el meta en `index.html` y `curso-intro.html` entre los marcadores
+`<!-- PIT-NOINDEX:START/END -->` (mismo mecanismo que `sync-nav.js`) y pone o saca la regla
+del header en `vercel.json`. **No editar esos cinco lugares a mano: el build los pisa.**
+
+Después de apagarlo, verificar: `curl -sI https://drricardofrusso.com | grep -i robots` no
+tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
 
 ## Estructura
 - `index.html` + 10 subpáginas — HTML standalone, sin framework ni build para servir.
@@ -30,8 +46,18 @@ Quitar ambos al conectar el dominio.
   reemplaza automáticamente — no editar el nav ahí, no tiene efecto.)
 - `_build/sync-nav.js` — inyecta el nav en las páginas manuales (`index.html`) entre
   los marcadores `<!-- PIT-NAV:START/END -->`, sin tocar su CSS inline.
-- **Build completo: `node _build/build.js`** (corre convert.js → foro.js → sync-nav.js
-  en orden; es idempotente). También se pueden correr sueltos si hace falta.
+- `_build/site.js` — banderas del sitio. Hoy solo `STAGING` (ver "la palanca del
+  lanzamiento" más arriba).
+- `_build/sync-staging.js` — propaga `STAGING` a las páginas manuales y a `vercel.json`.
+- `_build/check-lang.js` — **verifica el diccionario ES/EN contra el HTML construido**
+  (nodos de texto, `placeholder`, `aria-label`) y falla nombrando las claves huérfanas.
+  La lista blanca son las cadenas marcadas con `// RUNTIME` en `assets/js/pit-lang.js`
+  (las que escribe el JS y no están en el HTML servido). También detecta claves y
+  traducciones repetidas, las dos trampas del formato que documenta ese archivo.
+- **Build completo: `node _build/build.js`** (corre convert.js → foro.js → sync-nav.js →
+  sync-staging.js → check-lang.js en orden; es idempotente). Los generadores van primero
+  y los verificadores después, porque miran el HTML ya construido. También se pueden
+  correr sueltos si hace falta.
 
 ## Foro (portal de contenido)
 
