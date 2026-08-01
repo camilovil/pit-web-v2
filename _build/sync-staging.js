@@ -77,7 +77,13 @@ try {
     console.error('     y actualizá fmtRule/fmtConfig antes de volver a correr el build.');
     failed = true;
   } else {
-    cfg.headers = (cfg.headers || []).filter(r => !(r.headers || []).some(h => h.key === 'X-Robots-Tag'));
+    // Se saca SOLO el header X-Robots-Tag, no la regla que lo contiene: si
+    // alguna vez comparte regla con los headers de seguridad, apagar el staging
+    // se los llevaría puestos sin que nada avise. Una regla que queda sin
+    // headers se descarta.
+    cfg.headers = (cfg.headers || [])
+      .map(r => ({ ...r, headers: (r.headers || []).filter(h => h.key !== 'X-Robots-Tag') }))
+      .filter(r => r.headers.length);
     if (STAGING) cfg.headers.push(NOINDEX_HEADER);
 
     const next = fmtConfig(cfg);

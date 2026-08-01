@@ -109,6 +109,33 @@ el prompt; si no, el bot contesta algo distinto a lo que dice la página.
 Vercel (proyecto separado del sitio live). Cuando esté aprobado: mover el dominio
 `drricardofrusso.com` a este proyecto desde el dashboard de Vercel y quitar el noindex.
 
+### Headers de seguridad (`vercel.json`)
+Tres headers en todas las respuestas:
+- `X-Content-Type-Options: nosniff` — el navegador respeta el `Content-Type` que
+  mandamos en vez de adivinarlo. Sin esto, un archivo de `docs/` o `img/` servido con
+  el tipo equivocado puede terminar interpretado como HTML o JS.
+- `Referrer-Policy: strict-origin-when-cross-origin` — hacia afuera (Formspree, Hotmart,
+  Instagram, el mapa) viaja solo el origen, no la URL completa. Importa porque las URLs
+  del foro dicen de qué trata la consulta del visitante.
+- `X-Frame-Options: SAMEORIGIN` — nadie puede meter el sitio en un iframe ajeno y montar
+  un clickjacking sobre los formularios. `SAMEORIGIN` y no `DENY` para no cerrarle la
+  puerta a embeber una página del sitio dentro de otra del mismo sitio.
+
+**Sin CSP, a propósito.** El sitio tiene mucho CSS y JS inline: el `<style>` de la home,
+los `style="..."` que emiten los generadores, los `<script>` inline del foro y del aula
+del curso. Una CSP que no los contemple deja la home sin estilos o el aula sin funcionar,
+y el fallo no se ve en el build: aparece recién en producción. Lo que habría que medir
+antes de escribir una:
+1. Inventariar todo lo inline y decidir entre `'unsafe-inline'` (que casi no aporta),
+   hashes (se rompen con cada cambio de copy, salvo que los calcule el build) o `nonce`
+   (necesita respuesta dinámica; hoy el sitio es estático).
+2. Listar los orígenes externos reales: `formspree.io`, `www.google.com/maps`,
+   `/_vercel/insights` y `/_vercel/speed-insights`, y lo que agregue el asistente IA.
+3. Desplegar primero en `Content-Security-Policy-Report-Only` y mirar los reportes con
+   tráfico real antes de pasarla a modo bloqueante.
+Corolario mientras no haya CSP: lo que una CSP habría contenido hay que contenerlo en el
+generador, porque no queda una segunda línea de defensa.
+
 ### Caché (`vercel.json`) — no romper
 Los archivos de `assets/css/` y `assets/js/` **no llevan hash en el nombre**, así que van
 con `max-age=0, must-revalidate` (revalidan con ETag → 304, no cuesta ancho de banda).
