@@ -10,7 +10,7 @@ fechaLabel: 09 jul 2026
 lectura: 5
 tags: Infiltraciones, Corticoides
 resumen: Una pregunta muy frecuente en el consultorio. Ricardo explica la diferencia entre infiltrar la articulación y tratar el nervio sensibilizado — y por qué no son excluyentes.
-portada: /img/DSC_0086.jpg
+portada: /img/DSC_0086.webp
 ---
 Es una de las preguntas que más se repiten en el consultorio, y entiendo la frustración detrás: pasaste por una infiltración, hubo alivio, y a los meses el dolor volvió como si nada. Vale la pena entender por qué pasa eso antes de hablar de PIT.
 
@@ -20,7 +20,7 @@ El corticoide apaga la inflamación del tejido, pero no actúa sobre el nervio p
 
 [[placeholder: Desarrollo completo de Ricardo (2–3 párrafos)]]
 
-![Sesión de PIT en zona lumbar](/img/DSC_lumbar01.jpg "Mapeo de ramas nerviosas · Consultorio")
+![Sesión de PIT en zona lumbar](/img/DSC_lumbar01.webp "Mapeo de ramas nerviosas · Consultorio")
 
 ## Qué puede aportar PIT en este caso
 

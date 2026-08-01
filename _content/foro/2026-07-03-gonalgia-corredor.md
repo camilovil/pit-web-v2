@@ -10,7 +10,7 @@ fechaLabel: 03 jul 2026
 lectura: 7
 tags: Rodilla, Caso clínico
 resumen: Corredor recreativo con dolor bilateral de rodilla de 14 meses de evolución. Mapeo peripatelar, abordaje de las ramas del safeno y evolución sesión a sesión.
-portada: /img/DSC_knee01.jpg
+portada: /img/DSC_knee01.webp
 ---
 Caso clínico comentado: paciente de 52 años, corredor recreativo (30–40 km semanales), con gonalgia bilateral de 14 meses de evolución que no cedió con kinesiología ni antiinflamatorios.
 

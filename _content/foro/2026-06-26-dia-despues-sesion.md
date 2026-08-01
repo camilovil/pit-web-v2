@@ -10,7 +10,7 @@ fechaLabel: 26 jun 2026
 lectura: 4
 tags: Consejos, Post-sesión
 resumen: Actividad, molestias normales, señales de consulta: guía breve para las 48 horas posteriores a una sesión.
-portada: /img/DSC_0086.jpg
+portada: /img/DSC_0086.webp
 ---
 Después de una sesión de PIT la mayoría de los pacientes retoma su rutina normal el mismo día. Aun así, hay algunas pautas simples que ayudan a que el tratamiento asiente mejor.
 
