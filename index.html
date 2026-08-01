@@ -951,6 +951,19 @@
     })();
   </script>
 
+<!-- pit-motion.js va junto con pit-motion.css, que esta pagina SÍ carga (arriba).
+     Faltaba, y era una trampa cargada: el CSS pone `opacity: 0` a los hijos de
+     `.pit-stagger` y solo este JS les agrega `.pit-in`. Hoy la home no usa esa
+     clase, así que no se notaba; el día que alguien la usara, el contenido
+     quedaba invisible SOLO en la home y sin un error en consola que lo delatara.
+
+     Ojo al orden de carga: esta página tiene ADEMÁS su propio sistema de
+     reveals inline (`.v2-reveal` / `.v2-stagger` → `.in`, más abajo en el
+     <script> de esta misma página). Los dos conviven porque usan clases
+     distintas y ninguno pisa al otro; pit-motion.js aporta el reveal a nivel
+     <section> que ya tienen las otras 17 páginas, y el inline sigue manejando
+     los elementos y los contadores. -->
+<script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=2"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
 <script src="assets/js/pit-lang.js?v=2"></script>
