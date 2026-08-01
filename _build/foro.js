@@ -30,6 +30,41 @@ const CAT = {
 };
 const CAT_SHORT = { pyr: 'P. y R.', caso: 'Caso clínico', evidencia: 'Evidencia', consejos: 'Consejos', noticias: 'Noticias' };
 const AUD = { pacientes: 'Pacientes', profesionales: 'Prof.', todos: 'Para todos' };
+const TIPO = ['qa', 'caso', 'articulo'];
+// Un slug se convierte en nombre de archivo (foro/<slug>.html) y en URL. Se
+// acota a lo que es seguro en los dos lados: sin puntos, sin barras, sin
+// mayúsculas, sin acentos.
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+// ---------- escape ----------
+// Todo lo que sale del frontmatter o del markdown y termina en HTML pasa por
+// acá. El caso que rompe no es un ataque: es una comilla doble en `titulo` o en
+// `resumen`, que van a <title>, a <meta content> y a alt="". Una sola cierra el
+// atributo antes de tiempo y desarma el <head> de la página. Los 8 posts de hoy
+// no la tienen; el primero que escriba un título con comillas la encuentra.
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ---------- esquemas de URL permitidos ----------
+// El sitio no tiene CSP (ver README): si un href sale con javascript:, el
+// enlace es funcional y no hay segunda línea de defensa. Se permiten http,
+// https, mailto, anclas y relativos — que es todo lo que un post necesita.
+const ESQUEMAS_OK = ['http:', 'https:', 'mailto:'];
+function urlSegura(url) {
+  // Los navegadores ignoran espacios y caracteres de control DENTRO del
+  // esquema: "java\tscript:alert(1)" se ejecuta. Se limpian antes de mirar.
+  const limpia = String(url || '').split('').filter(function (c) { var n = c.charCodeAt(0); return n > 32 && n !== 127; }).join('');
+  if (!limpia) return false;
+  const m = limpia.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/);
+  if (!m) return true;                       // relativo o ancla (#, ./, /img/…)
+  return ESQUEMAS_OK.includes(m[1].toLowerCase() + ':');
+}
 
 // ---------- parse ----------
 function parsePost(file) {
@@ -49,10 +84,76 @@ function parsePost(file) {
   return { ...meta, body: m[2].trim(), file };
 }
 
+// ---------- validación ----------
+// Antes, un campo mal tipeado no daba error: `categoria: pyrr` imprimía la
+// palabra "undefined" en la página, una `audiencia` inválida idem, una `portada`
+// que falta dejaba src="undefined" y un `slug` ausente escribía el archivo
+// undefined.html. Todo eso llegaba al sitio publicado sin una sola advertencia.
+// Ahora corta el build nombrando archivo y campo.
+function validar(posts) {
+  const errores = [];
+  const err = (p, campo, msg) => errores.push(`${p.file} · ${campo}: ${msg}`);
+  const vistos = new Map();
+
+  for (const p of posts) {
+    // --- slug: es nombre de archivo Y URL ---
+    if (!p.slug) err(p, 'slug', 'falta (el archivo saldría como "undefined.html")');
+    else if (!SLUG_RE.test(p.slug)) err(p, 'slug', `"${p.slug}" no es un slug válido (minúsculas, números y guiones: "mi-post")`);
+    else if (vistos.has(p.slug)) err(p, 'slug', `"${p.slug}" ya lo usa ${vistos.get(p.slug)} — uno de los dos pisaría al otro sin aviso`);
+    else vistos.set(p.slug, p.file);
+
+    // --- campos de texto obligatorios ---
+    for (const campo of ['titulo', 'resumen', 'semana', 'fechaLabel']) {
+      if (!String(p[campo] || '').trim()) err(p, campo, 'falta');
+    }
+
+    // --- tablas ---
+    if (!p.categoria) err(p, 'categoria', `falta (una de: ${Object.keys(CAT).join(', ')})`);
+    else if (!(p.categoria in CAT)) err(p, 'categoria', `"${p.categoria}" no existe — usá una de: ${Object.keys(CAT).join(', ')}`);
+
+    if (!p.audiencia) err(p, 'audiencia', `falta (una de: ${Object.keys(AUD).join(', ')})`);
+    else if (!(p.audiencia in AUD)) err(p, 'audiencia', `"${p.audiencia}" no existe — usá una de: ${Object.keys(AUD).join(', ')}`);
+
+    if (!p.tipo) err(p, 'tipo', `falta (una de: ${TIPO.join(', ')})`);
+    else if (!TIPO.includes(p.tipo)) err(p, 'tipo', `"${p.tipo}" no existe — usá una de: ${TIPO.join(', ')}`);
+
+    // --- fecha: ordena las publicaciones y decide cuál es la destacada ---
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(p.fecha || ''))) {
+      err(p, 'fecha', `"${p.fecha}" no es AAAA-MM-DD (de acá sale el orden del archivo y cuál es la destacada)`);
+    }
+
+    if (!Number.isFinite(p.lectura) || p.lectura <= 0) err(p, 'lectura', `"${p.lectura}" no es un número de minutos válido`);
+
+    // --- portada: cualquier post puede ser el destacado, así que la necesitan todos ---
+    if (!p.portada) err(p, 'portada', 'falta (el destacado del índice saldría con src="undefined")');
+    else if (!urlSegura(p.portada)) err(p, 'portada', `"${p.portada}" usa un esquema no permitido`);
+    else if (p.portada.startsWith('/') && !fs.existsSync(path.join(ROOT, p.portada.slice(1)))) {
+      err(p, 'portada', `"${p.portada}" no existe en el repo`);
+    }
+
+    // --- links e imágenes del cuerpo: esquema permitido ---
+    let m;
+    const links = /\[([^\]]+)\]\(([^)]+)\)/g;
+    while ((m = links.exec(p.body))) {
+      if (!urlSegura(m[2])) err(p, 'cuerpo', `el link "${m[1]}" apunta a "${m[2]}" — solo se permiten http, https, mailto, anclas y rutas relativas`);
+    }
+    const imgs = /!\[([^\]]*)\]\(([^)\s]+)/g;
+    while ((m = imgs.exec(p.body))) {
+      if (!urlSegura(m[2])) err(p, 'cuerpo', `la imagen "${m[1]}" apunta a "${m[2]}" — esquema no permitido`);
+    }
+  }
+  return errores;
+}
+
 function inline(text) {
   return text
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    // El href pasa por la whitelist de esquemas. Si no la pasa, se cae el
+    // enlace y queda el texto: nunca se emite un href que no sabemos que es
+    // seguro. La validación ya cortó el build antes de llegar acá — esto es la
+    // segunda vuelta de llave, para que ningún camino nuevo la esquive.
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (full, txt, url) =>
+      urlSegura(url) ? `<a href="${esc(url)}">${txt}</a>` : txt);
 }
 
 function mdToHtml(body) {
@@ -65,13 +166,16 @@ function mdToHtml(body) {
     }
     const ph = b.match(/^\[\[placeholder:\s*([\s\S]+?)\]\]$/);
     if (ph) {
-      return `<div style="margin: 0 0 28px;"><div class="ph" style="min-height: 110px;"><span>Placeholder · ${ph[1]}</span></div></div>`;
+      return `<div style="margin: 0 0 28px;"><div class="ph" style="min-height: 110px;"><span>Placeholder · ${esc(ph[1])}</span></div></div>`;
     }
     const img = b.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
     if (img) {
+      // src pasa por la whitelist igual que los links; alt y caption van a un
+      // atributo y a texto: escapados los dos.
+      const src = urlSegura(img[2]) ? esc(img[2]) : '';
       return `<figure style="margin: 0 0 28px;">
-          <img src="${img[2]}" alt="${img[1]}" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--pit-radius); display: block;">
-          ${img[3] ? `<figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">${img[3]}</figcaption>` : ''}
+          <img src="${src}" alt="${esc(img[1])}" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--pit-radius); display: block;">
+          ${img[3] ? `<figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">${esc(img[3])}</figcaption>` : ''}
         </figure>`;
     }
     if (b.startsWith('> ')) {
@@ -122,7 +226,14 @@ const FOOTER = (pre) => `  <footer class="v2-footer">
     </div>
   </footer>`;
 
-const HEAD = (pre, title, desc, extraCss = '') => `<!DOCTYPE html>
+// title y desc vienen del frontmatter (titulo/resumen) y caen en tres atributos
+// y en <title>. Se escapan ACÁ, en el único lugar por donde pasan los dos
+// generadores de página: una comilla doble suelta cerraba el atributo y desde
+// ahí el <head> quedaba desarmado.
+const HEAD = (pre, rawTitle, rawDesc, extraCss = '') => {
+  const title = esc(rawTitle);
+  const desc = esc(rawDesc);
+  return `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -160,6 +271,7 @@ ${extraCss}
 </head>
 <body>
 `;
+};
 
 const FOOT = (pre) => `
 <script src="${pre}assets/js/pit-forms.js?v=2"></script>
@@ -179,11 +291,14 @@ function renderPost(post, posts, idx) {
   const others = posts.filter(p => p !== post).slice(0, 3);
   const isQA = post.tipo === 'qa';
   const byline = isQA ? 'Responde el Dr. Ricardo D. Frusso' : 'Por el Dr. Ricardo D. Frusso';
-  const catLine = `${post.semana} · ${post.fechaLabel} · ${CAT_SHORT[post.categoria]} · ${AUD[post.audiencia]}`;
+  // CAT_SHORT/AUD/CAT salen de las tablas de este archivo (y validar() ya
+  // garantizó que la clave existe): son seguros. Lo que viene del frontmatter
+  // —semana, fechaLabel, titulo, tags, slug— va escapado.
+  const catLine = `${esc(post.semana)} · ${esc(post.fechaLabel)} · ${CAT_SHORT[post.categoria]} · ${AUD[post.audiencia]}`;
 
   const chips = [
     `<span class="pit-chip pit-chip--blue">${isQA ? 'Pregunta de ' + (post.audiencia === 'profesionales' ? 'profesional' : 'paciente') : CAT[post.categoria]}</span>`,
-    ...post.tags.map(t => `<span class="pit-chip">${t}</span>`),
+    ...post.tags.map(t => `<span class="pit-chip">${esc(t)}</span>`),
   ].join('\n          ');
 
   return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen) + `
@@ -212,11 +327,11 @@ ${renderNav({ active: 'foro', prefix: pre })}
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
           ${chips}
         </div>
-        <h1 class="m-title" style="font-size: 46px; font-weight: 600; line-height: 1.1; margin: 0 0 22px;">${post.titulo}</h1>
+        <h1 class="m-title" style="font-size: 46px; font-weight: 600; line-height: 1.1; margin: 0 0 22px;">${esc(post.titulo)}</h1>
         <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
           <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60);">${byline}</span>
           <span class="pit-pipe pit-pipe--blue" style="display: inline-block; width: 3px; height: 1em; background: var(--pit-blue); border-radius: 2px;"></span>
-          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">${post.fechaLabel} · ${post.lectura} min de lectura</span>
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">${esc(post.fechaLabel)} · ${post.lectura} min de lectura</span>
         </div>
       </div>
     </div>
@@ -246,7 +361,7 @@ ${renderNav({ active: 'foro', prefix: pre })}
         <div style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 26px 28px;">
           <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Seguí leyendo</span>
           <div style="display: grid; margin-top: 8px;">
-            ${others.map((o, i) => `<a href="${o.slug}.html" class="sh-post" style="font-size: var(--txt-sm); font-weight: 600; line-height: 1.4; color: var(--pit-ink); padding: 12px 0;${i < others.length - 1 ? ' border-bottom: 1px solid var(--pit-ink-10);' : ''}">${o.titulo}</a>`).join('\n            ')}
+            ${others.map((o, i) => `<a href="${esc(o.slug)}.html" class="sh-post" style="font-size: var(--txt-sm); font-weight: 600; line-height: 1.4; color: var(--pit-ink); padding: 12px 0;${i < others.length - 1 ? ' border-bottom: 1px solid var(--pit-ink-10);' : ''}">${esc(o.titulo)}</a>`).join('\n            ')}
           </div>
         </div>
       </aside>
@@ -256,9 +371,9 @@ ${renderNav({ active: 'foro', prefix: pre })}
   <!-- anterior / archivo -->
   <section style="background: var(--pit-paper-pure); border-top: 1px solid var(--pit-ink-10); padding: 0 24px;">
     <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
-      ${older ? `<a href="${older.slug}.html" class="sh-post" style="padding-block: 28px; padding-inline: 0 24px; color: var(--pit-ink); border-inline-end: 1px solid var(--pit-ink-10);">
-        <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-ink-40);">← Anterior · ${older.semana}</span>
-        <div style="font-size: var(--txt-md); font-weight: 600; margin-top: 6px;">${older.titulo}</div>
+      ${older ? `<a href="${esc(older.slug)}.html" class="sh-post" style="padding-block: 28px; padding-inline: 0 24px; color: var(--pit-ink); border-inline-end: 1px solid var(--pit-ink-10);">
+        <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-ink-40);">← Anterior · ${esc(older.semana)}</span>
+        <div style="font-size: var(--txt-md); font-weight: 600; margin-top: 6px;">${esc(older.titulo)}</div>
       </a>` : '<span style="border-inline-end: 1px solid var(--pit-ink-10);"></span>'}
       <a href="${pre}foro.html" class="sh-post" style="padding-block: 28px; padding-inline: 24px 0; text-align: end; color: var(--pit-ink);">
         <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-ink-40);">Archivo completo →</span>
@@ -292,10 +407,10 @@ function renderIndex(posts) {
   const ARCHIVO = rest.length;
   const isQA = featured.tipo === 'qa';
 
-  const rows = rest.map(p => `        <a href="foro/${p.slug}.html" class="m-list foro-row" data-cat="${p.categoria}" data-aud="${p.audiencia}" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
-          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">${p.semana} · ${p.fechaLabel.replace(' 2026', '')}</span>
+  const rows = rest.map(p => `        <a href="foro/${esc(p.slug)}.html" class="m-list foro-row" data-cat="${esc(p.categoria)}" data-aud="${esc(p.audiencia)}" style="display: grid; grid-template-columns: 170px 200px 1fr auto; gap: 24px; align-items: baseline; padding: 22px 8px; border-bottom: 1px solid var(--pit-ink-10); color: var(--pit-ink);">
+          <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--pit-ink-40);">${esc(p.semana)} · ${esc(p.fechaLabel.replace(' 2026', ''))}</span>
           <span style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">${CAT_SHORT[p.categoria]} · ${AUD[p.audiencia]}</span>
-          <span style="font-size: var(--txt-md); font-weight: 600;">${p.titulo}</span>
+          <span style="font-size: var(--txt-md); font-weight: 600;">${esc(p.titulo)}</span>
           <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-blue);">Leer →</span>
         </a>`).join('\n');
 
@@ -374,16 +489,16 @@ ${renderNav({ active: 'foro', prefix: pre })}
           <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
             <span class="pit-chip pit-chip--blue">${CAT[featured.categoria]}</span>
             <span class="pit-chip">${AUD[featured.audiencia]}</span>
-            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Semana ${featured.semana.replace('S', '')} · ${featured.fechaLabel}</span>
+            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Semana ${esc(featured.semana.replace('S', ''))} · ${esc(featured.fechaLabel)}</span>
           </div>
-          <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">${featured.titulo}</span></h2>
-          <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">${featured.resumen}</p>
+          <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">${esc(featured.titulo)}</span></h2>
+          <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">${esc(featured.resumen)}</p>
           <div style="display: flex; gap: 20px; align-items: center;">
-            <a class="pit-btn pit-btn--primary" href="foro/${featured.slug}.html">Leer →</a>
+            <a class="pit-btn pit-btn--primary" href="foro/${esc(featured.slug)}.html">Leer →</a>
             <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">${featured.lectura} min de lectura</span>
           </div>
         </div>
-        <img class="m-first" src="${featured.portada}" alt="${featured.titulo}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img class="m-first" src="${esc(featured.portada)}" alt="${esc(featured.titulo)}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </article>
     </div>
   </section>
@@ -664,6 +779,16 @@ ${FOOTER(pre)}
 const files = fs.readdirSync(CONTENT).filter(f => f.endsWith('.md')).sort().reverse(); // fecha desc por nombre
 const posts = files.map(parsePost);
 posts.sort((a, b) => b.fecha.localeCompare(a.fecha));
+
+// La validación va ANTES de borrar el directorio de salida: si un post está mal
+// escrito, el foro publicado sigue en su lugar. Nada a medio generar.
+const errores = validar(posts);
+if (errores.length) {
+  console.error(`\n✗ foro.js: ${errores.length} problema(s) en _content/foro/ — no se generó nada.\n`);
+  errores.forEach(e => console.error(`  · ${e}`));
+  console.error('');
+  process.exit(1);
+}
 
 if (!fs.existsSync(OUTDIR)) fs.mkdirSync(OUTDIR, { recursive: true });
 // limpiar html viejos del directorio de salida

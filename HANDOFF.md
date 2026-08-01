@@ -282,6 +282,15 @@ necesitan chequeo visual.
 - Artifacts online: propuesta + calculadora de presupuesto (links en el chat de la sesión).
 
 ## Seguridad (para cuando escale)
-- `_build/foro.js` genera HTML desde markdown sin sanitizar. Hoy es seguro (contenido
-  del autor); si el foro llegara a aceptar contenido de terceros, escapar antes de insertar.
+- `_build/foro.js` **escapa** todo lo que sale del frontmatter y del markdown hacia
+  atributos y texto (`esc()`), **valida** el frontmatter contra sus tablas (corta el build
+  nombrando archivo y campo, sin generar nada) y **filtra los esquemas** de los links
+  (`http`/`https`/`mailto`/anclas/relativos). Lo que motivó el escape no fue un ataque:
+  una comilla doble en `titulo` o `resumen` desarmaba el `<head>` de la página entera.
+- **Falta**: el cuerpo del markdown sigue sin sanitizar (`mdToHtml()` deja pasar HTML
+  crudo dentro de un párrafo). Hoy es seguro porque lo escribe el autor; con contenido
+  de terceros hace falta un sanitizador con allowlist, que es otro trabajo.
+- El sitio **no tiene CSP** a propósito (mucho CSS y JS inline). Ver README para lo que
+  habría que medir antes de escribir una. Sí lleva `X-Content-Type-Options`,
+  `Referrer-Policy` y `X-Frame-Options` en `vercel.json`.
 - La API key del asistente IA va en variable de entorno de Vercel, nunca en el repo/front.

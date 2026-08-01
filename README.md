@@ -76,6 +76,26 @@ El foro es un portal generado desde archivos markdown — **no se edita el HTML 
 **Publicar algo nuevo** = crear el `.md`, correr `node _build/foro.js`, commit y push
 (el deploy sale automático). Convención de nombre: `AAAA-MM-DD-titulo-corto.md`.
 
+### El generador valida antes de escribir
+Si el frontmatter está mal, **el build corta nombrando archivo y campo** y no genera nada
+(la validación corre antes de borrar `foro/`, así que el foro publicado no se toca). Chequea:
+`slug` presente, con formato válido y **único** entre todos los posts; `categoria`,
+`audiencia` y `tipo` contra las tablas del generador; `fecha` en formato `AAAA-MM-DD`
+(de ahí sale el orden del archivo y cuál es la destacada); `lectura` numérica;
+`titulo`, `resumen`, `semana` y `fechaLabel` no vacíos; y `portada` presente, con
+esquema permitido y **existente en el repo**. Antes, un campo mal tipeado no daba error:
+imprimía la palabra "undefined" en la página publicada.
+
+Todo lo que sale del frontmatter y del markdown pasa por `esc()` antes de entrar al HTML.
+El caso que rompe no es un ataque: **una comilla doble en `titulo` o en `resumen`** cierra
+el atributo antes de tiempo en `<title>`, `<meta content>` y `alt=""`, y a partir de ahí
+el navegador se come el resto del `<head>` — incluidos los `<link>` de las hojas de estilo.
+
+Los links del cuerpo pasan por una **whitelist de esquemas** (`http`, `https`, `mailto`,
+anclas y rutas relativas). `[texto](javascript:…)` producía un enlace funcional, y el sitio
+no tiene CSP que lo contenga. La validación corta el build, y `inline()` además no emite
+el `href` aunque llegue hasta ahí.
+
 ## Formularios (Formspree)
 Foro y contacto envían vía `assets/js/pit-forms.js` → Formspree (AJAX, sin recargar,
 manteniendo el estado de éxito en la página). El endpoint está en el objeto `ENDPOINTS`
@@ -86,9 +106,12 @@ sin enviar) — útil para staging. Para separarlos, crear un segundo form en Fo
 cambiar una línea. El newsletter hoy es el checkbox del form del foro (llega como campo
 `newsletter: sí/no`); si más adelante se quiere lista propia, migrar a Brevo/Mailchimp.
 
-**Seguridad pendiente para cuando escale:** `_build/foro.js` genera HTML desde markdown
-sin sanitizar (`inline()`/`mdToHtml`). Hoy es seguro porque el contenido lo escribe el
-autor del sitio; si el foro llegara a aceptar contenido de terceros, escapar antes de insertar.
+**Seguridad pendiente para cuando escale:** el frontmatter, los atributos y los esquemas
+de URL ya están cubiertos (ver arriba), pero el **cuerpo del markdown sigue sin sanitizar**:
+`mdToHtml()` deja pasar HTML crudo escrito dentro de un párrafo. Hoy es seguro porque el
+contenido lo escribe el autor del sitio. Si el foro llegara a aceptar contenido de terceros,
+ahí sí hace falta un sanitizador de verdad (allowlist de etiquetas y atributos), que es
+bastante más que un `esc()`.
 
 ## Pendientes de contenido (placeholders en el diseño)
 - Testimonios reales (home y curso) — "A validar con Ricardo".
