@@ -37,6 +37,10 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
   violetas, la franja de respaldos y el breakpoint del nav. Las copias llevan comentarios
   cruzados avisándolo. Si se toca una sola, el bug aparece únicamente en la home o
   únicamente en las subpáginas, que es lo más caro de diagnosticar.
+  **Ya no se puede tocar una sola sin enterarse:** `_build/check-css.js` corre en el build,
+  compara los 76 selectores compartidos con los valores ya resueltos (`var()` incluido) y
+  falla nombrando selector y propiedad. Unificarlas en una sola fuente se evaluó y se
+  descartó — el porqué, medido, está en el README → "Las dos copias del CSS".
 - Lo que se inyecta por JS (widget del chat en `pit-chat.js`) y lo que sale de
   `_build/nav.js` **necesitan fallback** al usar tokens: `var(--txt-sm, 15px)`. Aparecen
   en `curso-intro.html`, que tampoco carga `pit-v2.css`, y sin fallback quedarían sin

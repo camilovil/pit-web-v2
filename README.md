@@ -49,6 +49,9 @@ tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
 - `_build/site.js` — banderas del sitio. Hoy solo `STAGING` (ver "la palanca del
   lanzamiento" más arriba).
 - `_build/sync-staging.js` — propaga `STAGING` a las páginas manuales y a `vercel.json`.
+- `_build/check-css.js` — **verifica que las dos copias del CSS compartido no se hayan
+  separado** (ver "Las dos copias del CSS" más abajo). Compara los valores ya resueltos,
+  así que `var(--pit-ink-20)` y `#BFBFBF` cuentan como iguales mientras lo sean.
 - `_build/check-lang.js` — **verifica el diccionario ES/EN contra el HTML construido**
   (nodos de texto, `placeholder`, `aria-label`) y falla nombrando las claves huérfanas.
   La lista blanca son las cadenas marcadas con `// RUNTIME` en `assets/js/pit-lang.js`
@@ -58,6 +61,48 @@ tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
   sync-staging.js → check-lang.js en orden; es idempotente). Los generadores van primero
   y los verificadores después, porque miran el HTML ya construido. También se pueden
   correr sueltos si hace falta.
+
+## Las dos copias del CSS
+
+`index.html` no carga `pit-v2.css`: tiene su propio `<style>` inline. **76 selectores
+existen en las dos copias y hay que moverlos juntos.** `pit-v2.css` se tocó en 16 commits
+y en los 16 hubo que tocar `index.html` también.
+
+**`node _build/build.js` ahora lo verifica** (`_build/check-css.js`): compara los valores
+**ya resueltos** —cada `var(--token)` reemplazado por lo que vale en su contexto, la home
+con su bloque inline y las 17 subpáginas con `ds.css` pisado por `pit-v2.css`— y falla
+nombrando selector y propiedad. Por eso no da falso positivo cuando una copia escribe
+`var(--pit-ink-20)` y la otra `#BFBFBF`: son lo mismo hasta que dejen de serlo.
+
+### Por qué NO se unificaron en una sola fuente
+Se evaluó generar la copia de la home inyectando `pit-v2.css` en `index.html` entre
+marcadores, como hace `sync-nav.js` con el nav. **No cierra**, por tres razones medidas:
+
+1. **`pit-v2.css` trae reglas que la home no debe recibir.** `body { padding-top: 84px }`
+   deja lugar a la nav flotante en las subpáginas; la home no lo lleva porque su hero
+   arranca pegado arriba. Inyectando el archivo tal cual en la home (probado en el
+   navegador) el hero baja **84px** y la página crece 84px: aparece una banda blanca
+   arriba y la franja de respaldos se va del pliegue, que es justo lo que el hero está
+   calibrado para evitar. Haría falta una lista de exclusiones — otro contrato implícito
+   que mantener, del mismo tipo que el que causó el problema.
+2. **Inyectar no elimina la duplicación, la duplica más.** Para que haya una sola fuente
+   hay que además *borrar* los 76 selectores compartidos del bloque inline. No están
+   juntos: alternan con los de la home en **15 tramos**, con los comentarios que explican
+   cada decisión intercalados entre medio.
+3. **Cambiaría el orden de cascada.** Hoy cada regla de la home tiene una posición
+   concreta respecto de las compartidas. Al mover todas las compartidas a una región
+   única, toda regla propia que hoy va *antes* pasaría a ir *después*. Con 168 reglas
+   inline y tramos de hasta 60 seguidas, auditar cada empate de especificidad no es
+   verificable con confianza.
+
+Dos cosas sí son más chicas de lo que parecían, por si alguien retoma la idea: solo
+**2 tokens** (`--pit-blue` y `--pit-ink-20`) habría que arrastrar de `ds.css`, y la
+divergencia real entre las copias era **1 regla**, no 4 (`.lang-btn`, ya arreglada; el
+resto eran `var()` contra hex equivalente y diferencias de espaciado).
+
+Conclusión: **duplicación documentada y verificada** en vez de un generador frágil. El
+costo que quedaba —que se separaran sin que nadie se enterara— es el que `check-css.js`
+elimina.
 
 ## Foro (portal de contenido)
 

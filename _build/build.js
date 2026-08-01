@@ -11,6 +11,7 @@ const STEPS = [
   { file: 'sync-nav.js', label: 'sync-nav.js' },
   { file: 'sync-staging.js', label: 'sync-staging.js  (bandera noindex)' },
   { file: 'check-lang.js', label: 'check-lang.js  (diccionario ES/EN)' },
+  { file: 'check-css.js', label: 'check-css.js   (las dos copias del CSS)' },
 ];
 
 let failed = false;
