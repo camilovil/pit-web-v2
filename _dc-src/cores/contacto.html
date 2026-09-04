@@ -22,12 +22,16 @@
        despojado de su apariencia nativa. */
     .ct-linkbtn { font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-blue); background: none; border: none; border-bottom: 1px solid var(--pit-blue); padding: 0 0 2px; cursor: pointer; }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .contacto-grid, .contacto-grid > * { min-width: 0; }
+    .contacto-email { overflow-wrap: anywhere; }
+    #contacto-form, #contacto-ok { width: 100%; min-width: 0; box-sizing: border-box; }
+    @media (max-width: 420px) { #contacto-form, #contacto-ok { padding: 28px 24px !important; } .ct-linkbtn { min-height: 44px; padding: 10px 4px; } }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
 </style>
 <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <x-import component-from-global-scope="FrussoDS.Ruler" accent="end" hint-size="100%,6px"></x-import>
-      <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: start; padding-top: 40px;">
+      <div class="m-stack contacto-grid" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: start; padding-top: 40px;">
         <div>
           <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="220px,18px">Contacto</x-import>
           <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px; max-width: 18ch;" hint-size="100%,80px">El consultorio queda en Belgrano.</x-import>
@@ -38,7 +42,7 @@
             </div>
             <div style="padding: 18px 4px; border-bottom: 1px solid var(--pit-ink-10);">
               <span style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pit-blue);">Email</span>
-              <div style="font-size: 17px; font-weight: 600; margin-top: 4px;"><a href="mailto:ricardo.frusso@hospitalitaliano.org.ar" style="color: var(--pit-ink);">ricardo.frusso@hospitalitaliano.org.ar</a></div>
+              <div style="font-size: 17px; font-weight: 600; margin-top: 4px;"><a class="contacto-email" href="mailto:ricardo.frusso@hospitalitaliano.org.ar" style="color: var(--pit-ink);">ricardo.frusso@<wbr>hospitalitaliano.org.ar</a></div>
             </div>
             <!-- Fila "WhatsApp" OCULTA: no tenemos el dato todavia (Número a confirmar con Ricardo). Se muestra
                  una linea vacia o "Placeholder" es peor que no mostrar la fila.

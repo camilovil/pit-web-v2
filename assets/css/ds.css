@@ -188,6 +188,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
+  box-sizing: border-box;
   gap: 8px;
   font-family: var(--pit-font-sans);
   font-weight: 600;

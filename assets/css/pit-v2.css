@@ -74,7 +74,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 body { padding-top: 84px; background: #FFFFFF; }
 
 /* ---- botones pill ---- */
-.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+.v2-btn { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
 .v2-btn:hover { transform: translateY(-2px); }
 .v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
 .v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
@@ -135,6 +135,7 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--pit-ink-20); border-radius: 999px; padding: 2px; }
 .lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; background: none; border: none; color: var(--pit-ink-40); padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 .lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
+.v2-lang-toggle--drawer .lang-btn { min-height: 44px; }
 
 /* Nav → menú hamburguesa. Breakpoint = ancho mínimo medido (nowrap) para que
    quepan los 7 links + logo + CTA + toggle ES/EN sin comprimirse, + margen.

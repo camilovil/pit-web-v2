@@ -230,10 +230,10 @@ ${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <link rel="stylesheet" href="assets/css/fonts.css?v=2">
-  <link rel="stylesheet" href="assets/css/ds.css?v=2">
+  <link rel="stylesheet" href="assets/css/ds.css?v=3">
   <link rel="stylesheet" href="assets/css/pit-mobile.css?v=2">
   <link rel="stylesheet" href="assets/css/pit-motion.css?v=2">
-  <link rel="stylesheet" href="assets/css/pit-v2.css?v=2">
+  <link rel="stylesheet" href="assets/css/pit-v2.css?v=3">
   <style>
 ${extraCss}
   </style>
@@ -245,7 +245,7 @@ const FOOT = `
 <script src="assets/js/pit-forms.js?v=2"></script>
 <script src="assets/js/pit-v2.js?v=2"></script>
 <script src="assets/js/pit-motion.js?v=2"></script>
-<script src="assets/js/pit-chat.js?v=2"></script>
+<script src="assets/js/pit-chat.js?v=3"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
 <script src="assets/js/pit-lang.js?v=2"></script>
 </body>

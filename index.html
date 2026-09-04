@@ -135,7 +135,7 @@
     a:hover { color: var(--v2-navy); }
 
     /* ---- pill buttons ---- */
-    .v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+    .v2-btn { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 8px; font-family: var(--pit-font-sans); font-weight: 600; font-size: var(--txt-sm); line-height: 1; padding: 15px 28px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
     .v2-btn:hover { transform: translateY(-2px); }
     .v2-btn--navy { background: var(--v2-navy); color: #FFFFFF; }
     .v2-btn--navy:hover { background: var(--v2-navy-80); color: #FFFFFF; box-shadow: 0 12px 28px rgba(0,11,51,0.25); }
@@ -151,7 +151,7 @@
        Vive SOLO en la home: los bloques que lo usan los escriben
        sync-foro-home.js y sync-cursos-home.js, y no hay ninguno en las otras
        17 páginas, así que no tiene copia en pit-v2.css. */
-    .v2-btn--linea { background: #FFFFFF; color: var(--v2-navy); border: 1px solid rgba(0,11,51,0.22); padding: 11px 20px; font-size: var(--txt-xs); }
+    .v2-btn--linea { min-height: 44px; background: #FFFFFF; color: var(--v2-navy); border: 1px solid rgba(0,11,51,0.22); padding: 11px 20px; font-size: var(--txt-xs); }
     .v2-btn--linea:hover { border-color: var(--v2-navy); background: var(--v2-navy); color: #FFFFFF; }
 
     .v2-eyebrow { font-family: var(--pit-font-mono); font-weight: 500; font-size: var(--txt-2xs); letter-spacing: 0.16em; text-transform: uppercase; }
@@ -204,6 +204,7 @@
     .v2-lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid #BFBFBF; border-radius: 999px; padding: 2px; }
     .lang-btn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: .08em; background: none; border: none; color: #5F6C78; padding: 9px 12px; min-height: 36px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
     .lang-btn.lang-active { background: #2563EB; color: #FFFFFF; }
+    .v2-lang-toggle--drawer .lang-btn { min-height: 44px; }
 
     /* ---- hero ---- */
     /* El hero se mide contra la ALTURA de pantalla, no solo el ancho: así en
@@ -320,7 +321,7 @@
     /* 12px es el piso para controles con borde y fondo: a 10px las pastillas
        se leían como una tira continua en vez de cuatro opciones. */
     .v2-tabs { display: flex; gap: 12px; flex-wrap: wrap; margin: 26px 0 0; }
-    .v2-tab { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(0,11,51,0.15); background: #FFFFFF; color: var(--v2-navy); cursor: pointer; transition: all 0.25s ease; }
+    .v2-tab { min-height: 44px; box-sizing: border-box; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(0,11,51,0.15); background: #FFFFFF; color: var(--v2-navy); cursor: pointer; transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease; }
     .v2-tab:hover { border-color: var(--v2-blue); color: var(--v2-blue); }
     .v2-tab.active { background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
     .v2-data-panel { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; margin-top: 36px; }
@@ -517,7 +518,7 @@
          uno arriba del otro: se leian como dos cosas sueltas. Van a un ancho
          comun, que es lo que se espera de un par de botones apilados. */
       .v2-hero-ctas { flex-direction: column; align-items: center; gap: 10px; }
-      .v2-hero-ctas .v2-btn { width: 100%; max-width: 300px; }
+      .v2-hero-ctas .v2-btn { width: 100%; max-width: 300px; min-height: 47px; }
 
       /* Titulos de seccion: mismo problema de reparto que el eyebrow. El de la
          bifurcacion caia en cuatro lineas con "para vos" solo en la ultima. */
@@ -631,9 +632,9 @@
     .v2-cursos-btn:disabled { border-color: rgba(0,11,51,0.10); color: rgba(0,11,51,0.25); cursor: default; }
 
     .v2-cursos-dots { display: flex; align-items: center; gap: 2px; margin-inline-start: 8px; }
-    /* El puntito visible es el ::before; el <button> que lo envuelve mide 22px
-       para que se pueda tocar con el dedo — un blanco de 8px no se acierta. */
-    .v2-cursos-dot { min-width: 22px; height: 22px; border: none; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+    /* El puntito visible es el ::before; el <button> que lo envuelve tiene un
+       área táctil amplia aunque el indicador visual siga siendo pequeño. */
+    .v2-cursos-dot { min-width: 32px; height: 32px; border: none; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
     .v2-cursos-dot::before { content: ""; display: block; width: 8px; height: 8px; border-radius: 999px; background: rgba(0,11,51,0.24); transition: width 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
     .v2-cursos-dot:hover::before { background: rgba(0,11,51,0.42); }
     .v2-cursos-dot[aria-current="true"]::before { width: 20px; background: var(--v2-blue); }
@@ -655,7 +656,7 @@
       .v2-cursos-track { scroll-behavior: smooth; }
     }
   </style>
-  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=2">
+  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=3">
 </head>
 <body>
 
@@ -1337,7 +1338,7 @@
      <section> que ya tienen las otras 17 páginas, y el inline sigue manejando
      los elementos y los contadores. -->
 <script src="assets/js/pit-motion.js?v=2"></script>
-<script src="assets/js/pit-chat.js?v=2"></script>
+<script src="assets/js/pit-chat.js?v=3"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
 <!-- PIT-PRIVACY-UI:START -->
 

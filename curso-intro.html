@@ -23,7 +23,7 @@
   <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <link rel="stylesheet" href="assets/css/fonts.css?v=2">
-  <link rel="stylesheet" href="assets/css/ds.css?v=2">
+  <link rel="stylesheet" href="assets/css/ds.css?v=3">
   <link rel="stylesheet" href="assets/css/pit-mobile.css?v=2">
   <link rel="stylesheet" href="assets/css/pit-motion.css?v=2">
   <style>
@@ -64,14 +64,16 @@
     .ci-opt input[type="radio"] { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
     .ci-opt:focus-within { outline: 2px solid var(--pit-blue, #2563EB); outline-offset: 3px; }
     .ci-qnum { font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); text-transform: uppercase; letter-spacing: 0.06em; color: var(--pit-blue, #2563EB); }
-    .ci-linkbtn { font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); background: none; border: none; padding: 0; cursor: pointer; text-align: start; }
+    .ci-linkbtn { min-height: 44px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-60); background: none; border: none; padding: 10px 4px; cursor: pointer; text-align: start; }
     .ci-linkbtn--next { color: var(--pit-blue, #2563EB); text-align: end; }
-    .ci-linkbtn--blue { color: var(--pit-blue, #2563EB); border-bottom: 1px solid var(--pit-blue, #2563EB); padding-bottom: 2px; }
+    .ci-linkbtn--blue { color: var(--pit-blue, #2563EB); border-bottom: 1px solid var(--pit-blue, #2563EB); }
+    @media (max-width: 480px) { .ci-bottom-nav { flex-direction: column; gap: 8px !important; } .ci-bottom-nav > span:empty { display: none; } }
+    @media (max-width: 360px) { .ci-topbar { gap: 12px !important; padding-inline: 16px !important; } .ci-progress-wrap { gap: 8px !important; } .ci-progress-wrap .m-bar { width: 64px !important; } }
     /* Texto solo para lectores de pantalla: el tilde ✓ de la fila completada es
        decorativo (aria-hidden) y sin esto el estado no se anunciaba. */
     .ci-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
   </style>
-  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=2">
+  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=3">
 </head>
 <body>
 
@@ -84,7 +86,7 @@
 
   <!-- ============ BARRA SUPERIOR (aula) ============ -->
   <header style="background: var(--pit-ink); color: var(--pit-paper); position: sticky; top: 0; z-index: 50;">
-    <div style="max-width: 1360px; margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 12px 24px;">
+    <div class="ci-topbar" style="max-width: 1360px; margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 12px 24px;">
       <a href="index.html" style="text-transform: uppercase; color: var(--pit-paper); flex-shrink: 0;">
         <span class="pit-logo pit-logo--on-dark"><span class="pit-logo-dr" style="color: #FFFFFF;">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span style="color: #FFFFFF;">Ricardo D.</span><span style="color: #FFFFFF;">Frusso</span></span></span>
       </a>
@@ -92,7 +94,7 @@
         <span class="pit-pipe pit-pipe--blue" style="display: inline-block; width: 4px; height: 28px; background: var(--pit-blue, #2563EB); border-radius: 2px;"></span>
         <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;">Curso gratuito · Introducción a PIT</span>
       </span>
-      <div style="margin-left: auto; display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
+      <div class="ci-progress-wrap" style="margin-left: auto; display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
         <span id="ci-progress-label" style="font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; color: rgba(255,255,255,0.7); white-space: nowrap;">0/4 · 0%</span>
         <!-- role="progressbar": la barra era un <div> decorativo y el porcentaje
              solo existia como texto suelto al lado. Con los aria-value* el
@@ -237,7 +239,7 @@
 
   function bottomNav() {
     var a = state.active;
-    var html = '<div style="display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; border-top: 1px solid var(--pit-ink-10); padding-top: 20px;">';
+    var html = '<div class="ci-bottom-nav" style="display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; border-top: 1px solid var(--pit-ink-10); padding-top: 20px;">';
     // <button> y no <span>: eran controles de navegacion sin foco ni Enter.
     html += a > 0
       ? '<button type="button" data-go="' + (a - 1) + '" class="ci-linkbtn">← ' + esc(LESSONS[a - 1].title) + '</button>'
@@ -423,7 +425,7 @@
 </script>
 
 <script src="assets/js/pit-motion.js?v=2"></script>
-<script src="assets/js/pit-chat.js?v=2"></script>
+<script src="assets/js/pit-chat.js?v=3"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
 <!-- PIT-PRIVACY-UI:START -->
 <button type="button" class="pit-privacy-standalone" data-privacy-open>Privacidad</button>

@@ -23,10 +23,11 @@
     '.pitchat-fab { position: fixed; bottom: 28px; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); inset-inline-end: 28px; inset-inline-end: calc(28px + env(safe-area-inset-right, 0px)); height: 56px; padding: 0 22px 0 18px; border-radius: 999px; background: #000B33; border: none; cursor: pointer; z-index: 950; display: flex; align-items: center; gap: 10px; box-shadow: 0 16px 40px rgba(0,11,51,0.35); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
     '.pitchat-fab:hover { transform: translateY(-3px); box-shadow: 0 22px 52px rgba(0,11,51,0.45); }',
     '.pitchat-fab-dot { width: 8px; height: 8px; border-radius: 50%; background: #5B7FDE; box-shadow: 0 0 0 4px rgba(91,127,222,0.25); }',
+    '.pitchat-fab-icon { display: none; width: 24px; height: 24px; color: #FFFFFF; }',
     '.pitchat-fab-label { color: #fff; font-weight: 600; font-size: var(--txt-sm, 15px); letter-spacing: -0.01em; }',
     // El max-height también resta el área segura: si el panel sube por el
     // inset pero conserva su alto, el borde de arriba se mete debajo del nav.
-    '.pitchat-panel { position: fixed; bottom: 100px; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); inset-inline-end: 28px; inset-inline-end: calc(28px + env(safe-area-inset-right, 0px)); width: 380px; max-width: calc(100vw - 32px); max-height: min(580px, calc(100vh - 140px)); max-height: min(580px, calc(100vh - 140px - env(safe-area-inset-bottom, 0px))); background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.7); border-radius: 24px; box-shadow: 0 32px 80px rgba(0,11,51,0.22); z-index: 951; display: none; flex-direction: column; overflow: hidden; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
+    '.pitchat-panel { position: fixed; bottom: 100px; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); inset-inline-end: 28px; inset-inline-end: calc(28px + env(safe-area-inset-right, 0px)); width: 380px; max-width: calc(100vw - 32px); max-height: min(580px, calc(100vh - 140px)); max-height: min(580px, calc(100vh - 140px - env(safe-area-inset-bottom, 0px))); box-sizing: border-box; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.7); border-radius: 24px; box-shadow: 0 32px 80px rgba(0,11,51,0.22); z-index: 951; display: none; flex-direction: column; overflow: hidden; font-family: var(--pit-font-sans, "Space Grotesk", sans-serif); }',
     '.pitchat-panel.open { display: flex; }',
     '.pitchat-head { background: linear-gradient(140deg, #000B33 0%, #1A2E6B 70%, #2C4BA8 100%); padding: 18px 20px; display: flex; align-items: center; gap: 12px; }',
     '.pitchat-head-pipe { width: 8px; height: 8px; border-radius: 50%; background: #5B7FDE; box-shadow: 0 0 0 4px rgba(91,127,222,0.3); }',
@@ -40,10 +41,10 @@
     '.pitchat-msg.bot { align-self: flex-start; background: #FFFFFF; border: 1px solid rgba(0,11,51,0.08); color: #000B33; border-bottom-left-radius: 6px; box-shadow: 0 4px 14px rgba(0,11,51,0.05); }',
     '.pitchat-msg.typing { color: #6F7C86; font-size: var(--txt-xs, 13px); }',
     '.pitchat-enlaces { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 8px; margin-top: -2px; }',
-    '.pitchat-enlace { font-family: var(--pit-font-mono, ui-monospace, monospace); font-size: var(--txt-2xs, 11px); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #000B33; background: #FFFFFF; border: 1px solid rgba(0,11,51,0.22); border-radius: 999px; padding: 9px 14px; text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }',
+    '.pitchat-enlace { min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; font-family: var(--pit-font-mono, ui-monospace, monospace); font-size: var(--txt-2xs, 11px); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #000B33; background: #FFFFFF; border: 1px solid rgba(0,11,51,0.22); border-radius: 999px; padding: 9px 14px; text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }',
     '.pitchat-enlace:hover { background: #000B33; border-color: #000B33; color: #FFFFFF; }',
     '.pitchat-sugs { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; background: transparent; }',
-    '.pitchat-sug { font-family: inherit; font-size: var(--txt-xs, 13px); font-weight: 500; color: #2563EB; background: #EFF4FE; border: 1px solid rgba(37,99,235,0.22); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }',
+    '.pitchat-sug { min-height: 44px; box-sizing: border-box; font-family: inherit; font-size: var(--txt-xs, 13px); font-weight: 500; color: #2563EB; background: #EFF4FE; border: 1px solid rgba(37,99,235,0.22); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }',
     '.pitchat-sug:hover { background: #FFFFFF; transform: translateY(-1px); }',
     '.pitchat-form { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid rgba(0,11,51,0.06); background: rgba(255,255,255,0.7); }',
     // 16px en mobile: iOS Safari hace zoom a toda la pagina cuando el texto de
@@ -53,11 +54,11 @@
     '.pitchat-input { flex: 1; border: 1px solid rgba(0,11,51,0.12); border-radius: 999px; outline: none; padding: 11px 18px; font-family: inherit; font-size: 16px; color: #000B33; min-width: 0; background: #FFFFFF; transition: border-color 0.2s ease; }',
     '@media (min-width: 640px) { .pitchat-input { font-size: var(--txt-sm, 15px); } }',
     '.pitchat-input:focus { border-color: #2563EB; }',
-    '.pitchat-send { background: #2563EB; color: #fff; border: none; font-family: inherit; font-weight: 600; font-size: var(--txt-sm, 15px); width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }',
+    '.pitchat-send { background: #2563EB; color: #fff; border: none; font-family: inherit; font-weight: 600; font-size: var(--txt-sm, 15px); width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }',
     '.pitchat-send:hover { background: #1E4FC4; transform: translateY(-1px); }',
     '.pitchat-send:disabled { background: #BFC7D6; cursor: default; transform: none; }',
     '.pitchat-note { font-size: var(--txt-2xs, 11px); color: #5F6C78; text-align: center; padding: 0 12px 10px; background: transparent; border-top: none; }',
-    '@media (max-width: 480px) { .pitchat-panel { inset-inline-end: 16px; inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { inset-inline-end: 20px; inset-inline-end: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab-label { display: none; } .pitchat-fab { padding: 0; width: 56px; justify-content: center; } }'
+    '@media (max-width: 480px) { .pitchat-panel { inset-inline-end: 16px; inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { inset-inline-end: 20px; inset-inline-end: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); padding: 0; width: 56px; justify-content: center; } .pitchat-fab-label, .pitchat-fab-dot { display: none; } .pitchat-fab-icon { display: block; } .pitchat-close { width: 44px; height: 44px; flex: 0 0 44px; } }'
   ].join('\n');
 
   function boot() {
@@ -71,7 +72,7 @@
     fab.setAttribute('aria-label', 'Abrir asistente sobre PIT');
     fab.setAttribute('aria-expanded', 'false');
     fab.setAttribute('aria-controls', 'pitchat-panel');
-    fab.innerHTML = '<span class="pitchat-fab-dot" aria-hidden="true"></span><span class="pitchat-fab-label">Preguntale a PIT</span>';
+    fab.innerHTML = '<span class="pitchat-fab-dot" aria-hidden="true"></span><svg class="pitchat-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span class="pitchat-fab-label">Preguntale a PIT</span>';
 
     var panel = document.createElement('div');
     panel.className = 'pitchat-panel';
@@ -93,7 +94,7 @@
       '<div class="pitchat-sugs"></div>' +
       '<form class="pitchat-form">' +
         '<input class="pitchat-input" type="text" aria-label="Escribí tu pregunta sobre PIT" placeholder="Preguntá sobre PIT…" maxlength="400">' +
-        '<button class="pitchat-send" type="submit">→</button>' +
+        '<button class="pitchat-send" type="submit" aria-label="Enviar pregunta">→</button>' +
       '</form>' +
       '<div class="pitchat-note">No reemplaza una consulta médica</div>';
 

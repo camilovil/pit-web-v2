@@ -34,7 +34,8 @@ for (const rel of [...rootPages, ...forumPages]) {
   const footer = /<div class="v2-footer-legal">[\s\S]*?<\/div>(?=\s*<\/footer>)/;
   const hasFooter = footer.test(html);
   if (hasFooter) html = html.replace(footer, legal(pre));
-  if (!html.includes('assets/css/pit-privacy.css')) html = html.replace('</head>', `  <link rel="stylesheet" href="${pre}assets/css/pit-privacy.css?v=2">\n</head>`);
+  html = html.replace(/assets\/css\/pit-privacy\.css\?v=\d+/g, 'assets/css/pit-privacy.css?v=3');
+  if (!html.includes('assets/css/pit-privacy.css')) html = html.replace('</head>', `  <link rel="stylesheet" href="${pre}assets/css/pit-privacy.css?v=3">\n</head>`);
   const langScript = /<script src="[^"]*assets\/js\/pit-lang\.js[^\"]*"><\/script>/;
   if (!langScript.test(html)) { console.error(`FAIL ${rel}: falta pit-lang.js`); failed = true; continue; }
   // La UI debe existir antes de que pit-lang.js recorra el documento; de otro

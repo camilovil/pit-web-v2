@@ -6,7 +6,7 @@
 .pit-privacy-btn { min-height: 44px; padding: 10px 16px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; color: #FFFFFF; background: transparent; font: 600 var(--txt-sm,15px)/1 var(--pit-font-sans,"Space Grotesk",sans-serif); cursor: pointer; }
 .pit-privacy-btn--primary { color: #000B33; background: #FFFFFF; border-color: #FFFFFF; }
 .pit-privacy-btn:focus-visible, .v2-footer-privacy:focus-visible { outline: 3px solid #8FAAF0; outline-offset: 3px; }
-.v2-footer-privacy { padding: 0; border: 0; color: #FFFFFF; background: none; font: inherit; letter-spacing: inherit; text-transform: inherit; text-shadow: inherit; cursor: pointer; }
+.v2-footer-privacy { min-height: 44px; padding: 10px 0; display: inline-flex; align-items: center; border: 0; color: #FFFFFF; background: none; font: inherit; letter-spacing: inherit; text-transform: inherit; text-shadow: inherit; cursor: pointer; }
 .v2-footer-privacy:hover { opacity: .75; }
 .pit-privacy-standalone { position: fixed; inset-inline-start: 16px; bottom: 16px; z-index: 900; min-height: 44px; padding: 10px 15px; border: 1px solid #DCE2EB; border-radius: 999px; color: #000B33; background: #FFFFFF; box-shadow: 0 8px 26px rgba(0,11,51,.14); font: 600 var(--txt-sm,15px)/1 var(--pit-font-sans,"Space Grotesk",sans-serif); cursor: pointer; }
 .pit-privacy-dialog { width: min(620px, calc(100vw - 32px)); padding: 0; color: #000B33; background: #FFFFFF; border: 0; border-radius: 24px; box-shadow: 0 28px 90px rgba(0,11,51,.35); font-family: var(--pit-font-sans,"Space Grotesk",sans-serif); }

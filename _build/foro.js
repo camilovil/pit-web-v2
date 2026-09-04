@@ -286,10 +286,10 @@ ${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <link rel="stylesheet" href="${pre}assets/css/fonts.css?v=2">
-  <link rel="stylesheet" href="${pre}assets/css/ds.css?v=2">
+  <link rel="stylesheet" href="${pre}assets/css/ds.css?v=3">
   <link rel="stylesheet" href="${pre}assets/css/pit-mobile.css?v=2">
   <link rel="stylesheet" href="${pre}assets/css/pit-motion.css?v=2">
-  <link rel="stylesheet" href="${pre}assets/css/pit-v2.css?v=2">
+  <link rel="stylesheet" href="${pre}assets/css/pit-v2.css?v=3">
   <style>
     body { margin: 0; background: #FFFFFF; }
     a { color: #2563EB; text-decoration: none; }
@@ -307,7 +307,7 @@ const FOOT = (pre) => `
 <script src="${pre}assets/js/pit-forms.js?v=2"></script>
 <script src="${pre}assets/js/pit-v2.js?v=2"></script>
 <script src="${pre}assets/js/pit-motion.js?v=2"></script>
-<script src="${pre}assets/js/pit-chat.js?v=2"></script>
+<script src="${pre}assets/js/pit-chat.js?v=3"></script>
 <script src="${pre}assets/js/pit-scrolltop.js?v=2"></script>
 <script src="${pre}assets/js/pit-lang.js?v=2"></script>
 </body>
@@ -537,12 +537,14 @@ function renderIndex(posts) {
     .foro-dest-btn:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 3px; }
     .foro-dest-btn:disabled { border-color: var(--pit-ink-10); color: var(--pit-ink-20); cursor: default; }
     .foro-dest-dots { display: flex; align-items: center; gap: 2px; margin-inline-start: 8px; }
-    .foro-dest-dot { min-width: 22px; height: 22px; border: none; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+    .foro-dest-dot { min-width: 32px; height: 32px; border: none; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
     .foro-dest-dot::before { content: ""; display: block; width: 8px; height: 8px; border-radius: 999px; background: var(--pit-ink-20); transition: width 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
     .foro-dest-dot[aria-current="true"]::before { width: 20px; background: var(--pit-blue); }
     .foro-dest-dot:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 1px; border-radius: 999px; }
     @media (prefers-reduced-motion: no-preference) { .foro-dest-track { scroll-behavior: smooth; } }
-    @media (max-width: 820px) { .foro-dest { grid-template-columns: 1fr; } }`;
+    .foro-audiencia label { min-height: 44px; box-sizing: border-box; }
+    @media (max-width: 820px) { .foro-dest { grid-template-columns: minmax(0, 1fr); } }
+    @media (max-width: 420px) { .foro-audiencia { flex-direction: column; } }`;
 
   const filterCss = `    @media (max-width: 620px) {
       /* Los nueve filtros ocupaban cuatro renglones antes de que empezara el
@@ -557,7 +559,7 @@ function renderIndex(posts) {
       .foro-filtros::-webkit-scrollbar { display: none; }
       .foro-filtros > * { flex: 0 0 auto; }
     }
-    .foro-filter { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
+    .foro-filter { min-height: 44px; box-sizing: border-box; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease; }
     .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
     .foro-filter.on { background: var(--pit-ink); border-color: var(--pit-ink); color: #FFFFFF; }
     .foro-row:hover { color: var(--pit-ink); }
@@ -572,7 +574,7 @@ function renderIndex(posts) {
     #foro-q[aria-invalid="true"], #foro-email[aria-invalid="true"] { border-color: var(--pit-error-on-dark); }
     /* "Enviar otra pregunta" era un <span> con cursor:pointer: parecía control
        pero no recibía foco ni respondía a Enter. */
-    .foro-linkbtn { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); background: none; border: none; border-bottom: 1px solid var(--pit-ink-20); padding: 0 0 2px; cursor: pointer; }
+    .foro-linkbtn { min-height: 44px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); background: none; border: none; border-bottom: 1px solid var(--pit-ink-20); padding: 10px 4px; cursor: pointer; }
     .foro-linkbtn:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; }
     /* Etiquetas y notas del form, que vive sobre el navy de la sección.
        Antes usaban --pit-ink-40 (#5F6C78), el gris pensado para fondo claro:
@@ -692,7 +694,7 @@ ${rows}
            + ancho intrinseco del textarea) mide mas que la columna, y a 375px
            empujaba la seccion entera 21px fuera de pantalla. -->
       <form id="foro-form" style="display: grid; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 32px; box-sizing: border-box; min-width: 0;">
-        <div style="display: flex; gap: 10px;">
+        <div class="foro-audiencia" style="display: flex; gap: 10px;">
           <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="paciente" checked style="accent-color: #2563EB;"> Soy paciente</label>
           <label style="flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-20); border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); padding: 12px 14px; cursor: pointer;"><input type="radio" name="audiencia" value="profesional" style="accent-color: #2563EB;"> Soy profesional</label>
         </div>
