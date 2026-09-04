@@ -509,6 +509,48 @@
       .v2-foro-tit { grid-column: 1 / -1; margin-top: 2px; }
       .v2-foro-leer { display: none; }
     }
+
+    /* ---- Próximos cursos presenciales (carrusel) ----
+       Las tarjetas las ESCRIBE _build/sync-cursos-home.js desde los posts del
+       foro que traen los campos `evento*`, entre los marcadores
+       PIT-CURSOS-HOME: no se editan a mano acá.
+       El deslizamiento es scroll-snap nativo, sin librería: el track es un
+       scroller horizontal y cada tarjeta un punto de anclaje. Así funciona con
+       gesto táctil, con rueda horizontal, con teclado (las tarjetas son
+       enlaces y reciben foco) y con los botones de abajo. El JS solo empuja el
+       scroll y pinta los puntitos; si no corre, el bloque sigue siendo
+       deslizable a mano.
+       Cada tarjeta trae su color en --acento, que sale del banner de esa
+       ciudad. Componente solo de la home: no tiene copia en pit-v2.css. */
+    .v2-cursos-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; margin: 0 -4px; padding: 4px; }
+    .v2-cursos-track::-webkit-scrollbar { display: none; }
+    .v2-curso { scroll-snap-align: center; display: flex; flex-direction: column; gap: 18px; padding: 32px 34px 30px; border-radius: var(--v2-radius); background: var(--v2-navy); color: #FFFFFF; text-decoration: none; box-shadow: inset 4px 0 0 var(--acento); min-width: 0; }
+    .v2-curso-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .v2-curso-zona { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; background: var(--acento); border-radius: 999px; padding: 5px 12px; }
+    .v2-curso-tema { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+    .v2-curso-tit { font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; margin: 0; max-width: 30ch; }
+    .v2-curso-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.14); }
+    .v2-curso-datos > span { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; min-width: 0; }
+    .v2-curso-datos small { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    .v2-curso-datos b { font-size: var(--txt-sm); font-weight: 600; line-height: 1.45; }
+    .v2-curso-cta { font-weight: 600; font-size: var(--txt-sm); color: #FFFFFF; margin-top: auto; }
+    .v2-curso:hover .v2-curso-cta { text-decoration: underline; text-underline-offset: 4px; }
+
+    .v2-cursos-nav { display: flex; align-items: center; gap: 14px; margin-top: 22px; }
+    .v2-cursos-btn { width: 40px; height: 40px; border-radius: 999px; border: 1px solid rgba(0,11,51,0.16); background: #FFFFFF; color: var(--v2-navy); font-size: var(--txt-md); line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s ease, opacity 0.2s ease; }
+    .v2-cursos-btn:hover:not(:disabled) { border-color: var(--v2-blue); color: var(--v2-blue); }
+    .v2-cursos-btn:disabled { opacity: 0.3; cursor: default; }
+    .v2-cursos-dots { display: flex; gap: 8px; margin-inline-start: auto; }
+    .v2-cursos-dot { width: 8px; height: 8px; border-radius: 999px; border: none; padding: 0; background: rgba(0,11,51,0.18); cursor: pointer; transition: background 0.2s ease, width 0.2s ease; }
+    .v2-cursos-dot[aria-current="true"] { width: 24px; background: var(--v2-blue); }
+
+    @media (max-width: 860px) {
+      .v2-curso { padding: 26px 24px 24px; }
+      .v2-curso-datos { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .v2-cursos-track { scroll-behavior: smooth; }
+    }
   </style>
 </head>
 <body>
@@ -836,6 +878,78 @@
     </div>
   </section>
 
+  <!-- ============ PRÓXIMOS CURSOS ============ -->
+  <!-- PIT-CURSOS-HOME:START — lo escribe _build/sync-cursos-home.js desde los posts del foro con campos evento*. No editar a mano: se regenera en cada build. -->
+  <section class="v2-section" id="cursos-presenciales">
+    <div class="v2-wrap">
+      <div class="v2-reveal">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px;">
+          <div>
+            <span class="v2-eyebrow" style="color: var(--v2-blue);">Próximos cursos</span>
+            <h2 class="v2-title" style="margin-top: 14px;">Formación presencial, con práctica sobre pacientes reales</h2>
+          </div>
+          <a href="foro.html" style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate);">Ver todo el foro →</a>
+        </div>
+
+        <div class="v2-cursos-track" id="v2-cursos-track" role="region" aria-label="Próximos cursos" tabindex="0">
+            <a class="v2-curso" href="foro/curso-salta-miembros-inferiores.html" style="--acento: #2B5CE6;">
+              <span class="v2-curso-top">
+                <span class="v2-curso-zona">Salta</span>
+                <span class="v2-curso-tema">Miembros inferiores</span>
+              </span>
+              <h3 class="v2-curso-tit">Curso en Salta: el dolor de miembros inferiores, desde los nervios</h3>
+              <span class="v2-curso-datos">
+                <span><small>Fecha y hora</small><b>Viernes 04/09 · 14 a 20 hs</b></span>
+                <span><small>Lugar</small><b>Ciudad de Salta</b></span>
+                <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
+                <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469<br>cursopitsalta@gmail.com</b></span>
+              </span>
+              <span class="v2-curso-cta">Ver el curso →</span>
+            </a>
+            <a class="v2-curso" href="foro/curso-jujuy-dorso-lumbar.html" style="--acento: #C05A2B;">
+              <span class="v2-curso-top">
+                <span class="v2-curso-zona">San Salvador de Jujuy</span>
+                <span class="v2-curso-tema">Zona dorso-lumbar</span>
+              </span>
+              <h3 class="v2-curso-tit">Curso en Jujuy: tratamiento del dolor de la zona dorso-lumbar con Lyftogt PIT</h3>
+              <span class="v2-curso-datos">
+                <span><small>Fecha y hora</small><b>Sábado 05/09 · 08:30 a 13:00 hs</b></span>
+                <span><small>Lugar</small><b>Consejo de Médicos de Jujuy · La Reina Mora 656</b></span>
+                <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
+                <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469</b></span>
+              </span>
+              <span class="v2-curso-cta">Ver el curso →</span>
+            </a>
+            <a class="v2-curso" href="foro/curso-tucuman-cabeza-cuello-hombro.html" style="--acento: #157A57;">
+              <span class="v2-curso-top">
+                <span class="v2-curso-zona">Tucumán</span>
+                <span class="v2-curso-tema">Cabeza, cuello y hombro</span>
+              </span>
+              <h3 class="v2-curso-tit">Curso en Tucumán: el dolor de la cabeza, el cuello y el hombro con Lyftogt PIT</h3>
+              <span class="v2-curso-datos">
+                <span><small>Fecha y hora</small><b>Martes 08/09 · 08:30 a 15:00 hs</b></span>
+                <span><small>Lugar</small><b>San Miguel de Tucumán</b></span>
+                <span><small>Modalidad</small><b>Presencial y virtual</b></span>
+                <span><small>Inscripción por WhatsApp</small><b>+54 9 381 597-6087</b></span>
+              </span>
+              <span class="v2-curso-cta">Ver el curso →</span>
+            </a>
+        </div>
+
+        <div class="v2-cursos-nav">
+          <button type="button" class="v2-cursos-btn" data-curso-prev aria-label="Curso anterior">←</button>
+          <button type="button" class="v2-cursos-btn" data-curso-next aria-label="Curso siguiente">→</button>
+          <div class="v2-cursos-dots">
+            <button type="button" class="v2-cursos-dot" data-curso-dot="0" aria-current="true" aria-label="Ir al curso de Salta"></button>
+            <button type="button" class="v2-cursos-dot" data-curso-dot="1" aria-current="false" aria-label="Ir al curso de San Salvador de Jujuy"></button>
+            <button type="button" class="v2-cursos-dot" data-curso-dot="2" aria-current="false" aria-label="Ir al curso de Tucumán"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- PIT-CURSOS-HOME:END -->
+
   <!-- ============ CURSO (NAVY) ============ -->
   <section class="v2-section v2-dark" style="border-radius: 36px; max-width: 1228px; margin: 0 auto; box-sizing: border-box;">
     <div class="v2-wrap">
@@ -958,6 +1072,80 @@
         if (de) de.innerHTML = d.desc;
         if (bar) bar.style.width = d.pct + '%';
       });
+
+      // ---- carrusel de próximos cursos ----
+      // El deslizamiento REAL lo hace el CSS (scroll-snap sobre un scroller
+      // horizontal). Esto solo agrega los botones y los puntitos: si el JS no
+      // corre, el bloque sigue siendo deslizable con el dedo, con la rueda y
+      // con el tabulador. Por eso no se oculta nada desde CSS esperando al JS.
+      var cTrack = document.getElementById('v2-cursos-track');
+      if (cTrack) {
+        var cards = [].slice.call(cTrack.querySelectorAll('.v2-curso'));
+        var dots = [].slice.call(document.querySelectorAll('[data-curso-dot]'));
+        var prev = document.querySelector('[data-curso-prev]');
+        var next = document.querySelector('[data-curso-next]');
+
+        // Distancia de una tarjeta al borde del track, en píxeles de scroll.
+        // Se mide con getBoundingClientRect en vez de offsetLeft porque el
+        // track tiene margen negativo y padding propios: con offsetLeft el
+        // cálculo salía 4px corrido y solo lo tapaba el scroll-snap.
+        function pos(c) {
+          return cTrack.scrollLeft + (c.getBoundingClientRect().left - cTrack.getBoundingClientRect().left);
+        }
+
+        // Cuál está a la vista: el que tiene su borde izquierdo más cerca del
+        // borde del track. Se calcula del scroll real y no de un índice propio,
+        // así el gesto táctil y los botones no pueden desincronizarse.
+        function actual() {
+          var idx = 0, mejor = Infinity;
+          for (var i = 0; i < cards.length; i++) {
+            var d = Math.abs(pos(cards[i]) - cTrack.scrollLeft);
+            if (d < mejor) { mejor = d; idx = i; }
+          }
+          return idx;
+        }
+
+        // `i` opcional: cuando el movimiento lo dispara un botón o un puntito
+        // ya sabemos a dónde vamos, y pintar de una hace que la interfaz
+        // responda en el acto en vez de esperar a que termine el scroll suave.
+        // Sin argumento (gesto táctil, rueda) se deduce de la posición real.
+        function pintar(i) {
+          if (i == null) i = actual();
+          for (var k = 0; k < dots.length; k++) {
+            dots[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+          }
+          if (prev) prev.disabled = i <= 0;
+          if (next) next.disabled = i >= cards.length - 1;
+        }
+
+        function ir(i) {
+          i = Math.max(0, Math.min(cards.length - 1, i));
+          var c = cards[i];
+          if (!c) return;
+          // SIN behavior: 'smooth' a propósito. La suavidad la pone el CSS, que
+          // ya la tiene dentro de un @media (prefers-reduced-motion:
+          // no-preference); pasarla acá pisaría esa preferencia y le animaría
+          // el scroll igual a quien pidió que no se le anime nada.
+          cTrack.scrollTo({ left: pos(c) });
+          pintar(i);
+        }
+
+        if (prev) prev.addEventListener('click', function () { ir(actual() - 1); });
+        if (next) next.addEventListener('click', function () { ir(actual() + 1); });
+        for (var d0 = 0; d0 < dots.length; d0++) {
+          (function (k) {
+            dots[k].addEventListener('click', function () { ir(k); });
+          })(d0);
+        }
+
+        var tick;
+        cTrack.addEventListener('scroll', function () {
+          clearTimeout(tick);
+          tick = setTimeout(pintar, 90);
+        }, { passive: true });
+        addEventListener('resize', pintar, { passive: true });
+        pintar();
+      }
 
       // ---- reveals + counters ----
       var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;

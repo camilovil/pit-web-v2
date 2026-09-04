@@ -19,17 +19,31 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
 ## Arquitectura
 - 11 páginas núcleo + portal del foro (8 publicaciones con URL propia).
 - Build completo: **`node _build/build.js`** (corre convert.js → foro.js → sync-nav.js →
-  sync-foro-home.js, idempotente). Generadores sueltos: `convert.js` (páginas desde
-  `_dc-src/`), `foro.js` (foro desde `_content/foro/*.md`), `sync-nav.js` (nav en páginas
-  manuales), `sync-foro-home.js` (últimas publicaciones del foro en la home).
+  sync-foro-home.js → sync-cursos-home.js, idempotente). Generadores sueltos:
+  `convert.js` (páginas desde `_dc-src/`), `foro.js` (foro desde `_content/foro/*.md`),
+  `sync-nav.js` (nav en páginas manuales), `sync-foro-home.js` (últimas publicaciones del
+  foro en la home), `sync-cursos-home.js` (carrusel de próximos cursos en la home).
 - **Nav en una sola fuente:** `_build/nav.js` define el menú (header + drawer); un cambio
   se hace SOLO ahí y se propaga a las 17 páginas al buildear. Las fuentes `.dc.html`
   conservan un bloque de nav que el build reemplaza (no editar el nav ahí).
 - `index.html` y `curso-intro.html` son manuales (el aula del curso intro es una
   app vanilla JS con quizzes + progreso en localStorage). `index.html` recibe el nav
-  vía `sync-nav.js` entre marcadores `<!-- PIT-NAV:START/END -->`, y las últimas tres
-  publicaciones del foro vía `sync-foro-home.js` entre `<!-- PIT-FORO-HOME:START/END -->`.
+  vía `sync-nav.js` entre marcadores `<!-- PIT-NAV:START/END -->`, las últimas tres
+  publicaciones del foro vía `sync-foro-home.js` entre `<!-- PIT-FORO-HOME:START/END -->`
+  y el carrusel de próximos cursos vía `sync-cursos-home.js` entre
+  `<!-- PIT-CURSOS-HOME:START/END -->`.
   **Lo que está entre marcadores no se edita a mano**: el build lo reescribe.
+- **Los cursos son publicaciones del foro.** Un post con los campos `evento*` en el
+  frontmatter (`eventoFecha`, `eventoFechaLabel`, `eventoLugar`, `eventoZona`,
+  `eventoModalidad`, `eventoWhatsapp`, `eventoTema`, `eventoAcento`, y `eventoEmail`
+  opcional) es el anuncio de un curso: aparece en el carrusel de la home y la tarjeta
+  lleva a ese mismo artículo. Una sola fuente, así la fecha de la tarjeta no puede
+  contradecir a la del artículo. `foro.js` exige el juego completo de campos o ninguno.
+  Esos posts se excluyen del bloque "lo último del foro" para que los dos bloques de la
+  home no muestren lo mismo. **Para retirar un curso que ya pasó** se le sacan los campos
+  `evento*` al post (el artículo queda publicado) o se borra el post: no hay filtro por
+  fecha de hoy a propósito, porque el HTML se commitea y el sitio cambiaría solo según el
+  día en que alguien corriera el build.
 - **Los posts del foro se leen desde un solo lugar:** `_build/foro-posts.js` (parser del
   frontmatter + tablas de categoría/audiencia + `esc`). Lo usan `foro.js` y
   `sync-foro-home.js`. Antes vivía dentro de `foro.js`, pero requerirlo desde otro

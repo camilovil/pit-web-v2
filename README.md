@@ -58,7 +58,18 @@ tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
   (`S27 · 03 jul`, `Caso clínico · Prof.`, el título), así que el diccionario ES/EN las
   traduce sin claves nuevas — salvo la del post más nuevo, que en `foro.html` es el
   destacado y arma su línea de otra forma: esa semana hay que agregar su clave
-  `Sxx · dd mmm`.
+  `Sxx · dd mmm`. Los anuncios de curso se excluyen de este listado: tienen su propio
+  bloque.
+- `_build/sync-cursos-home.js` — escribe el **carrusel de próximos cursos** en la home,
+  entre `<!-- PIT-CURSOS-HOME:START/END -->`. Los cursos son publicaciones del foro con
+  los campos `evento*` en el frontmatter, así que la tarjeta y el artículo que abre son
+  la misma fuente y no se pueden contradecir. Se ordenan por `eventoFecha` ascendente
+  (el más próximo primero) y se muestran tres. **No se filtra por la fecha de hoy**: el
+  HTML se commitea, y un filtro por `new Date()` haría que el sitio cambiara solo según
+  el día en que se corriera el build, con diffs que aparecen sin que nadie toque nada.
+  Para retirar un curso pasado, sacale los campos `evento*` al post o borralo.
+  El deslizamiento es scroll-snap nativo: sin JS el bloque igual se desliza con el dedo,
+  con la rueda y con el tabulador — el script solo agrega botones y puntitos.
 - `_build/site.js` — banderas del sitio. Hoy solo `STAGING` (ver "la palanca del
   lanzamiento" más arriba).
 - `_build/sync-staging.js` — propaga `STAGING` a las páginas manuales y a `vercel.json`.
@@ -71,8 +82,8 @@ tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
   (las que escribe el JS y no están en el HTML servido). También detecta claves y
   traducciones repetidas, las dos trampas del formato que documenta ese archivo.
 - **Build completo: `node _build/build.js`** (corre convert.js → foro.js → sync-nav.js →
-  sync-foro-home.js → sync-staging.js → check-lang.js → check-css.js en orden; es
-  idempotente). Los generadores van primero
+  sync-foro-home.js → sync-cursos-home.js → sync-staging.js → check-lang.js →
+  check-css.js en orden; es idempotente). Los generadores van primero
   y los verificadores después, porque miran el HTML ya construido. También se pueden
   correr sueltos si hace falta.
 

@@ -20,7 +20,7 @@
 // estas filas, hay que mirar check-lang.js.
 const fs = require('fs');
 const path = require('path');
-const { CAT_SHORT, AUD, esc, loadPosts } = require('./foro-posts');
+const { CAT_SHORT, AUD, esc, esCurso, loadPosts } = require('./foro-posts');
 
 const ROOT = path.join(__dirname, '..');
 const START = '<!-- PIT-FORO-HOME:START';   // se matchea por prefijo (el comentario lleva texto extra)
@@ -70,7 +70,11 @@ if (html.indexOf(START) !== html.lastIndexOf(START) || html.indexOf(END) !== htm
   process.exit(1);
 }
 
-const posts = loadPosts();
+// Los anuncios de curso salen de este listado: tienen su propio bloque en la
+// home (sync-cursos-home.js) y, si no se filtraran, las tres tarjetas de
+// "lo último del foro" quedarían mostrando exactamente lo mismo que el bloque
+// de arriba. En foro.html sí aparecen: ahí son publicaciones como cualquier otra.
+const posts = loadPosts().filter(p => !esCurso(p));
 if (!posts.length) {
   console.error('FAIL sync-foro-home: no hay publicaciones en _content/foro/');
   process.exit(1);
