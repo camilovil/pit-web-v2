@@ -10,7 +10,7 @@ fechaLabel: 25 ago 2026
 lectura: 3
 tags: Cursos, Noticias
 resumen: Primera parada del recorrido por el noroeste argentino. Jornada teórico-práctica sobre Lyftogt PIT aplicado al miembro inferior, con cupo limitado por la instancia práctica.
-portada: /img/DSC_knee01.webp
+portada: /img/cursos/salta-aviso.webp
 eventoFecha: 2026-09-04
 eventoFechaLabel: Viernes 04/09 · 14 a 20 hs
 eventoLugar: Ciudad de Salta
@@ -18,6 +18,7 @@ eventoZona: Salta
 eventoModalidad: Presencial y virtual en vivo
 eventoWhatsapp: +54 9 387 541-0469
 eventoEmail: cursopitsalta@gmail.com
+eventoImagen: /img/cursos/salta-nervios.webp
 eventoTema: Miembros inferiores
 eventoAcento: "#2B5CE6"
 ---
@@ -44,3 +45,9 @@ El encuentro es el **viernes 04/09 de 14 a 20 hs en la ciudad de Salta**. El cup
 Inscripción y consultas por WhatsApp al **+54 9 387 541-0469** o por mail a [cursopitsalta@gmail.com](mailto:cursopitsalta@gmail.com).
 
 El curso lo dicta el Dr. Ricardo D. Frusso, Médico de Familia, pionero en Proloterapia y PIT en Argentina y docente autorizado por el Dr. John Lyftogt.
+
+## El carrusel del curso
+
+[[carrusel: /img/cursos/salta-aviso.webp | /img/cursos/salta-c1.webp | /img/cursos/salta-c2.webp | /img/cursos/salta-c3.webp | /img/cursos/salta-c4.webp]]
+
+Las mismas piezas que circulan por Instagram: el aviso, la presentación del tema, el temario teórico, la práctica en directo y los datos para anotarse. Todo lo que dicen está escrito acá arriba en texto.

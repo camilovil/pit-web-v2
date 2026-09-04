@@ -11,7 +11,9 @@
 //              audiencia (pacientes|profesionales|todos), semana, fecha, fechaLabel, lectura, tags, resumen, portada
 // Cuerpo (markdown mínimo): párrafos, "## " títulos, **negrita**, [link](url),
 //   ![alt](src "CAPTION") → figura, "> texto" → callout Idea clave,
-//   [[placeholder: texto]] → caja punteada de contenido pendiente.
+//   [[placeholder: texto]] → caja punteada de contenido pendiente,
+//   [[carrusel: /img/a.webp | /img/b.webp | …]] → galería deslizable de piezas
+//     verticales (4:5), pensada para el carrusel de Instagram de un curso.
 const fs = require('fs');
 const path = require('path');
 
@@ -142,6 +144,28 @@ function mdToHtml(body) {
     if (b.startsWith('## ')) {
       return `<h2 style="font-size: var(--txt-xl); font-weight: 600; margin: 0 0 12px;"><span class="hover-underline">${inline(b.slice(3))}</span></h2>`;
     }
+    // [[carrusel: src | src | …]] — galería deslizable de piezas 4:5.
+    // Las piezas del carrusel llevan su texto QUEMADO en la imagen, así que el
+    // artículo NUNCA depende de ellas para decir algo: lo que cuentan ya está
+    // escrito arriba en texto de verdad. Por eso van con alt="" y con un
+    // rótulo que aclara qué son. Es una galería, no una fuente de información.
+    const car = b.match(/^\[\[carrusel:\s*([\s\S]+?)\]\]$/);
+    if (car) {
+      const srcs = car[1].split('|').map(x => x.trim()).filter(Boolean).filter(urlSegura);
+      if (!srcs.length) return '';
+      // El ancho de cada pieza va en % del track, NUNCA en vw: con vw, si algo
+      // desborda, el ancho del viewport crece, las piezas crecen con el y
+      // desbordan mas. El min-width: 0 y el max-width: 100% del track son los
+      // que evitan que empuje el ancho de la pagina en vez de scrollear adentro.
+      const slides = srcs.map((src) => `<img src="${esc(src)}" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">`).join('\n            ');
+      return `<figure class="foro-carrusel" style="margin: 0 0 28px; max-width: 100%; min-width: 0;">
+          <div class="foro-carrusel-track" style="display: flex; gap: 14px; overflow-x: auto; max-width: 100%; min-width: 0; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: 2px 0 6px;">
+            ${slides}
+          </div>
+          <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">${srcs.length} piezas · deslizá para verlas</figcaption>
+        </figure>`;
+    }
+
     const ph = b.match(/^\[\[placeholder:\s*([\s\S]+?)\]\]$/);
     if (ph) {
       return `<div style="margin: 0 0 28px;"><div class="ph" style="min-height: 110px;"><span>Placeholder · ${esc(ph[1])}</span></div></div>`;
@@ -208,9 +232,14 @@ const FOOTER = (pre) => `  <footer class="v2-footer">
 // y en <title>. Se escapan ACÁ, en el único lugar por donde pasan los dos
 // generadores de página: una comilla doble suelta cerraba el atributo y desde
 // ahí el <head> quedaba desarmado.
-const HEAD = (pre, rawTitle, rawDesc, extraCss = '') => {
+const HEAD = (pre, rawTitle, rawDesc, extraCss = '', portada = '') => {
   const title = esc(rawTitle);
   const desc = esc(rawDesc);
+  // og:image tiene que ser absoluta: las redes no resuelven rutas relativas.
+  // `portada` viene del frontmatter y ya pasó por urlSegura() en validar().
+  const ogImg = portada && portada.startsWith('/')
+    ? `https://drricardofrusso.com${portada}`
+    : (portada || 'https://drricardofrusso.com/img/og-image.png');
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -221,7 +250,7 @@ ${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="article">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${desc}">
-  <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
+  <meta property="og:image" content="${esc(ogImg)}">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">
@@ -279,7 +308,13 @@ function renderPost(post, posts, idx) {
     ...post.tags.map(t => `<span class="pit-chip">${esc(t)}</span>`),
   ].join('\n          ');
 
-  return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen) + `
+  // La galería solo necesita su CSS en los posts que la usan.
+  const carruselCss = /\[\[carrusel:/.test(post.body)
+    ? `    .foro-carrusel-track { scrollbar-width: none; -ms-overflow-style: none; }
+    .foro-carrusel-track::-webkit-scrollbar { display: none; }
+    @media (prefers-reduced-motion: no-preference) { .foro-carrusel-track { scroll-behavior: smooth; } }`
+    : '';
+  return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen, carruselCss, post.portada) + `
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
 ${renderNav({ active: 'foro', prefix: pre })}
@@ -318,7 +353,12 @@ ${renderNav({ active: 'foro', prefix: pre })}
   <!-- cuerpo -->
   <section style="padding: var(--pit-section-padding); padding-top: 0; background: var(--pit-paper);">
     <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1.7fr 1fr; gap: 64px; align-items: start;">
-      <article style="max-width: 68ch;">
+      <!-- min-width: 0 porque este <article> es un item de grid (.m-stack).
+           Con el min-width: auto que traen los items por defecto, un hijo
+           ancho -una galeria, una tabla, un bloque de codigo- lo estira
+           hasta su propio ancho y empuja el ancho de TODA la pagina en
+           mobile, en vez de scrollear adentro de si mismo. -->
+      <article style="max-width: 68ch; min-width: 0;">
         ${mdToHtml(post.body)}
 
         <div style="display: flex; align-items: center; gap: 14px; border-top: 2px solid var(--pit-ink); padding-top: 20px; margin-top: 28px;">

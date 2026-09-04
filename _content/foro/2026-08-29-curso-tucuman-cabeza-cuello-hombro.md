@@ -10,13 +10,14 @@ fechaLabel: 29 ago 2026
 lectura: 3
 tags: Cursos, Noticias
 resumen: Último destino del recorrido por el noroeste. Tres zonas anatómicamente complejas y con alta densidad nerviosa, con teoría por la mañana y práctica con pacientes reales.
-portada: /img/DSC_neck02.webp
+portada: /img/cursos/tucuman-aviso.webp
 eventoFecha: 2026-09-08
 eventoFechaLabel: Martes 08/09 · 08:30 a 15:00 hs
 eventoLugar: San Miguel de Tucumán
 eventoZona: Tucumán
 eventoModalidad: Presencial y virtual
 eventoWhatsapp: +54 9 381 597-6087
+eventoImagen: /img/cursos/tucuman-nervios.webp
 eventoTema: Cabeza, cuello y hombro
 eventoAcento: "#157A57"
 ---
@@ -51,3 +52,9 @@ También hay modalidad virtual para quienes deseen participar a distancia: **con
 Inscripción y consultas por WhatsApp al **+54 9 381 597-6087** — es un número específico para este curso, distinto al de Salta y Jujuy.
 
 El curso lo dicta el Dr. Ricardo D. Frusso, Médico de Familia, pionero en Proloterapia y PIT en Argentina y docente autorizado por el Dr. John Lyftogt.
+
+## El carrusel del curso
+
+[[carrusel: /img/cursos/tucuman-aviso.webp | /img/cursos/tucuman-c1.webp | /img/cursos/tucuman-c2.webp | /img/cursos/tucuman-c3.webp | /img/cursos/tucuman-c4.webp]]
+
+Las mismas piezas que circulan por Instagram: el aviso, la presentación del tema, el temario teórico, la práctica en directo y los datos para anotarse. Todo lo que dicen está escrito acá arriba en texto.
