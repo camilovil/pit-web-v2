@@ -309,3 +309,13 @@ a.v2-trust-item:hover { transform: translateY(-3px); }
 /* detalles/acordeones y cards heredan radio suave del token 16px; sombra flotante al hover */
 details { transition: box-shadow 0.3s ease; }
 details[open] { box-shadow: 0 16px 40px rgba(0,11,51,0.08); }
+
+
+/* ---- Pasada de mobile (espejo del bloque de index.html) ----
+   .v2-title y .v2-trust-item small son selectores COMPARTIDOS: check-css.js
+   compara sus valores contra la copia inline de index.html y falla si se
+   separan. Los dos archivos se mueven juntos. */
+@media (max-width: 560px) {
+  .v2-title { text-wrap: balance; }
+  .v2-trust-item small { min-height: 33px; }
+}
