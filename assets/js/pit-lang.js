@@ -244,7 +244,7 @@
     'Leer →': 'Read →',
 
     // Archivo
-    'Publicaciones anteriores': 'Previous posts',
+    'Todas las publicaciones': 'All posts',
     'El archivo del foro.': 'The forum archive.',
     'Sin resultados en el archivo': 'No results in the archive',   // RUNTIME
     'Ver todas las publicaciones': 'See all posts',
