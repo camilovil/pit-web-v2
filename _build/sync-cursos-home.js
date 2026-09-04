@@ -62,6 +62,12 @@ function tarjeta(p) {
             </a>`;
 }
 
+// Las flechas van en SVG y no como los caracteres ← y →: esos se dibujan con
+// la tipografía del sitio, salen finitos al lado del círculo y cambian de peso
+// según la fuente que llegue a cargar. El trazo de 2px es siempre el mismo.
+// aria-hidden porque el nombre del botón ya lo da su aria-label.
+const FLECHA = (d) => `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+
 function bloque(cursos) {
   const tarjetas = cursos.map(tarjeta).join('\n');
   // Los puntitos son botones de verdad, no divs: se llega con el tabulador y
@@ -78,7 +84,7 @@ function bloque(cursos) {
             <span class="v2-eyebrow" style="color: var(--v2-blue);">Próximos cursos</span>
             <h2 class="v2-title" style="margin-top: 14px;">Formación presencial, con práctica sobre pacientes reales</h2>
           </div>
-          <a href="foro.html" style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate);">Ver todo el foro →</a>
+          <a class="v2-btn v2-btn--linea" href="foro.html">Ver todo el foro →</a>
         </div>
 
         <div class="v2-cursos-track" id="v2-cursos-track" role="region" aria-label="Próximos cursos" tabindex="0">
@@ -86,8 +92,8 @@ ${tarjetas}
         </div>
 
         <div class="v2-cursos-nav">
-          <button type="button" class="v2-cursos-btn" data-curso-prev aria-label="Curso anterior">←</button>
-          <button type="button" class="v2-cursos-btn" data-curso-next aria-label="Curso siguiente">→</button>
+          <button type="button" class="v2-cursos-btn" data-curso-prev aria-label="Curso anterior">${FLECHA('M15 5l-7 7 7 7')}</button>
+          <button type="button" class="v2-cursos-btn" data-curso-next aria-label="Curso siguiente">${FLECHA('M9 5l7 7-7 7')}</button>
           <div class="v2-cursos-dots">
 ${dots}
           </div>
