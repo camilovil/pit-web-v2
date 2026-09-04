@@ -34,14 +34,17 @@ function tarjeta(p) {
   const contacto = p.eventoEmail
     ? `${esc(p.eventoWhatsapp)}<br>${esc(p.eventoEmail)}`
     : esc(p.eventoWhatsapp);
-  // La foto es la `portada` del propio post: ya es obligatoria para todos y ya
-  // corresponde a la región que trata el curso (rodilla, lumbar, cuello), así
-  // que un curso nuevo trae su imagen sin campos extra.
+  // La foto sale de `eventoImagen` si el post la trae, y si no de su `portada`,
+  // que es obligatoria para todos: un curso nuevo trae imagen sin campos extra.
+  // Los tres del NOA sí la traen, porque su portada es el flyer y el flyer
+  // repite en la imagen el título, la fecha y el teléfono que la tarjeta ya
+  // dice en texto al lado. En `eventoImagen` va la banda anatómica del propio
+  // banner, que es la única pieza sin texto encima.
   // alt="" a propósito: es decorativa. Está dentro de un enlace que ya dice
   // ciudad, tema, título, fecha, lugar y modalidad — repetirlo en el alt solo
   // le haría escuchar todo dos veces a quien usa lector de pantalla.
   return `            <a class="v2-curso" href="foro/${esc(p.slug)}.html" style="--acento: ${esc(p.eventoAcento)};">
-              <span class="v2-curso-foto"><img src="${esc(p.portada)}" alt="" loading="lazy" decoding="async"></span>
+              <span class="v2-curso-foto"><img src="${esc(p.eventoImagen || p.portada)}" alt="" loading="lazy" decoding="async"></span>
               <span class="v2-curso-cuerpo">
                 <span class="v2-curso-top">
                   <span class="v2-curso-zona">${esc(p.eventoZona)}</span>

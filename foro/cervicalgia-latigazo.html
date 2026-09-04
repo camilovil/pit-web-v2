@@ -9,7 +9,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Cervicalgia post-latigazo: abordaje del plexo cervical superficial — Foro PIT · Dr. Frusso">
   <meta property="og:description" content="Dolor cervical persistente tras accidente de tránsito. Mapeo del plexo cervical superficial y de la región occipital.">
-  <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
+  <meta property="og:image" content="https://drricardofrusso.com/img/DSC_neck02.webp">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">
@@ -116,7 +116,12 @@
   <!-- cuerpo -->
   <section style="padding: var(--pit-section-padding); padding-top: 0; background: var(--pit-paper);">
     <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1.7fr 1fr; gap: 64px; align-items: start;">
-      <article style="max-width: 68ch;">
+      <!-- min-width: 0 porque este <article> es un item de grid (.m-stack).
+           Con el min-width: auto que traen los items por defecto, un hijo
+           ancho -una galeria, una tabla, un bloque de codigo- lo estira
+           hasta su propio ancho y empuja el ancho de TODA la pagina en
+           mobile, en vez de scrollear adentro de si mismo. -->
+      <article style="max-width: 68ch; min-width: 0;">
         <div style="margin: 0 0 28px;"><div class="ph" style="min-height: 110px;"><span>Placeholder · Desarrollo del caso por Ricardo — mecanismo del latigazo, mapeo, evolución</span></div></div>
 
         <div style="display: flex; align-items: center; gap: 14px; border-top: 2px solid var(--pit-ink); padding-top: 20px; margin-top: 28px;">

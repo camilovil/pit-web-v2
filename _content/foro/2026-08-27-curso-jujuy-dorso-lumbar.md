@@ -10,13 +10,14 @@ fechaLabel: 27 ago 2026
 lectura: 3
 tags: Cursos, Noticias
 resumen: Segunda parada del recorrido por el noroeste, en el Consejo de Médicos de Jujuy. Teoría de PIT enfocada en la zona dorso-lumbar y práctica con personas con dolor crónico.
-portada: /img/DSC_lumbar01.webp
+portada: /img/cursos/jujuy-aviso.webp
 eventoFecha: 2026-09-05
 eventoFechaLabel: Sábado 05/09 · 08:30 a 13:00 hs
 eventoLugar: Consejo de Médicos de Jujuy · La Reina Mora 656
 eventoZona: San Salvador de Jujuy
 eventoModalidad: Presencial y virtual en vivo
 eventoWhatsapp: +54 9 387 541-0469
+eventoImagen: /img/cursos/jujuy-nervios.webp
 eventoTema: Zona dorso-lumbar
 eventoAcento: "#C05A2B"
 ---
@@ -49,3 +50,9 @@ El cupo presencial es limitado por la instancia práctica. Quienes deseen partic
 Inscripción y consultas por WhatsApp al **+54 9 387 541-0469**.
 
 El curso lo dicta el Dr. Ricardo D. Frusso, Médico de Familia, pionero en Proloterapia y PIT en Argentina y docente autorizado por el Dr. John Lyftogt.
+
+## El carrusel del curso
+
+[[carrusel: /img/cursos/jujuy-aviso.webp | /img/cursos/jujuy-c1.webp | /img/cursos/jujuy-c2.webp | /img/cursos/jujuy-c3.webp | /img/cursos/jujuy-c4.webp]]
+
+Las mismas piezas que circulan por Instagram: el aviso, la presentación del tema, el temario teórico, la práctica en directo y los datos para anotarse. Todo lo que dicen está escrito acá arriba en texto.

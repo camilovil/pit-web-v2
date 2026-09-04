@@ -9,7 +9,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Curso en Salta: el dolor de miembros inferiores, desde los nervios — Foro PIT · Dr. Frusso">
   <meta property="og:description" content="Primera parada del recorrido por el noroeste argentino. Jornada teórico-práctica sobre Lyftogt PIT aplicado al miembro inferior, con cupo limitado por la instancia práctica.">
-  <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
+  <meta property="og:image" content="https://drricardofrusso.com/img/cursos/salta-aviso.webp">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">
@@ -32,7 +32,9 @@
     a:hover { color: #1E3A8A; }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
-
+    .foro-carrusel-track { scrollbar-width: none; -ms-overflow-style: none; }
+    .foro-carrusel-track::-webkit-scrollbar { display: none; }
+    @media (prefers-reduced-motion: no-preference) { .foro-carrusel-track { scroll-behavior: smooth; } }
   </style>
 </head>
 <body>
@@ -116,7 +118,12 @@
   <!-- cuerpo -->
   <section style="padding: var(--pit-section-padding); padding-top: 0; background: var(--pit-paper);">
     <div class="m-stack" style="max-width: var(--pit-content-max); margin: 0 auto; display: grid; grid-template-columns: 1.7fr 1fr; gap: 64px; align-items: start;">
-      <article style="max-width: 68ch;">
+      <!-- min-width: 0 porque este <article> es un item de grid (.m-stack).
+           Con el min-width: auto que traen los items por defecto, un hijo
+           ancho -una galeria, una tabla, un bloque de codigo- lo estira
+           hasta su propio ancho y empuja el ancho de TODA la pagina en
+           mobile, en vez de scrollear adentro de si mismo. -->
+      <article style="max-width: 68ch; min-width: 0;">
         <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Arranca en la ciudad de Salta un recorrido de tres encuentros por el noroeste argentino. Esta primera jornada es teórico-práctica y se centra en el <strong>dolor de miembros inferiores</strong>: dextrosa al 5% sobre nervios superficiales sensibilizados.</p>
 
         <h2 style="font-size: var(--txt-xl); font-weight: 600; margin: 0 0 12px;"><span class="hover-underline">Qué abordaremos en el curso</span></h2>
@@ -143,6 +150,21 @@
         <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Inscripción y consultas por WhatsApp al <strong>+54 9 387 541-0469</strong> o por mail a <a href="mailto:cursopitsalta@gmail.com">cursopitsalta@gmail.com</a>.</p>
 
         <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">El curso lo dicta el Dr. Ricardo D. Frusso, Médico de Familia, pionero en Proloterapia y PIT en Argentina y docente autorizado por el Dr. John Lyftogt.</p>
+
+        <h2 style="font-size: var(--txt-xl); font-weight: 600; margin: 0 0 12px;"><span class="hover-underline">El carrusel del curso</span></h2>
+
+        <figure class="foro-carrusel" style="margin: 0 0 28px; max-width: 100%; min-width: 0;">
+          <div class="foro-carrusel-track" style="display: flex; gap: 14px; overflow-x: auto; max-width: 100%; min-width: 0; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: 2px 0 6px;">
+            <img src="/img/cursos/salta-aviso.webp" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">
+            <img src="/img/cursos/salta-c1.webp" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">
+            <img src="/img/cursos/salta-c2.webp" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">
+            <img src="/img/cursos/salta-c3.webp" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">
+            <img src="/img/cursos/salta-c4.webp" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">
+          </div>
+          <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">5 piezas · deslizá para verlas</figcaption>
+        </figure>
+
+        <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Las mismas piezas que circulan por Instagram: el aviso, la presentación del tema, el temario teórico, la práctica en directo y los datos para anotarse. Todo lo que dicen está escrito acá arriba en texto.</p>
 
         <div style="display: flex; align-items: center; gap: 14px; border-top: 2px solid var(--pit-ink); padding-top: 20px; margin-top: 28px;">
           <span style="display: inline-block; width: 3px; height: 34px; background: var(--pit-blue); border-radius: 2px;"></span>

@@ -65,7 +65,11 @@ function parsePost(file) {
 // describir en la home es peor que no anunciarlo.
 const EVENTO_REQ = ['eventoFecha', 'eventoFechaLabel', 'eventoLugar', 'eventoZona',
                     'eventoModalidad', 'eventoWhatsapp', 'eventoTema', 'eventoAcento'];
-const EVENTO_OPC = ['eventoEmail'];
+// eventoImagen: la foto que va en la tarjeta del carrusel de la home. Si no
+// está, se usa la `portada`. Existe porque la portada de estos posts es el
+// flyer, que ya trae el título, la fecha y el teléfono quemados en la imagen —
+// y la tarjeta de la home dice exactamente eso mismo en texto al lado.
+const EVENTO_OPC = ['eventoEmail', 'eventoImagen'];
 
 // Un post es "de curso" si trae la fecha del evento. Se mira ese campo y no
 // otro porque es el que ordena los cursos en la home.
