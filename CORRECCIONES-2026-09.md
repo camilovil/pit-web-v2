@@ -673,3 +673,41 @@ genérica del sitio. Compartir el link de un curso ahora muestra su flyer.
 
 375px y 1280px, y las ocho páginas principales barridas a 375 buscando
 desbordes: ninguna.
+
+---
+
+## #13 · El bloque de cursos sube al 41% de la página
+
+Commit `eb05238` · merge `af0ab59`.
+
+El bloque estaba pegado a la sección del Módulo I, que era donde lo había
+puesto para que las dos formaciones se leyeran juntas. Medido sobre la página
+publicada, eso lo dejaba **al 71% de la home, a más de cinco pantallas de
+scroll** — y estos cursos tienen día y hora: Salta el 04/09, Jujuy el 05/09,
+Tucumán el 08/09. A esa altura de la página, un curso de esta semana no lo ve
+nadie.
+
+| | Antes | Después |
+|---|---|---|
+| Posición | y=4622 · 71% · 5,1 pantallas | y=2690 · **42% · 3,0 pantallas** |
+
+### Dónde queda y por qué
+
+Justo después de **"Contenido gratuito"**, que cierra con las últimas
+publicaciones del foro. Las dos cosas son lo que está pasando ahora y se leen
+juntas. Queda arriba del tramo largo dirigido al paciente (patologías,
+testimonios, preguntas frecuentes) y sigue estando después de la bifurcación,
+así que el visitante ya se identificó como paciente o profesional antes de
+llegar.
+
+**El costo:** se rompe el emparejamiento con la sección del Módulo I. Vale la
+pena, porque el Módulo I es un curso online que no vence y sigue cerrando la
+página, mientras que estos tienen fecha.
+
+Es un movimiento de los marcadores `PIT-CURSOS-HOME`: el generador no cambia.
+
+### El orden de la home queda así
+
+Hero → respaldos → bifurcación → contenido gratuito (+ últimas del foro) →
+**próximos cursos** → qué trata PIT → testimonios → preguntas frecuentes →
+Curso Módulo I → footer.
