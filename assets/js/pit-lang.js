@@ -74,8 +74,12 @@
     // ahora la encabeza sí: sin esta clave, "Consultorio:" quedaba en
     // español en medio de un footer traducido.
     'Consultorio: Amenabar 2446, Belgrano, CABA': 'Practice: Amenabar 2446, Belgrano, CABA',
-    'Instagram del Dr. Frusso · @drfrussoricardo': 'Dr. Frusso on Instagram · @drfrussoricardo',
-    'Instagram de la Escuela de PIT · @escueladepit': 'Escuela de PIT on Instagram · @escueladepit',
+    // El texto visible de los dos Instagram es corto; el nombre completo
+    // -el que anuncia un lector de pantalla- va en el aria-label, y por eso
+    // tiene su propia clave: check-lang mira los aria-label igual que el texto.
+    'Instagram del Dr. Frusso': 'Dr. Frusso on Instagram',
+    'Instagram de la Escuela de PIT': 'Escuela de PIT on Instagram',
+    'Escuela PIT': 'Escuela PIT',
     'Privacidad y aviso médico': 'Privacy & medical notice',
     'Ver el sitio anterior': 'View the previous site',
 
