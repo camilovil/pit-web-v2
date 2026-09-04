@@ -371,3 +371,186 @@ marca para reformular pero no dejó el texto.
   invasivo".
 - **El footer de las dos páginas *raw*** (Qué es PIT y Curso Módulo I), que está
   más viejo que el compartido: le falta el Instagram de la Escuela de PIT.
+
+---
+
+# Seguimiento — lo que vino después del PR #3
+
+Cuatro cambios más, cada uno en su propio commit y su propio PR, mergeados a
+`main` en este orden. Mismo criterio de siempre: para volver atrás uno solo,
+
+```
+git revert <hash del commit>
+node _build/build.js
+```
+
+| # | Qué | Commit | Merge |
+|---|---|---|---|
+| [#6](https://github.com/camilovil/pit-web-v2/pull/6) | El título de la home | `8d3217d` | `6681efa` |
+| [#4](https://github.com/camilovil/pit-web-v2/pull/4) | Dextrosa al 5% | `30f2617` | `2b8266c` |
+| [#5](https://github.com/camilovil/pit-web-v2/pull/5) | El foro en la home | `9506f54` | `d0503c8` |
+| [#7](https://github.com/camilovil/pit-web-v2/pull/7) | Los cursos del NOA | `21eb886` | `ff69161` |
+
+Antes de estos cuatro hubo un quinto arreglo, `6622cb7`, sobre el propio PR #3:
+la dirección del consultorio no se traducía al inglés. Está contado abajo del
+todo, en "La dirección del consultorio".
+
+---
+
+## #6 · El título de la home
+
+El Bloque 2 cambió el H1 a "Tratar el dolor desde el nervio" pero yo dejé el
+`<title>` y los títulos sociales con el texto viejo, argumentando SEO. Camilo
+corrigió la decisión: la pestaña del navegador y la tarjeta que se ve al
+compartir el link son copy visible, y tenían que decir lo mismo que la página.
+
+| Etiqueta | Antes | Después |
+|---|---|---|
+| `<title>` | PIT · **Aliviar el dolor crónico** desde el nervio — Dr. Ricardo D. Frusso | PIT · **Tratar el dolor** desde el nervio — Dr. Ricardo D. Frusso |
+| `og:title` / `twitter:title` | PIT · Aliviar el dolor crónico desde el nervio — Dr. Frusso | PIT · Tratar el dolor desde el nervio — Dr. Frusso |
+| `description` | Tratamiento **mínimamente invasivo** del dolor crónico… | Tratamiento del dolor crónico que actúa desde el nervio, donde nace… |
+
+La `description` todavía arrastraba "mínimamente invasivo", que el hero ya no
+decía desde el Bloque 2.
+
+---
+
+## #4 · Dextrosa al 5%, aclarando glucosa
+
+El Bloque 4 trajo "dextrosa" en los dos textos nuevos de Qué es PIT mientras el
+resto del sitio decía "glucosa al 5%". Son la misma sustancia, pero la misma
+página usaba las dos palabras. Camilo definió el criterio: **poner dextrosa y
+aclarar glucosa**.
+
+Queda "dextrosa al 5%" en todo lo que describe lo que se inyecta, con
+"(glucosa)" en la **primera mención de cada página**:
+
+| Página | Dónde aclara |
+|---|---|
+| Home | Panel de Lumbalgia (la pestaña que abre por defecto) |
+| Qué es PIT | Párrafo de pacientes |
+| FAQ | Respuesta sobre efectos secundarios |
+| Foro · corticoides | "Qué puede aportar PIT en este caso" |
+
+La FAQ de la home no repite la aclaración porque el panel de arriba ya la dio;
+la de `faq.html` sí, porque ahí la pregunta se lee sola. Son dos claves
+distintas del diccionario a propósito.
+
+**Lo que no se tocó:** las referencias a la literatura. Los tres estudios de
+Evidencia y el post sobre la revisión sistemática siguen diciendo "glucosa
+perineural", que es como se publican y como se buscan. La aclaración de la
+primera mención es el puente entre las dos palabras. En el bloque de
+profesionales, además, dextrosa es el término de la fuente: los trabajos de
+Lyftogt dicen "5% dextrose".
+
+---
+
+## #5 · Las últimas publicaciones del foro en la home
+
+La sección de contenido gratuito prometía "el foro semanal" y enlazaba al foro,
+pero no mostraba una sola publicación. Ahora cierra con las tres últimas —
+fecha, categoría, audiencia y título, con las mismas columnas que el archivo de
+`foro.html`.
+
+**Se genera, no se escribe a mano.** Un bloque a mano en `index.html` queda
+viejo el primer lunes y nadie se entera. `_build/sync-foro-home.js` lo escribe
+entre `<!-- PIT-FORO-HOME:START/END -->` desde `_content/foro/*.md`: publicar un
+post ya lo pone en la home.
+
+Para leer los mismos `.md` desde dos lugares hubo que sacar el parser de
+`foro.js`, que es un generador — requerirlo regenera el foro entero. El parser
+del frontmatter, las tablas de categoría/audiencia y el `esc` pasaron a
+**`_build/foro-posts.js`**, fuente única. La alternativa era copiar el parser,
+que es el mismo error que el repo ya paga con las dos copias del CSS. Se
+verificó que la salida del foro quedó **byte a byte idéntica** después del
+refactor.
+
+Las filas reusan las cadenas exactas del archivo del foro, así que se traducen
+al inglés sin una clave nueva por post. La excepción es el post más nuevo: en
+`foro.html` es el destacado y arma su línea de otra forma, así que su clave
+`Sxx · dd mmm` hay que agregarla a mano esa semana.
+
+---
+
+## #7 · Los tres cursos del NOA
+
+La home no anunciaba en ningún lado los cursos presenciales. Ahora hay un
+carrusel deslizable con los tres próximos, justo arriba de la sección del
+Módulo I: quedan juntas las dos formaciones, primero las presenciales con fecha
+y después el curso online.
+
+**Los cursos son publicaciones del foro.** Un post con los campos `evento*` en
+el frontmatter es el anuncio de un curso: sale en el carrusel y la tarjeta lleva
+a ese mismo artículo. Una sola fuente, así la fecha de la tarjeta no puede
+contradecir a la del artículo. `foro.js` exige el juego completo de campos o
+ninguno y corta el build nombrando cuáles faltan.
+
+| Curso | Fecha | Artículo |
+|---|---|---|
+| Salta · miembros inferiores | Vie 04/09 · 14 a 20 hs | `foro/curso-salta-miembros-inferiores.html` |
+| Jujuy · zona dorso-lumbar | Sáb 05/09 · 08:30 a 13:00 hs | `foro/curso-jujuy-dorso-lumbar.html` |
+| Tucumán · cabeza, cuello y hombro | Mar 08/09 · 08:30 a 15:00 hs | `foro/curso-tucuman-cabeza-cuello-hombro.html` |
+
+Cada uno con el temario de cinco módulos y los datos de inscripción de su
+banner. Los textos de Jujuy y Tucumán son los de Ricardo, en primera persona.
+
+**Revisar:** el de Salta no tenía texto — en el documento solo se lo menciona
+como "el banner pasado". Se armó con el copy de su propio carrusel
+(`salta-02` a `salta-05`), así que es el único de los tres sin texto original
+de Ricardo.
+
+**Dos efectos secundarios que conviene tener presentes:** como los cursos son
+las publicaciones más recientes, el destacado de `foro.html` pasó a ser el de
+Tucumán; y los cursos se excluyen del bloque "lo último del foro", porque si no
+las tarjetas de abajo mostraban lo mismo que el carrusel de arriba.
+
+### El carrusel
+
+Scroll-snap nativo, sin librería: si el JS no corre, el bloque igual se desliza
+con el dedo, con la rueda y con el tabulador. El script solo agrega los botones
+y los puntitos. Cada tarjeta lleva el color de su banner en `--acento`.
+
+Dos bugs propios corregidos al mirarlo en el navegador: `ir()` pasaba
+`behavior: 'smooth'` explícito, lo que **pisaba el `prefers-reduced-motion`**
+que el CSS ya respeta; y la posición se calculaba con `offsetLeft`, que daba
+4px corridos por el margen negativo del track y solo lo tapaba el snap.
+
+### Orden y retiro
+
+Se ordenan por `eventoFecha` ascendente, el más próximo primero. **No se filtra
+por la fecha de hoy** a propósito: el HTML se commitea, y un filtro por
+`new Date()` haría que el sitio cambiara solo según el día en que alguien
+corriera el build, con diffs que aparecen sin que nadie toque nada. Para retirar
+un curso pasado, sacale los campos `evento*` al post (el artículo queda
+publicado) o borralo.
+
+---
+
+## La dirección del consultorio (`6622cb7`)
+
+Copilot marcó en la revisión del PR #3 que el prefijo "Consultorio:" que agregó
+el Bloque 2 quedaba en español con el sitio en inglés. La dirección nunca tuvo
+clave porque es un domicilio y no se traduce, pero la etiqueta que ahora la
+encabeza sí:
+
+```js
+'Consultorio: Amenabar 2446, Belgrano, CABA': 'Practice: Amenabar 2446, Belgrano, CABA',
+```
+
+Va la línea entera y no la etiqueta suelta porque `apply()` traduce por nodo de
+texto completo, y hoy etiqueta y dirección son un solo nodo dentro del mismo
+`<span>`.
+
+---
+
+# Lo que sigue pendiente
+
+Sin cambios respecto de lo que quedó abierto en el PR #3 (ver arriba, "Lo que
+quedó pendiente"), menos dos que se cerraron: el título de la home y la
+inconsistencia glucosa/dextrosa.
+
+Y uno nuevo, de diseño y no de código: en el material del NOA, Camilo anotó que
+en los banners conviene **cambiar la imagen de la zona del cuerpo manteniendo la
+estética que grafica el dolor de los nervios y no el de los huesos** — Ricardo
+insiste en referir al dolor neuropático y correrse del gráfico tradicional de
+dolor óseo. Es trabajo sobre las piezas de Instagram, no sobre el sitio.
