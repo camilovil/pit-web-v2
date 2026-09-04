@@ -506,6 +506,37 @@
       .v2-hero { min-height: auto; padding-top: 120px; }
     }
 
+    /* ---- Pasada de mobile ----
+       Cosas que a 375px no se rompian, pero se veian mal. */
+    @media (max-width: 560px) {
+      /* El eyebrow del hero ("PIT · Neuroproloterapia · Dr. Ricardo D.
+         Frusso") entra en dos renglones y dejaba "D. Frusso" solo en el
+         segundo. balance reparte las palabras entre las dos lineas. */
+      .v2-hero-eyebrow, .v2-hero h1, .v2-hero-sub { text-wrap: balance; }
+
+      /* Los dos botones del hero quedaban centrados y de anchos distintos,
+         uno arriba del otro: se leian como dos cosas sueltas. Van a un ancho
+         comun, que es lo que se espera de un par de botones apilados. */
+      .v2-hero-ctas { flex-direction: column; align-items: center; gap: 10px; }
+      .v2-hero-ctas .v2-btn { width: 100%; max-width: 300px; }
+
+      /* Titulos de seccion: mismo problema de reparto que el eyebrow. El de la
+         bifurcacion caia en cuatro lineas con "para vos" solo en la ultima. */
+      .v2-title { text-wrap: balance; }
+
+      /* Los rotulos de la franja median 17, 33 y hasta 50px de alto segun
+         cuanto texto tuvieran, y con dos columnas eso descolocaba las filas
+         entre si. Se les reserva el alto de dos lineas, que es el mas comun. */
+      .v2-trust-item small { min-height: 33px; }
+
+      /* El badge del curso gratis entraba en dos renglones y ocupaba media
+         imagen. Un punto menos de cuerpo y menos aire lo dejan en su lugar. */
+      .v2-free-badge { font-size: var(--txt-2xs); padding: 7px 12px; line-height: 1.35; }
+
+      /* El titulo de la tarjeta de curso llegaba hasta el borde del navy. */
+      .v2-curso-tit { max-width: none; }
+    }
+
     /* ---- Últimas publicaciones del foro ----
        Las filas las ESCRIBE _build/sync-foro-home.js desde _content/foro/*.md,
        entre los marcadores PIT-FORO-HOME del cuerpo: no se editan a mano acá,

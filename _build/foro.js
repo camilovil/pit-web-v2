@@ -566,7 +566,20 @@ function renderIndex(posts) {
     @media (prefers-reduced-motion: no-preference) { .foro-dest-track { scroll-behavior: smooth; } }
     @media (max-width: 820px) { .foro-dest { grid-template-columns: 1fr; } }`;
 
-  const filterCss = `    .foro-filter { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
+  const filterCss = `    @media (max-width: 620px) {
+      /* Los nueve filtros ocupaban cuatro renglones antes de que empezara el
+         contenido. En una tira que se desliza ocupan uno solo, que es como
+         funcionan los filtros en cualquier app de celular. Se recorta el
+         padding del contenedor para que la tira llegue al borde y se note que
+         sigue. */
+      /* !important porque el flex-wrap: wrap va en el atributo style= del
+         contenedor, y un estilo inline le gana a cualquier regla de hoja.
+         Es el mismo recurso que ya usa pit-mobile.css para .m-stack. */
+      .foro-filtros { display: flex; flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; margin-inline: calc(var(--pit-gutter, 24px) * -1); padding-inline: var(--pit-gutter, 24px); }
+      .foro-filtros::-webkit-scrollbar { display: none; }
+      .foro-filtros > * { flex: 0 0 auto; }
+    }
+    .foro-filter { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
     .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
     .foro-filter.on { background: var(--pit-ink); border-color: var(--pit-ink); color: #FFFFFF; }
     .foro-row:hover { color: var(--pit-ink); }
@@ -615,7 +628,7 @@ ${renderNav({ active: 'foro', prefix: pre })}
         <h1 class="pit-display" style="margin-top: 18px;">Cada semana, una respuesta.</h1>
         <p class="pit-lead" style="margin-top: 24px; max-width: 56ch;">El Dr. Frusso publica todas las semanas: responde preguntas de la comunidad, comenta casos clínicos, comparte evidencia nueva y novedades del método. Las preguntas se moderan antes de publicarse.</p>
       </div>
-      <div style="display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap; align-items: center;">
+      <div class="foro-filtros" style="display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap; align-items: center;">
         ${catChips}
         <span style="margin-inline-start: auto; display: flex; gap: 8px; align-items: center; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40);">
           <span>Audiencia</span>
