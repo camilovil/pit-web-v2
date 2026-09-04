@@ -50,7 +50,7 @@ function bloque(posts) {
   return `        <div class="v2-foro-ultimo v2-reveal" style="margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(0,11,51,0.10);">
           <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 10px;">
             <span class="v2-eyebrow" style="color: var(--v2-blue);">Lo último del foro</span>
-            <a href="foro.html" style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate);">Ver todo el foro →</a>
+            <a class="v2-btn v2-btn--linea" href="foro.html">Ver todo el foro →</a>
           </div>
 ${filas}
         </div>`;
