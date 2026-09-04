@@ -235,16 +235,11 @@
 
     // Publicación destacada
     'Esta semana': 'This week',
-    'Semana 35 · 29 ago 2026': 'Week 35 · 29 ago 2026',
-    'Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?': 'I had a corticosteroid injection and the pain came back. Can PIT help me?',
-    'Último destino del recorrido por el noroeste. Tres zonas anatómicamente complejas y con alta densidad nerviosa, con teoría por la mañana y práctica con pacientes reales.': 'Final stop of the northwest tour. Three anatomically complex, nerve-dense areas, with theory in the morning and practice on real patients.',
     'Leer →': 'Read →',
-    '3 min de lectura': '3 min read',
 
     // Archivo
     'Publicaciones anteriores': 'Previous posts',
     'El archivo del foro.': 'The forum archive.',
-    '10 publicaciones en el archivo': '10 posts in the archive',
     'Sin resultados en el archivo': 'No results in the archive',   // RUNTIME
     'Ver todas las publicaciones': 'See all posts',
     // El post mas nuevo aparece en la home (listado de sync-foro-home.js)
@@ -252,28 +247,9 @@
     // esta clave existe solo por la home. Cuando se publica el siguiente,
     // el destacado de hoy baja al archivo del foro y la clave sigue
     // sirviendo; lo que hay que agregar es la del post nuevo.
-    'S28 · 09 jul': 'W28 · 09 jul',
-    'S27 · 03 jul': 'W27 · 03 jul',
-    'S26b · 30 jun': 'W26b · 30 jun',
-    'S26 · 26 jun': 'W26 · 26 jun',
-    'S25 · 19 jun': 'W25 · 19 jun',
-    'S24 · 12 jun': 'W24 · 12 jun',
-    'S23 · 05 jun': 'W23 · 05 jun',
-    'S22 · 29 may': 'W22 · 29 may',
-    'Caso clínico · Prof.': 'Clinical case · Prof.',
     'Noticias · Para todos': 'News · For everyone',
-    'Consejos · Pacientes': 'Tips · Patients',
-    'Evidencia · Prof.': 'Evidence · Prof.',
-    'P. y R. · Pacientes': 'Q&A · Patients',
 
     // Títulos de las 8 publicaciones
-    'Gonalgia bilateral en corredor de 52 años: mapeo y evolución en 5 sesiones': 'Bilateral knee pain in a 52-year-old runner: mapping and progress over 5 sessions',
-    'PIT en el Congreso de Medicina Familiar 2026: qué se presentó': 'PIT at the 2026 Family Medicine Congress: what was presented',
-    'Qué hacer (y qué no) el día después de una sesión de PIT': 'What to do (and not do) the day after a PIT session',
-    'Nueva revisión sistemática sobre glucosa perineural: qué dice y qué no dice': 'New systematic review on perineural glucose: what it says and what it does not',
-    '¿Cuántas sesiones necesito antes de saber si PIT funciona para mí?': 'How many sessions do I need before I know whether PIT works for me?',
-    'Cervicalgia post-latigazo: abordaje del plexo cervical superficial': 'Post-whiplash neck pain: approaching the superficial cervical plexus',
-    '¿PIT sirve si ya tengo artrosis avanzada?': 'Does PIT help if I already have advanced osteoarthritis?',
 
     // Formulario del foro
     'Participá': 'Take part',
@@ -304,10 +280,7 @@
 
     // ══ FORO — páginas de publicación ═════════════════════════════════════
     '← Foro PIT': '← PIT Forum',
-    'Pregunta de paciente': 'Question from a patient',
     'Pregunta de profesional': 'Question from a professional',   // RUNTIME
-    'Caso clínico': 'Clinical case',
-    'Responde el Dr. Ricardo D. Frusso': 'Answered by Dr. Ricardo D. Frusso',
     'Por el Dr. Ricardo D. Frusso': 'By Dr. Ricardo D. Frusso',
     'M.N. 86.498 · Instructor autorizado PIT': 'M.N. 86.498 · Certified PIT instructor',
     '¿Tenés una pregunta?': 'Do you have a question?',
@@ -319,80 +292,16 @@
     'Idea clave': 'Key idea',
 
     // Fechas y navegación entre publicaciones
-    'S28 · 09 jul 2026 · P. y R. · Pacientes': 'W28 · 09 jul 2026 · Q&A · Patients',
-    'S27 · 03 jul 2026 · Caso clínico · Prof.': 'W27 · 03 jul 2026 · Clinical case · Prof.',
-    'S26b · 30 jun 2026 · Noticias · Para todos': 'W26b · 30 jun 2026 · News · For everyone',
-    'S26 · 26 jun 2026 · Consejos · Pacientes': 'W26 · 26 jun 2026 · Tips · Patients',
-    'S25 · 19 jun 2026 · Evidencia · Prof.': 'W25 · 19 jun 2026 · Evidence · Prof.',
-    'S24 · 12 jun 2026 · P. y R. · Pacientes': 'W24 · 12 jun 2026 · Q&A · Patients',
-    'S23 · 05 jun 2026 · Caso clínico · Prof.': 'W23 · 05 jun 2026 · Clinical case · Prof.',
-    'S22 · 29 may 2026 · P. y R. · Pacientes': 'W22 · 29 may 2026 · Q&A · Patients',
-    '09 jul 2026 · 5 min de lectura': '09 jul 2026 · 5 min read',
-    '03 jul 2026 · 7 min de lectura': '03 jul 2026 · 7 min read',
-    '30 jun 2026 · 4 min de lectura': '30 jun 2026 · 4 min read',
-    '26 jun 2026 · 4 min de lectura': '26 jun 2026 · 4 min read',
-    '19 jun 2026 · 6 min de lectura': '19 jun 2026 · 6 min read',
-    '12 jun 2026 · 4 min de lectura': '12 jun 2026 · 4 min read',
-    '05 jun 2026 · 6 min de lectura': '05 jun 2026 · 6 min read',
-    '29 may 2026 · 4 min de lectura': '29 may 2026 · 4 min read',
-    '← Anterior · S27': '← Previous · W27',
-    '← Anterior · S26b': '← Previous · W26b',
-    '← Anterior · S26': '← Previous · W26',
-    '← Anterior · S25': '← Previous · W25',
-    '← Anterior · S24': '← Previous · W24',
-    '← Anterior · S23': '← Previous · W23',
-    '← Anterior · S22': '← Previous · W22',
 
     // Etiquetas de las publicaciones
-    'Infiltraciones': 'Joint injections',
-    'Corticoides': 'Corticosteroids',
-    'Congresos': 'Congresses',
-    'Post-sesión': 'After the session',
     // "Glucose 5%" y no "5% glucose": la etiqueta del post y el texto del
     // cuerpo ("Glucosa al 5%") tienen que dar traducciones DISTINTAS, si no
     // REV — el diccionario inverso — colapsa las dos claves en una y volver a
     // español rompe una de las dos.
-    'Glucosa 5%': 'Glucose 5%',
-    'Sesiones': 'Sessions',
-    'Tratamiento': 'Treatment',
-    'Artrosis': 'Osteoarthritis',
 
     // Cuerpo de las publicaciones
-    'Es una de las preguntas que más se repiten en el consultorio, y entiendo la frustración detrás: pasaste por una infiltración, hubo alivio, y a los meses el dolor volvió como si nada. Vale la pena entender por qué pasa eso antes de hablar de PIT.': 'It is one of the questions I hear most in the practice, and I understand the frustration behind it: you had an injection, there was relief, and months later the pain came back as if nothing had happened. It is worth understanding why that happens before talking about PIT.',
-    'Por qué el alivio del corticoide se agota': 'Why relief from corticosteroids runs out',
-    'El corticoide apaga la inflamación del tejido, pero no actúa sobre el nervio periférico sensibilizado — que en el dolor crónico suele ser el verdadero origen. Cuando el efecto antiinflamatorio termina, el nervio sigue irritado y el dolor reaparece.': 'Corticosteroids switch off inflammation in the tissue, but they do not act on the sensitized peripheral nerve — which in chronic pain is usually the real origin. When the anti-inflammatory effect wears off, the nerve is still irritated and the pain returns.',
-    'Qué puede aportar PIT en este caso': 'What PIT can contribute in this case',
-    'PIT trabaja exactamente en ese punto: desinflamar el nervio sensibilizado con inyecciones subcutáneas de dextrosa al 5% (glucosa). No compite con la infiltración previa ni interfiere con otros tratamientos en curso.': 'PIT works exactly on that point: calming the sensitized nerve with subcutaneous injections of 5% dextrose (glucose). It does not compete with the earlier injection nor interfere with other ongoing treatments.',
-    'Que una infiltración haya dejado de funcionar no significa que tu dolor no tenga tratamiento: significa que quizás el objetivo era otro.': 'An injection that stopped working does not mean your pain has no treatment: it may mean the target was a different one.',
-    'Cuándo PIT no es la respuesta': 'When PIT is not the answer',
-    'No todo dolor es de origen neuropático periférico. Por eso la primera sesión empieza siempre con una evaluación: si tu caso no es para PIT, también te lo voy a decir.': 'Not all pain is of peripheral neuropathic origin. That is why the first session always starts with an assessment: if your case is not one for PIT, I will tell you that too.',
-    'Mapeo de ramas nerviosas · Consultorio': 'Mapping of nerve branches · Practice',
-    'Caso clínico comentado: paciente de 52 años, corredor recreativo (30–40 km semanales), con gonalgia bilateral de 14 meses de evolución que no cedió con kinesiología ni antiinflamatorios.': 'Annotated clinical case: 52-year-old patient, recreational runner (30–40 km a week), with 14 months of bilateral knee pain that did not respond to physiotherapy or anti-inflammatories.',
-    'El alivio en la misma sesión no es solo terapéutico: es parte del razonamiento diagnóstico.': 'Relief within the same session is not only therapeutic: it is part of the diagnostic reasoning.',
-    'Lo que más preguntaron los colegas': 'What colleagues asked about most',
-    'El interés por las técnicas mínimamente invasivas para dolor crónico crece cada año — y la pregunta ya no es "¿funciona?" sino "¿cómo me formo?".': 'Interest in minimally invasive techniques for chronic pain grows every year — and the question is no longer “does it work?” but “how do I train in it?”.',
-    'Después de una sesión de PIT la mayoría de los pacientes retoma su rutina normal el mismo día. Aun así, hay algunas pautas simples que ayudan a que el tratamiento asiente mejor.': 'After a PIT session most patients go back to their normal routine the same day. Even so, a few simple guidelines help the treatment settle better.',
-    'La regla general: movete con normalidad, sin exigencia máxima, y dejá que el alivio se consolide solo.': 'The general rule: move normally, without pushing to your limit, and let the relief settle on its own.',
-    'Qué encontró': 'What it found',
-    'Los límites que hay que decir': 'The limits worth stating',
-    'Sin sobrevender: la evidencia es creciente pero heterogénea, y decirlo también es hacer buena medicina.': 'Without overselling: the evidence is growing but heterogeneous, and saying so is also good medicine.',
-    'La respuesta corta: desde la primera sesión ya tenemos información valiosa, porque el alivio inmediato es parte del diagnóstico.': 'The short answer: from the very first session we already have valuable information, because immediate relief is part of the diagnosis.',
-    'Es importante ser claros: PIT no regenera el cartílago ni revierte la artrosis. Pero buena parte del dolor que acompaña a la artrosis no viene del cartílago — que no tiene terminales de dolor — sino de los nervios periféricos sensibilizados alrededor de la articulación.': 'It is important to be clear: PIT does not regenerate cartilage or reverse osteoarthritis. But much of the pain that comes with osteoarthritis does not come from the cartilage — which has no pain endings — but from the sensitized peripheral nerves around the joint.',
-    'El objetivo no es la imagen de la radiografía: es cómo caminás, dormís y vivís con esa rodilla.': 'The goal is not the image on the X-ray: it is how you walk, sleep and live with that knee.',
 
     // Placeholders de contenido pendiente en las publicaciones
-    'Placeholder · Desarrollo completo de Ricardo (2–3 párrafos)': 'Placeholder · Full text from Ricardo (2–3 paragraphs)',
-    'Placeholder · Desarrollo completo de Ricardo': 'Placeholder · Full text from Ricardo',
-    'Placeholder · Desarrollo del caso por Ricardo — anamnesis, mapeo, evolución por sesión, imágenes': 'Placeholder · Case write-up by Ricardo — history, mapping, session-by-session progress, images',
-    'Placeholder · Desarrollo del caso por Ricardo — mecanismo del latigazo, mapeo, evolución': 'Placeholder · Case write-up by Ricardo — whiplash mechanism, mapping, progress',
-    'Placeholder · Cierre y aprendizajes del caso': 'Placeholder · Closing notes and takeaways from the case',
-    'Placeholder · Crónica de Ricardo sobre la presentación — 3–4 párrafos, fotos del congreso': 'Placeholder · Ricardo’s report on the presentation — 3–4 paragraphs, photos from the congress',
-    'Placeholder · Las 3 preguntas más repetidas en el auditorio, con respuestas cortas': 'Placeholder · The 3 most repeated questions from the audience, with short answers',
-    'Placeholder · Guía completa de Ricardo — actividad recomendada, molestias esperables, cuándo consultar': 'Placeholder · Full guide from Ricardo — recommended activity, expected discomfort, when to seek advice',
-    'Placeholder · Cita completa de la revisión (autores, revista, año, DOI)': 'Placeholder · Full citation of the review (authors, journal, year, DOI)',
-    'Placeholder · Síntesis de resultados por Ricardo': 'Placeholder · Summary of results by Ricardo',
-    'Placeholder · Lectura crítica — heterogeneidad, tamaños muestrales, comparadores': 'Placeholder · Critical appraisal — heterogeneity, sample sizes, comparators',
-    'Placeholder · Desarrollo completo de Ricardo — qué esperar sesión a sesión, cuándo se decide continuar': 'Placeholder · Full text from Ricardo — what to expect session by session, when the decision to continue is made',
 
     // ══ RESTO DEL SITIO ═══════════════════════════════════════════════════
     // Cobertura PARCIAL: son las claves que seguían siendo válidas contra el

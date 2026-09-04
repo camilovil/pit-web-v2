@@ -13,7 +13,8 @@
 //   ![alt](src "CAPTION") → figura, "> texto" → callout Idea clave,
 //   [[placeholder: texto]] → caja punteada de contenido pendiente,
 //   [[carrusel: /img/a.webp | /img/b.webp | …]] → galería deslizable de piezas
-//     verticales (4:5), pensada para el carrusel de Instagram de un curso.
+//     verticales (4:5), pensada para el carrusel de Instagram de un curso,
+//   [[video: <url de YouTube> | Título]] → video embebido 16:9.
 const fs = require('fs');
 const path = require('path');
 
@@ -144,6 +145,27 @@ function mdToHtml(body) {
     if (b.startsWith('## ')) {
       return `<h2 style="font-size: var(--txt-xl); font-weight: 600; margin: 0 0 12px;"><span class="hover-underline">${inline(b.slice(3))}</span></h2>`;
     }
+    // [[video: url | título]] — un video de YouTube embebido.
+    // Se embebe desde youtube-nocookie.com: el sitio tiene pagina de privacidad
+    // y no hay motivo para que YouTube ponga cookies de seguimiento a quien
+    // solo abrio un articulo. El ID se valida contra una lista de caracteres
+    // antes de entrar a la URL — es lo unico del bloque que termina siendo una
+    // direccion, y una barra o un ? ahi cambiarian el destino del iframe.
+    const vid = b.match(/^\[\[video:\s*([\s\S]+?)\]\]$/);
+    if (vid) {
+      const partes = vid[1].split('|').map(x => x.trim());
+      const url = partes[0] || '';
+      const titulo = partes[1] || 'Video';
+      const m = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([A-Za-z0-9_-]{6,20})/);
+      if (!m) return '';
+      return `<figure style="margin: 0 0 28px;">
+          <div style="position: relative; aspect-ratio: 16 / 9; border-radius: var(--pit-radius); overflow: hidden; background: var(--pit-ink-05);">
+            <iframe src="https://www.youtube-nocookie.com/embed/${m[1]}" title="${esc(titulo)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
+          </div>
+          <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">${esc(titulo)}</figcaption>
+        </figure>`;
+    }
+
     // [[carrusel: src | src | …]] — galería deslizable de piezas 4:5.
     // Las piezas del carrusel llevan su texto QUEMADO en la imagen, así que el
     // artículo NUNCA depende de ellas para decir algo: lo que cuentan ya está
