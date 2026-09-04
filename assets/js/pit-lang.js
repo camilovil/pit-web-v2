@@ -142,7 +142,7 @@
     'En la misma sesión': 'In the same session',
     '20–30 min': '20–30 min.',
     'Lumbalgia crónica.': 'Chronic low back pain.',
-    'Dolor persistente en la parte baja de la espalda. Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%.': 'Persistent pain in the lower back. The sensitized superficial nerve branches of the lumbar area are mapped by palpation and treated with subcutaneous injections of 5% glucose.',
+    'Dolor persistente en la parte baja de la espalda. Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de dextrosa al 5% (glucosa).': 'Persistent pain in the lower back. The sensitized superficial nerve branches of the lumbar area are mapped by palpation and treated with subcutaneous injections of 5% dextrose (glucose).',
     'Cómo es una sesión →': 'What a session is like →',
     'Valores orientativos · Cada caso requiere evaluación individual': 'Indicative values · Each case requires individual assessment',
 
@@ -168,7 +168,11 @@
     '¿Es compatible con otros tratamientos?': 'Is it compatible with other treatments?',
     'Sí. PIT es complementario: no interfiere con medicación, kinesiología ni otros procedimientos en curso, y no requiere suspender nada.': 'Yes. PIT is complementary: it does not interfere with medication, physiotherapy or other ongoing procedures, and nothing needs to be stopped.',
     '¿Tiene efectos secundarios?': 'Are there side effects?',
-    'La glucosa al 5% es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección. Cada caso se evalúa individualmente en la consulta.': '5% glucose is a safe substance, without the adverse effects of corticosteroids. There may be brief local discomfort at the injection site. Each case is assessed individually during the consultation.',
+    // La home ya aclaró "(glucosa)" en el panel de patologías, que está
+    // más arriba; la FAQ suelta no tiene ese contexto y la repite. Son dos
+    // cadenas distintas a propósito.
+    'La dextrosa al 5% es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección. Cada caso se evalúa individualmente en la consulta.': '5% dextrose is a safe substance, without the adverse effects of corticosteroids. There may be brief local discomfort at the injection site. Each case is assessed individually during the consultation.',
+    'La dextrosa al 5% (glucosa) es una sustancia segura, sin los efectos adversos del corticoide. Puede haber una molestia local pasajera en el sitio de inyección. Cada caso se evalúa individualmente en la consulta.': '5% dextrose (glucose) is a safe substance, without the adverse effects of corticosteroids. There may be brief local discomfort at the injection site. Each case is assessed individually during the consultation.',
     'Ver todas las preguntas →': 'See all questions →',
 
     // Cierre: curso pago
@@ -317,7 +321,7 @@
     'Por qué el alivio del corticoide se agota': 'Why relief from corticosteroids runs out',
     'El corticoide apaga la inflamación del tejido, pero no actúa sobre el nervio periférico sensibilizado — que en el dolor crónico suele ser el verdadero origen. Cuando el efecto antiinflamatorio termina, el nervio sigue irritado y el dolor reaparece.': 'Corticosteroids switch off inflammation in the tissue, but they do not act on the sensitized peripheral nerve — which in chronic pain is usually the real origin. When the anti-inflammatory effect wears off, the nerve is still irritated and the pain returns.',
     'Qué puede aportar PIT en este caso': 'What PIT can contribute in this case',
-    'PIT trabaja exactamente en ese punto: desinflamar el nervio sensibilizado con inyecciones subcutáneas de glucosa al 5%. No compite con la infiltración previa ni interfiere con otros tratamientos en curso.': 'PIT works exactly on that point: calming the sensitized nerve with subcutaneous injections of 5% glucose. It does not compete with the earlier injection nor interfere with other ongoing treatments.',
+    'PIT trabaja exactamente en ese punto: desinflamar el nervio sensibilizado con inyecciones subcutáneas de dextrosa al 5% (glucosa). No compite con la infiltración previa ni interfiere con otros tratamientos en curso.': 'PIT works exactly on that point: calming the sensitized nerve with subcutaneous injections of 5% dextrose (glucose). It does not compete with the earlier injection nor interfere with other ongoing treatments.',
     'Que una infiltración haya dejado de funcionar no significa que tu dolor no tenga tratamiento: significa que quizás el objetivo era otro.': 'An injection that stopped working does not mean your pain has no treatment: it may mean the target was a different one.',
     'Cuándo PIT no es la respuesta': 'When PIT is not the answer',
     'No todo dolor es de origen neuropático periférico. Por eso la primera sesión empieza siempre con una evaluación: si tu caso no es para PIT, también te lo voy a decir.': 'Not all pain is of peripheral neuropathic origin. That is why the first session always starts with an assessment: if your case is not one for PIT, I will tell you that too.',

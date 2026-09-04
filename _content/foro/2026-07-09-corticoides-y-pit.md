@@ -24,7 +24,7 @@ El corticoide apaga la inflamación del tejido, pero no actúa sobre el nervio p
 
 ## Qué puede aportar PIT en este caso
 
-PIT trabaja exactamente en ese punto: desinflamar el nervio sensibilizado con inyecciones subcutáneas de glucosa al 5%. No compite con la infiltración previa ni interfiere con otros tratamientos en curso.
+PIT trabaja exactamente en ese punto: desinflamar el nervio sensibilizado con inyecciones subcutáneas de dextrosa al 5% (glucosa). No compite con la infiltración previa ni interfiere con otros tratamientos en curso.
 
 [[placeholder: Desarrollo completo de Ricardo (2–3 párrafos)]]
 
