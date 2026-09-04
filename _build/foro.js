@@ -514,8 +514,18 @@ ${FOOTER(pre)}
 // ---------- índice del foro ----------
 function renderIndex(posts) {
   const pre = '';
+  // "Esta semana" muestra hasta cuatro publicaciones en un carrusel, no una
+  // sola: con los tres cursos del NOA publicados juntos, una sola tarjeta
+  // dejaba tres afuera y había que bajar al archivo para verlas.
+  const DESTACADAS = posts.slice(0, 4);
   const featured = posts[0];
-  const rest = posts.slice(1);
+  // El archivo lista TODAS, incluidas las destacadas. Antes listaba "las
+  // anteriores" (posts.slice(1)), pero con el carrusel arriba eso dejaba al
+  // archivo -que es el que tiene los filtros por categoría y audiencia- con
+  // menos publicaciones de las que hay. Los filtros tienen que poder llegar a
+  // todo, así que el archivo es el listado completo y el carrusel es un
+  // destacado, no un recorte.
+  const rest = posts;
   // Total UNICO para el contador: las publicaciones del archivo (todas menos
   // la destacada de la semana, que se muestra aparte arriba).
   const ARCHIVO = rest.length;
@@ -534,6 +544,27 @@ function renderIndex(posts) {
   const audChips = [['pacientes', 'Pacientes'], ['profesionales', 'Profesionales']]
     .map(([k, label]) => `<button type="button" class="foro-filter" data-faud="${k}" aria-pressed="false">${label}</button>`)
     .join('\n          ');
+
+  const destCss = `    /* El destacado es un carrusel: mismas piezas que el de cursos de la home
+       -scroll-snap nativo, flechas y puntitos-. Sin JS igual se desliza con el
+       dedo, con la rueda y con el tabulador. */
+    .foro-dest-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: 18px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; margin: 24px -4px 0; padding: 4px; max-width: 100%; min-width: 0; }
+    .foro-dest-track::-webkit-scrollbar { display: none; }
+    .foro-dest { scroll-snap-align: center; background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; gap: 0; min-width: 0; }
+    .foro-dest-nav { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+    .foro-dest-btn { width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.22,1,0.36,1); }
+    .foro-dest-btn svg { display: block; }
+    .foro-dest-btn:hover:not(:disabled) { background: var(--pit-ink); border-color: var(--pit-ink); color: var(--pit-paper-pure); }
+    .foro-dest-btn:active:not(:disabled) { transform: scale(0.94); }
+    .foro-dest-btn:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 3px; }
+    .foro-dest-btn:disabled { border-color: var(--pit-ink-10); color: var(--pit-ink-20); cursor: default; }
+    .foro-dest-dots { display: flex; align-items: center; gap: 2px; margin-inline-start: 8px; }
+    .foro-dest-dot { min-width: 22px; height: 22px; border: none; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+    .foro-dest-dot::before { content: ""; display: block; width: 8px; height: 8px; border-radius: 999px; background: var(--pit-ink-20); transition: width 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
+    .foro-dest-dot[aria-current="true"]::before { width: 20px; background: var(--pit-blue); }
+    .foro-dest-dot:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 1px; border-radius: 999px; }
+    @media (prefers-reduced-motion: no-preference) { .foro-dest-track { scroll-behavior: smooth; } }
+    @media (max-width: 820px) { .foro-dest { grid-template-columns: 1fr; } }`;
 
   const filterCss = `    .foro-filter { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink-60); cursor: pointer; transition: all 0.2s ease; }
     .foro-filter:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
@@ -567,7 +598,7 @@ function renderIndex(posts) {
   // prefers-reduced-motion. Acá solo queda el color del texto.
 
   return HEAD(pre, 'Foro PIT — noticias, casos y respuestas · Dr. Frusso',
-    'Portal del foro PIT: preguntas respondidas, casos clínicos, evidencia y noticias del método, por el Dr. Ricardo D. Frusso.', filterCss) + `
+    'Portal del foro PIT: preguntas respondidas, casos clínicos, evidencia y noticias del método, por el Dr. Ricardo D. Frusso.', destCss + '\n' + filterCss) + `
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
 ${renderNav({ active: 'foro', prefix: pre })}
@@ -598,22 +629,31 @@ ${renderNav({ active: 'foro', prefix: pre })}
   <section style="padding: var(--pit-section-padding); background: var(--pit-blue-tint);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <p class="pit-eyebrow">Esta semana</p>
-      <article class="m-stack0" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-blue); border-radius: var(--pit-radius); margin-top: 24px; display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; gap: 0;">
-        <div class="m-pad" style="padding: 40px 44px;">
-          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
-            <span class="pit-chip pit-chip--blue">${CAT[featured.categoria]}</span>
-            <span class="pit-chip">${AUD[featured.audiencia]}</span>
-            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Semana ${esc(featured.semana.replace('S', ''))} · ${esc(featured.fechaLabel)}</span>
+      <div class="foro-dest-track" id="foro-dest-track" role="region" aria-label="Publicaciones de la semana" tabindex="0">
+${DESTACADAS.map(d => `        <article class="foro-dest m-stack0">
+          <div class="m-pad" style="padding: 40px 44px;">
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
+              <span class="pit-chip pit-chip--blue">${CAT[d.categoria]}</span>
+              <span class="pit-chip">${AUD[d.audiencia]}</span>
+              <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">Semana ${esc(d.semana.replace('S', ''))} · ${esc(d.fechaLabel)}</span>
+            </div>
+            <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">${esc(d.titulo)}</span></h2>
+            <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">${esc(d.resumen)}</p>
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+              <a class="pit-btn pit-btn--primary" href="foro/${esc(d.slug)}.html">Leer →</a>
+              <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">${d.lectura} min de lectura</span>
+            </div>
           </div>
-          <h2 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px;"><span class="hover-underline">${esc(featured.titulo)}</span></h2>
-          <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-60); margin: 0 0 24px; max-width: 58ch;">${esc(featured.resumen)}</p>
-          <div style="display: flex; gap: 20px; align-items: center;">
-            <a class="pit-btn pit-btn--primary" href="foro/${esc(featured.slug)}.html">Leer →</a>
-            <span style="font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">${featured.lectura} min de lectura</span>
-          </div>
+          <img class="m-first" src="${esc(d.portada)}" alt="" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </article>`).join('\n')}
+      </div>
+      ${DESTACADAS.length > 1 ? `<div class="foro-dest-nav">
+        <button type="button" class="foro-dest-btn" data-dest-prev aria-label="Publicación anterior"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="foro-dest-btn" data-dest-next aria-label="Publicación siguiente"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="foro-dest-dots">
+${DESTACADAS.map((d, i) => `          <button type="button" class="foro-dest-dot" data-dest-dot="${i}" aria-current="${i === 0}" aria-label="Ir a la publicación ${i + 1}"></button>`).join('\n')}
         </div>
-        <img class="m-first" src="${esc(featured.portada)}" alt="${esc(featured.titulo)}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-      </article>
+      </div>` : ''}
     </div>
   </section>
 
@@ -625,7 +665,7 @@ ${renderNav({ active: 'foro', prefix: pre })}
            desbordaba 73px a 375px. Ahora baja a su propia línea. -->
       <div style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap;">
         <div style="flex: 1; min-width: 0;">
-          <p class="pit-eyebrow">Publicaciones anteriores</p>
+          <p class="pit-eyebrow">Todas las publicaciones</p>
           <h2 class="pit-section-title" style="margin-top: 12px;"><span class="hover-underline">El archivo del foro.</span></h2>
         </div>
         <span id="foro-count" role="status" aria-live="polite" class="foro-count">${ARCHIVO} publicaciones en el archivo</span>
@@ -716,6 +756,58 @@ ${FOOTER(pre)}
 </div>
 
 <script>
+
+    // ---- carrusel del destacado ----
+    // Igual que el de cursos de la home: el deslizamiento lo hace el CSS
+    // (scroll-snap) y esto solo agrega las flechas y los puntitos. Si el JS no
+    // corre, el carrusel sigue andando con el dedo y con el tabulador.
+    (function () {
+      var track = document.getElementById('foro-dest-track');
+      if (!track) return;
+      var cards = [].slice.call(track.querySelectorAll('.foro-dest'));
+      var dots = [].slice.call(document.querySelectorAll('[data-dest-dot]'));
+      var prev = document.querySelector('[data-dest-prev]');
+      var next = document.querySelector('[data-dest-next]');
+      if (!prev || !next || cards.length < 2) return;
+
+      function pos(c) {
+        return track.scrollLeft + (c.getBoundingClientRect().left - track.getBoundingClientRect().left);
+      }
+      function actual() {
+        var idx = 0, mejor = Infinity;
+        for (var i = 0; i < cards.length; i++) {
+          var d = Math.abs(pos(cards[i]) - track.scrollLeft);
+          if (d < mejor) { mejor = d; idx = i; }
+        }
+        return idx;
+      }
+      function pintar(i) {
+        if (i == null) i = actual();
+        for (var k = 0; k < dots.length; k++) {
+          dots[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+        }
+        prev.disabled = i <= 0;
+        next.disabled = i >= cards.length - 1;
+      }
+      function ir(i) {
+        i = Math.max(0, Math.min(cards.length - 1, i));
+        // Sin behavior: 'smooth' explicito — lo decide el CSS, que ya respeta
+        // prefers-reduced-motion.
+        track.scrollTo({ left: pos(cards[i]) });
+        pintar(i);
+      }
+      prev.addEventListener('click', function () { ir(actual() - 1); });
+      next.addEventListener('click', function () { ir(actual() + 1); });
+      for (var d0 = 0; d0 < dots.length; d0++) {
+        (function (k) { dots[k].addEventListener('click', function () { ir(k); }); })(d0);
+      }
+      var tick;
+      track.addEventListener('scroll', function () {
+        clearTimeout(tick); tick = setTimeout(function () { pintar(); }, 90);
+      }, { passive: true });
+      addEventListener('resize', function () { pintar(); }, { passive: true });
+      pintar(0);
+    })();
   // Filtros del archivo (categoría + audiencia)
   (function () {
     var cat = 'todo';

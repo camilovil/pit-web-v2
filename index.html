@@ -536,6 +536,19 @@
        foto va en su propia columna y a sangre, así que el padding vive en
        .v2-curso-cuerpo y no en la tarjeta. */
     .v2-curso { scroll-snap-align: center; display: grid; grid-template-columns: 1fr 32%; border-radius: var(--v2-radius); overflow: hidden; background: var(--v2-navy); color: #FFFFFF; text-decoration: none; box-shadow: inset 4px 0 0 var(--acento); min-width: 0; }
+    /* La tarjeta entera se levanta apenas al apuntarla o al recibir foco: es
+       una pieza que se toca completa -toda ella es el enlace al curso- y sin
+       esto la unica senal era el subrayado del "Ver el curso" alla abajo.
+       El foco tambien la levanta, para que quien navega con teclado vea lo
+       mismo que quien usa el mouse.
+       Dentro de un @media de movimiento: a quien pidio que no se le anime nada
+       no se le anima. El outline del foco NO va adentro del media: ese tiene
+       que estar siempre. */
+    .v2-curso:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .v2-curso { transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1); }
+      .v2-curso:hover, .v2-curso:focus-visible { transform: translateY(-6px); box-shadow: inset 4px 0 0 var(--acento), 0 18px 40px rgba(0,11,51,0.22); }
+    }
     .v2-curso-cuerpo { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 18px; padding: 32px 34px 30px; min-width: 0; }
     .v2-curso-foto { grid-column: 2; grid-row: 1; display: block; min-width: 0; background: #05102E; }
     .v2-curso-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -1010,7 +1023,7 @@
         </details>
       </div>
       <div style="text-align: center; margin-top: 32px;">
-        <a href="faq.html" style="font-weight: 600; font-size: var(--txt-sm);">Ver todas las preguntas →</a>
+        <a class="v2-btn v2-btn--linea" href="faq.html">Ver todas las preguntas →</a>
       </div>
     </div>
   </section>
