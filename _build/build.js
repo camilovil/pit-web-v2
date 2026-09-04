@@ -9,6 +9,9 @@ const STEPS = [
   { file: 'convert.js', label: 'convert.js' },
   { file: 'foro.js', label: 'foro.js' },
   { file: 'sync-nav.js', label: 'sync-nav.js' },
+  // Va DESPUÉS de foro.js: ese paso valida el frontmatter y corta el build
+  // si un post está mal escrito, así que acá los datos ya están validados.
+  { file: 'sync-foro-home.js', label: 'sync-foro-home.js  (últimas del foro en la home)' },
   { file: 'sync-staging.js', label: 'sync-staging.js  (bandera noindex)' },
   { file: 'check-lang.js', label: 'check-lang.js  (diccionario ES/EN)' },
   { file: 'check-css.js', label: 'check-css.js   (las dos copias del CSS)' },

@@ -18,15 +18,23 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
 
 ## Arquitectura
 - 11 páginas núcleo + portal del foro (8 publicaciones con URL propia).
-- Build completo: **`node _build/build.js`** (corre convert.js → foro.js → sync-nav.js,
-  idempotente). Generadores sueltos: `convert.js` (páginas desde `_dc-src/`),
-  `foro.js` (foro desde `_content/foro/*.md`), `sync-nav.js` (nav en páginas manuales).
+- Build completo: **`node _build/build.js`** (corre convert.js → foro.js → sync-nav.js →
+  sync-foro-home.js, idempotente). Generadores sueltos: `convert.js` (páginas desde
+  `_dc-src/`), `foro.js` (foro desde `_content/foro/*.md`), `sync-nav.js` (nav en páginas
+  manuales), `sync-foro-home.js` (últimas publicaciones del foro en la home).
 - **Nav en una sola fuente:** `_build/nav.js` define el menú (header + drawer); un cambio
   se hace SOLO ahí y se propaga a las 17 páginas al buildear. Las fuentes `.dc.html`
   conservan un bloque de nav que el build reemplaza (no editar el nav ahí).
 - `index.html` y `curso-intro.html` son manuales (el aula del curso intro es una
   app vanilla JS con quizzes + progreso en localStorage). `index.html` recibe el nav
-  vía `sync-nav.js` entre marcadores `<!-- PIT-NAV:START/END -->`.
+  vía `sync-nav.js` entre marcadores `<!-- PIT-NAV:START/END -->`, y las últimas tres
+  publicaciones del foro vía `sync-foro-home.js` entre `<!-- PIT-FORO-HOME:START/END -->`.
+  **Lo que está entre marcadores no se edita a mano**: el build lo reescribe.
+- **Los posts del foro se leen desde un solo lugar:** `_build/foro-posts.js` (parser del
+  frontmatter + tablas de categoría/audiencia + `esc`). Lo usan `foro.js` y
+  `sync-foro-home.js`. Antes vivía dentro de `foro.js`, pero requerirlo desde otro
+  script regeneraba el foro entero, y la alternativa era una segunda copia del parser —
+  el mismo error que ya se paga con las dos copias del CSS.
 - Assets propios: `img/` y `docs/` viven en el repo (ya no dependen del sitio viejo).
   Fuentes self-hosted (Space Grotesk + JetBrains Mono) en `assets/css/fonts.css`.
 - Design system en `assets/css/ds.css` (+ `pit-v2.css`, `pit-mobile.css`, `pit-motion.css`).

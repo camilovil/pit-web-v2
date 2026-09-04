@@ -486,6 +486,29 @@
       .m2-stack { grid-template-columns: 1fr !important; }
       .v2-hero { min-height: auto; padding-top: 120px; }
     }
+
+    /* ---- Últimas publicaciones del foro ----
+       Las filas las ESCRIBE _build/sync-foro-home.js desde _content/foro/*.md,
+       entre los marcadores PIT-FORO-HOME del cuerpo: no se editan a mano acá,
+       se regeneran en cada build. Las mismas columnas que el archivo de
+       foro.html (fecha · categoría · título · leer), para que el visitante
+       reconozca el formato cuando llega al foro.
+       Este componente NO existe en pit-v2.css: vive solo en la home, así que
+       check-css.js no lo compara contra nada. */
+    .v2-foro-row { display: grid; grid-template-columns: 108px 186px 1fr auto; gap: 22px; align-items: baseline; padding: 15px 8px; border-block-end: 1px solid rgba(0,11,51,0.08); color: var(--v2-navy); text-decoration: none; border-radius: 6px; transition: background 0.2s ease; }
+    .v2-foro-row:last-child { border-block-end: none; }
+    .v2-foro-row:hover { background: rgba(37,99,235,0.05); }
+    .v2-foro-fecha { font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: 0.06em; color: var(--v2-slate); }
+    .v2-foro-cat { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-blue); }
+    .v2-foro-tit { font-size: var(--txt-md); font-weight: 600; line-height: 1.4; }
+    .v2-foro-leer { font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--v2-blue); }
+    @media (max-width: 860px) {
+      /* Apiladas: la fecha y la categoría comparten renglón para que el título
+         quede pegado a ellas y no separado por dos líneas de metadatos. */
+      .v2-foro-row { grid-template-columns: auto 1fr; gap: 4px 14px; padding: 14px 8px; }
+      .v2-foro-tit { grid-column: 1 / -1; margin-top: 2px; }
+      .v2-foro-leer { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -665,6 +688,33 @@
             </a>
           </div>
         </div>
+
+        <!-- PIT-FORO-HOME:START — lo escribe _build/sync-foro-home.js desde _content/foro/*.md. No editar a mano: se regenera en cada build. -->
+        <div class="v2-foro-ultimo v2-reveal" style="margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(0,11,51,0.10);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 10px;">
+            <span class="v2-eyebrow" style="color: var(--v2-blue);">Lo último del foro</span>
+            <a href="foro.html" style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-slate);">Ver todo el foro →</a>
+          </div>
+          <a class="v2-foro-row" href="foro/corticoides-y-pit.html">
+            <span class="v2-foro-fecha">S28 · 09 jul</span>
+            <span class="v2-foro-cat">P. y R. · Pacientes</span>
+            <span class="v2-foro-tit">Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?</span>
+            <span class="v2-foro-leer">Leer →</span>
+          </a>
+          <a class="v2-foro-row" href="foro/gonalgia-corredor-52.html">
+            <span class="v2-foro-fecha">S27 · 03 jul</span>
+            <span class="v2-foro-cat">Caso clínico · Prof.</span>
+            <span class="v2-foro-tit">Gonalgia bilateral en corredor de 52 años: mapeo y evolución en 5 sesiones</span>
+            <span class="v2-foro-leer">Leer →</span>
+          </a>
+          <a class="v2-foro-row" href="foro/congreso-medicina-familiar-2026.html">
+            <span class="v2-foro-fecha">S26b · 30 jun</span>
+            <span class="v2-foro-cat">Noticias · Para todos</span>
+            <span class="v2-foro-tit">PIT en el Congreso de Medicina Familiar 2026: qué se presentó</span>
+            <span class="v2-foro-leer">Leer →</span>
+          </a>
+        </div>
+        <!-- PIT-FORO-HOME:END -->
       </div>
     </div>
   </section>

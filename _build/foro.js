@@ -21,35 +21,13 @@ const OUTDIR = path.join(ROOT, 'foro');
 const { renderNav } = require('./nav');
 const { NOINDEX_META } = require('./site');   // palanca del noindex: _build/site.js
 
-const CAT = {
-  pyr: 'Preguntas y respuestas',
-  caso: 'Casos clínicos',
-  evidencia: 'Evidencia',
-  consejos: 'Consejos',
-  noticias: 'Noticias',
-};
-const CAT_SHORT = { pyr: 'P. y R.', caso: 'Caso clínico', evidencia: 'Evidencia', consejos: 'Consejos', noticias: 'Noticias' };
-const AUD = { pacientes: 'Pacientes', profesionales: 'Prof.', todos: 'Para todos' };
-const TIPO = ['qa', 'caso', 'articulo'];
-// Un slug se convierte en nombre de archivo (foro/<slug>.html) y en URL. Se
-// acota a lo que es seguro en los dos lados: sin puntos, sin barras, sin
-// mayúsculas, sin acentos.
-const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-
-// ---------- escape ----------
-// Todo lo que sale del frontmatter o del markdown y termina en HTML pasa por
-// acá. El caso que rompe no es un ataque: es una comilla doble en `titulo` o en
-// `resumen`, que van a <title>, a <meta content> y a alt="". Una sola cierra el
-// atributo antes de tiempo y desarma el <head> de la página. Los 8 posts de hoy
-// no la tienen; el primero que escriba un título con comillas la encuentra.
-function esc(s) {
-  return String(s == null ? '' : s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+// Las tablas de etiquetas, el escape y el parser del frontmatter viven en
+// _build/foro-posts.js: la home también los necesita para mostrar las últimas
+// publicaciones, y una segunda copia era exactamente el problema que este repo
+// ya paga con las dos copias del CSS. Un slug se convierte en nombre de archivo
+// (foro/<slug>.html) y en URL, así que SLUG_RE lo acota a lo seguro en los dos
+// lados: sin puntos, sin barras, sin mayúsculas, sin acentos.
+const { CAT, CAT_SHORT, AUD, TIPO, SLUG_RE, esc, parsePost, loadPosts } = require('./foro-posts');
 
 // ---------- esquemas de URL permitidos ----------
 // El sitio no tiene CSP (ver README): si un href sale con javascript:, el
@@ -64,24 +42,6 @@ function urlSegura(url) {
   const m = limpia.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/);
   if (!m) return true;                       // relativo o ancla (#, ./, /img/…)
   return ESQUEMAS_OK.includes(m[1].toLowerCase() + ':');
-}
-
-// ---------- parse ----------
-function parsePost(file) {
-  const raw = fs.readFileSync(path.join(CONTENT, file), 'utf8').replace(/\r\n/g, '\n');
-  const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!m) throw new Error(`${file}: sin frontmatter`);
-  const meta = {};
-  for (const line of m[1].split('\n')) {
-    const mm = line.match(/^(\w+):\s*(.*)$/);
-    if (!mm) continue;
-    let v = mm[2].trim();
-    if (v.startsWith('"') && v.endsWith('"')) v = v.slice(1, -1);
-    meta[mm[1]] = v;
-  }
-  meta.lectura = parseInt(meta.lectura || '5', 10);
-  meta.tags = (meta.tags || '').split(',').map(t => t.trim()).filter(Boolean);
-  return { ...meta, body: m[2].trim(), file };
 }
 
 // ---------- validación ----------
@@ -775,9 +735,7 @@ ${FOOTER(pre)}
 }
 
 // ---------- main ----------
-const files = fs.readdirSync(CONTENT).filter(f => f.endsWith('.md')).sort().reverse(); // fecha desc por nombre
-const posts = files.map(parsePost);
-posts.sort((a, b) => b.fecha.localeCompare(a.fecha));
+const posts = loadPosts();   // ya vienen ordenados por fecha descendente
 
 // La validación va ANTES de borrar el directorio de salida: si un post está mal
 // escrito, el foro publicado sigue en su lugar. Nada a medio generar.

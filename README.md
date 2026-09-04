@@ -46,6 +46,19 @@ tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
   reemplaza automáticamente — no editar el nav ahí, no tiene efecto.)
 - `_build/sync-nav.js` — inyecta el nav en las páginas manuales (`index.html`) entre
   los marcadores `<!-- PIT-NAV:START/END -->`, sin tocar su CSS inline.
+- `_build/foro-posts.js` — **fuente única de los posts del foro**: lee y parsea
+  `_content/foro/*.md` y exporta las tablas de categoría/audiencia y el `esc`. Lo usan
+  `foro.js` y `sync-foro-home.js`. No valida: la validación (que corta el build nombrando
+  archivo y campo) sigue en `foro.js`.
+- `_build/sync-foro-home.js` — escribe las **tres últimas publicaciones del foro en la
+  home**, entre `<!-- PIT-FORO-HOME:START/END -->`. Se genera y no se escribe a mano
+  porque el foro publica todas las semanas: un bloque escrito a mano queda viejo el
+  primer lunes y nadie se entera. Corre después de `foro.js`, que ya validó el
+  frontmatter. Las filas reusan las MISMAS cadenas que el archivo de `foro.html`
+  (`S27 · 03 jul`, `Caso clínico · Prof.`, el título), así que el diccionario ES/EN las
+  traduce sin claves nuevas — salvo la del post más nuevo, que en `foro.html` es el
+  destacado y arma su línea de otra forma: esa semana hay que agregar su clave
+  `Sxx · dd mmm`.
 - `_build/site.js` — banderas del sitio. Hoy solo `STAGING` (ver "la palanca del
   lanzamiento" más arriba).
 - `_build/sync-staging.js` — propaga `STAGING` a las páginas manuales y a `vercel.json`.
@@ -58,7 +71,8 @@ tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
   (las que escribe el JS y no están en el HTML servido). También detecta claves y
   traducciones repetidas, las dos trampas del formato que documenta ese archivo.
 - **Build completo: `node _build/build.js`** (corre convert.js → foro.js → sync-nav.js →
-  sync-staging.js → check-lang.js en orden; es idempotente). Los generadores van primero
+  sync-foro-home.js → sync-staging.js → check-lang.js → check-css.js en orden; es
+  idempotente). Los generadores van primero
   y los verificadores después, porque miran el HTML ya construido. También se pueden
   correr sueltos si hace falta.
 
