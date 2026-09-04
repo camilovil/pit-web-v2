@@ -189,19 +189,11 @@
     'Cómo es una sesión →': 'What a session is like →',
     'Valores orientativos · Cada caso requiere evaluación individual': 'Indicative values · Each case requires individual assessment',
 
-    // Testimonios (contenido pendiente de validación)
-    'La diferencia': 'The difference',
-    'de tratar el nervio': 'of treating the nerve',
-    'Placeholder · Testimonio real': 'Placeholder · Real testimonial',
-    'A validar con Ricardo': 'Placeholder · To be confirmed',
-    '“Después de años de infiltraciones, con PIT el dolor cedió desde la primera sesión.”': '“After years of injections, with PIT the pain eased from the first session.”',
-    'Paciente · Lumbalgia': 'Patient · Low back pain',
-    '“El curso me dio una herramienta que uso todas las semanas en el consultorio.”': '“The course gave me a tool I use every week in my practice.”',
-    'Médico de familia': 'Family physician',
-    '“Volví a caminar sin pensar en la rodilla. Cinco sesiones.”': '“I walk again without thinking about my knee. Five sessions.”',
-    'Paciente · Gonalgia': 'Patient · Knee pain',
-    '“La formación más clara que hice en años: casos reales, sin cortes.”': '“The clearest training I have done in years: real cases, uncut.”',
-    'Traumatóloga': 'Orthopaedic surgeon',
+    // Los testimonios de la home, los de alumnos del Modulo I, la pregunta
+    // de cobertura de la FAQ y la fila de Horarios de Contacto estan
+    // OCULTOS en sus fuentes hasta tener contenido real, asi que sus claves
+    // se fueron de aca: sin texto en el HTML quedaban huerfanas y el build
+    // lo corta. Cuando el bloque vuelva, vuelven sus claves.
 
     // FAQ del home
     '¿Duelen las inyecciones?': 'Do the injections hurt?',
@@ -434,7 +426,6 @@
     'Aprobación con respaldo': 'Approval with backing',
     'Compra segura': 'Secure purchase',
     'Garantía de 7 días': '7-day guarantee',
-    'Lo que dicen los alumnos': 'What students say',
     'Empezá hoy. El acceso es tuyo para siempre.': 'Start today. The access is yours forever.',
     'Trayectoria': 'Career',
     'Dónde ejerce, enseña y se formó': 'Where he practices, teaches and trained',
@@ -445,13 +436,11 @@
     'Lo que más nos preguntan.': 'What we get asked the most.',
     '¿Tiene efectos secundarios o contraindicaciones?': 'Are there side effects or contraindications?',
     '¿Es compatible con otros tratamientos que ya estoy haciendo?': 'Is it compatible with treatments I am already doing?',
-    '¿Lo cubre mi obra social o prepaga?': 'Is it covered by my health insurance?',
     '¿Necesito formación previa en proloterapia?': 'Do I need prior training in prolotherapy?',
     '¿Qué materiales necesito para empezar a aplicar PIT?': 'What materials do I need to start applying PIT?',
     '¿El certificado del curso me habilita a ejercer la técnica?': 'Does the course certificate license me to practice the technique?',
     'El consultorio queda en Belgrano.': 'The practice is in Belgrano.',
     'Dirección': 'Address',
-    'Horarios': 'Hours',
     'Escribinos': 'Write to us',
     'Nombre': 'Name',
     'Tu nombre': 'Your name',
