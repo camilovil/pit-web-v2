@@ -71,7 +71,17 @@ const rawVercel = fs.readFileSync(vp, 'utf8');
 try {
   const cfg = JSON.parse(rawVercel);
 
-  if (fmtConfig(cfg) !== rawVercel.replace(/\r\n/g, '\n')) {
+  const previousHeaders = JSON.stringify(cfg.headers || []);
+  const nextHeaders = (cfg.headers || [])
+    .map(r => ({ ...r, headers: (r.headers || []).filter(h => h.key !== 'X-Robots-Tag') }))
+    .filter(r => r.headers.length);
+  if (STAGING) nextHeaders.push(NOINDEX_HEADER);
+
+  // Vercel normaliza el JSON antes de ejecutar el build. Si los headers ya
+  // son correctos, no hay nada que escribir ni motivo para exigir formato.
+  if (JSON.stringify(nextHeaders) === previousHeaders) {
+    console.log('OK   vercel.json (headers sin cambios)');
+  } else if (fmtConfig(cfg) !== rawVercel.replace(/\r\n/g, '\n')) {
     console.error('FAIL vercel.json: el formato del archivo no coincide con el que sabe escribir sync-staging.js.');
     console.error('     No se tocó nada. Revisá el archivo (¿se agregó una clave nueva, o una regla con "has"/"destination"?)');
     console.error('     y actualizá fmtRule/fmtConfig antes de volver a correr el build.');
@@ -81,10 +91,7 @@ try {
     // alguna vez comparte regla con los headers de seguridad, apagar el staging
     // se los llevaría puestos sin que nada avise. Una regla que queda sin
     // headers se descarta.
-    cfg.headers = (cfg.headers || [])
-      .map(r => ({ ...r, headers: (r.headers || []).filter(h => h.key !== 'X-Robots-Tag') }))
-      .filter(r => r.headers.length);
-    if (STAGING) cfg.headers.push(NOINDEX_HEADER);
+    cfg.headers = nextHeaders;
 
     const next = fmtConfig(cfg);
     if (next !== rawVercel) { fs.writeFileSync(vp, next); console.log(`SYNC vercel.json  (X-Robots-Tag: ${STAGING ? 'sí' : 'no'})`); }
