@@ -611,3 +611,65 @@ pasa arriba a lo ancho y el texto abajo.
 un 6%. Es imperceptible en pantalla normal, pero si en algún momento se quieren
 las tarjetas más nítidas en pantallas retina, el arreglo es una imagen de origen
 más grande — no hay nada que tocar en el código.
+
+---
+
+## #11 · Los flyers del NOA en los artículos
+
+Commit `79e582e` · merge `580f367`.
+
+Los tres cursos tenían como imagen una foto genérica del sitio. Ahora usan sus
+propias piezas: las 15 imágenes del NOA entran al repo como webp — **de 10,8 MB
+de PNG a 1 MB** — en `img/cursos/`.
+
+| Dónde | Qué imagen |
+|---|---|
+| `portada` del post | El **flyer** del curso (`<ciudad>-aviso.webp`) |
+| Cuerpo del artículo | **"El carrusel del curso"**: las 5 piezas en galería deslizable |
+| Tarjeta de la home | La **banda anatómica** recortada del carrusel-01 (`<ciudad>-nervios.webp`) |
+
+### Por qué la tarjeta de la home no lleva el flyer
+
+La tarjeta ya dice ciudad, tema, título, fecha, lugar y modalidad **en texto**.
+Poner al lado el flyer, que repite todo eso quemado dentro de la imagen, era
+decirlo dos veces. El recorte de la banda anatómica es la única de las cinco
+piezas sin texto encima, y además es la estética que pide Ricardo: el dolor
+graficado en los nervios y no en los huesos.
+
+De paso, el recorte mide 1080×520 y se dibuja a 378×398, así que también cierra
+el pendiente del 6% de agrandamiento que tenía la foto de Salta.
+
+### El bloque `[[carrusel: …]]`
+
+Nuevo en el markdown del foro: `[[carrusel: /img/a.webp | /img/b.webp | …]]`
+renderiza una galería deslizable de piezas 4:5.
+
+Las piezas van con `alt=""` y un rótulo que aclara qué son. **El artículo nunca
+depende de ellas para decir algo**: llevan su texto quemado en la imagen, y todo
+lo que cuentan ya está escrito arriba en texto de verdad. Es una galería, no una
+fuente de información.
+
+### Dos desbordes horizontales que aparecieron midiendo
+
+**Uno era mío.** Las piezas tenían ancho `min(300px, 72vw)`. El `vw` se
+retroalimenta: si algo desborda, el ancho del viewport crece, las piezas crecen
+con él y desbordan más. Pasan a % del track.
+
+**El otro es viejo y estaba latente.** El `<article>` de los posts es un item de
+grid (`.m-stack`) con el `min-width: auto` que traen los items por defecto: un
+hijo ancho lo estira hasta su propio ancho y empuja el ancho de **toda la
+página** en mobile, en vez de scrollear adentro de sí mismo. Con la galería, la
+página se iba a 721px sobre un viewport de 375. Va `min-width: 0`, que además
+deja cubierto el próximo hijo ancho que aparezca — una tabla, un bloque de
+código.
+
+### Un extra
+
+Ya que la `portada` empezó a valer para algo más que la tarjeta del destacado,
+**`og:image` de cada publicación pasa a ser su portada** en vez de la imagen
+genérica del sitio. Compartir el link de un curso ahora muestra su flyer.
+
+### Verificación
+
+375px y 1280px, y las ocho páginas principales barridas a 375 buscando
+desbordes: ninguna.
