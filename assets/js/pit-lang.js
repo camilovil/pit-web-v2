@@ -125,6 +125,12 @@
     'Anatomía, técnica y puntos de inyección para cada región.': 'Anatomy, technique and injection points for each region.',
     'Descargar apuntes →': 'Download the notes →',
     'Foro · Cada semana': 'Forum · Every week',
+    // Las dos cadenas fijas del listado de ultimas publicaciones que
+    // escribe _build/sync-foro-home.js en la home. Las filas en si
+    // (fecha, categoria, titulo, "Leer") reusan las cadenas que ya
+    // existen en el foro, asi que no necesitan clave propia.
+    'Lo último del foro': 'Latest from the forum',
+    'Ver todo el foro →': 'See the whole forum →',
     'El Dr. Frusso responde': 'Dr. Frusso answers',
     'Noticias, casos clínicos y tu pregunta respondida — sin datos personales.': 'News, clinical cases and your question answered — with no personal data.',
     'Ir al foro →': 'Go to the forum →',
@@ -208,6 +214,12 @@
     '7 publicaciones en el archivo': '7 posts in the archive',
     'Sin resultados en el archivo': 'No results in the archive',   // RUNTIME
     'Ver todas las publicaciones': 'See all posts',
+    // El post mas nuevo aparece en la home (listado de sync-foro-home.js)
+    // pero en foro.html es el DESTACADO, que arma su linea de otra forma:
+    // esta clave existe solo por la home. Cuando se publica el siguiente,
+    // el destacado de hoy baja al archivo del foro y la clave sigue
+    // sirviendo; lo que hay que agregar es la del post nuevo.
+    'S28 · 09 jul': 'W28 · 09 jul',
     'S27 · 03 jul': 'W27 · 03 jul',
     'S26b · 30 jun': 'W26b · 30 jun',
     'S26 · 26 jun': 'W26 · 26 jun',
