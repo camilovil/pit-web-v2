@@ -63,7 +63,7 @@
     'Foro semanal': 'Weekly forum',
     'Apuntes de PIT': 'PIT study notes',
     'Preguntas frecuentes': 'FAQ',
-    'Tratamiento del dolor crónico, desde el nervio, en cada etapa': 'Chronic pain treatment, from the nerve, at every stage',
+    'Tratamiento del dolor crónico: de la inyección subcutánea al resultado profundo': 'Chronic pain treatment: from the subcutaneous injection to deep results',
     'Instagram del Dr. Frusso · @drfrussoricardo': 'Dr. Frusso on Instagram · @drfrussoricardo',
     'Instagram de la Escuela de PIT · @escueladepit': 'Escuela de PIT on Instagram · @escueladepit',
     'Privacidad y aviso médico': 'Privacy & medical notice',
@@ -85,24 +85,24 @@
     // ══ HOME ══════════════════════════════════════════════════════════════
     // Hero
     'PIT · Neuroproloterapia · Dr. Ricardo D. Frusso': 'PIT · Neuroprolotherapy · Dr. Ricardo D. Frusso',
-    'Aliviar el dolor crónico desde el nervio': 'Relieve chronic pain at its source: the nerve',
-    'PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión, sin interferir con otros tratamientos en curso.': 'PIT is a minimally invasive treatment that acts where pain begins. Relief is usually felt from the first session, without interfering with any ongoing treatment.',
+    'Tratar el dolor desde el nervio': 'Treating pain at the nerve',
+    'PIT es un tratamiento que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión. Su creador es el Dr. John Lyftogt.': 'PIT is a treatment that acts where pain begins. Relief is usually felt from the first session. It was created by Dr. John Lyftogt.',
     'Pedir una consulta': 'Request a consultation',
 
     // Franja de respaldos
     'Práctica y formación respaldadas por': 'Practice and training backed by',
     'Práctica clínica · 30+ años': 'Clinical practice · 30+ years',
-    'Área de dolor · Cursos PIT': 'Pain unit · PIT courses',
+    'Centro del Dolor · Instructor en PIT': 'Pain Centre · PIT instructor',
+    'Instructor autorizado · Discípulo directo': 'Certified instructor · Direct student',
     'Instructor autorizado': 'Certified instructor',
-    'Fundador · Formación en PIT': 'Founder · PIT training',
-    'Formación · 1992': 'Medical degree · 1992',
+    'Miembro Fundador · Instructor en PIT': 'Founding member · PIT instructor',
+    'Formación universitaria · 1992': 'University degree · 1992',
 
     // Bifurcación
-    '¿Quién sos?': 'Who are you?',
-    'La misma técnica, explicada para vos': 'The same technique, explained for you',
+    'La misma técnica, explicada específicamente para vos': 'The same technique, explained specifically for you',
     'Para pacientes': 'For patients',
     'Tengo dolor crónico': 'I live with chronic pain',
-    'Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.': 'Understand why your pain persists, how PIT works and whether it makes sense for your case — in plain language.',
+    'Entendé por qué podría estar persistiendo tu dolor y cómo funciona PIT frente al mismo.': 'Understand why your pain might be persisting, and how PIT works on it.',
     'Entender mi dolor →': 'Understand my pain →',
     'Para profesionales': 'For professionals',
     'Soy profesional de la salud': 'I am a health professional',
@@ -127,7 +127,7 @@
 
     // Módulo de datos por patología
     'Qué trata PIT': 'What PIT treats',
-    'Elegí dónde te duele': 'Choose where it hurts',
+    'Elegí una opción': 'Choose an option',
     'Lumbalgia': 'Low back pain',
     'Rodilla': 'Knee',
     'Cervical': 'Neck',
@@ -138,7 +138,7 @@
     'En la misma sesión': 'In the same session',
     '20–30 min': '20–30 min.',
     'Lumbalgia crónica.': 'Chronic low back pain.',
-    'Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.': 'The sensitized superficial nerve branches of the lumbar area are mapped by palpation and treated with subcutaneous injections of 5% glucose. It is the region that opens Module I of the course.',
+    'Dolor persistente en la parte baja de la espalda. Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%.': 'Persistent pain in the lower back. The sensitized superficial nerve branches of the lumbar area are mapped by palpation and treated with subcutaneous injections of 5% glucose.',
     'Cómo es una sesión →': 'What a session is like →',
     'Valores orientativos · Cada caso requiere evaluación individual': 'Indicative values · Each case requires individual assessment',
 
