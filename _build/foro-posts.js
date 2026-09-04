@@ -60,6 +60,17 @@ function parsePost(file) {
   return { ...meta, body: m[2].trim(), file };
 }
 
+// Campos que convierten a un post en el anuncio de un curso. Si aparece
+// cualquiera de ellos, foro.js exige el juego completo: un curso a medio
+// describir en la home es peor que no anunciarlo.
+const EVENTO_REQ = ['eventoFecha', 'eventoFechaLabel', 'eventoLugar', 'eventoZona',
+                    'eventoModalidad', 'eventoWhatsapp', 'eventoTema', 'eventoAcento'];
+const EVENTO_OPC = ['eventoEmail'];
+
+// Un post es "de curso" si trae la fecha del evento. Se mira ese campo y no
+// otro porque es el que ordena los cursos en la home.
+function esCurso(p) { return !!(p && p.eventoFecha); }
+
 // Devuelve los posts ordenados por fecha descendente: el [0] es el último.
 function loadPosts() {
   const files = fs.readdirSync(CONTENT).filter(f => f.endsWith('.md')).sort().reverse();
@@ -68,4 +79,4 @@ function loadPosts() {
   return posts;
 }
 
-module.exports = { CONTENT, CAT, CAT_SHORT, AUD, TIPO, SLUG_RE, esc, parsePost, loadPosts };
+module.exports = { CONTENT, CAT, CAT_SHORT, AUD, TIPO, SLUG_RE, EVENTO_REQ, EVENTO_OPC, esc, esCurso, parsePost, loadPosts };

@@ -130,6 +130,37 @@
     // (fecha, categoria, titulo, "Leer") reusan las cadenas que ya
     // existen en el foro, asi que no necesitan clave propia.
     'Lo último del foro': 'Latest from the forum',
+
+    // ── Bloque de proximos cursos (lo escribe _build/sync-cursos-home.js) ──
+    // Las etiquetas de los datos son fijas; la zona, la fecha, el lugar y la
+    // modalidad salen del frontmatter de cada post y llevan su propia clave.
+    'Próximos cursos': 'Upcoming courses',
+    'Formación presencial, con práctica sobre pacientes reales': 'In-person training, with practice on real patients',
+    'Fecha y hora': 'Date and time',
+    'Lugar': 'Venue',
+    'Modalidad': 'Format',
+    'Inscripción por WhatsApp': 'Sign up on WhatsApp',
+    'Curso anterior': 'Previous course',
+    'Curso siguiente': 'Next course',
+    // Los tres cursos del NOA, septiembre 2026.
+    'Curso en Salta: el dolor de miembros inferiores, desde los nervios': 'Course in Salta: lower-limb pain, from the nerves',
+    'Curso en Jujuy: tratamiento del dolor de la zona dorso-lumbar con Lyftogt PIT': 'Course in Jujuy: treating thoracolumbar pain with Lyftogt PIT',
+    'Curso en Tucumán: el dolor de la cabeza, el cuello y el hombro con Lyftogt PIT': 'Course in Tucumán: head, neck and shoulder pain with Lyftogt PIT',
+    'Miembros inferiores': 'Lower limbs',
+    'Zona dorso-lumbar': 'Thoracolumbar area',
+    'Cabeza, cuello y hombro': 'Head, neck and shoulder',
+    'San Salvador de Jujuy': 'San Salvador de Jujuy',
+    'Viernes 04/09 · 14 a 20 hs': 'Friday 04/09 · 2 to 8 pm',
+    'Sábado 05/09 · 08:30 a 13:00 hs': 'Saturday 05/09 · 8:30 am to 1 pm',
+    'Martes 08/09 · 08:30 a 15:00 hs': 'Tuesday 08/09 · 8:30 am to 3 pm',
+    'Ciudad de Salta': 'City of Salta',
+    'Consejo de Médicos de Jujuy · La Reina Mora 656': 'Consejo de Médicos de Jujuy · La Reina Mora 656',
+    'San Miguel de Tucumán': 'San Miguel de Tucumán',
+    'Presencial y virtual en vivo': 'In person and live online',
+    'Presencial y virtual': 'In person and online',
+    'Ir al curso de Salta': 'Go to the Salta course',
+    'Ir al curso de San Salvador de Jujuy': 'Go to the San Salvador de Jujuy course',
+    'Ir al curso de Tucumán': 'Go to the Tucumán course',
     'Ver todo el foro →': 'See the whole forum →',
     'El Dr. Frusso responde': 'Dr. Frusso answers',
     'Noticias, casos clínicos y tu pregunta respondida — sin datos personales.': 'News, clinical cases and your question answered — with no personal data.',
@@ -206,16 +237,16 @@
 
     // Publicación destacada
     'Esta semana': 'This week',
-    'Semana 28 · 09 jul 2026': 'Week 28 · 09 jul 2026',
+    'Semana 35 · 29 ago 2026': 'Week 35 · 29 ago 2026',
     'Me infiltraron con corticoides y volvió el dolor. ¿PIT puede ayudarme?': 'I had a corticosteroid injection and the pain came back. Can PIT help me?',
-    'Una pregunta muy frecuente en el consultorio. Ricardo explica la diferencia entre infiltrar la articulación y tratar el nervio sensibilizado — y por qué no son excluyentes.': 'A very common question in the practice. Ricardo explains the difference between injecting the joint and treating the sensitized nerve — and why the two are not mutually exclusive.',
+    'Último destino del recorrido por el noroeste. Tres zonas anatómicamente complejas y con alta densidad nerviosa, con teoría por la mañana y práctica con pacientes reales.': 'Final stop of the northwest tour. Three anatomically complex, nerve-dense areas, with theory in the morning and practice on real patients.',
     'Leer →': 'Read →',
-    '5 min de lectura': '5 min read',
+    '3 min de lectura': '3 min read',
 
     // Archivo
     'Publicaciones anteriores': 'Previous posts',
     'El archivo del foro.': 'The forum archive.',
-    '7 publicaciones en el archivo': '7 posts in the archive',
+    '10 publicaciones en el archivo': '10 posts in the archive',
     'Sin resultados en el archivo': 'No results in the archive',   // RUNTIME
     'Ver todas las publicaciones': 'See all posts',
     // El post mas nuevo aparece en la home (listado de sync-foro-home.js)

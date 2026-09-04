@@ -27,7 +27,7 @@ const { NOINDEX_META } = require('./site');   // palanca del noindex: _build/sit
 // ya paga con las dos copias del CSS. Un slug se convierte en nombre de archivo
 // (foro/<slug>.html) y en URL, así que SLUG_RE lo acota a lo seguro en los dos
 // lados: sin puntos, sin barras, sin mayúsculas, sin acentos.
-const { CAT, CAT_SHORT, AUD, TIPO, SLUG_RE, esc, parsePost, loadPosts } = require('./foro-posts');
+const { CAT, CAT_SHORT, AUD, TIPO, SLUG_RE, EVENTO_REQ, EVENTO_OPC, esc, esCurso, parsePost, loadPosts } = require('./foro-posts');
 
 // ---------- esquemas de URL permitidos ----------
 // El sitio no tiene CSP (ver README): si un href sale con javascript:, el
@@ -89,6 +89,24 @@ function validar(posts) {
     else if (!urlSegura(p.portada)) err(p, 'portada', `"${p.portada}" usa un esquema no permitido`);
     else if (p.portada.startsWith('/') && !fs.existsSync(path.join(ROOT, p.portada.slice(1)))) {
       err(p, 'portada', `"${p.portada}" no existe en el repo`);
+    }
+
+    // --- anuncio de curso: o están todos los campos, o no está ninguno ---
+    // Estos posts alimentan el bloque de cursos de la home. Con un campo a
+    // medias, la tarjeta saldría con un hueco o con "undefined" y el error
+    // recién se vería en la home publicada.
+    const eventoPresentes = [...EVENTO_REQ, ...EVENTO_OPC].filter(c => String(p[c] || '').trim());
+    if (eventoPresentes.length) {
+      const faltan = EVENTO_REQ.filter(c => !String(p[c] || '').trim());
+      if (faltan.length) {
+        err(p, 'evento', `trae ${eventoPresentes.join(', ')} pero le falta ${faltan.join(', ')} — o están todos los campos del curso, o ninguno`);
+      }
+      if (p.eventoFecha && !/^\d{4}-\d{2}-\d{2}$/.test(String(p.eventoFecha))) {
+        err(p, 'eventoFecha', `"${p.eventoFecha}" no es AAAA-MM-DD (de acá sale el orden de los cursos en la home)`);
+      }
+      if (p.eventoAcento && !/^#[0-9a-fA-F]{6}$/.test(String(p.eventoAcento))) {
+        err(p, 'eventoAcento', `"${p.eventoAcento}" no es un color #rrggbb (va a un atributo style de la home)`);
+      }
     }
 
     // --- links e imágenes del cuerpo: esquema permitido ---
