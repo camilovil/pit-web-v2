@@ -524,15 +524,30 @@
        ciudad. Componente solo de la home: no tiene copia en pit-v2.css. */
     .v2-cursos-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; margin: 0 -4px; padding: 4px; }
     .v2-cursos-track::-webkit-scrollbar { display: none; }
-    .v2-curso { scroll-snap-align: center; display: flex; flex-direction: column; gap: 18px; padding: 32px 34px 30px; border-radius: var(--v2-radius); background: var(--v2-navy); color: #FFFFFF; text-decoration: none; box-shadow: inset 4px 0 0 var(--acento); min-width: 0; }
+    /* La tarjeta es texto a la izquierda y foto de la región a la derecha. La
+       foto va en su propia columna y a sangre, así que el padding vive en
+       .v2-curso-cuerpo y no en la tarjeta. */
+    .v2-curso { scroll-snap-align: center; display: grid; grid-template-columns: 1fr 32%; border-radius: var(--v2-radius); overflow: hidden; background: var(--v2-navy); color: #FFFFFF; text-decoration: none; box-shadow: inset 4px 0 0 var(--acento); min-width: 0; }
+    .v2-curso-cuerpo { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 18px; padding: 32px 34px 30px; min-width: 0; }
+    .v2-curso-foto { grid-column: 2; grid-row: 1; display: block; min-width: 0; background: #05102E; }
+    .v2-curso-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .v2-curso-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .v2-curso-zona { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; background: var(--acento); border-radius: 999px; padding: 5px 12px; }
-    .v2-curso-tema { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
-    .v2-curso-tit { font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; margin: 0; max-width: 30ch; }
-    .v2-curso-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.14); }
+    /* CONTRASTE — medido sobre el fondo de la tarjeta (#000B33):
+       los rótulos estaban en alpha 0.45, que da 4.44:1 y no llega al 4.5:1
+       exigido para texto normal, y encima son 11px en mayúsculas. A 0.62 dan
+       7.54:1. El blanco puro de los valores da 19.17:1.
+       Y el título y los valores AHORA DECLARAN su color en vez de heredarlo de
+       .v2-curso: eran los dos únicos que dependían de la herencia y los dos
+       únicos que se veían en blanco en la captura de un navegador con
+       extensión de tema — un color heredado a través de un cambio de fondo es
+       justo lo que esas extensiones rompen. */
+    .v2-curso-tema { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
+    .v2-curso-tit { font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; margin: 0; max-width: 26ch; color: #FFFFFF; }
+    .v2-curso-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.16); }
     .v2-curso-datos > span { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; min-width: 0; }
-    .v2-curso-datos small { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-    .v2-curso-datos b { font-size: var(--txt-sm); font-weight: 600; line-height: 1.45; }
+    .v2-curso-datos small { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
+    .v2-curso-datos b { font-size: var(--txt-sm); font-weight: 600; line-height: 1.45; color: #FFFFFF; }
     .v2-curso-cta { font-weight: 600; font-size: var(--txt-sm); color: #FFFFFF; margin-top: auto; }
     .v2-curso:hover .v2-curso-cta { text-decoration: underline; text-underline-offset: 4px; }
 
@@ -544,8 +559,16 @@
     .v2-cursos-dot { width: 8px; height: 8px; border-radius: 999px; border: none; padding: 0; background: rgba(0,11,51,0.18); cursor: pointer; transition: background 0.2s ease, width 0.2s ease; }
     .v2-cursos-dot[aria-current="true"] { width: 24px; background: var(--v2-blue); }
 
+    @media (max-width: 1020px) {
+      /* Abajo de 1020px la columna de la foto deja al título en cuatro o cinco
+         líneas: la foto pasa arriba, a lo ancho, y el texto abajo. */
+      .v2-curso { grid-template-columns: 1fr; }
+      .v2-curso-foto { grid-column: 1; grid-row: 1; aspect-ratio: 16 / 6; }
+      .v2-curso-cuerpo { grid-column: 1; grid-row: 2; }
+    }
     @media (max-width: 860px) {
-      .v2-curso { padding: 26px 24px 24px; }
+      .v2-curso-cuerpo { padding: 26px 24px 24px; }
+      .v2-curso-foto { aspect-ratio: 16 / 9; }
       .v2-curso-datos { grid-template-columns: 1fr; gap: 0; }
     }
     @media (prefers-reduced-motion: no-preference) {
@@ -893,46 +916,55 @@
 
         <div class="v2-cursos-track" id="v2-cursos-track" role="region" aria-label="Próximos cursos" tabindex="0">
             <a class="v2-curso" href="foro/curso-salta-miembros-inferiores.html" style="--acento: #2B5CE6;">
-              <span class="v2-curso-top">
-                <span class="v2-curso-zona">Salta</span>
-                <span class="v2-curso-tema">Miembros inferiores</span>
+              <span class="v2-curso-foto"><img src="/img/DSC_knee01.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="v2-curso-cuerpo">
+                <span class="v2-curso-top">
+                  <span class="v2-curso-zona">Salta</span>
+                  <span class="v2-curso-tema">Miembros inferiores</span>
+                </span>
+                <h3 class="v2-curso-tit">Curso en Salta: el dolor de miembros inferiores, desde los nervios</h3>
+                <span class="v2-curso-datos">
+                  <span><small>Fecha y hora</small><b>Viernes 04/09 · 14 a 20 hs</b></span>
+                  <span><small>Lugar</small><b>Ciudad de Salta</b></span>
+                  <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
+                  <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469<br>cursopitsalta@gmail.com</b></span>
+                </span>
+                <span class="v2-curso-cta">Ver el curso →</span>
               </span>
-              <h3 class="v2-curso-tit">Curso en Salta: el dolor de miembros inferiores, desde los nervios</h3>
-              <span class="v2-curso-datos">
-                <span><small>Fecha y hora</small><b>Viernes 04/09 · 14 a 20 hs</b></span>
-                <span><small>Lugar</small><b>Ciudad de Salta</b></span>
-                <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
-                <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469<br>cursopitsalta@gmail.com</b></span>
-              </span>
-              <span class="v2-curso-cta">Ver el curso →</span>
             </a>
             <a class="v2-curso" href="foro/curso-jujuy-dorso-lumbar.html" style="--acento: #C05A2B;">
-              <span class="v2-curso-top">
-                <span class="v2-curso-zona">San Salvador de Jujuy</span>
-                <span class="v2-curso-tema">Zona dorso-lumbar</span>
+              <span class="v2-curso-foto"><img src="/img/DSC_lumbar01.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="v2-curso-cuerpo">
+                <span class="v2-curso-top">
+                  <span class="v2-curso-zona">San Salvador de Jujuy</span>
+                  <span class="v2-curso-tema">Zona dorso-lumbar</span>
+                </span>
+                <h3 class="v2-curso-tit">Curso en Jujuy: tratamiento del dolor de la zona dorso-lumbar con Lyftogt PIT</h3>
+                <span class="v2-curso-datos">
+                  <span><small>Fecha y hora</small><b>Sábado 05/09 · 08:30 a 13:00 hs</b></span>
+                  <span><small>Lugar</small><b>Consejo de Médicos de Jujuy · La Reina Mora 656</b></span>
+                  <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
+                  <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469</b></span>
+                </span>
+                <span class="v2-curso-cta">Ver el curso →</span>
               </span>
-              <h3 class="v2-curso-tit">Curso en Jujuy: tratamiento del dolor de la zona dorso-lumbar con Lyftogt PIT</h3>
-              <span class="v2-curso-datos">
-                <span><small>Fecha y hora</small><b>Sábado 05/09 · 08:30 a 13:00 hs</b></span>
-                <span><small>Lugar</small><b>Consejo de Médicos de Jujuy · La Reina Mora 656</b></span>
-                <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
-                <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469</b></span>
-              </span>
-              <span class="v2-curso-cta">Ver el curso →</span>
             </a>
             <a class="v2-curso" href="foro/curso-tucuman-cabeza-cuello-hombro.html" style="--acento: #157A57;">
-              <span class="v2-curso-top">
-                <span class="v2-curso-zona">Tucumán</span>
-                <span class="v2-curso-tema">Cabeza, cuello y hombro</span>
+              <span class="v2-curso-foto"><img src="/img/DSC_neck02.webp" alt="" loading="lazy" decoding="async"></span>
+              <span class="v2-curso-cuerpo">
+                <span class="v2-curso-top">
+                  <span class="v2-curso-zona">Tucumán</span>
+                  <span class="v2-curso-tema">Cabeza, cuello y hombro</span>
+                </span>
+                <h3 class="v2-curso-tit">Curso en Tucumán: el dolor de la cabeza, el cuello y el hombro con Lyftogt PIT</h3>
+                <span class="v2-curso-datos">
+                  <span><small>Fecha y hora</small><b>Martes 08/09 · 08:30 a 15:00 hs</b></span>
+                  <span><small>Lugar</small><b>San Miguel de Tucumán</b></span>
+                  <span><small>Modalidad</small><b>Presencial y virtual</b></span>
+                  <span><small>Inscripción por WhatsApp</small><b>+54 9 381 597-6087</b></span>
+                </span>
+                <span class="v2-curso-cta">Ver el curso →</span>
               </span>
-              <h3 class="v2-curso-tit">Curso en Tucumán: el dolor de la cabeza, el cuello y el hombro con Lyftogt PIT</h3>
-              <span class="v2-curso-datos">
-                <span><small>Fecha y hora</small><b>Martes 08/09 · 08:30 a 15:00 hs</b></span>
-                <span><small>Lugar</small><b>San Miguel de Tucumán</b></span>
-                <span><small>Modalidad</small><b>Presencial y virtual</b></span>
-                <span><small>Inscripción por WhatsApp</small><b>+54 9 381 597-6087</b></span>
-              </span>
-              <span class="v2-curso-cta">Ver el curso →</span>
             </a>
         </div>
 

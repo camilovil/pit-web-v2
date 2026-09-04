@@ -34,19 +34,28 @@ function tarjeta(p) {
   const contacto = p.eventoEmail
     ? `${esc(p.eventoWhatsapp)}<br>${esc(p.eventoEmail)}`
     : esc(p.eventoWhatsapp);
+  // La foto es la `portada` del propio post: ya es obligatoria para todos y ya
+  // corresponde a la región que trata el curso (rodilla, lumbar, cuello), así
+  // que un curso nuevo trae su imagen sin campos extra.
+  // alt="" a propósito: es decorativa. Está dentro de un enlace que ya dice
+  // ciudad, tema, título, fecha, lugar y modalidad — repetirlo en el alt solo
+  // le haría escuchar todo dos veces a quien usa lector de pantalla.
   return `            <a class="v2-curso" href="foro/${esc(p.slug)}.html" style="--acento: ${esc(p.eventoAcento)};">
-              <span class="v2-curso-top">
-                <span class="v2-curso-zona">${esc(p.eventoZona)}</span>
-                <span class="v2-curso-tema">${esc(p.eventoTema)}</span>
+              <span class="v2-curso-foto"><img src="${esc(p.portada)}" alt="" loading="lazy" decoding="async"></span>
+              <span class="v2-curso-cuerpo">
+                <span class="v2-curso-top">
+                  <span class="v2-curso-zona">${esc(p.eventoZona)}</span>
+                  <span class="v2-curso-tema">${esc(p.eventoTema)}</span>
+                </span>
+                <h3 class="v2-curso-tit">${esc(p.titulo)}</h3>
+                <span class="v2-curso-datos">
+                  <span><small>Fecha y hora</small><b>${esc(p.eventoFechaLabel)}</b></span>
+                  <span><small>Lugar</small><b>${esc(p.eventoLugar)}</b></span>
+                  <span><small>Modalidad</small><b>${esc(p.eventoModalidad)}</b></span>
+                  <span><small>Inscripción por WhatsApp</small><b>${contacto}</b></span>
+                </span>
+                <span class="v2-curso-cta">Ver el curso →</span>
               </span>
-              <h3 class="v2-curso-tit">${esc(p.titulo)}</h3>
-              <span class="v2-curso-datos">
-                <span><small>Fecha y hora</small><b>${esc(p.eventoFechaLabel)}</b></span>
-                <span><small>Lugar</small><b>${esc(p.eventoLugar)}</b></span>
-                <span><small>Modalidad</small><b>${esc(p.eventoModalidad)}</b></span>
-                <span><small>Inscripción por WhatsApp</small><b>${contacto}</b></span>
-              </span>
-              <span class="v2-curso-cta">Ver el curso →</span>
             </a>`;
 }
 
