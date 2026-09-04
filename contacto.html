@@ -56,6 +56,7 @@
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
 
   </style>
+  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=2">
 </head>
 <body>
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
@@ -136,7 +137,7 @@
             -->
           </div>
           <div style="margin-top: 24px;">
-            <iframe title="Mapa del consultorio — Amenabar 2446, Belgrano, CABA" src="https://www.google.com/maps?q=Amenabar%202446,%20Belgrano,%20CABA,%20Argentina&output=embed" width="100%" height="260" style="border: 0; border-radius: var(--pit-radius); display: block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            <div class="pit-external" aria-label="Mapa del consultorio"><div class="pit-external-placeholder"><strong>Mapa de Google</strong><p>El mapa se carga desde Google y puede enviarle datos técnicos de tu visita.</p><button type="button" class="pit-btn pit-btn--primary pit-btn--sm" data-external-load>Cargar mapa</button><br><a href="https://www.google.com/maps/search/?api=1&query=Amenabar+2446%2C+Belgrano%2C+CABA%2C+Argentina" target="_blank" rel="noopener noreferrer">Abrir la dirección en Google Maps →</a></div><template data-external-template><iframe title="Mapa del consultorio — Amenabar 2446, Belgrano, CABA" src="https://www.google.com/maps?q=Amenabar%202446,%20Belgrano,%20CABA,%20Argentina&output=embed" width="100%" height="260" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></template></div>
             <a href="https://maps.app.goo.gl/krxuSHVs63Xafrc77" target="_blank" rel="noopener" style="display: inline-block; margin-top: 12px; font-family: var(--pit-font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Cómo llegar →</a>
           </div>
         </div>
@@ -293,7 +294,8 @@
     </div>
     <div class="v2-footer-legal">
       <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
-      <a href="privacidad.html">Privacidad y aviso médico</a>
+      <a href="privacidad.html#aviso-legal">Aviso legal</a><a href="privacidad.html#privacidad">Privacidad</a><a href="privacidad.html#cookies">Cookies</a><a href="privacidad.html#terminos">Términos</a>
+      <button type="button" class="v2-footer-privacy" data-privacy-open>Preferencias de privacidad</button>
     </div>
   </footer>
 
@@ -303,6 +305,20 @@
 <script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=2"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:START -->
+
+<aside class="pit-privacy-banner" data-privacy-banner hidden aria-label="Aviso de privacidad">
+  <p>Usamos almacenamiento necesario para recordar tus preferencias y likes. Google Maps y YouTube solo se cargan si permitís contenido externo. <a href="privacidad.html#cookies">Ver detalles</a>.</p>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Solo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</aside>
+<dialog class="pit-privacy-dialog" data-privacy-dialog aria-labelledby="pit-privacy-title"><div class="pit-privacy-dialog-inner">
+  <h2 id="pit-privacy-title">Preferencias de privacidad</h2><p>Elegí si querés cargar servicios externos dentro de las páginas. Podés cambiar esta decisión cuando quieras.</p>
+  <div class="pit-privacy-choice"><strong>Funciones necesarias</strong><span>Idioma, avance del curso, seguridad, likes y tu elección de privacidad. Siempre activas.</span></div>
+  <div class="pit-privacy-choice"><strong>Contenido externo</strong><span>Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.</span></div>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Usar solo lo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</div></dialog>
+<script src="assets/js/pit-privacy.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:END -->
 <script src="assets/js/pit-lang.js?v=2"></script>
 </body>
 </html>

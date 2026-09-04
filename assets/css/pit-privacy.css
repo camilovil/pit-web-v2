@@ -1,0 +1,32 @@
+.pit-privacy-banner { position: fixed; inset-inline: 18px; bottom: 18px; z-index: 1100; max-width: 720px; margin-inline: auto; padding: 18px; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px 24px; align-items: center; color: #FFFFFF; background: rgba(0,11,51,.97); border: 1px solid rgba(255,255,255,.18); border-radius: 18px; box-shadow: 0 20px 60px rgba(0,11,51,.34); font-family: var(--pit-font-sans,"Space Grotesk",sans-serif); }
+.pit-privacy-banner[hidden] { display: none; }
+.pit-privacy-banner p { margin: 0; font-size: var(--txt-sm,15px); line-height: 1.55; }
+.pit-privacy-banner a { color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px; }
+.pit-privacy-actions { display: flex; gap: 9px; flex-wrap: wrap; }
+.pit-privacy-btn { min-height: 44px; padding: 10px 16px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; color: #FFFFFF; background: transparent; font: 600 var(--txt-sm,15px)/1 var(--pit-font-sans,"Space Grotesk",sans-serif); cursor: pointer; }
+.pit-privacy-btn--primary { color: #000B33; background: #FFFFFF; border-color: #FFFFFF; }
+.pit-privacy-btn:focus-visible, .v2-footer-privacy:focus-visible { outline: 3px solid #8FAAF0; outline-offset: 3px; }
+.v2-footer-privacy { padding: 0; border: 0; color: #FFFFFF; background: none; font: inherit; letter-spacing: inherit; text-transform: inherit; text-shadow: inherit; cursor: pointer; }
+.v2-footer-privacy:hover { opacity: .75; }
+.pit-privacy-standalone { position: fixed; inset-inline-start: 16px; bottom: 16px; z-index: 900; min-height: 44px; padding: 10px 15px; border: 1px solid #DCE2EB; border-radius: 999px; color: #000B33; background: #FFFFFF; box-shadow: 0 8px 26px rgba(0,11,51,.14); font: 600 var(--txt-sm,15px)/1 var(--pit-font-sans,"Space Grotesk",sans-serif); cursor: pointer; }
+.pit-privacy-dialog { width: min(620px, calc(100vw - 32px)); padding: 0; color: #000B33; background: #FFFFFF; border: 0; border-radius: 24px; box-shadow: 0 28px 90px rgba(0,11,51,.35); font-family: var(--pit-font-sans,"Space Grotesk",sans-serif); }
+.pit-privacy-dialog::backdrop { background: rgba(0,11,51,.58); backdrop-filter: blur(3px); }
+.pit-privacy-dialog-inner { padding: clamp(24px,5vw,38px); }
+.pit-privacy-dialog h2 { margin: 0 0 12px; font-size: clamp(25px,4vw,34px); line-height: 1.15; }
+.pit-privacy-dialog p { margin: 0 0 18px; color: #55616D; font-size: var(--txt-md,17px); line-height: 1.6; }
+.pit-privacy-choice { padding: 16px 0; border-top: 1px solid #E2E5EA; }
+.pit-privacy-choice strong { display: block; margin-bottom: 4px; }
+.pit-privacy-choice span { color: #55616D; font-size: var(--txt-sm,15px); line-height: 1.5; }
+.pit-privacy-dialog .pit-privacy-actions { margin-top: 22px; }
+.pit-privacy-dialog .pit-privacy-btn { color: #000B33; border-color: #BFC5CE; }
+.pit-privacy-dialog .pit-privacy-btn--primary { color: #FFFFFF; background: #2563EB; border-color: #2563EB; }
+.pit-external { min-height: 260px; display: grid; place-items: center; overflow: hidden; background: #F1F4F9; border: 1px solid #DCE2EB; border-radius: var(--pit-radius,16px); }
+.pit-external--video { width: 100%; min-width: 0; box-sizing: border-box; }
+.pit-external--video.is-loaded { min-height: 0; aspect-ratio: 16 / 9; }
+.pit-external iframe { width: 100%; height: 100%; min-height: inherit; display: block; border: 0; }
+.pit-external-placeholder { max-width: 520px; padding: 28px; text-align: center; }
+.pit-external-placeholder strong { display: block; margin-bottom: 8px; font-size: var(--txt-lg,21px); }
+.pit-external-placeholder p { margin: 0 0 16px; color: #55616D; font-size: var(--txt-sm,15px); line-height: 1.55; }
+.pit-external-placeholder a { display: inline-block; margin-top: 12px; font-size: var(--txt-sm,15px); }
+@media (max-width: 620px) { .pit-privacy-banner { grid-template-columns: 1fr; } .pit-privacy-actions { width: 100%; } .pit-privacy-btn { flex: 1; } .pit-privacy-standalone { inset-inline-start: 12px; bottom: 12px; } }
+@media (prefers-reduced-motion: reduce) { .pit-privacy-dialog::backdrop { backdrop-filter: none; } }

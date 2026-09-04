@@ -45,8 +45,8 @@ const PAGES = [
     title: 'Sobre el Dr. Ricardo D. Frusso — 30+ años en dolor crónico',
     desc: 'Médico de Familia (UBA, 1992), 30+ años en el Hospital Italiano de Buenos Aires, instructor autorizado de PIT para América Latina desde 2015.' },
   { mode: 'core', src: 'cores/privacidad.html', out: 'privacidad.html', active: null,
-    title: 'Privacidad y aviso médico — Dr. Ricardo D. Frusso',
-    desc: 'Política de privacidad y aviso médico del sitio del Dr. Ricardo D. Frusso.' },
+    title: 'Información legal y privacidad — Dr. Ricardo D. Frusso',
+    desc: 'Aviso legal, privacidad, cookies, términos de uso y aviso médico del sitio del Dr. Ricardo D. Frusso.' },
 ];
 
 const COMPONENTS = {

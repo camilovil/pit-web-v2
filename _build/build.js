@@ -13,6 +13,8 @@ const STEPS = [
   // si un post está mal escrito, así que acá los datos ya están validados.
   { file: 'sync-foro-home.js', label: 'sync-foro-home.js  (últimas del foro en la home)' },
   { file: 'sync-cursos-home.js', label: 'sync-cursos-home.js  (próximos cursos en la home)' },
+  { file: 'sync-privacy-ui.js', label: 'sync-privacy-ui.js  (documentación y preferencias)' },
+  { file: 'check-privacy.js', label: 'check-privacy.js  (controles y embeds externos)' },
   { file: 'sync-staging.js', label: 'sync-staging.js  (bandera noindex)' },
   { file: 'check-lang.js', label: 'check-lang.js  (diccionario ES/EN)' },
   { file: 'check-css.js', label: 'check-css.js   (las dos copias del CSS)' },

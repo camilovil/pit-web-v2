@@ -71,6 +71,7 @@
        decorativo (aria-hidden) y sin esto el estado no se anunciaba. */
     .ci-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
   </style>
+  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=2">
 </head>
 <body>
 
@@ -424,6 +425,20 @@
 <script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=2"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:START -->
+<button type="button" class="pit-privacy-standalone" data-privacy-open>Privacidad</button>
+<aside class="pit-privacy-banner" data-privacy-banner hidden aria-label="Aviso de privacidad">
+  <p>Usamos almacenamiento necesario para recordar tus preferencias y likes. Google Maps y YouTube solo se cargan si permitís contenido externo. <a href="privacidad.html#cookies">Ver detalles</a>.</p>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Solo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</aside>
+<dialog class="pit-privacy-dialog" data-privacy-dialog aria-labelledby="pit-privacy-title"><div class="pit-privacy-dialog-inner">
+  <h2 id="pit-privacy-title">Preferencias de privacidad</h2><p>Elegí si querés cargar servicios externos dentro de las páginas. Podés cambiar esta decisión cuando quieras.</p>
+  <div class="pit-privacy-choice"><strong>Funciones necesarias</strong><span>Idioma, avance del curso, seguridad, likes y tu elección de privacidad. Siempre activas.</span></div>
+  <div class="pit-privacy-choice"><strong>Contenido externo</strong><span>Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.</span></div>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Usar solo lo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</div></dialog>
+<script src="assets/js/pit-privacy.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:END -->
 <script src="assets/js/pit-lang.js?v=2"></script>
 </body>
 </html>

@@ -159,8 +159,9 @@ function mdToHtml(body) {
       const m = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([A-Za-z0-9_-]{6,20})/);
       if (!m) return '';
       return `<figure style="margin: 0 0 28px;">
-          <div style="position: relative; aspect-ratio: 16 / 9; border-radius: var(--pit-radius); overflow: hidden; background: var(--pit-ink-05);">
-            <iframe src="https://www.youtube-nocookie.com/embed/${m[1]}" title="${esc(titulo)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
+          <div class="pit-external pit-external--video">
+            <div class="pit-external-placeholder"><strong>Video de YouTube</strong><p>El video se carga desde YouTube y puede enviarle datos técnicos de tu visita.</p><button type="button" class="pit-btn pit-btn--primary pit-btn--sm" data-external-load>Cargar video</button><br><a href="https://youtu.be/${m[1]}" target="_blank" rel="noopener noreferrer">Ver directamente en YouTube →</a></div>
+            <template data-external-template><iframe src="https://www.youtube-nocookie.com/embed/${m[1]}" title="${esc(titulo)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></template>
           </div>
           <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">${esc(titulo)}</figcaption>
         </figure>`;

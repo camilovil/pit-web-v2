@@ -43,6 +43,7 @@
     .foro-accion[aria-pressed="true"] { border-color: #C0392B; color: #C0392B; }
     .foro-accion[aria-pressed="true"] svg { fill: #C0392B; }
   </style>
+  <link rel="stylesheet" href="../assets/css/pit-privacy.css?v=2">
 </head>
 <body>
 
@@ -153,8 +154,9 @@
         <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">La referencia es la lapicera de insulina: un dispositivo con un botón que va inyectando la dosis. La idea es hacer ese mismo mecanismo con dextrosa, para que el paciente continúe las aplicaciones en su casa en vez de volver al hospital cada semana.</p>
 
         <figure style="margin: 0 0 28px;">
-          <div style="position: relative; aspect-ratio: 16 / 9; border-radius: var(--pit-radius); overflow: hidden; background: var(--pit-ink-05);">
-            <iframe src="https://www.youtube-nocookie.com/embed/xe3lFE1l7QE" title="El proyecto del dispositivo, contado por el Dr. Frusso" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
+          <div class="pit-external pit-external--video">
+            <div class="pit-external-placeholder"><strong>Video de YouTube</strong><p>El video se carga desde YouTube y puede enviarle datos técnicos de tu visita.</p><button type="button" class="pit-btn pit-btn--primary pit-btn--sm" data-external-load>Cargar video</button><br><a href="https://youtu.be/xe3lFE1l7QE" target="_blank" rel="noopener noreferrer">Ver directamente en YouTube →</a></div>
+            <template data-external-template><iframe src="https://www.youtube-nocookie.com/embed/xe3lFE1l7QE" title="El proyecto del dispositivo, contado por el Dr. Frusso" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></template>
           </div>
           <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">El proyecto del dispositivo, contado por el Dr. Frusso</figcaption>
         </figure>
@@ -168,8 +170,9 @@
         <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Ese mismo órgano intersticial está también <strong>debajo de las mucosas</strong>, tanto la de la boca como la de la zona vaginal. La hipótesis del proyecto es que las molestias de las mujeres posmenopáusicas —ardor, molestia, sequedad vaginal— tienen que ver con una alteración de la irrigación de ese órgano: no le llega sangre en forma suficiente.</p>
 
         <figure style="margin: 0 0 28px;">
-          <div style="position: relative; aspect-ratio: 16 / 9; border-radius: var(--pit-radius); overflow: hidden; background: var(--pit-ink-05);">
-            <iframe src="https://www.youtube-nocookie.com/embed/b6kcOLnyRo4" title="El proyecto del gel con dextrosa, contado por el Dr. Frusso" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
+          <div class="pit-external pit-external--video">
+            <div class="pit-external-placeholder"><strong>Video de YouTube</strong><p>El video se carga desde YouTube y puede enviarle datos técnicos de tu visita.</p><button type="button" class="pit-btn pit-btn--primary pit-btn--sm" data-external-load>Cargar video</button><br><a href="https://youtu.be/b6kcOLnyRo4" target="_blank" rel="noopener noreferrer">Ver directamente en YouTube →</a></div>
+            <template data-external-template><iframe src="https://www.youtube-nocookie.com/embed/b6kcOLnyRo4" title="El proyecto del gel con dextrosa, contado por el Dr. Frusso" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></template>
           </div>
           <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">El proyecto del gel con dextrosa, contado por el Dr. Frusso</figcaption>
         </figure>
@@ -309,7 +312,8 @@
     </div>
     <div class="v2-footer-legal">
       <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
-      <a href="../privacidad.html">Privacidad y aviso médico</a>
+      <a href="../privacidad.html#aviso-legal">Aviso legal</a><a href="../privacidad.html#privacidad">Privacidad</a><a href="../privacidad.html#cookies">Cookies</a><a href="../privacidad.html#terminos">Términos</a>
+      <button type="button" class="v2-footer-privacy" data-privacy-open>Preferencias de privacidad</button>
     </div>
   </footer>
 
@@ -320,6 +324,20 @@
 <script src="../assets/js/pit-motion.js?v=2"></script>
 <script src="../assets/js/pit-chat.js?v=2"></script>
 <script src="../assets/js/pit-scrolltop.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:START -->
+
+<aside class="pit-privacy-banner" data-privacy-banner hidden aria-label="Aviso de privacidad">
+  <p>Usamos almacenamiento necesario para recordar tus preferencias y likes. Google Maps y YouTube solo se cargan si permitís contenido externo. <a href="../privacidad.html#cookies">Ver detalles</a>.</p>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Solo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</aside>
+<dialog class="pit-privacy-dialog" data-privacy-dialog aria-labelledby="pit-privacy-title"><div class="pit-privacy-dialog-inner">
+  <h2 id="pit-privacy-title">Preferencias de privacidad</h2><p>Elegí si querés cargar servicios externos dentro de las páginas. Podés cambiar esta decisión cuando quieras.</p>
+  <div class="pit-privacy-choice"><strong>Funciones necesarias</strong><span>Idioma, avance del curso, seguridad, likes y tu elección de privacidad. Siempre activas.</span></div>
+  <div class="pit-privacy-choice"><strong>Contenido externo</strong><span>Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.</span></div>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Usar solo lo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</div></dialog>
+<script src="../assets/js/pit-privacy.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:END -->
 <script src="../assets/js/pit-lang.js?v=2"></script>
 </body>
 </html>

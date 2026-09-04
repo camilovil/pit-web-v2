@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Política de privacidad y aviso médico del sitio del Dr. Ricardo D. Frusso.">
+  <meta name="description" content="Aviso legal, privacidad, cookies, términos de uso y aviso médico del sitio del Dr. Ricardo D. Frusso.">
   <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Privacidad y aviso médico — Dr. Ricardo D. Frusso">
-  <meta property="og:description" content="Política de privacidad y aviso médico del sitio del Dr. Ricardo D. Frusso.">
+  <meta property="og:title" content="Información legal y privacidad — Dr. Ricardo D. Frusso">
+  <meta property="og:description" content="Aviso legal, privacidad, cookies, términos de uso y aviso médico del sitio del Dr. Ricardo D. Frusso.">
   <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Privacidad y aviso médico — Dr. Ricardo D. Frusso</title>
+  <title>Información legal y privacidad — Dr. Ricardo D. Frusso</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#000B33">
@@ -29,7 +29,35 @@
     body { margin: 0; background: #FFFFFF; }
     a { color: #2563EB; text-decoration: none; }
     a:hover { color: #1E3A8A; }
+
+  .legal-hero { padding: clamp(70px, 10vw, 128px) 24px 56px; background: linear-gradient(145deg, var(--pit-paper) 45%, var(--pit-blue-tint)); }
+  .legal-wrap { max-width: 1060px; min-width: 0; margin: 0 auto; }
+  .legal-lead { max-width: 760px; font-size: var(--txt-lg); line-height: 1.58; color: var(--pit-ink-60); }
+  .legal-meta { margin-top: 22px; font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-ink-40); letter-spacing: .05em; text-transform: uppercase; }
+  .legal-index { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 42px; }
+  .legal-index a { min-height: 112px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; color: var(--pit-ink); background: rgba(255,255,255,.78); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); font-weight: 600; }
+  .legal-index a span { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); color: var(--pit-blue); }
+  .legal-body { padding: 68px 24px 100px; }
+  .legal-section { min-width: 0; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(32px, 7vw, 90px); padding: 58px 0; border-top: 1px solid var(--pit-ink-10); scroll-margin-top: 110px; }
+  .legal-section:first-child { border-top: 2px solid var(--pit-ink); }
+  .legal-section h2 { margin: 0; font-size: var(--txt-xl); line-height: 1.2; }
+  .legal-copy { max-width: 720px; min-width: 0; overflow-wrap: anywhere; }
+  .legal-copy h3 { margin: 30px 0 8px; font-size: var(--txt-lg); line-height: 1.3; }
+  .legal-copy h3:first-child { margin-top: 0; }
+  .legal-copy p, .legal-copy li { font-size: var(--txt-md); line-height: 1.7; color: var(--pit-ink-60); }
+  .legal-copy p { margin: 0 0 14px; }
+  .legal-copy ul { margin: 8px 0 18px; padding-left: 22px; }
+  .legal-copy a { text-decoration: underline; text-underline-offset: 3px; }
+  .legal-note { padding: 20px 22px; margin: 22px 0; border-left: 3px solid var(--pit-blue); border-radius: var(--pit-radius); background: var(--pit-blue-tint); }
+  .legal-table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: var(--txt-sm); }
+  .legal-table th, .legal-table td { padding: 15px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--pit-ink-10); line-height: 1.55; }
+  .legal-table th { color: var(--pit-ink); font-family: var(--pit-font-mono); font-size: var(--txt-xs); letter-spacing: .04em; text-transform: uppercase; }
+  .legal-table td { color: var(--pit-ink-60); }
+  @media (max-width: 760px) { .legal-index { grid-template-columns: 1fr 1fr; } .legal-section { grid-template-columns: 1fr; gap: 20px; padding: 44px 0; } .legal-table { display: block; overflow-x: auto; } }
+  @media (max-width: 430px) { .legal-index { grid-template-columns: 1fr; } }
+
   </style>
+  <link rel="stylesheet" href="assets/css/pit-privacy.css?v=2">
 </head>
 <body>
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
@@ -76,27 +104,78 @@
   </nav>
 
   <main id="pit-main" tabindex="-1">
-  <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
-    <div style="max-width: 760px; margin: 0 auto;">
-      <div class="pit-ruler"><span class="pit-ruler-seg pit-ruler-seg--blue"></span></div>
-      <div style="padding-top: 40px;">
-        <p class="pit-eyebrow">Legal</p>
-        <h2 class="pit-section-title" style="margin-top: 12px; max-width: 18ch;">Privacidad y aviso médico.</h2>
-      </div>
+  <section class="legal-hero"><div class="legal-wrap">
+  <p class="pit-eyebrow">Transparencia</p>
+  <h1 class="pit-title" style="max-width: 16ch; margin: 18px 0 20px;">Información legal, clara y completa.</h1>
+  <p class="legal-lead">Acá explicamos quién administra el sitio, cómo usamos los datos, qué se guarda en tu navegador y cuáles son las condiciones para usar los contenidos y contratar cursos.</p>
+  <p class="legal-meta">Última actualización: 4 de septiembre de 2026</p>
+  <nav class="legal-index" aria-label="Secciones legales">
+    <a href="#aviso-legal"><span>01</span>Aviso legal</a><a href="#privacidad"><span>02</span>Privacidad</a>
+    <a href="#cookies"><span>03</span>Cookies y almacenamiento</a><a href="#terminos"><span>04</span>Términos de uso y compra</a>
+  </nav>
+</div></section>
 
-      <h3 style="font-size: 22px; font-weight: 600; margin: 44px 0 10px; border-top: 2px solid var(--pit-ink); padding-top: 18px;">Qué datos guardamos</h3>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 12px;">Cuando enviás una pregunta al foro o te suscribís al newsletter guardamos tu email y el contenido de tu mensaje. Las preguntas se publican siempre sin datos personales: se eliminan nombres, edades exactas y cualquier detalle que permita identificarte.</p>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 12px;">Los botones Me gusta usan una cookie anónima para recordar tu elección en este navegador. Las elecciones se guardan en Upstash para mostrar un total compartido, sin tu nombre ni email. Podés retirar tu Me gusta tocando el corazón otra vez.</p>
-      <h3 style="font-size: 22px; font-weight: 600; margin: 32px 0 10px;">Para qué los usamos</h3>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 12px;">Solo para avisarte cuando tu respuesta se publica y, si te suscribiste, para enviarte el newsletter. No compartimos ni vendemos datos a terceros.</p>
-      <h3 style="font-size: 22px; font-weight: 600; margin: 32px 0 10px;">Cómo darte de baja</h3>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 12px;">Todos los emails incluyen un enlace de baja inmediata. También podés pedir la eliminación de tus datos escribiendo a <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>.</p>
+<section class="legal-body"><div class="legal-wrap">
+  <article class="legal-section" id="aviso-legal"><h2>Aviso legal</h2><div class="legal-copy">
+    <h3>Responsable del sitio</h3>
+    <p>Este sitio es administrado por el Dr. Ricardo D. Frusso, Médico de Familia, M.N. 86.498, con consultorio en Amenabar 2446, Belgrano, Ciudad Autónoma de Buenos Aires, Argentina.</p>
+    <p>Contacto: <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>.</p>
+    <h3>Finalidad</h3>
+    <p>El sitio difunde información educativa sobre PIT, la actividad profesional del Dr. Frusso, cursos y publicaciones. También permite enviar consultas, preguntas para el foro y mensajes al asistente informativo.</p>
+    <div class="legal-note"><p><strong>La información del sitio no es un diagnóstico, una indicación terapéutica ni atención de urgencia.</strong> No reemplaza una consulta médica presencial ni la evaluación individual de un profesional habilitado.</p></div>
+    <p>Ante una urgencia o síntomas graves, contactá al servicio de emergencias de tu localidad. No uses los formularios ni el asistente del sitio para pedir ayuda urgente.</p>
+    <h3>Autoría, enlaces y disponibilidad</h3>
+    <p>Salvo que se indique otra cosa, los textos, materiales educativos, diseño y recursos propios pertenecen al Dr. Ricardo D. Frusso. Podés enlazarlos y citarlos mencionando la fuente; no podés venderlos, alterar su sentido ni republicarlos íntegramente sin autorización.</p>
+    <p>Los enlaces a sitios externos se ofrecen como referencia. Cada tercero responde por su contenido, disponibilidad, privacidad y condiciones. Procuramos mantener la información actualizada, pero no garantizamos que el sitio funcione sin interrupciones.</p>
+  </div></article>
 
-      <h3 style="font-size: 22px; font-weight: 600; margin: 44px 0 10px; border-top: 2px solid var(--pit-ink); padding-top: 18px;">Aviso médico</h3>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 12px;">Todo el contenido de este sitio — incluyendo el foro, los cursos y los apuntes — es informativo y educativo. No constituye consejo médico ni reemplaza una consulta profesional. Las respuestas del foro se refieren a casos generales y no a tu situación particular.</p>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">Ante cualquier dolor persistente, consultá con un profesional de la salud habilitado que pueda evaluarte personalmente.</p>
-    </div>
-  </section>
+  <article class="legal-section" id="privacidad"><h2>Política de privacidad</h2><div class="legal-copy">
+    <h3>Qué datos tratamos y para qué</h3>
+    <table class="legal-table"><thead><tr><th>Interacción</th><th>Datos</th><th>Finalidad</th></tr></thead><tbody>
+      <tr><td>Contacto y foro</td><td>Nombre, email, tipo de consulta, mensaje y elección de newsletter. El mensaje puede contener datos de salud que decidís aportar.</td><td>Responder, moderar y publicar preguntas sin datos identificatorios, y enviar novedades solo si lo pediste.</td></tr>
+      <tr><td>Asistente sobre PIT</td><td>El texto que escribís y el historial breve de esa conversación.</td><td>Generar una respuesta informativa. Evitá incluir nombres, documentos, historias clínicas u otros datos que identifiquen a una persona.</td></tr>
+      <tr><td>Likes del foro</td><td>Identificador aleatorio firmado y no nominal. Para limitar abuso se usa por 60 segundos un resumen criptográfico de la dirección de red.</td><td>Recordar el like de ese navegador y mostrar un total compartido sin crear un perfil personal.</td></tr>
+      <tr><td>Uso técnico</td><td>Dirección de red, navegador, dispositivo, páginas visitadas, tiempos de carga y registros de seguridad.</td><td>Entregar, proteger, diagnosticar y medir el rendimiento del sitio.</td></tr>
+      <tr><td>Compra de cursos</td><td>El sitio no recibe los datos de pago. Al continuar a Hotmart, esa plataforma recopila los datos que informa en su checkout.</td><td>Procesar la compra, el acceso y, cuando corresponda, la garantía del curso.</td></tr>
+    </tbody></table>
+    <p>Completar formularios y usar el asistente es voluntario. Si no brindás los datos marcados como necesarios, no podremos responder o procesar esa solicitud. Los datos de salud son sensibles: compartí solo lo indispensable y no envíes información de terceros sin autorización.</p>
+    <h3>Proveedores que intervienen</h3>
+    <ul><li><strong>Vercel:</strong> alojamiento, seguridad, analítica de visitas sin cookies y métricas de rendimiento.</li><li><strong>Formspree:</strong> recepción de los formularios de contacto y del foro.</li><li><strong>Anthropic:</strong> procesamiento de los mensajes enviados al asistente para generar la respuesta.</li><li><strong>Upstash:</strong> almacenamiento de los contadores anónimos de likes.</li><li><strong>Google Maps y YouTube:</strong> contenido externo que solo se carga en esta web si lo autorizás.</li><li><strong>Hotmart:</strong> plataforma externa de comercialización y entrega de cursos.</li></ul>
+    <p>Estos proveedores pueden procesar datos fuera de Argentina según sus propias políticas y los acuerdos aplicables. Consultá las políticas de <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel</a>, <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">Formspree</a>, <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener noreferrer">Anthropic</a>, <a href="https://upstash.com/trust/privacy.pdf" target="_blank" rel="noopener noreferrer">Upstash</a>, <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a> y <a href="https://hotmart.com/es/legal/privacidad-de-datos" target="_blank" rel="noopener noreferrer">Hotmart</a>.</p>
+    <h3>Conservación y seguridad</h3>
+    <p>Conservamos mensajes y datos de contacto durante el tiempo necesario para responder, administrar el foro y cumplir obligaciones legales. El email del newsletter se conserva hasta que te des de baja. Los proveedores conservan registros técnicos según sus políticas. Los totales anónimos de likes pueden mantenerse como información estadística.</p>
+    <p>Aplicamos medidas razonables para reducir accesos no autorizados, pérdidas y usos indebidos. Ningún sistema conectado a internet puede garantizar seguridad absoluta.</p>
+    <h3>Tus derechos</h3>
+    <p>Podés pedir acceso a tus datos gratuitamente cada seis meses y solicitar su actualización, rectificación, confidencialidad o supresión escribiendo al email de contacto y acreditando tu identidad. La Ley 25.326 prevé diez días corridos para responder una solicitud de acceso y cinco días hábiles para rectificar, actualizar o suprimir cuando corresponda.</p>
+    <p>Si la respuesta fuera insuficiente, podés reclamar ante la <a href="https://www.argentina.gob.ar/aaip/datospersonales/derechos" target="_blank" rel="noopener noreferrer">Agencia de Acceso a la Información Pública</a>, autoridad de control de la Ley 25.326. Darte de baja del newsletter no afecta otros mensajes necesarios sobre una consulta o compra.</p>
+  </div></article>
+
+  <article class="legal-section" id="cookies"><h2>Cookies y almacenamiento</h2><div class="legal-copy">
+    <p>Usamos almacenamiento esencial para que el sitio recuerde tus elecciones. El mapa y los videos externos permanecen bloqueados hasta que los permitís. Podés cambiar esa decisión en cualquier momento desde “Preferencias de privacidad” en el pie.</p>
+    <table class="legal-table"><thead><tr><th>Nombre</th><th>Tipo y duración</th><th>Uso</th></tr></thead><tbody>
+      <tr><td><code>__Host-pit-visitor</code></td><td>Cookie esencial, hasta 1 año</td><td>Identificador aleatorio, firmado y HttpOnly para no duplicar likes del mismo navegador.</td></tr>
+      <tr><td><code>pit-privacy-choice</code></td><td>Almacenamiento local, hasta que lo borres</td><td>Recuerda si elegiste solo funciones necesarias o también contenido externo.</td></tr>
+      <tr><td><code>pit-lang</code></td><td>Almacenamiento local, hasta que lo borres</td><td>Recuerda si preferís leer el sitio en español o inglés.</td></tr>
+      <tr><td><code>pit-curso-intro-v1</code></td><td>Almacenamiento local, hasta que lo borres</td><td>Guarda únicamente el avance del curso gratuito en ese navegador.</td></tr>
+      <tr><td>Google Maps / YouTube</td><td>Contenido externo opcional</td><td>Al permitirlo, Google puede recibir datos técnicos y usar sus propias tecnologías de almacenamiento.</td></tr>
+    </tbody></table>
+    <p>Vercel Web Analytics mide visitas sin cookies. Speed Insights recoge métricas técnicas de rendimiento. Bloquear o borrar el almacenamiento del navegador puede restablecer el idioma, el avance del curso, la preferencia de privacidad y el reconocimiento de tus likes.</p>
+    <button type="button" class="pit-btn pit-btn--primary" data-privacy-open>Preferencias de privacidad</button>
+  </div></article>
+
+  <article class="legal-section" id="terminos"><h2>Términos de uso y compra</h2><div class="legal-copy">
+    <h3>Uso del sitio</h3>
+    <p>Al navegar aceptás usar el sitio de manera lícita y sin interferir con su funcionamiento, intentar acceder a sistemas restringidos, automatizar envíos abusivos o utilizar los contenidos para suplantar consejo profesional.</p>
+    <p>Las preguntas enviadas al foro son moderadas. Al enviarlas autorizás su edición y publicación anónima con fines educativos. No se publican deliberadamente nombres, emails ni otros datos que identifiquen a quien consulta.</p>
+    <h3>Cursos y compras</h3>
+    <p>Las características, precio, moneda, acceso, certificado y garantía aplicables son los informados en la oferta del curso y en el checkout de Hotmart al momento de comprar. Hotmart procesa el pago y facilita el acceso conforme a sus propios términos.</p>
+    <p>Antes de pagar, revisá el contenido, los requisitos técnicos y el importe final del checkout. Para pedir soporte sobre el contenido escribí al email de contacto; para pagos, comprobantes, acceso o ejercicio de una garantía también podés usar los canales que Hotmart muestra en la compra.</p>
+    <p>Nada de estos términos limita los derechos irrenunciables que correspondan según la legislación de defensa del consumidor. La formación y los certificados educativos no reemplazan títulos habilitantes, matrículas, incumbencias profesionales ni requisitos regulatorios.</p>
+    <h3>Cambios y ley aplicable</h3>
+    <p>Podemos corregir, actualizar o retirar contenidos y modificar estos documentos cuando cambien el sitio, los proveedores o la normativa. La fecha de la versión vigente aparece al comienzo de esta página. Si un cambio afectara de forma sustancial un tratamiento basado en consentimiento, se solicitará una nueva elección cuando corresponda.</p>
+    <p>Se aplica la legislación de la República Argentina. Cualquier controversia se tramitará ante las autoridades o tribunales que correspondan según las normas aplicables y el domicilio del consumidor.</p>
+  </div></article>
+</div></section>
   </main>
 
   <footer class="v2-footer">
@@ -131,7 +210,8 @@
     </div>
     <div class="v2-footer-legal">
       <span>© 2026 Dr. Ricardo D. Frusso · M.N. 86.498</span>
-      <a href="privacidad.html">Privacidad y aviso médico</a>
+      <a href="privacidad.html#aviso-legal">Aviso legal</a><a href="privacidad.html#privacidad">Privacidad</a><a href="privacidad.html#cookies">Cookies</a><a href="privacidad.html#terminos">Términos</a>
+      <button type="button" class="v2-footer-privacy" data-privacy-open>Preferencias de privacidad</button>
     </div>
   </footer>
 
@@ -141,6 +221,20 @@
 <script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=2"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:START -->
+
+<aside class="pit-privacy-banner" data-privacy-banner hidden aria-label="Aviso de privacidad">
+  <p>Usamos almacenamiento necesario para recordar tus preferencias y likes. Google Maps y YouTube solo se cargan si permitís contenido externo. <a href="privacidad.html#cookies">Ver detalles</a>.</p>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Solo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</aside>
+<dialog class="pit-privacy-dialog" data-privacy-dialog aria-labelledby="pit-privacy-title"><div class="pit-privacy-dialog-inner">
+  <h2 id="pit-privacy-title">Preferencias de privacidad</h2><p>Elegí si querés cargar servicios externos dentro de las páginas. Podés cambiar esta decisión cuando quieras.</p>
+  <div class="pit-privacy-choice"><strong>Funciones necesarias</strong><span>Idioma, avance del curso, seguridad, likes y tu elección de privacidad. Siempre activas.</span></div>
+  <div class="pit-privacy-choice"><strong>Contenido externo</strong><span>Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.</span></div>
+  <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Usar solo lo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
+</div></dialog>
+<script src="assets/js/pit-privacy.js?v=2"></script>
+<!-- PIT-PRIVACY-UI:END -->
 <script src="assets/js/pit-lang.js?v=2"></script>
 </body>
 </html>
