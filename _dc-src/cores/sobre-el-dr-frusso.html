@@ -1,23 +1,6 @@
 <style data-page>
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
-
-    /* La franja de respaldos de ESTA página no va en la fila de cinco de la
-       home: el rótulo de arriba dice "dónde ejerce, enseña y se formó" y los
-       logos siguen ese orden en tres filas — ejerce (Italiano), enseña
-       (Clínicas + Escuela de PIT), se formó (UBA + Lyftogtmed). En una sola
-       fila el rótulo prometía un orden que los logos no cumplían.
-       Es una regla LOCAL, con .v2-trust-strip por delante: la franja de la
-       home cuelga de .v2-trust y no se entera. El componente base sigue
-       viviendo en assets/css/pit-v2.css (con su copia inline en index.html);
-       esto solo lo re-dispone acá. */
-    .v2-trust-strip .v2-trust-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: center; gap: 34px clamp(18px, 4vw, 72px); max-width: 720px; margin-inline: auto; }
-    .v2-trust-strip .v2-trust-row > .v2-trust-item:first-child { grid-column: 1 / -1; }
-    /* pit-v2.css hace que el ULTIMO logo ocupe el ancho completo abajo de
-       640px (ahí la franja de la home queda en 2 columnas y sobra uno). Acá
-       son cinco en filas de 1-2-2: no sobra ninguno, y ese span descolocaría
-       la última fila. */
-    .v2-trust-strip .v2-trust-row > .v2-trust-item:last-child { grid-column: auto; }
 </style>
 <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
@@ -41,10 +24,12 @@
        franja está dentro de la biografía, así que describe el vínculo de
        Ricardo con cada institución en vez de decir que todas lo "respaldan"
        — la Escuela de PIT la fundó él junto a otros tres profesionales.
-       Tampoco van en la fila de cinco de la home: van en tres filas que siguen
-       el rótulo (ejerce / enseña / se formó), con la regla local del <style>
-       de arriba. El separador vertical de la home se sacó acá: el corte de
-       fila hace el trabajo que hacía él.
+       EL ORDEN NO ES EL DE LA HOME: sigue al rótulo de arriba, "dónde ejerce,
+       enseña y se formó". De izquierda a derecha: ejerce (Italiano), enseña
+       (Clínicas, Escuela de PIT), y después del separador, se formó (UBA,
+       Lyftogtmed). Se probó partirlo en tres filas para que el corte fuera más
+       literal y quedaba desparramado, con mucho aire muerto a los costados: en
+       una sola fila se lee igual de bien y la página respira mejor.
        El CSS vive en assets/css/pit-v2.css (ver el comentario de ahí: hay una
        segunda copia inline en index.html y las dos se mueven juntas). -->
   <!-- El padding lateral tiene que ser el MISMO que el de las demás secciones
@@ -73,6 +58,7 @@
           <span class="v2-trust-logo v2-trust-logo--tall"><img src="/img/logos/escuela-de-pit.png" alt="Escuela de PIT" width="75" height="92" decoding="async"></span>
           <small>Miembro Fundador · Instructor en PIT</small>
         </a>
+        <span class="v2-trust-sep" aria-hidden="true"></span>
         <a class="v2-trust-item" href="https://www.uba.ar" target="_blank" rel="noopener noreferrer">
           <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
           <small>Formación universitaria · 1992</small>
@@ -121,6 +107,14 @@
     </div>
   </section>
 
+  <!-- ============ CONGRESOS Y PRENSA — OCULTA ============
+       Eran tres cajas punteadas que solo decían "Placeholder": en una página
+       que ya está publicada, tres huecos vacíos restan más de lo que promete
+       la sección. Se guarda entera acá, comentada, para no volver a escribirla
+       cuando haya material: congresos, ponencias y notas de prensa reales.
+       PARA VOLVER A MOSTRARLA: sacar los marcadores de comentario de acá abajo
+       y devolver 'Congresos y prensa' al diccionario de assets/js/pit-lang.js.
+
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
       <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="240px,18px">Congresos y prensa</x-import>
@@ -129,7 +123,15 @@
         <div class="ph" style="min-height: 120px;"><span>Placeholder · Congreso / ponencia destacada 2</span></div>
         <div class="ph" style="min-height: 120px;"><span>Placeholder · Nota de prensa o entrevista</span></div>
       </div>
-      <div class="m-col" style="display: flex; gap: 16px; align-items: center; margin-top: 40px;">
+    </div>
+  </section>
+       ============================================================ -->
+
+  <!-- Los dos botones de cierre de la página, que vivían dentro de la sección
+       de congresos, siguen acá: son la salida hacia el foro y hacia el turno. -->
+  <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
+    <div style="max-width: var(--pit-content-max); margin: 0 auto;">
+      <div class="m-col" style="display: flex; gap: 16px; align-items: center;">
         <x-import component-from-global-scope="FrussoDS.Button" variant="primary" href="Foro PIT.dc.html" hint-size="230px,48px">Leer el foro semanal →</x-import>
         <a href="Contacto PIT.dc.html" style="font-family: var(--pit-font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--pit-blue); padding-bottom: 2px;">Pedir una consulta</a>
       </div>
