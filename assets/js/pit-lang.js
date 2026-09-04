@@ -58,6 +58,7 @@
 
     // Barra de acciones al pie de cada publicacion del foro.
     'Me gusta': 'Like',
+    'No se pudo conectar. Volvé a intentar.': 'Could not connect. Try again.',   // RUNTIME
     'Te gusta': 'Liked',   // RUNTIME
     'Compartir': 'Share',
     'Link copiado': 'Link copied',   // RUNTIME
@@ -371,6 +372,7 @@
     'Otro': 'Other',
     'Privacidad y aviso médico.': 'Privacy & medical notice.',
     'Qué datos guardamos': 'What data we keep',
+    'Los botones Me gusta usan una cookie anónima para recordar tu elección en este navegador. Las elecciones se guardan en Upstash para mostrar un total compartido, sin tu nombre ni email. Podés retirar tu Me gusta tocando el corazón otra vez.': 'Like buttons use an anonymous cookie to remember your choice in this browser. Choices are stored in Upstash to show a shared total, without your name or email. You can remove your like by tapping the heart again.',
     'Para qué los usamos': 'What we use it for',
     'Cómo darte de baja': 'How to unsubscribe',
     'Aviso médico': 'Medical notice',

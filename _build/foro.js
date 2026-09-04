@@ -406,12 +406,14 @@ ${renderNav({ active: 'foro', prefix: pre })}
           <button type="button" class="foro-accion" data-like aria-pressed="false">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5 5 0 0 0-7.1 0l-1.7 1.7-1.7-1.7a5 5 0 1 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
             <span data-like-txt>Me gusta</span>
+            <span data-like-count aria-live="polite" hidden></span>
           </button>
           <button type="button" class="foro-accion" data-share>
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
             <span data-share-txt>Compartir</span>
           </button>
         </div>
+        <p data-like-status role="status" hidden style="font-size: var(--txt-xs); color: var(--pit-ink-60);"></p>
       </article>
 
       <aside style="display: grid; gap: 24px; position: sticky; top: 90px;">
@@ -446,37 +448,12 @@ ${renderNav({ active: 'foro', prefix: pre })}
   <style>.sh-post, .sh-post div { transition: color 0.22s ease; }
     .sh-post:hover, .sh-post:hover div { color: var(--pit-blue); }</style>
 
+  <script defer src="${pre}assets/js/pit-likes.js"></script>
   <script>
-  // "Me gusta" y "Compartir" al pie del articulo.
-  // El corazon se guarda en el navegador de quien lo toca: NO hay contador
-  // global porque no hay donde guardarlo (sitio estatico, sin base de datos).
-  // Por eso tampoco se muestra un numero: seria inventarle un dato al visitante.
+  // Compartir al pie del artículo. Los likes compartidos viven en pit-likes.js.
   (function () {
     var caja = document.querySelector('.foro-acciones');
     if (!caja) return;
-    var slug = caja.getAttribute('data-slug') || '';
-    var clave = 'pit-like:' + slug;
-
-    var btnLike = caja.querySelector('[data-like]');
-    var txtLike = caja.querySelector('[data-like-txt]');
-    function pintar(on) {
-      btnLike.setAttribute('aria-pressed', on ? 'true' : 'false');
-      txtLike.textContent = on ? 'Te gusta' : 'Me gusta';   // RUNTIME
-    }
-    // localStorage puede tirar excepcion (modo privado, cookies bloqueadas):
-    // si falla, el boton igual funciona en la sesion, solo no se recuerda.
-    var guardado = false;
-    try { guardado = localStorage.getItem(clave) === '1'; } catch (e) {}
-    pintar(guardado);
-    btnLike.addEventListener('click', function () {
-      guardado = !guardado;
-      pintar(guardado);
-      try {
-        if (guardado) localStorage.setItem(clave, '1');
-        else localStorage.removeItem(clave);
-      } catch (e) {}
-    });
-
     var btnShare = caja.querySelector('[data-share]');
     var txtShare = caja.querySelector('[data-share-txt]');
     btnShare.addEventListener('click', function () {
@@ -1006,6 +983,9 @@ if (errores.length) {
   process.exit(1);
 }
 
+// Bundle only validated article identifiers into the serverless likes API.
+fs.mkdirSync(path.join(ROOT, 'lib'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'lib', 'foro-slugs.json'), JSON.stringify(posts.map(p => p.slug), null, 2) + '\n');
 if (!fs.existsSync(OUTDIR)) fs.mkdirSync(OUTDIR, { recursive: true });
 // limpiar html viejos del directorio de salida
 for (const f of fs.readdirSync(OUTDIR)) if (f.endsWith('.html')) fs.unlinkSync(path.join(OUTDIR, f));

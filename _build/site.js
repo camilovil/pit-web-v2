@@ -20,7 +20,7 @@
 
 // true  = staging: el sitio pide a los buscadores que no lo indexen.
 // false = producción: se quitan el meta y el header en las 18 páginas.
-const STAGING = true;
+const STAGING = false;
 
 // Línea completa del <head>, con salto de línea, o cadena vacía. Se interpola
 // tal cual en las plantillas: en producción la línea desaparece, no queda un
