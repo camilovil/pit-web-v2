@@ -435,7 +435,7 @@
     'Miembro Fundador · Escuela de PIT': 'Founding member · Escuela de PIT',
     'Funda en conjunto la Escuela de PIT': 'Co-founds Escuela de PIT',
     'Bibliografía médica y experiencia clínica.': 'Medical literature and clinical experience.',
-    'Descargar referencias (PDF) ↓': 'Download references (PDF) ↓',
+    'Las 28 referencias completas (PDF) ↓': 'All 28 references (PDF) ↓',
     'Lo que más nos preguntan.': 'What we get asked the most.',
     '¿Tiene efectos secundarios o contraindicaciones?': 'Are there side effects or contraindications?',
     '¿Es compatible con otros tratamientos que ya estoy haciendo?': 'Is it compatible with treatments I am already doing?',
