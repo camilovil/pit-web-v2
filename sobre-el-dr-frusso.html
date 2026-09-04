@@ -34,6 +34,23 @@
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
 
+    /* La franja de respaldos de ESTA página no va en la fila de cinco de la
+       home: el rótulo de arriba dice "dónde ejerce, enseña y se formó" y los
+       logos siguen ese orden en tres filas — ejerce (Italiano), enseña
+       (Clínicas + Escuela de PIT), se formó (UBA + Lyftogtmed). En una sola
+       fila el rótulo prometía un orden que los logos no cumplían.
+       Es una regla LOCAL, con .v2-trust-strip por delante: la franja de la
+       home cuelga de .v2-trust y no se entera. El componente base sigue
+       viviendo en assets/css/pit-v2.css (con su copia inline en index.html);
+       esto solo lo re-dispone acá. */
+    .v2-trust-strip .v2-trust-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: center; gap: 34px clamp(18px, 4vw, 72px); max-width: 720px; margin-inline: auto; }
+    .v2-trust-strip .v2-trust-row > .v2-trust-item:first-child { grid-column: 1 / -1; }
+    /* pit-v2.css hace que el ULTIMO logo ocupe el ancho completo abajo de
+       640px (ahí la franja de la home queda en 2 columnas y sobra uno). Acá
+       son cinco en filas de 1-2-2: no sobra ninguno, y ese span descolocaría
+       la última fila. */
+    .v2-trust-strip .v2-trust-row > .v2-trust-item:last-child { grid-column: auto; }
+
   </style>
 </head>
 <body>
@@ -89,9 +106,9 @@
         <div>
           <p class="pit-eyebrow">Sobre el Dr. Frusso</p>
           <h1 class="pit-display" style="margin-top: 18px;">Ricardo D. Frusso</h1>
-          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 20px 0 0; max-width: var(--pit-text-max);">Médico de Familia (UBA, 1992) con más de tres décadas de práctica en el Hospital Italiano de Buenos Aires. Pionero en Argentina en la aplicación de PIT, formado directamente por el Dr. John Lyftogt — creador del método — e instructor autorizado para América Latina desde 2015. Fundador de la Escuela de PIT, desde donde forma a profesionales de la región.</p>
+          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 20px 0 0; max-width: var(--pit-text-max);">Médico de Familia (UBA, 1992) con más de tres décadas de práctica en el Hospital Italiano de Buenos Aires. Fundador del Área de Medicina Musculoesquelética dentro del Servicio de Medicina Familiar en ese mismo hospital. Pionero en Argentina en la aplicación de PIT, formado directamente por el Dr. John Lyftogt — creador del método — e instructor autorizado para América Latina desde 2015. Miembro Fundador de la Escuela de PIT, donde forma a profesionales de toda la región junto a sus otros tres fundadores: el Dr. Heno Pigerl y las doctoras María Paz Caruso y María Julia Aparicio.</p>
           <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
-            <span class="pit-chip">M.N. 86.498</span><span class="pit-chip">UBA 1992</span><span class="pit-chip">HIBA · 30+ años</span><span class="pit-chip pit-chip--blue">Instructor autorizado</span><span class="pit-chip pit-chip--blue">Fundador · Escuela de PIT</span>
+            <span class="pit-chip">M.N. 86.498</span><span class="pit-chip">UBA 1992</span><span class="pit-chip">HIBA · 30+ años</span><span class="pit-chip pit-chip--blue">Instructor autorizado</span><span class="pit-chip pit-chip--blue">Miembro Fundador · Escuela de PIT</span>
           </div>
         </div>
       </div>
@@ -102,7 +119,11 @@
        Los mismos cinco logos que la home, pero con rótulo propio: acá la
        franja está dentro de la biografía, así que describe el vínculo de
        Ricardo con cada institución en vez de decir que todas lo "respaldan"
-       — la Escuela de PIT es suya, la fundó él.
+       — la Escuela de PIT la fundó él junto a otros tres profesionales.
+       Tampoco van en la fila de cinco de la home: van en tres filas que siguen
+       el rótulo (ejerce / enseña / se formó), con la regla local del <style>
+       de arriba. El separador vertical de la home se sacó acá: el corte de
+       fila hace el trabajo que hacía él.
        El CSS vive en assets/css/pit-v2.css (ver el comentario de ahí: hay una
        segunda copia inline en index.html y las dos se mueven juntas). -->
   <!-- El padding lateral tiene que ser el MISMO que el de las demás secciones
@@ -125,20 +146,19 @@
         </a>
         <a class="v2-trust-item" href="https://www.hospitaldeclinicas.uba.ar" target="_blank" rel="noopener noreferrer">
           <span class="v2-trust-logo v2-trust-logo--circle"><img src="/img/logos/hospital-de-clinicas.png" alt="Hospital de Clínicas José de San Martín" width="92" height="92" decoding="async"></span>
-          <small>Área de dolor · Cursos PIT</small>
-        </a>
-        <a class="v2-trust-item" href="https://www.lyftogtmed.com" target="_blank" rel="noopener noreferrer">
-          <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/lyftogt.png" alt="Lyftogt Perineural Injection Treatment" width="195" height="56" decoding="async"></span>
-          <small>Instructor autorizado</small>
+          <small>Centro del Dolor · Instructor en PIT</small>
         </a>
         <a class="v2-trust-item" href="https://www.instagram.com/escueladepit/" target="_blank" rel="noopener noreferrer">
           <span class="v2-trust-logo v2-trust-logo--tall"><img src="/img/logos/escuela-de-pit.png" alt="Escuela de PIT" width="75" height="92" decoding="async"></span>
-          <small>Fundador · Formación en PIT</small>
+          <small>Miembro Fundador · Instructor en PIT</small>
         </a>
-        <span class="v2-trust-sep" aria-hidden="true"></span>
         <a class="v2-trust-item" href="https://www.uba.ar" target="_blank" rel="noopener noreferrer">
           <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
-          <small>Formación · 1992</small>
+          <small>Formación universitaria · 1992</small>
+        </a>
+        <a class="v2-trust-item" href="https://www.lyftogtmed.com" target="_blank" rel="noopener noreferrer">
+          <span class="v2-trust-logo v2-trust-logo--wide"><img src="/img/logos/lyftogt.png" alt="Lyftogt Perineural Injection Treatment" width="195" height="56" decoding="async"></span>
+          <small>Instructor autorizado · Discípulo directo</small>
         </a>
       </div>
     </div>
@@ -169,11 +189,11 @@
              es otro, se cambia acá y se rebuildea. -->
         <div class="m-list" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 22px 4px; border-bottom: 1px solid var(--pit-ink-10);">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">2026</span>
-          <div><div style="font-size: 17px; font-weight: 600;">Funda la Escuela de PIT</div><div style="font-size: 14px; color: var(--pit-ink-60); margin-top: 2px;">Su propia escuela de formación en el método, para profesionales de la salud de la región.</div></div>
+          <div><div style="font-size: 17px; font-weight: 600;">Funda en conjunto la Escuela de PIT</div><div style="font-size: 14px; color: var(--pit-ink-60); margin-top: 2px;">Junto al Dr. Pigerl y las doctoras Caruso y Aparicio, inauguran su propia escuela de formación en el método, para profesionales de la salud de toda la región.</div></div>
         </div>
         <div class="m-list" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 22px 4px; border-bottom: 1px solid var(--pit-ink-10);">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">Hoy</span>
-          <div><div style="font-size: 17px; font-weight: 600;">Consultorio en Belgrano + docencia online</div><div style="font-size: 14px; color: var(--pit-ink-60); margin-top: 2px;">Atención de pacientes, foro semanal y cursos para profesionales.</div></div>
+          <div><div style="font-size: 17px; font-weight: 600;">Hospital Italiano, consultorio en Belgrano, docencia y divulgación</div><div style="font-size: 14px; color: var(--pit-ink-60); margin-top: 2px;">Atención de pacientes, formación de profesionales y divulgación de la técnica a través de medios digitales.</div></div>
         </div>
       </div>
       <p style="font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 16px 0 0;">Placeholder · Fechas exactas, año de fundación de la Escuela y congresos a validar con Ricardo</p>
@@ -209,7 +229,7 @@
         <a href="faq.html">Preguntas frecuentes</a>
       </nav>
       <div class="v2-footer-claim">
-        <h3>Tratamiento del dolor crónico, desde el nervio, en cada etapa</h3>
+        <h3>Tratamiento del dolor crónico: de la inyección subcutánea al resultado profundo</h3>
         <div class="v2-footer-avatars">
           <img src="/img/DSC_0016.webp" alt="Dr. Frusso">
           <img src="/img/DSC_0086.webp" alt="Consultorio">
@@ -221,9 +241,9 @@
       <div class="v2-footer-brand"><span class="pipe"></span>Dr. Frusso</div>
       <div class="v2-footer-contact">
         <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>
+        <span style="color: #FFFFFF;">Consultorio: Amenabar 2446, Belgrano, CABA</span>
         <a href="https://www.instagram.com/drfrussoricardo">Instagram del Dr. Frusso · @drfrussoricardo</a>
         <a href="https://www.instagram.com/escueladepit/">Instagram de la Escuela de PIT · @escueladepit</a>
-        <span style="color: #FFFFFF;">Amenabar 2446, Belgrano, CABA</span>
       </div>
     </div>
     <div class="v2-footer-legal">

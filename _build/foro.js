@@ -203,7 +203,7 @@ const FOOTER = (pre) => `  <footer class="v2-footer">
         <a href="${pre}faq.html">Preguntas frecuentes</a>
       </nav>
       <div class="v2-footer-claim">
-        <h3>Tratamiento del dolor crónico, desde el nervio, en cada etapa</h3>
+        <h3>Tratamiento del dolor crónico: de la inyección subcutánea al resultado profundo</h3>
         <div class="v2-footer-avatars">
           <img src="/img/DSC_0016.webp" alt="Dr. Frusso">
           <img src="/img/DSC_0086.webp" alt="Consultorio">
@@ -215,9 +215,9 @@ const FOOTER = (pre) => `  <footer class="v2-footer">
       <div class="v2-footer-brand"><span class="pipe"></span>Dr. Frusso</div>
       <div class="v2-footer-contact">
         <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>
+        <span style="color: #FFFFFF;">Consultorio: Amenabar 2446, Belgrano, CABA</span>
         <a href="https://www.instagram.com/drfrussoricardo">Instagram del Dr. Frusso · @drfrussoricardo</a>
         <a href="https://www.instagram.com/escueladepit/">Instagram de la Escuela de PIT · @escueladepit</a>
-        <span style="color: #FFFFFF;">Amenabar 2446, Belgrano, CABA</span>
       </div>
     </div>
     <div class="v2-footer-legal">
@@ -536,11 +536,10 @@ ${rows}
       <div>
         <p class="pit-eyebrow">Participá</p>
         <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 14px; color: var(--pit-paper);"><span class="hover-underline">Enviá tu pregunta al foro.</span></h2>
-        <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">El Dr. Frusso selecciona y responde preguntas cada semana. Todas se revisan antes de publicarse y se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.</p>
+        <p style="font-size: var(--txt-md); line-height: 1.65; color: var(--pit-ink-20); margin: 0; max-width: 48ch;">El Dr. Frusso selecciona y responde preguntas cada semana. Se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.</p>
         <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
           <span class="pit-chip pit-chip--ghost">Sin registro</span>
           <span class="pit-chip pit-chip--ghost">Anónimas</span>
-          <span class="pit-chip pit-chip--ghost">Moderadas</span>
         </div>
       </div>
       <!-- min-width: 0 + box-sizing: border-box: sin eso este <form> es un item
@@ -564,7 +563,7 @@ ${rows}
              aparecía con el aspecto por defecto del navegador sobre el fondo
              navy. min-width: 0 es necesario acá: sin él, el item de grilla no
              baja de su min-content y desbordaba la página a 375px. -->
-        <textarea id="foro-q" data-ph-paciente="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." data-ph-profesional="Escribí tu pregunta acá. Sumá el contexto clínico que ayude (región, hallazgos, qué probaste)." placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta." rows="5" style="min-width: 0; font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
+        <textarea id="foro-q" data-ph-paciente="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), más completa podrá ser la respuesta." data-ph-profesional="Escribí tu pregunta acá. Sumá el contexto clínico que ayude (región, hallazgos, qué probaste)." placeholder="Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), más completa podrá ser la respuesta." rows="5" style="min-width: 0; font-family: var(--pit-font-sans); line-height: 1.6; padding: 14px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none; resize: vertical;"></textarea>
         <div>
           <label for="foro-email" class="foro-label">Tu email — te avisamos cuando el Dr. Frusso responda</label>
           <input id="foro-email" type="email" placeholder="tu@email.com" style="width: 100%; box-sizing: border-box; font-family: var(--pit-font-mono); padding: 13px 16px; border: 1px solid var(--pit-ink-80); border-radius: var(--pit-radius); background: rgba(255,255,255,0.04); color: var(--pit-paper); outline: none;">

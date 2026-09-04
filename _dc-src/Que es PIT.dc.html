@@ -22,6 +22,17 @@
     a:hover { color: #1E3A8A; }
     .ph { border: 1.5px dashed var(--pit-ink-20); border-radius: var(--pit-radius); background: var(--pit-ink-05); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .ph span { font-family: var(--pit-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-40); }
+
+    /* Los cuatro pasos de "Cómo es una sesión" van en una fila de cuatro. Con
+       los títulos nuevos, dos ocupan dos líneas y dos una sola: los párrafos
+       arrancaban 23px más abajo en la mitad de las tarjetas y la fila se veía
+       desprolija. Arriba de 820px —el breakpoint donde .m-stack todavía no
+       apila, en pit-mobile.css— el título reserva las dos líneas y los cuatro
+       párrafos empiezan a la misma altura. Apilado no hace falta: ahí cada
+       tarjeta es su propia columna y la reserva solo dejaría un hueco. */
+    @media (min-width: 821px) {
+      .pit-pasos h4 { min-height: 2.6em; }
+    }
   </style>
 </helmet>
 
@@ -73,8 +84,8 @@
       <x-import component-from-global-scope="FrussoDS.SectionTitle" style="margin-top: 12px; max-width: 22ch;" hint-size="100%,80px"><span class="hover-underline">Entender tu dolor es el primer paso.</span></x-import>
       <div class="m-stack" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; margin-top: 40px;">
         <div>
-          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Cuando un dolor persiste durante meses, muchas veces el problema ya no está en el músculo ni en la articulación: está en el nervio que transmite la señal. Ese nervio se inflamó, se volvió hipersensible, y dispara dolor aunque el tejido esté sano.</p>
-          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 24px;">PIT actúa sobre ese nervio con pequeñas inyecciones debajo de la piel de glucosa al 5% — sin corticoides, sin cirugía, y sin interferir con ningún otro tratamiento que estés haciendo.</p>
+          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 16px;">Cuando un dolor persiste durante meses, muchas veces el problema ya no está en el músculo ni en la articulación: está en el nervio que transmite la señal. Ese nervio se inflamó, se volvió hipersensible, y envía señales de dolor aunque el tejido esté sano.</p>
+          <p style="font-size: 17px; line-height: 1.7; color: var(--pit-ink-60); margin: 0 0 24px;">PIT actúa sobre ese nervio con pequeñas inyecciones de glucosa al 5% debajo de la piel — sin corticoides, sin cirugía, y sin interferir con ningún otro tratamiento que estés haciendo.</p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Lumbalgia</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Rodilla</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Cervical</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Hombro</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Codo</x-import><x-import component-from-global-scope="FrussoDS.Chip" hint-size="120px,26px">Tobillo</x-import><x-import component-from-global-scope="FrussoDS.Chip" variant="ghost" hint-size="120px,26px">Y más</x-import>
           </div>
@@ -83,26 +94,26 @@
       </div>
 
       <h3 style="font-size: 24px; font-weight: 600; margin: 56px 0 0;">Cómo es una sesión</h3>
-      <div class="m-stack" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; margin-top: 24px;">
+      <div class="m-stack pit-pasos" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; margin-top: 24px;">
         <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">01</span>
-          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Evaluación y mapeo</h4>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Se identifican por palpación los puntos donde el nervio está sensibilizado.</p>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Conversación con el paciente (anamnesis)</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Se dialoga con la persona y se le pregunta cuándo, cómo y dónde comenzó el dolor.</p>
         </div>
         <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">02</span>
-          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Inyecciones subcutáneas</h4>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Glucosa al 5% con aguja fina, justo debajo de la piel. Molestia mínima.</p>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Identificación de la zona de dolor</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">El paciente indica la zona donde le duele, lo que permite localizar el campo anatómico y determinar qué nervio está inflamado.</p>
         </div>
         <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">03</span>
-          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Verificación del efecto</h4>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">El efecto se verifica en la misma sesión: es parte del diagnóstico.</p>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Breve examen físico</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Se identifican por palpación los puntos donde el nervio está sensibilizado. Estos puntos se denominan «puntos de Valleix».</p>
         </div>
         <div style="border-top: 2px solid var(--pit-ink); padding-top: 18px;">
           <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">04</span>
-          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Plan de tratamiento</h4>
-          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Típicamente 6 a 8 sesiones, con alivio que se consolida entre sesiones.</p>
+          <h4 style="font-size: 18px; font-weight: 600; margin: 8px 0 6px;">Inyecciones subcutáneas</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--pit-ink-60); margin: 0;">Se aplica dextrosa al 5% con una aguja ultrafina y de manera superficial, reduciendo al mínimo la posibilidad de experimentar dolor por la aplicación.</p>
         </div>
       </div>
 
@@ -116,28 +127,28 @@
   <!-- TRES PILARES ==========================================================
        Encuadre tomado del sitio de Lyftogt (lyftogtmed.com), la organización
        del creador del método, pero REDACTADO DE CERO: no se copió texto.
-       Los datos técnicos (glucosa al 5%, pH 7.4, aguja de media pulgada,
-       6-8 sesiones) son del método, no afirmaciones propias del consultorio.
+       Los datos técnicos (dextrosa al 5%, pH 7.4, 6-8 sesiones) son del
+       método, no afirmaciones propias del consultorio.
        PENDIENTE: que Ricardo valide la duración del alivio inicial, que es el
        único dato acá que promete un resultado. -->
   <section style="padding: var(--pit-section-padding); background: var(--pit-paper);">
     <div style="max-width: var(--pit-content-max); margin: 0 auto;">
-      <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="200px,18px">Por qué es distinto</x-import>
-      <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 0; max-width: 22ch;">Tres cosas que conviene saber antes de empezar.</h2>
+      <x-import component-from-global-scope="FrussoDS.Eyebrow" hint-size="200px,18px">Un procedimiento innovador</x-import>
+      <h2 class="m-title" style="font-size: 40px; font-weight: 600; line-height: 1.12; margin: 16px 0 0; max-width: 22ch;">Tres aspectos que marcan la diferencia.</h2>
       <div class="m-stack pit-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 44px;">
 
         <div>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">Lo que se inyecta ya está en el hospital</h3>
-          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">La sustancia es glucosa al 5% en agua estéril, la misma solución que se cuelga por vía intravenosa en cualquier guardia del mundo. Acá va debajo de la piel, con una aguja de media pulgada que no llega al músculo ni a la articulación. Por eso es un procedimiento de consultorio: se hace sentado, sin preparación previa y te vas caminando.</p>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">Dextrosa y agua, dos compuestos naturales unidos para aliviar el nervio</h3>
+          <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">La sustancia es dextrosa diluida en agua purificada, la misma solución utilizada en cualquier guardia del mundo para hidratar a los pacientes. En este caso va debajo de la piel mediante una aguja ultrafina que reduce al mínimo el dolor propio de la aplicación. Por eso es un procedimiento de consultorio: se hace sentado o acostado y sin preparación previa por parte del paciente.</p>
         </div>
 
         <div>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">El alivio se construye, no aparece de golpe</h3>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">El alivio duradero se construye</h3>
           <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">Después de la primera sesión el dolor suele ceder por un rato y volver. Eso es lo esperable, no una falla: cada sesión semanal alarga ese período y baja el piso de dolor con el que arrancás la siguiente. Un tratamiento típico son 6 a 8 sesiones, y el objetivo es que el dolor deje de volver. Cuánto se logra en cada caso depende de la región, del tiempo de evolución y de la persona.</p>
         </div>
 
         <div>
-          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">No lleva corticoides ni analgésicos</h3>
+          <h3 style="font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px;">Sin corticoides, sin analgésicos</h3>
           <p style="font-size: 16px; line-height: 1.7; color: var(--pit-ink-60); margin: 0;">No hay antiinflamatorios, no hay corticoides y no hay anestésicos en lo que se inyecta: solo glucosa a un pH neutro de 7.4, cercano al de la sangre. Esto importa si ya pasaste por infiltraciones: PIT no compite con lo que estés tomando ni suma efectos adversos de un fármaco más.</p>
         </div>
 
@@ -161,7 +172,7 @@
               <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">→</span>
             </a>
             <a href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="display: flex; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--pit-ink-80); color: var(--pit-paper);" style-hover="color: #FFFFFF; background: var(--pit-ink-80);">
-              <span style="font-weight: 600; font-size: 16px;">Apuntes de PIT — 80 páginas, gratis</span>
+              <span style="font-weight: 600; font-size: 16px;">Apuntes de PIT — 80 páginas (gratis)</span>
               <span style="font-family: var(--pit-font-mono); font-size: 13px; color: var(--pit-blue);">PDF ↓</span>
             </a>
             <a href="Curso Intro PIT.dc.html" style="display: flex; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--pit-ink-80); color: var(--pit-paper);" style-hover="color: #FFFFFF; background: var(--pit-ink-80);">
@@ -211,7 +222,7 @@
         <a href="FAQ PIT.dc.html">Preguntas frecuentes</a>
       </nav>
       <div class="v2-footer-claim">
-        <h3>Tratamiento del dolor crónico, desde el nervio, en cada etapa</h3>
+        <h3>Tratamiento del dolor crónico: de la inyección subcutánea al resultado profundo</h3>
         <div class="v2-footer-avatars">
           <img src="/img/DSC_0016.webp" alt="Dr. Frusso">
           <img src="/img/DSC_0086.webp" alt="Consultorio">
@@ -223,8 +234,8 @@
       <div class="v2-footer-brand"><span class="pipe"></span>Dr. Frusso</div>
       <div class="v2-footer-contact">
         <a href="mailto:ricardo.frusso@hospitalitaliano.org.ar">ricardo.frusso@hospitalitaliano.org.ar</a>
+        <span style="color: #FFFFFF;">Consultorio: Amenabar 2446, Belgrano, CABA</span>
         <a href="https://www.instagram.com/drfrussoricardo">@drfrussoricardo</a>
-        <span style="color: #FFFFFF;">Amenabar 2446, Belgrano, CABA</span>
       </div>
     </div>
     <div class="v2-footer-legal">

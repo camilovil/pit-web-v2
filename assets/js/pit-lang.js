@@ -63,7 +63,11 @@
     'Foro semanal': 'Weekly forum',
     'Apuntes de PIT': 'PIT study notes',
     'Preguntas frecuentes': 'FAQ',
-    'Tratamiento del dolor crónico, desde el nervio, en cada etapa': 'Chronic pain treatment, from the nerve, at every stage',
+    'Tratamiento del dolor crónico: de la inyección subcutánea al resultado profundo': 'Chronic pain treatment: from the subcutaneous injection to deep results',
+    // La dirección no se traduce (es un domicilio), pero la etiqueta que
+    // ahora la encabeza sí: sin esta clave, "Consultorio:" quedaba en
+    // español en medio de un footer traducido.
+    'Consultorio: Amenabar 2446, Belgrano, CABA': 'Practice: Amenabar 2446, Belgrano, CABA',
     'Instagram del Dr. Frusso · @drfrussoricardo': 'Dr. Frusso on Instagram · @drfrussoricardo',
     'Instagram de la Escuela de PIT · @escueladepit': 'Escuela de PIT on Instagram · @escueladepit',
     'Privacidad y aviso médico': 'Privacy & medical notice',
@@ -85,24 +89,24 @@
     // ══ HOME ══════════════════════════════════════════════════════════════
     // Hero
     'PIT · Neuroproloterapia · Dr. Ricardo D. Frusso': 'PIT · Neuroprolotherapy · Dr. Ricardo D. Frusso',
-    'Aliviar el dolor crónico desde el nervio': 'Relieve chronic pain at its source: the nerve',
-    'PIT es un tratamiento mínimamente invasivo que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión, sin interferir con otros tratamientos en curso.': 'PIT is a minimally invasive treatment that acts where pain begins. Relief is usually felt from the first session, without interfering with any ongoing treatment.',
+    'Tratar el dolor desde el nervio': 'Treating pain at the nerve',
+    'PIT es un tratamiento que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión. Su creador es el Dr. John Lyftogt.': 'PIT is a treatment that acts where pain begins. Relief is usually felt from the first session. It was created by Dr. John Lyftogt.',
     'Pedir una consulta': 'Request a consultation',
 
     // Franja de respaldos
     'Práctica y formación respaldadas por': 'Practice and training backed by',
     'Práctica clínica · 30+ años': 'Clinical practice · 30+ years',
-    'Área de dolor · Cursos PIT': 'Pain unit · PIT courses',
+    'Centro del Dolor · Instructor en PIT': 'Pain Centre · PIT instructor',
+    'Instructor autorizado · Discípulo directo': 'Certified instructor · Direct student',
     'Instructor autorizado': 'Certified instructor',
-    'Fundador · Formación en PIT': 'Founder · PIT training',
-    'Formación · 1992': 'Medical degree · 1992',
+    'Miembro Fundador · Instructor en PIT': 'Founding member · PIT instructor',
+    'Formación universitaria · 1992': 'University degree · 1992',
 
     // Bifurcación
-    '¿Quién sos?': 'Who are you?',
-    'La misma técnica, explicada para vos': 'The same technique, explained for you',
+    'La misma técnica, explicada específicamente para vos': 'The same technique, explained specifically for you',
     'Para pacientes': 'For patients',
     'Tengo dolor crónico': 'I live with chronic pain',
-    'Entendé por qué persiste tu dolor, cómo funciona PIT y si tiene sentido para tu caso — en lenguaje claro.': 'Understand why your pain persists, how PIT works and whether it makes sense for your case — in plain language.',
+    'Entendé por qué podría estar persistiendo tu dolor y cómo funciona PIT frente al mismo.': 'Understand why your pain might be persisting, and how PIT works on it.',
     'Entender mi dolor →': 'Understand my pain →',
     'Para profesionales': 'For professionals',
     'Soy profesional de la salud': 'I am a health professional',
@@ -127,7 +131,7 @@
 
     // Módulo de datos por patología
     'Qué trata PIT': 'What PIT treats',
-    'Elegí dónde te duele': 'Choose where it hurts',
+    'Elegí una opción': 'Choose an option',
     'Lumbalgia': 'Low back pain',
     'Rodilla': 'Knee',
     'Cervical': 'Neck',
@@ -138,7 +142,7 @@
     'En la misma sesión': 'In the same session',
     '20–30 min': '20–30 min.',
     'Lumbalgia crónica.': 'Chronic low back pain.',
-    'Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%. Es la región con la que abre el Módulo I del curso.': 'The sensitized superficial nerve branches of the lumbar area are mapped by palpation and treated with subcutaneous injections of 5% glucose. It is the region that opens Module I of the course.',
+    'Dolor persistente en la parte baja de la espalda. Se mapean por palpación las ramas nerviosas superficiales sensibilizadas de la zona lumbar y se tratan con inyecciones subcutáneas de glucosa al 5%.': 'Persistent pain in the lower back. The sensitized superficial nerve branches of the lumbar area are mapped by palpation and treated with subcutaneous injections of 5% glucose.',
     'Cómo es una sesión →': 'What a session is like →',
     'Valores orientativos · Cada caso requiere evaluación individual': 'Indicative values · Each case requires individual assessment',
 
@@ -229,14 +233,13 @@
     // Formulario del foro
     'Participá': 'Take part',
     'Enviá tu pregunta al foro.': 'Send your question to the forum.',
-    'El Dr. Frusso selecciona y responde preguntas cada semana. Todas se revisan antes de publicarse y se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.': 'Dr. Frusso selects and answers questions every week. All of them are reviewed before publication and appear without a name or personal data. Leave your email and we will let you know as soon as the answer is up.',
+    'El Dr. Frusso selecciona y responde preguntas cada semana. Se publican sin nombre ni datos personales. Dejá tu email y te avisamos apenas esté la respuesta.': 'Dr. Frusso selects and answers questions every week. They are published without a name or personal data. Leave your email and we will let you know as soon as the answer is up.',
     'Sin registro': 'No sign-up',
     'Anónimas': 'Anonymous',
-    'Moderadas': 'Moderated',
     'Soy paciente': 'I am a patient',
     'Soy profesional': 'I am a professional',
     'Tu pregunta': 'Your question',
-    'Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), mejor la respuesta.': 'Write your question here. The more context you give (where it hurts, how long you have had it, previous treatments), the better the answer.',
+    'Escribí tu pregunta acá. Cuanto más contexto (zona del dolor, tiempo de evolución, tratamientos previos), más completa podrá ser la respuesta.': 'Write your question here. The more context you give (where it hurts, how long you have had it, previous treatments), the more complete the answer can be.',
     'Escribí tu pregunta acá. Sumá el contexto clínico que ayude (región, hallazgos, qué probaste).': 'Write your question here. Add whatever clinical context helps (region, findings, what you have tried).',   // RUNTIME
     'Tu email — te avisamos cuando el Dr. Frusso responda': 'Your email — we will tell you when Dr. Frusso answers',
     'tu@email.com': 'you@email.com',
@@ -353,13 +356,14 @@
     // array de preguntas, no está en el HTML servido.
     'Glucosa al 5%': '5% glucose',   // RUNTIME
     'Cómo es una sesión': 'What a session is like',
-    'Evaluación y mapeo': 'Assessment and mapping',
+    'Conversación con el paciente (anamnesis)': 'Talking with the patient (history taking)',
+    'Identificación de la zona de dolor': 'Identifying the painful area',
+    'Breve examen físico': 'Brief physical examination',
     'Inyecciones subcutáneas': 'Subcutaneous injections',
-    'Plan de tratamiento': 'Treatment plan',
     'Para profesionales de la salud': 'For health professionals',
     'El mecanismo, con el rigor que esperás.': 'The mechanism, with the rigor you expect.',
     'Evidencia científica publicada': 'Published scientific evidence',
-    'Apuntes de PIT — 80 páginas, gratis': 'PIT study notes — 80 pages, free',
+    'Apuntes de PIT — 80 páginas (gratis)': 'PIT study notes — 80 pages (free)',
     'Curso introductorio gratuito': 'Free introductory course',
     'Formarme en PIT →': 'Train in PIT →',
     'La técnica, en imágenes': 'The technique, in pictures',
@@ -382,9 +386,9 @@
     'Trayectoria': 'Career',
     'Congresos y prensa': 'Congresses and press',
     'Dónde ejerce, enseña y se formó': 'Where he practices, teaches and trained',
-    'Fundador · Escuela de PIT': 'Founder · Escuela de PIT',
-    'Funda la Escuela de PIT': 'Founds Escuela de PIT',
-    'Qué dice la literatura — y qué dice la clínica.': 'What the literature says — and what the clinic says.',
+    'Miembro Fundador · Escuela de PIT': 'Founding member · Escuela de PIT',
+    'Funda en conjunto la Escuela de PIT': 'Co-founds Escuela de PIT',
+    'Bibliografía médica y experiencia clínica.': 'Medical literature and clinical experience.',
     'Descargar referencias (PDF) ↓': 'Download references (PDF) ↓',
     'Lo que más nos preguntan.': 'What we get asked the most.',
     '¿Tiene efectos secundarios o contraindicaciones?': 'Are there side effects or contraindications?',
