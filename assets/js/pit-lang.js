@@ -64,6 +64,10 @@
     'Apuntes de PIT': 'PIT study notes',
     'Preguntas frecuentes': 'FAQ',
     'Tratamiento del dolor crónico: de la inyección subcutánea al resultado profundo': 'Chronic pain treatment: from the subcutaneous injection to deep results',
+    // La dirección no se traduce (es un domicilio), pero la etiqueta que
+    // ahora la encabeza sí: sin esta clave, "Consultorio:" quedaba en
+    // español en medio de un footer traducido.
+    'Consultorio: Amenabar 2446, Belgrano, CABA': 'Practice: Amenabar 2446, Belgrano, CABA',
     'Instagram del Dr. Frusso · @drfrussoricardo': 'Dr. Frusso on Instagram · @drfrussoricardo',
     'Instagram de la Escuela de PIT · @escueladepit': 'Escuela de PIT on Instagram · @escueladepit',
     'Privacidad y aviso médico': 'Privacy & medical notice',
