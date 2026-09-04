@@ -330,13 +330,24 @@ function renderPost(post, posts, idx) {
     ...post.tags.map(t => `<span class="pit-chip">${esc(t)}</span>`),
   ].join('\n          ');
 
+  const accionesCss = `    .foro-acciones { display: flex; gap: 10px; margin-top: 22px; }
+    .foro-accion { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--pit-ink-20); background: var(--pit-paper-pure); color: var(--pit-ink); font-family: var(--pit-font-sans); font-size: var(--txt-sm); font-weight: 600; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s cubic-bezier(0.22,1,0.36,1); }
+    .foro-accion:hover { border-color: var(--pit-blue); color: var(--pit-blue); }
+    .foro-accion:active { transform: scale(0.96); }
+    .foro-accion:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 3px; }
+    .foro-accion svg { display: block; transition: fill 0.2s ease; }
+    /* Marcado: el corazon se rellena. El color no es lo unico que cambia —el
+       relleno tambien— para que se distinga sin depender de ver el color. */
+    .foro-accion[aria-pressed="true"] { border-color: #C0392B; color: #C0392B; }
+    .foro-accion[aria-pressed="true"] svg { fill: #C0392B; }`;
+
   // La galería solo necesita su CSS en los posts que la usan.
   const carruselCss = /\[\[carrusel:/.test(post.body)
     ? `    .foro-carrusel-track { scrollbar-width: none; -ms-overflow-style: none; }
     .foro-carrusel-track::-webkit-scrollbar { display: none; }
     @media (prefers-reduced-motion: no-preference) { .foro-carrusel-track { scroll-behavior: smooth; } }`
     : '';
-  return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen, carruselCss, post.portada) + `
+  return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen, carruselCss + '\n' + accionesCss, post.portada) + `
 <div style="font-family: var(--pit-font-sans); color: var(--pit-ink); background: var(--pit-paper);">
 
 ${renderNav({ active: 'foro', prefix: pre })}
@@ -390,6 +401,17 @@ ${renderNav({ active: 'foro', prefix: pre })}
             <div style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40);">M.N. 86.498 · Instructor autorizado PIT</div>
           </div>
         </div>
+
+        <div class="foro-acciones" data-slug="${esc(post.slug)}">
+          <button type="button" class="foro-accion" data-like aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5 5 0 0 0-7.1 0l-1.7 1.7-1.7-1.7a5 5 0 1 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+            <span data-like-txt>Me gusta</span>
+          </button>
+          <button type="button" class="foro-accion" data-share>
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
+            <span data-share-txt>Compartir</span>
+          </button>
+        </div>
       </article>
 
       <aside style="display: grid; gap: 24px; position: sticky; top: 90px;">
@@ -423,6 +445,58 @@ ${renderNav({ active: 'foro', prefix: pre })}
   </section>
   <style>.sh-post, .sh-post div { transition: color 0.22s ease; }
     .sh-post:hover, .sh-post:hover div { color: var(--pit-blue); }</style>
+
+  <script>
+  // "Me gusta" y "Compartir" al pie del articulo.
+  // El corazon se guarda en el navegador de quien lo toca: NO hay contador
+  // global porque no hay donde guardarlo (sitio estatico, sin base de datos).
+  // Por eso tampoco se muestra un numero: seria inventarle un dato al visitante.
+  (function () {
+    var caja = document.querySelector('.foro-acciones');
+    if (!caja) return;
+    var slug = caja.getAttribute('data-slug') || '';
+    var clave = 'pit-like:' + slug;
+
+    var btnLike = caja.querySelector('[data-like]');
+    var txtLike = caja.querySelector('[data-like-txt]');
+    function pintar(on) {
+      btnLike.setAttribute('aria-pressed', on ? 'true' : 'false');
+      txtLike.textContent = on ? 'Te gusta' : 'Me gusta';   // RUNTIME
+    }
+    // localStorage puede tirar excepcion (modo privado, cookies bloqueadas):
+    // si falla, el boton igual funciona en la sesion, solo no se recuerda.
+    var guardado = false;
+    try { guardado = localStorage.getItem(clave) === '1'; } catch (e) {}
+    pintar(guardado);
+    btnLike.addEventListener('click', function () {
+      guardado = !guardado;
+      pintar(guardado);
+      try {
+        if (guardado) localStorage.setItem(clave, '1');
+        else localStorage.removeItem(clave);
+      } catch (e) {}
+    });
+
+    var btnShare = caja.querySelector('[data-share]');
+    var txtShare = caja.querySelector('[data-share-txt]');
+    btnShare.addEventListener('click', function () {
+      var datos = { title: document.title, url: location.href };
+      // navigator.share es lo normal en celular: abre el menu del sistema.
+      if (navigator.share) {
+        navigator.share(datos).catch(function () {});
+        return;
+      }
+      // En escritorio, copiar el link y avisarlo.
+      var avisar = function () {
+        txtShare.textContent = 'Link copiado';   // RUNTIME
+        setTimeout(function () { txtShare.textContent = 'Compartir'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(location.href).then(avisar, function () {});
+      }
+    });
+  })();
+  </script>
 
   <!-- descargo -->
   <div style="background: var(--pit-ink-05); padding: 18px 24px;">
