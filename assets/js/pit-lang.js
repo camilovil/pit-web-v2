@@ -56,6 +56,12 @@
     'Abrir menú': 'Open menu',
     'Cerrar menú': 'Close menu',   // RUNTIME
 
+    // Barra de acciones al pie de cada publicacion del foro.
+    'Me gusta': 'Like',
+    'Te gusta': 'Liked',   // RUNTIME
+    'Compartir': 'Share',
+    'Link copiado': 'Link copied',   // RUNTIME
+
     // ── Chrome compartido: footer ─────────────────────────────────────────
     'Curso gratis': 'Free course',
     'Evidencia científica': 'Scientific evidence',
