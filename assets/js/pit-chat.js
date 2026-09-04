@@ -39,6 +39,9 @@
     '.pitchat-msg.user { align-self: flex-end; background: #000B33; color: #fff; border-bottom-right-radius: 6px; }',
     '.pitchat-msg.bot { align-self: flex-start; background: #FFFFFF; border: 1px solid rgba(0,11,51,0.08); color: #000B33; border-bottom-left-radius: 6px; box-shadow: 0 4px 14px rgba(0,11,51,0.05); }',
     '.pitchat-msg.typing { color: #6F7C86; font-size: var(--txt-xs, 13px); }',
+    '.pitchat-enlaces { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 8px; margin-top: -2px; }',
+    '.pitchat-enlace { font-family: var(--pit-font-mono, ui-monospace, monospace); font-size: var(--txt-2xs, 11px); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #000B33; background: #FFFFFF; border: 1px solid rgba(0,11,51,0.22); border-radius: 999px; padding: 9px 14px; text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }',
+    '.pitchat-enlace:hover { background: #000B33; border-color: #000B33; color: #FFFFFF; }',
     '.pitchat-sugs { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; background: transparent; }',
     '.pitchat-sug { font-family: inherit; font-size: var(--txt-xs, 13px); font-weight: 500; color: #2563EB; background: #EFF4FE; border: 1px solid rgba(37,99,235,0.22); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }',
     '.pitchat-sug:hover { background: #FFFFFF; transform: translateY(-1px); }',
@@ -136,9 +139,31 @@
       history.push({ role: 'user', content: text });
       var typing = add('bot typing', 'Escribiendo…');
 
-      var done = function (reply) {
+      // `enlaces` solo llega en las respuestas que arma el propio servidor
+      // (hoy: el aviso de que el asistente no está disponible). Nunca viene del
+      // modelo. Cada <a> se construye con createElement y textContent, así que
+      // ni el texto ni el href pueden inyectar markup.
+      var done = function (reply, enlaces) {
         typing.remove();
         add('bot', reply);
+        if (Array.isArray(enlaces) && enlaces.length) {
+          var box = document.createElement('div');
+          box.className = 'pitchat-enlaces';
+          enlaces.forEach(function (e) {
+            if (!e || typeof e.href !== 'string' || typeof e.texto !== 'string') return;
+            // Solo rutas internas: nada que empiece por un esquema.
+            if (e.href.charAt(0) !== '/') return;
+            var a = document.createElement('a');
+            a.className = 'pitchat-enlace';
+            a.href = e.href;
+            a.textContent = e.texto + ' →';
+            box.appendChild(a);
+          });
+          if (box.childNodes.length) {
+            msgsEl.appendChild(box);
+            msgsEl.scrollTop = msgsEl.scrollHeight;
+          }
+        }
         history.push({ role: 'assistant', content: reply });
         busy = false;
         sendBtn.disabled = false;
@@ -160,7 +185,7 @@
         if (!res.ok || !res.data || !res.data.reply) {
           throw new Error('bad_response');
         }
-        done(res.data.reply);
+        done(res.data.reply, res.data.enlaces);
       }).catch(function () {
         typing.remove();
         add('bot', 'No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.');

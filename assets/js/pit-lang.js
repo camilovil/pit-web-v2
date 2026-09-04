@@ -82,6 +82,12 @@
     'Asistente PIT': 'PIT assistant',   // RUNTIME
     'Cerrar el asistente': 'Close the assistant',   // RUNTIME
     'Conversación con el asistente': 'Conversation with the assistant',   // RUNTIME
+    'El asistente no está disponible por ahora. Podés escribirnos o dejar tu pregunta en el foro, y te respondemos.': 'The assistant is unavailable right now. You can write to us or leave your question in the forum, and we will answer.',   // RUNTIME
+    'Ir a Contacto →': 'Go to Contact →',   // RUNTIME
+    // El otro enlace del asistente, "Preguntar en el foro →", NO va acá: ya
+    // tiene su clave más abajo, donde el foro lo usa en HTML de verdad. La
+    // misma cadena no puede estar dos veces -la segunda pisa a la primera- y
+    // ahí no lleva RUNTIME porque sí está en el HTML servido.
     'Escribí tu pregunta sobre PIT': 'Type your question about PIT',   // RUNTIME
     'Preguntá sobre PIT…': 'Ask about PIT…',   // RUNTIME
     'Volver arriba': 'Back to top',   // RUNTIME
