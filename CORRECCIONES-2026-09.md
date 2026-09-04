@@ -554,3 +554,60 @@ en los banners conviene **cambiar la imagen de la zona del cuerpo manteniendo la
 estética que grafica el dolor de los nervios y no el de los huesos** — Ricardo
 insiste en referir al dolor neuropático y correrse del gráfico tradicional de
 dolor óseo. Es trabajo sobre las piezas de Instagram, no sobre el sitio.
+
+---
+
+## #9 · Contraste de las tarjetas de curso y foto al costado
+
+Commit `9a088a8` · merge `ce101b6` — el commit suelto es el que hay que
+revertir si se quiere volver atras solo este cambio.
+
+### El bug que reportó la captura
+
+En la tarjeta del curso faltaban el título y los cuatro valores: se veían el
+chip de la ciudad, el tema, los rótulos y el "Ver el curso", y el resto en
+blanco. El patrón no era casual — lo que desapareció son **exactamente los dos
+únicos elementos que heredaban el color** de `.v2-curso` en vez de declararlo.
+Un color heredado a través de un cambio de fondo es justo lo que rompen las
+extensiones de tema del navegador.
+
+En mi navegador computaba blanco sobre navy, así que no lo iba a encontrar
+mirando: lo delató el patrón de cuáles faltaban. Ahora el título y los valores
+declaran su color, como ya hacían sus vecinos.
+
+**Regla para el futuro:** dentro de un bloque que cambia el fondo (las tarjetas
+navy, la sección `.v2-dark`), cada elemento con texto declara su color. No se
+deja colgado de la herencia.
+
+### El contraste, medido sobre `#000B33`
+
+| Elemento | Antes | | Después | |
+|---|---|---|---|---|
+| Rótulos (11px mayúsculas) | `rgba(255,255,255,0.45)` | **4.44:1 — falla** | `0.62` | 7.54:1 |
+| Tema | `0.55` | 6.11:1 | `0.62` | 7.54:1 |
+| Título y valores | heredado | — | `#FFFFFF` declarado | 19.17:1 |
+
+El mínimo para texto normal es 4.5:1.
+
+### La foto de la región
+
+Sale de la **`portada` del propio post**, que ya es obligatoria para todos y ya
+corresponde a la zona que trata el curso: rodilla para Salta, lumbar para
+Jujuy, cuello para Tucumán. Un curso nuevo trae su imagen sin agregar un solo
+campo al frontmatter.
+
+Va con `alt=""` porque es decorativa: está dentro de un enlace que ya dice
+ciudad, tema, título, fecha, lugar y modalidad, y repetirlo en el alt solo se lo
+haría escuchar dos veces a quien usa lector de pantalla.
+
+La tarjeta pasó de flex a grid de dos columnas y el padding se mudó de la
+tarjeta a `.v2-curso-cuerpo`, para que la foto vaya a sangre. Abajo de 1020px
+la columna de la foto dejaba el título en cuatro líneas, así que ahí la foto
+pasa arriba a lo ancho y el texto abajo.
+
+### Anotado
+
+`DSC_knee01.webp` mide 412×515 y en la tarjeta se dibuja a 378×547: se agranda
+un 6%. Es imperceptible en pantalla normal, pero si en algún momento se quieren
+las tarjetas más nítidas en pantallas retina, el arreglo es una imagen de origen
+más grande — no hay nada que tocar en el código.
