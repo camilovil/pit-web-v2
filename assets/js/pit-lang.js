@@ -352,13 +352,14 @@
     // array de preguntas, no está en el HTML servido.
     'Glucosa al 5%': '5% glucose',   // RUNTIME
     'Cómo es una sesión': 'What a session is like',
-    'Evaluación y mapeo': 'Assessment and mapping',
+    'Conversación con el paciente (anamnesis)': 'Talking with the patient (history taking)',
+    'Identificación de la zona de dolor': 'Identifying the painful area',
+    'Breve examen físico': 'Brief physical examination',
     'Inyecciones subcutáneas': 'Subcutaneous injections',
-    'Plan de tratamiento': 'Treatment plan',
     'Para profesionales de la salud': 'For health professionals',
     'El mecanismo, con el rigor que esperás.': 'The mechanism, with the rigor you expect.',
     'Evidencia científica publicada': 'Published scientific evidence',
-    'Apuntes de PIT — 80 páginas, gratis': 'PIT study notes — 80 pages, free',
+    'Apuntes de PIT — 80 páginas (gratis)': 'PIT study notes — 80 pages (free)',
     'Curso introductorio gratuito': 'Free introductory course',
     'Formarme en PIT →': 'Train in PIT →',
     'La técnica, en imágenes': 'The technique, in pictures',

@@ -254,3 +254,120 @@ franja de la home, verificada aparte, sigue en 2-2-1 como estaba.
 - **El año 2026 de la fundación de la Escuela** sigue siendo una inferencia
   anterior a estas correcciones: el comentario del código que lo avisa quedó en
   su lugar, y el placeholder del pie de Trayectoria también.
+
+---
+
+## Bloque 4 — Qué es PIT
+
+Fuente: `_dc-src/Que es PIT.dc.html` (modo *raw*). Es la página donde el
+documento dejó más cosas a medio escribir, así que va última: se aplicó todo lo
+que tenía texto y quedó anotado lo que falta.
+
+### Para pacientes
+
+| Antes | Después |
+|---|---|
+| …se volvió hipersensible, y **dispara dolor** aunque el tejido esté sano. | …se volvió hipersensible, y **envía señales de dolor** aunque el tejido esté sano. |
+| …pequeñas inyecciones **debajo de la piel de glucosa al 5%** — | …pequeñas inyecciones **de glucosa al 5% debajo de la piel** — |
+
+### Cómo es una sesión: los cuatro pasos, reescritos
+
+Reescritos contra la página 7 de los **Apuntes de PIT**, que es el material que
+la propia página ofrece descargar. La sesión ahora empieza donde empieza de
+verdad: en la conversación.
+
+| # | Antes | Después |
+|---|---|---|
+| 01 | Evaluación y mapeo | Conversación con el paciente (anamnesis) |
+| 02 | Inyecciones subcutáneas | Identificación de la zona de dolor |
+| 03 | Verificación del efecto | Breve examen físico |
+| 04 | Plan de tratamiento | Inyecciones subcutáneas |
+
+**Lo que salía de acá no se perdió**, que era el riesgo: la verificación del
+alivio en la misma consulta como criterio diagnóstico sigue en el bloque de
+profesionales de esta misma página, y las 6-8 sesiones están en el segundo
+pilar de más abajo y en el módulo de patologías de la home.
+
+**Alineación:** con los títulos nuevos, dos ocupan dos líneas y dos una sola, y
+los párrafos arrancaban 23px más abajo en la mitad de las tarjetas. Se agregó
+una regla local (`.pit-pasos h4 { min-height: 2.6em }`) arriba de 820px, que es
+el breakpoint donde `.m-stack` todavía no apila. Medido: los cuatro párrafos
+arrancan a la misma altura en 1280px, y apilado en 375px no queda hueco.
+
+### Tres pilares
+
+| Antes | Después |
+|---|---|
+| *(eyebrow)* Por qué es distinto | Un procedimiento innovador |
+| Tres cosas que conviene saber antes de empezar. | Tres aspectos que marcan la diferencia. |
+| Lo que se inyecta ya está en el hospital | Dextrosa y agua, dos compuestos naturales unidos para aliviar el nervio |
+| El alivio se construye, no aparece de golpe | El alivio duradero se construye |
+| No lleva corticoides ni analgésicos | Sin corticoides, sin analgésicos |
+
+El cuerpo del **primer** pilar se reescribió entero con el texto del documento
+(dextrosa diluida en agua purificada, aguja ultrafina, sentado o acostado). Los
+cuerpos del segundo y del tercero **quedaron como estaban**: el documento los
+marca para reformular pero no dejó el texto.
+
+### Apuntes
+
+| Antes | Después |
+|---|---|
+| Apuntes de PIT — 80 páginas, gratis | Apuntes de PIT — 80 páginas (gratis) |
+
+### Decisiones propias (revisar)
+
+1. **«puntos de Valleix», no "Puntos de Valleyx".** El documento lo escribió con
+   *y* y entre comillas latinas dobles; el apellido es **Valleix** y así figura
+   ya en el bloque de profesionales de esta misma página.
+2. **"diluida" sin tilde** (el documento traía "diluída") y se cerró el
+   paréntesis que quedaba abierto en el paso 04.
+3. **El paso 01 conserva "(anamnesis)"** tal como lo escribió el documento,
+   aunque sea el único término técnico de una sección dirigida a pacientes.
+4. **Aparece "dextrosa" donde el resto del sitio dice "glucosa al 5%".** Es lo
+   que pide el documento en los dos lugares nuevos (paso 04 y primer pilar),
+   pero ahora la misma página usa las dos palabras: "glucosa al 5%" en los
+   párrafos de arriba y en el bloque de profesionales, "dextrosa" en los de
+   abajo. Son lo mismo, pero conviene unificar en una pasada aparte.
+5. **El comentario del código de la sección** enumeraba los datos técnicos que
+   traían los pilares (incluida la aguja de media pulgada, que ya no aparece en
+   ninguno): se actualizó para que siga describiendo lo que hay.
+
+---
+
+# Lo que quedó pendiente
+
+## Falta el texto (el documento marcó "reformular" y dejó el reemplazo vacío)
+
+| Página | Qué |
+|---|---|
+| Home | Descripciones de **Rodilla**, **Cervical** y **Hombro** |
+| Qué es PIT | **H1** ("El dolor crónico se trata donde nace: en el nervio.") |
+| Qué es PIT | **Lead** (incluye reformular "mínimamente invasivo" y reemplazar "Elegí tu camino: la misma técnica, explicada para vos") |
+| Qué es PIT | Cuerpo del pilar **"El alivio duradero se construye"** |
+| Qué es PIT | Cuerpo del pilar **"Sin corticoides, sin analgésicos"** |
+| Qué es PIT | **"El mecanismo, con el rigor que esperás."** y los dos párrafos del bloque de profesionales (uno de ellos pide sumar pasos de la página 7 de los Apuntes) |
+
+## Hay que confirmarlo con Ricardo
+
+| Página | Qué |
+|---|---|
+| Home | **Sesiones típicas y duración** de las cuatro regiones (6-8 sesiones, 15-30 min) |
+| Foro | La **promesa semanal**: "Cada semana, una respuesta." y el párrafo que la desarrolla |
+| Sobre el Dr. Frusso | Credenciales de **Universidad de Wisconsin** y **Medicina Narrativa** (falta título, año y tipo de formación) |
+| Sobre el Dr. Frusso | **Año de fundación** de la Escuela de PIT (el 2026 sigue siendo una inferencia previa) |
+
+## Anotado para más adelante
+
+- **Testimonios filmados de pacientes** en la sección "Para pacientes" de la
+  home. Hoy los cuatro testimonios son placeholders marcados "A validar con
+  Ricardo".
+- **Desarrollar los tres pilares de Qué es PIT.** El documento lo pide
+  explícitamente: "Me gustaría dedicarle más tiempo a toda esta sección más
+  adelante".
+- **Unificar "glucosa al 5%" / "dextrosa al 5%"** en todo el sitio.
+- **`<title>`, `og:title`, `twitter:title` y la `meta description` de la home**,
+  que todavía dicen "Aliviar el dolor crónico desde el nervio" y "mínimamente
+  invasivo".
+- **El footer de las dos páginas *raw*** (Qué es PIT y Curso Módulo I), que está
+  más viejo que el compartido: le falta el Instagram de la Escuela de PIT.
