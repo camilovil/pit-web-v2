@@ -175,3 +175,82 @@ y no entra en el alcance del documento.
   los plazos de las cuatro regiones para confirmar con él.
 - **Testimonios filmados de pacientes**: sugerencia explícita "para más adelante
   en el tiempo".
+
+---
+
+## Bloque 3 — Sobre el Dr. Frusso
+
+Fuente: `_dc-src/cores/sobre-el-dr-frusso.html` (modo *core*: el build lo
+envuelve con el nav y el footer comunes). Los cinco rótulos de la franja de
+respaldos ya habían cambiado en el Bloque 2, porque el componente es compartido
+con la home.
+
+### Biografía
+
+Se agregó, después de la primera oración: **"Fundador del Área de Medicina
+Musculoesquelética dentro del Servicio de Medicina Familiar en ese mismo
+hospital."**
+
+| Antes | Después |
+|---|---|
+| **Fundador** de la Escuela de PIT, desde donde forma a profesionales de la región. | **Miembro Fundador** de la Escuela de PIT, donde forma a profesionales de toda la región junto a sus otros tres fundadores: el Dr. Heno Pigerl y las doctoras María Paz Caruso y María Julia Aparicio. |
+
+| Chip | Antes | Después |
+|---|---|---|
+| último | Fundador · Escuela de PIT | Miembro Fundador · Escuela de PIT |
+
+### Franja de respaldos: tres filas en vez de una
+
+El rótulo dice "Dónde ejerce, enseña y se formó" y los cinco logos venían en una
+fila que no cumplía ese orden. Quedaron así:
+
+| Fila | Logos | Qué dice el rótulo |
+|---|---|---|
+| 1 | Hospital Italiano | ejerce |
+| 2 | Hospital de Clínicas · Escuela de PIT | enseña |
+| 3 | UBA · Lyftogtmed | se formó |
+
+Cómo está hecho: se reordenó el **DOM** (no `order` de CSS, que deja el orden de
+lectura y el de tabulación distintos de lo que se ve) y se agregó una regla
+**local** en el `<style data-page>` de la página, prefijada con
+`.v2-trust-strip`. La franja de la home cuelga de `.v2-trust` y no se entera: el
+componente base sigue en `assets/css/pit-v2.css` con su copia inline en
+`index.html`, y `check-css.js` sigue pasando.
+
+Detalles que hubo que resolver:
+
+- `pit-v2.css` hace que el **último** logo ocupe el ancho completo abajo de
+  640px (en la home quedan 2 columnas y sobra uno). Acá son filas de 1-2-2, no
+  sobra ninguno, así que la regla local lo devuelve a `grid-column: auto`.
+- El **separador vertical** se sacó de esta página: separaba "ejerce" de "se
+  formó" en la fila única, y ahora ese corte lo hace el salto de fila.
+
+Medido después del cambio, en 1280px y en 375px: las tres filas en el orden
+pedido, los cinco rótulos a dos líneas exactas y sin scroll horizontal. La
+franja de la home, verificada aparte, sigue en 2-2-1 como estaba.
+
+### Trayectoria
+
+| Año | Antes | Después |
+|---|---|---|
+| 2026 | Funda la Escuela de PIT — Su propia escuela de formación en el método, para profesionales de la salud de la región. | Funda **en conjunto** la Escuela de PIT — Junto al Dr. Pigerl y las doctoras Caruso y Aparicio, inauguran su propia escuela de formación en el método, para profesionales de la salud de toda la región. |
+| Hoy | Consultorio en Belgrano + docencia online — Atención de pacientes, foro semanal y cursos para profesionales. | Hospital Italiano, consultorio en Belgrano, docencia y divulgación — Atención de pacientes, formación de profesionales y divulgación de la técnica a través de medios digitales. |
+
+### Decisiones propias (revisar)
+
+1. **"junto a sus otros tres fundadores: el Dr. Heno Pigerl…"** va con "el" en
+   minúscula. El documento lo escribió con mayúscula por empezar renglón; en
+   texto corrido, después de dos puntos, corresponde minúscula.
+2. **El separador de la franja se sacó solo en esta página.** En la home sigue,
+   porque ahí la fila es única y el separador es lo que distingue "ejerce" de
+   "se formó".
+
+### Fuera de alcance en este bloque
+
+- **Universidad de Wisconsin y Medicina Narrativa** (pendiente de Ricardo): el
+  documento las sugiere como credenciales a sumar, pero no hay título, año ni
+  tipo de formación para escribirlas. Cuando lleguen, el lugar natural son los
+  chips de la biografía y una fila más en Trayectoria.
+- **El año 2026 de la fundación de la Escuela** sigue siendo una inferencia
+  anterior a estas correcciones: el comentario del código que lo avisa quedó en
+  su lugar, y el placeholder del pie de Trayectoria también.
