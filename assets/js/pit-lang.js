@@ -431,7 +431,6 @@
     'Lo que dicen los alumnos': 'What students say',
     'Empezá hoy. El acceso es tuyo para siempre.': 'Start today. The access is yours forever.',
     'Trayectoria': 'Career',
-    'Congresos y prensa': 'Congresses and press',
     'Dónde ejerce, enseña y se formó': 'Where he practices, teaches and trained',
     'Miembro Fundador · Escuela de PIT': 'Founding member · Escuela de PIT',
     'Funda en conjunto la Escuela de PIT': 'Co-founds Escuela de PIT',
