@@ -178,6 +178,17 @@ body { padding-top: 84px; background: #FFFFFF; }
 .v2-footer-contact { display: grid; gap: 8px; font-size: var(--txt-sm); text-align: end; font-weight: 500; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
 .v2-footer-legal { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; text-shadow: 0 1px 2px rgba(0,11,51,0.18); }
 @media (max-width: 700px) { .v2-footer-contact { text-align: start; } .v2-footer { margin: 12px; } }
+/* Los dos Instagram del footer: logo + nombre corto. Antes decian
+   "Instagram del Dr. Frusso · @drfrussoricardo", que en mobile ocupaba dos
+   renglones cada uno para decir dos veces lo mismo. El logo dice que es
+   Instagram; el aria-label se lo dice a quien no lo ve. */
+.v2-footer-ig { display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 700px) {
+  /* margin-inline-start: auto empujaba "Ver el sitio anterior" contra el
+ borde y lo cortaba. A este ancho los tres van uno atras del otro. */
+  .v2-footer-legal > a:last-child { margin-inline-start: 0; }
+  .v2-footer-legal { gap: 12px 18px; }
+}
 
 /* ================= Docshield-ización de las subpáginas ================= */
 
