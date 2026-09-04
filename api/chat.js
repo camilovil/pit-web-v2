@@ -69,8 +69,19 @@ module.exports = async function handler(req, res) {
   // devolvemos una respuesta clara en vez de un 500. Así el sitio no rompe.
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
+    // Los destinos viajan como DATOS (texto + href), no como HTML dentro del
+    // texto: el widget pinta las respuestas con textContent a propósito —lo que
+    // contesta el modelo no se renderiza como markup— y no se abre esa puerta
+    // ni siquiera para un mensaje nuestro. El widget arma los <a> con
+    // createElement a partir de esta lista.
+    // Las rutas van absolutas desde la raíz porque el widget corre en las 18
+    // páginas, incluidas las de foro/, que están un nivel más abajo.
     return res.status(200).json({
-      reply: 'El asistente no está disponible por ahora. Escribinos desde Contacto y te respondemos.'
+      reply: 'El asistente no está disponible por ahora. Podés escribirnos o dejar tu pregunta en el foro, y te respondemos.',
+      enlaces: [
+        { texto: 'Ir a Contacto', href: '/contacto.html' },
+        { texto: 'Preguntar en el foro', href: '/foro.html#pregunta' }
+      ]
     });
   }
 
