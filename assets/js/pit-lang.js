@@ -153,6 +153,8 @@
     'Soy profesional de la salud': 'I am a health professional',
     'Mecanismo de acción, evidencia publicada y técnica — con casos clínicos reales filmados en consultorio.': 'Mechanism of action, published evidence and technique — with real clinical cases filmed in practice.',
     'Conocer la técnica →': 'Learn the technique →',
+    'Soy paciente ↓': 'I am a patient ↓',
+    'Soy profesional de la salud ↓': 'I am a healthcare professional ↓',
 
     // Contenido gratuito
     'Contenido gratuito · Sin registro': 'Free content · No sign-up',

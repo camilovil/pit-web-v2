@@ -247,7 +247,7 @@ const FOOT = `
 <script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=6"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
-<script src="assets/js/pit-lang.js?v=5"></script>
+<script src="assets/js/pit-lang.js?v=6"></script>
 </body>
 </html>
 `;
