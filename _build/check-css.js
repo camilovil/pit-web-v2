@@ -157,7 +157,7 @@ function main() {
     for (const p of props) {
       const va = a.get(p), vb = b.get(p);
       if (va !== vb) {
-        dif.push(`      ${p}\n        pit-v2.css (17 páginas): ${va === undefined ? '— no la declara —' : va.slice(p.length + 2)}\n        index.html (home):       ${vb === undefined ? '— no la declara —' : vb.slice(p.length + 2)}`);
+        dif.push(`      ${p}\n        pit-v2.css (subpáginas): ${va === undefined ? '— no la declara —' : va.slice(p.length + 2)}\n        index.html (home):       ${vb === undefined ? '— no la declara —' : vb.slice(p.length + 2)}`);
       }
     }
     if (dif.length) errores.push(`${clave}\n${dif.join('\n')}`);

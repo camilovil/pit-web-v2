@@ -19,7 +19,7 @@
 // (no tiene que aparecer nada) y buscar "noindex" en el HTML servido.
 
 // true  = staging: el sitio pide a los buscadores que no lo indexen.
-// false = producción: se quitan el meta y el header en las 18 páginas.
+// false = producción: se quitan el meta y el header en todas las páginas.
 const STAGING = false;
 
 // Línea completa del <head>, con salto de línea, o cadena vacía. Se interpola

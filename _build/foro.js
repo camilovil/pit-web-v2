@@ -307,9 +307,9 @@ const FOOT = (pre) => `
 <script src="${pre}assets/js/pit-forms.js?v=2"></script>
 <script src="${pre}assets/js/pit-v2.js?v=2"></script>
 <script src="${pre}assets/js/pit-motion.js?v=2"></script>
-<script src="${pre}assets/js/pit-chat.js?v=3"></script>
+<script src="${pre}assets/js/pit-chat.js?v=5"></script>
 <script src="${pre}assets/js/pit-scrolltop.js?v=2"></script>
-<script src="${pre}assets/js/pit-lang.js?v=2"></script>
+<script src="${pre}assets/js/pit-lang.js?v=4"></script>
 </body>
 </html>
 `;
@@ -354,7 +354,7 @@ function renderPost(post, posts, idx) {
 ${renderNav({ active: 'foro', prefix: pre })}
 
   <!-- <main id="pit-main">: destino del link "Saltar al contenido" de nav.js,
-       tiene que existir en las 18 páginas. tabindex="-1" para que el salto
+       tiene que existir en todas las páginas. tabindex="-1" para que el salto
        mueva el foco y no solo el scroll. -->
   <main id="pit-main" tabindex="-1">
 

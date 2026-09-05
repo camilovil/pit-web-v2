@@ -5,7 +5,7 @@
 // cada nodo. Cambiar una coma en el copy no rompe nada visible: simplemente esa
 // frase deja de traducirse y la clave queda huérfana, en silencio. El ritual
 // manual era pegar un TreeWalker en la consola de cada página y comparar a ojo
-// contra Object.keys(DICT) — 18 páginas, a mano, cada vez. Esto es ese ritual,
+// contra Object.keys(DICT) — todas las páginas, a mano, cada vez. Esto es ese ritual,
 // automatizado y corriendo en el build.
 //
 // QUÉ MIRA

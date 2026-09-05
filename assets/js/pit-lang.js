@@ -10,7 +10,7 @@
 //
 // Eso ya no se revisa a mano: **`_build/check-lang.js` corre en cada build**
 // (`node _build/build.js`) y compara estas claves contra el texto visible de las
-// 18 páginas construidas — nodos de texto, `placeholder` y `aria-label`, lo
+// todas las páginas construidas — nodos de texto, `placeholder` y `aria-label`, lo
 // mismo que mira `apply()` acá abajo. Si una clave dejó de coincidir, el build
 // falla nombrando la clave y su línea. Para correrlo suelto:
 //   node _build/check-lang.js
@@ -31,14 +31,14 @@
 //    español comparten la misma traducción al inglés, volver a ES rompe. Cada
 //    valor tiene que ser único.
 //
-// COBERTURA ACTUAL: home, portal del foro, las 8 publicaciones y el chrome
-// compartido (nav, footer, asistente) de las 18 páginas — completos.
+// COBERTURA ACTUAL: home, portal del foro, las publicaciones y el chrome
+// compartido (nav, footer, asistente) de todas las páginas — completos.
 // PENDIENTE: el cuerpo de Qué es PIT, Evidencia, FAQ, Contacto, Sobre el Dr.
 // Frusso, Privacidad, Curso Módulo I y el aula de Curso Intro conservan las
 // claves que seguían siendo válidas, pero no están cubiertos al 100%.
 (function () {
   var DICT = {
-    // ── Chrome compartido: nav + drawer (las 18 páginas) ──────────────────
+    // ── Chrome compartido: nav + drawer (todas las páginas) ───────────────
     'Saltar al contenido': 'Skip to content',
     'Qué es PIT': 'What is PIT',
     'Evidencia': 'Evidence',
@@ -105,9 +105,19 @@
     'Abrir asistente sobre PIT': 'Open the PIT assistant',   // RUNTIME
     'Cerrar asistente sobre PIT': 'Close the PIT assistant',   // RUNTIME
     'Asistente PIT': 'PIT assistant',   // RUNTIME
+    'Preguntale a PIT': 'Ask PIT',   // RUNTIME
+    'IA · Respuestas educativas': 'AI · Educational answers',   // RUNTIME
+    'No reemplaza una consulta médica': 'Not a substitute for medical advice',   // RUNTIME
     'Cerrar el asistente': 'Close the assistant',   // RUNTIME
     'Conversación con el asistente': 'Conversation with the assistant',   // RUNTIME
+    '¿Qué es PIT?': 'What is PIT?',   // RUNTIME
+    '¿Cómo empiezo el curso gratis?': 'How do I start the free course?',   // RUNTIME
+    'Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?': 'Hi 👋 I am the site assistant. I can explain what PIT is, how it works and which free resources are available. What would you like to know?',   // RUNTIME
+    'Escribiendo…': 'Typing…',   // RUNTIME
     'El asistente no está disponible por ahora. Podés escribirnos o dejar tu pregunta en el foro, y te respondemos.': 'The assistant is unavailable right now. You can write to us or leave your question in the forum, and we will answer.',   // RUNTIME
+    'No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.': 'I could not answer right now. Try again in a few seconds or contact us through the Contact page.',   // RUNTIME
+    'Ir a Contacto': 'Go to Contact',   // RUNTIME
+    'Preguntar en el foro': 'Ask in the forum',   // RUNTIME
     'Ir a Contacto →': 'Go to Contact →',   // RUNTIME
     // El otro enlace del asistente, "Preguntar en el foro →", NO va acá: ya
     // tiene su clave más abajo, donde el foro lo usa en HTML de verdad. La
@@ -243,6 +253,22 @@
     'Ver el curso →': 'View the course →',
     'USD 97.99 · Pago único': 'USD 97.99 · One-time payment',
 
+    // ══ SOBRE EL DR. FRUSSO ═══════════════════════════════════════════════
+    'Médico de Familia (UBA, 1992) con más de tres décadas de práctica en el Hospital Italiano de Buenos Aires. Fundador del Área de Medicina Musculoesquelética dentro del Servicio de Medicina Familiar en ese mismo hospital. Pionero en Argentina en la aplicación de PIT, formado directamente por el Dr. John Lyftogt — creador del método — e instructor autorizado para América Latina desde 2015. Miembro Fundador de la Escuela de PIT, donde forma a profesionales de toda la región junto a sus otros tres fundadores: el Dr. Heno Pigerl y las doctoras María Paz Caruso y María Julia Aparicio.': 'Family physician (University of Buenos Aires, 1992) with more than three decades of practice at Hospital Italiano de Buenos Aires. Founder of the Musculoskeletal Medicine Area within the hospital’s Family Medicine Service. A pioneer in the use of PIT in Argentina, he trained directly with Dr. John Lyftogt — creator of the method — and has been an authorized instructor for Latin America since 2015. He is a founding member of Escuela de PIT, where he trains professionals from across the region together with its other three founders: Dr. Heno Pigerl, Dr. María Paz Caruso and Dr. María Julia Aparicio.',
+    'HIBA · 30+ años': 'HIBA · 30+ years',
+    'Médico — Universidad de Buenos Aires': 'Medical degree — University of Buenos Aires',
+    'Especialización posterior en Medicina Familiar.': 'He later specialized in Family Medicine.',
+    'Más de 30 años de práctica clínica y docencia en Medicina Familiar.': 'More than 30 years of clinical practice and teaching in Family Medicine.',
+    'Formación con el Dr. John Lyftogt': 'Training with Dr. John Lyftogt',
+    'Entrenamiento directo con el creador del método PIT (Nueva Zelanda).': 'Direct training with the creator of the PIT method in New Zealand.',
+    'Instructor autorizado para América Latina': 'Authorized instructor for Latin America',
+    'Introduce y difunde PIT en la región; forma a cientos de profesionales.': 'Introduces and promotes PIT in the region, training hundreds of professionals.',
+    'Junto al Dr. Pigerl y las doctoras Caruso y Aparicio, inauguran su propia escuela de formación en el método, para profesionales de la salud de toda la región.': 'Together with Dr. Pigerl, Dr. Caruso and Dr. Aparicio, he launches a school dedicated to training health professionals from across the region in the method.',
+    'Hoy': 'Today',
+    'Hospital Italiano, consultorio en Belgrano, docencia y divulgación': 'Hospital Italiano, private practice in Belgrano, teaching and outreach',
+    'Atención de pacientes, formación de profesionales y divulgación de la técnica a través de medios digitales.': 'Patient care, professional training and communication about the technique through digital media.',
+    'Leer el foro semanal →': 'Read the weekly forum →',
+
     // ══ FORO — portada ════════════════════════════════════════════════════
     'Foro PIT · Noticias, casos y respuestas': 'PIT Forum · News, cases and answers',
     'Cada semana, una respuesta.': 'One answer every week.',
@@ -274,7 +300,7 @@
     // sirviendo; lo que hay que agregar es la del post nuevo.
     'Noticias · Para todos': 'News · For everyone',
 
-    // Títulos de las 8 publicaciones
+    // Títulos de las publicaciones
 
     // Formulario del foro
     'Participá': 'Take part',
@@ -362,7 +388,7 @@
     'Garantía de 7 días': '7-day guarantee',
     'Empezá hoy. El acceso es tuyo para siempre.': 'Start today. The access is yours forever.',
     'Trayectoria': 'Career',
-    'Dónde ejerce, enseña y se formó': 'Where he practices, teaches and trained',
+    'Dónde ejerce, enseña y se formó': 'Where he practices, teaches and received his training',
     'Miembro Fundador · Escuela de PIT': 'Founding member · Escuela de PIT',
     'Funda en conjunto la Escuela de PIT': 'Co-founds Escuela de PIT',
     'Bibliografía médica y experiencia clínica.': 'Medical literature and clinical experience.',
@@ -432,6 +458,13 @@
     }
     return REV;
   }
+
+  // Los componentes que crean texto después de la carga (hoy, el chat) usan
+  // esta misma fuente en vez de duplicar un segundo diccionario.
+  window.pitTranslate = function (text) {
+    var map = document.documentElement.lang === 'en' ? DICT : reverse();
+    return Object.prototype.hasOwnProperty.call(map, text) ? map[text] : text;
+  };
 
   // Marcar el idioma activo es barato (un atributo + dos botones) y hay que
   // hacerlo siempre. Traducir el documento es caro y solo hace falta cuando

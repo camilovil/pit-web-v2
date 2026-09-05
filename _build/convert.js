@@ -139,7 +139,7 @@ function replaceNavBlock(html, navHtml) {
 
 // Envuelve el contenido de una página raw en <main id="pit-main">: es el
 // destino del link "Saltar al contenido" que emite _build/nav.js, y tiene que
-// existir en LAS 18 páginas. En raw el contenido va entre el bloque de nav y
+// existir en todas las páginas. En raw el contenido va entre el bloque de nav y
 // el <footer class="v2-footer">, así que se abre después de uno y se cierra
 // antes del otro. tabindex="-1" es necesario: sin él, saltar al ancla mueve el
 // scroll pero no el foco, y la próxima tabulada vuelve al principio del nav.
@@ -245,9 +245,9 @@ const FOOT = `
 <script src="assets/js/pit-forms.js?v=2"></script>
 <script src="assets/js/pit-v2.js?v=2"></script>
 <script src="assets/js/pit-motion.js?v=2"></script>
-<script src="assets/js/pit-chat.js?v=3"></script>
+<script src="assets/js/pit-chat.js?v=5"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
-<script src="assets/js/pit-lang.js?v=2"></script>
+<script src="assets/js/pit-lang.js?v=4"></script>
 </body>
 </html>
 `;

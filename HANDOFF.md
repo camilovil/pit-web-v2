@@ -1,6 +1,6 @@
 # Handoff — Proyecto Web PIT v2
 
-_Última actualización: 2026-07-29_
+_Última actualización: 2026-09-05_
 
 Resumen de estado para retomar el proyecto en una sesión nueva sin perder contexto.
 
@@ -12,19 +12,19 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
 ## Coordenadas
 - **Código:** `E:\PIT\pit-web-v2`
 - **Repo:** github.com/camilovil/pit-web-v2 (privado)
-- **Live (staging):** https://pit-web-v2.vercel.app — con `noindex` en meta + header
-- **Sitio actual (intacto):** drricardofrusso.com — no se tocó nada
+- **Live (producción):** https://drricardofrusso.com — publicado desde `pit-web-v2`
+- **Preview de Vercel:** https://pit-web-v2.vercel.app
 - **Deploy:** Vercel conectado al repo; cada `git push` redeploya solo
 
 ## Arquitectura
-- 11 páginas núcleo + portal del foro (8 publicaciones con URL propia).
+- 10 páginas núcleo (incluido el portal del foro) + 4 publicaciones con URL propia.
 - Build completo: **`node _build/build.js`** (corre convert.js → foro.js → sync-nav.js →
   sync-foro-home.js → sync-cursos-home.js, idempotente). Generadores sueltos:
   `convert.js` (páginas desde `_dc-src/`), `foro.js` (foro desde `_content/foro/*.md`),
   `sync-nav.js` (nav en páginas manuales), `sync-foro-home.js` (últimas publicaciones del
   foro en la home), `sync-cursos-home.js` (carrusel de próximos cursos en la home).
 - **Nav en una sola fuente:** `_build/nav.js` define el menú (header + drawer); un cambio
-  se hace SOLO ahí y se propaga a las 17 páginas al buildear. Las fuentes `.dc.html`
+  se hace SOLO ahí y se propaga a todas las páginas al buildear. Las fuentes `.dc.html`
   conservan un bloque de nav que el build reemplaza (no editar el nav ahí).
 - `index.html` y `curso-intro.html` son manuales (el aula del curso intro es una
   app vanilla JS con quizzes + progreso en localStorage). `index.html` recibe el nav
@@ -86,7 +86,7 @@ ecosistema de contenido (foro semanal + curso gratuito + curso pago como cierre)
   (fue exactamente lo que pasó con foro y chat). Contacto conserva su propia copia de la
   regla porque su selector `.fld` gana por especificidad.
 - **Ritmo vertical con un solo token:** `--sec-y: clamp(36px, 4.4vw, 64px)`. El aire entre
-  secciones es 2× ese valor: 127px en desktop, 72px en mobile, en las 18 páginas. No
+  secciones es 2× ese valor: 127px en desktop, 72px en mobile, en todo el sitio. No
   agregar `padding-top` inline para "corregir" el espaciado de una sección: los cuatro
   parches que existían peleaban contra el desorden y se borraron.
   **Excepción deliberada y comentada:** hero → franja de logos queda en 23px. Los logos
@@ -130,7 +130,7 @@ de su primera visita, recibiendo el HTML nuevo con los estilos viejos.
   Config en `assets/js/pit-forms.js`. Modo demo si el endpoint tiene `REEMPLAZAR`.
 - **Newsletter:** checkbox dentro del form del foro (llega como `newsletter: sí/no`).
 - **Mapa** de Google embebido en Contacto (endpoint `output=embed`, sin API key).
-- **Analytics de Vercel** instalado en las 18 páginas (falta activarlo en el dashboard).
+- **Analytics de Vercel** instalado en todas las páginas (falta activarlo en el dashboard).
   Speed Insights también en las 18 (los generadores lo emiten en el HEAD).
 - **Home:** contenido gratuito como panel destacado, testimonios en desfile animado
   (ref. Docshield), logo animado en todas las páginas, sin contadores.
@@ -265,13 +265,10 @@ Quedan ~20 elementos por página sobre degradés que la auditoría no puede eval
 necesitan chequeo visual.
 
 ## Pendiente
-1. **URL de la Escuela de PIT** — es el único de los 5 logos sin enlazar. En cuanto Ricardo
-   la pase, se agrega el `<a>` en las dos copias de la franja (home + Sobre el Dr. Frusso).
-   No inventar una URL.
-2. **Año de fundación de la Escuela de PIT** — hoy dice **2026 por inferencia** (la fundó
+1. **Año de fundación de la Escuela de PIT** — hoy dice **2026 por inferencia** (la fundó
    hace poco). Está marcado para confirmar en un comentario del fuente y en el placeholder
    de validación al pie de la trayectoria.
-3. **Asistente IA** — **código listo, esperando la key.** Ya está la función
+2. **Asistente IA** — **código listo, esperando la key.** Ya está la función
    serverless `api/chat.js` (llama a Claude Haiku con la key server-side) y el
    widget `assets/js/pit-chat.js` ya la consume vía `fetch('/api/chat')`. El
    prompt de sistema y los límites (max_tokens 500, 12 turnos, largo por mensaje)
@@ -282,19 +279,16 @@ necesitan chequeo visual.
    - En Vercel → proyecto pit-web-v2 → Settings → Environment Variables:
      agregar `ANTHROPIC_API_KEY` con el valor de la key. Redeploy → queda andando.
    - Modelo actual: `claude-haiku-4-5` (barato y rápido). Se cambia en `api/chat.js`.
-4. **Activar Analytics** en Vercel → proyecto pit-web-v2 → pestaña Analytics → Enable.
-5. **Contenido de Ricardo** (placeholders marcados en el sitio): 2-3 testimonios reales,
+3. **Activar Analytics** en Vercel → proyecto pit-web-v2 → pestaña Analytics → Enable.
+4. **Contenido de Ricardo** (los bloques incompletos están ocultos): 2-3 testimonios reales,
    video de bienvenida del curso + subir el de materiales, preguntas definitivas de las
    autoevaluaciones, textos de los 8 posts del foro, citas de evidencia científica,
    WhatsApp y horarios en Contacto, duración del alivio inicial en los tres pilares, y
    los rangos de sesiones por patología si difieren del 6-8 general.
-6. **Traducción de Sobre el Dr. Frusso**: el cuerpo de esa página (bio, trayectoria) no
-   tiene NINGUNA cadena en `pit-lang.js`, así que con el toggle en EN queda en español.
-   Es previo a los cambios recientes; solo se agregaron las cadenas de componentes ya
-   traducidos.
-7. **Al final:** mover el dominio drricardofrusso.com a este proyecto en Vercel y
-   quitar el `noindex`: **`STAGING = false` en `_build/site.js` + `node _build/build.js`**.
-   Es un solo valor — antes había que tocar cinco lugares. Sin downtime, rollback instantáneo.
+
+La traducción completa de “Sobre el Dr. Frusso”, el dominio y la salida de `noindex` se
+cerraron en septiembre de 2026. El build también genera canonical, sitemap y robots y
+verifica enlaces internos antes de cada publicación.
 
 ## Decisiones que NO son bugs
 - El h2 gigante de testimonios (129px contra el h1 de 68px) es decisión de diseño.

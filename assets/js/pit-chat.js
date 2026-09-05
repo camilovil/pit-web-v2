@@ -8,6 +8,10 @@
 
   var SUGERIDAS = ['¿Qué es PIT?', '¿Duelen las inyecciones?', '¿Cómo empiezo el curso gratis?'];
 
+  function tr(text) {
+    return window.pitTranslate ? window.pitTranslate(text) : text;
+  }
+
   var css = [
     // inset-inline-end/bottom van declarados dos veces a propósito: el valor de
     // siempre y después el mismo valor + el área segura del dispositivo
@@ -69,34 +73,34 @@
     var fab = document.createElement('button');
     fab.className = 'pitchat-fab';
     fab.type = 'button';
-    fab.setAttribute('aria-label', 'Abrir asistente sobre PIT');
+    fab.setAttribute('aria-label', tr('Abrir asistente sobre PIT'));
     fab.setAttribute('aria-expanded', 'false');
     fab.setAttribute('aria-controls', 'pitchat-panel');
-    fab.innerHTML = '<span class="pitchat-fab-dot" aria-hidden="true"></span><svg class="pitchat-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span class="pitchat-fab-label">Preguntale a PIT</span>';
+    fab.innerHTML = '<span class="pitchat-fab-dot" aria-hidden="true"></span><svg class="pitchat-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span class="pitchat-fab-label">' + tr('Preguntale a PIT') + '</span>';
 
     var panel = document.createElement('div');
     panel.className = 'pitchat-panel';
     panel.id = 'pitchat-panel';
     panel.setAttribute('role', 'dialog');
-    panel.setAttribute('aria-label', 'Asistente PIT');
+    panel.setAttribute('aria-label', tr('Asistente PIT'));
     panel.innerHTML =
       '<div class="pitchat-head">' +
         '<span class="pitchat-head-pipe" aria-hidden="true"></span>' +
-        '<span class="pitchat-head-title">Asistente PIT<small>IA · Respuestas educativas</small></span>' +
-        '<button class="pitchat-close" type="button" aria-label="Cerrar el asistente"><span aria-hidden="true">×</span></button>' +
+        '<span class="pitchat-head-title">' + tr('Asistente PIT') + '<small>' + tr('IA · Respuestas educativas') + '</small></span>' +
+        '<button class="pitchat-close" type="button" aria-label="' + tr('Cerrar el asistente') + '"><span aria-hidden="true">×</span></button>' +
       '</div>' +
       // role="log" + aria-live="polite": las respuestas del bot se agregan al
       // DOM sin ningún aviso. Sin región viva, quien usa lector de pantalla
       // escribe la pregunta y no se entera nunca de que llegó la respuesta.
       // aria-relevant="additions" para que solo se anuncie lo nuevo (el
       // "Escribiendo…" se borra al llegar la respuesta y no debe releerse).
-      '<div class="pitchat-msgs" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversación con el asistente"></div>' +
+      '<div class="pitchat-msgs" role="log" aria-live="polite" aria-relevant="additions" aria-label="' + tr('Conversación con el asistente') + '"></div>' +
       '<div class="pitchat-sugs"></div>' +
       '<form class="pitchat-form">' +
-        '<input class="pitchat-input" type="text" aria-label="Escribí tu pregunta sobre PIT" placeholder="Preguntá sobre PIT…" maxlength="400">' +
-        '<button class="pitchat-send" type="submit" aria-label="Enviar pregunta">→</button>' +
+        '<input class="pitchat-input" type="text" aria-label="' + tr('Escribí tu pregunta sobre PIT') + '" placeholder="' + tr('Preguntá sobre PIT…') + '" maxlength="400">' +
+        '<button class="pitchat-send" type="submit" aria-label="' + tr('Enviar pregunta') + '">→</button>' +
       '</form>' +
-      '<div class="pitchat-note">No reemplaza una consulta médica</div>';
+      '<div class="pitchat-note">' + tr('No reemplaza una consulta médica') + '</div>';
 
     document.body.appendChild(fab);
     document.body.appendChild(panel);
@@ -121,11 +125,12 @@
     function renderSugs() {
       sugsEl.innerHTML = '';
       SUGERIDAS.forEach(function (q) {
+        var label = tr(q);
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'pitchat-sug';
-        b.textContent = q;
-        b.addEventListener('click', function () { send(q); });
+        b.textContent = label;
+        b.addEventListener('click', function () { send(label); });
         sugsEl.appendChild(b);
       });
     }
@@ -138,7 +143,7 @@
       sugsEl.innerHTML = '';
       add('user', text);
       history.push({ role: 'user', content: text });
-      var typing = add('bot typing', 'Escribiendo…');
+      var typing = add('bot typing', tr('Escribiendo…'));
 
       // `enlaces` solo llega en las respuestas que arma el propio servidor
       // (hoy: el aviso de que el asistente no está disponible). Nunca viene del
@@ -146,7 +151,7 @@
       // ni el texto ni el href pueden inyectar markup.
       var done = function (reply, enlaces) {
         typing.remove();
-        add('bot', reply);
+        add('bot', tr(reply));
         if (Array.isArray(enlaces) && enlaces.length) {
           var box = document.createElement('div');
           box.className = 'pitchat-enlaces';
@@ -157,7 +162,7 @@
             var a = document.createElement('a');
             a.className = 'pitchat-enlace';
             a.href = e.href;
-            a.textContent = e.texto + ' →';
+            a.textContent = tr(e.texto) + ' →';
             box.appendChild(a);
           });
           if (box.childNodes.length) {
@@ -189,7 +194,7 @@
         done(res.data.reply, res.data.enlaces);
       }).catch(function () {
         typing.remove();
-        add('bot', 'No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.');
+        add('bot', tr('No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.'));
         history.pop(); // quitamos el turno del usuario que no llegó a responderse
         busy = false;
         sendBtn.disabled = false;
@@ -209,7 +214,7 @@
     function setOpen(open) {
       panel.classList.toggle('open', open);
       fab.setAttribute('aria-expanded', open ? 'true' : 'false');
-      fab.setAttribute('aria-label', open ? 'Cerrar asistente sobre PIT' : 'Abrir asistente sobre PIT');
+      fab.setAttribute('aria-label', tr(open ? 'Cerrar asistente sobre PIT' : 'Abrir asistente sobre PIT'));
     }
     function close() {
       setOpen(false);
@@ -220,7 +225,7 @@
       var open = !panel.classList.contains('open');
       setOpen(open);
       if (open && !msgsEl.children.length) {
-        add('bot', 'Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?');
+        add('bot', tr('Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?'));
         renderSugs();
       }
       if (open) input.focus();

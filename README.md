@@ -3,12 +3,13 @@
 Sitio estático del Dr. Ricardo D. Frusso (PIT · Neuroproloterapia), implementado desde el
 proyecto de Claude Design "PIT" (`HomePit v2` + subpáginas, estética "Docshield").
 
-**Estado: staging.** Todas las páginas llevan `noindex` (meta + header en `vercel.json`).
+**Estado: producción.** El dominio público es https://drricardofrusso.com, `STAGING`
+está en `false` y el build genera canonical, sitemap y robots para las 14 páginas.
 
 ### La palanca del lanzamiento
 El `noindex` sale de **una sola constante**: `STAGING` en **`_build/site.js`**.
 Para publicar el sitio: poner `STAGING = false`, correr `node _build/build.js`, commit y push.
-Eso quita el `<meta name="robots">` de las 18 páginas y el header `X-Robots-Tag` de
+Eso quita el `<meta name="robots">` de todas las páginas y el header `X-Robots-Tag` de
 `vercel.json` de una sola vez.
 
 Antes vivía en cinco lugares (los dos generadores, las dos páginas manuales y `vercel.json`)
@@ -188,8 +189,8 @@ bastante más que un `esc()`.
 - Videos del curso intro (posters listos, falta conectar Vimeo/YouTube).
 - Citas de evidencia científica (el PDF de referencias ya está enlazado).
 - WhatsApp y horarios en Contacto (el mapa ya está embebido).
-- URL de la Escuela de PIT (es el único de los 5 logos de la franja de respaldos que
-  queda sin enlazar) y año real de su fundación (hoy figura 2026 por inferencia).
+- Año real de fundación de la Escuela de PIT (hoy figura 2026 por inferencia). Su enlace
+  público ya apunta a `instagram.com/escueladepit/`.
 - Asistente IA: código listo (`api/chat.js` + `pit-chat.js`), solo falta cargar
   `ANTHROPIC_API_KEY` en Vercel — ver HANDOFF.md → Pendiente.
 
@@ -199,8 +200,9 @@ de sistema del asistente IA (`api/chat.js`). Si cambia, se cambia en los 9 lugar
 el prompt; si no, el bot contesta algo distinto a lo que dice la página.
 
 ## Deploy
-Vercel (proyecto separado del sitio live). Cuando esté aprobado: mover el dominio
-`drricardofrusso.com` a este proyecto desde el dashboard de Vercel y quitar el noindex.
+Vercel publica automáticamente `main` en el proyecto `pit-web-v2`. El dominio
+`drricardofrusso.com` y su variante `www` ya apuntan a este proyecto; `www` redirige al
+dominio raíz. Los datos del cambio y del rollback están en `LANZAMIENTO.md`.
 
 ### Headers de seguridad (`vercel.json`)
 Tres headers en todas las respuestas:

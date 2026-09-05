@@ -16,6 +16,8 @@ const STEPS = [
   { file: 'sync-privacy-ui.js', label: 'sync-privacy-ui.js  (documentación y preferencias)' },
   { file: 'check-privacy.js', label: 'check-privacy.js  (controles y embeds externos)' },
   { file: 'sync-staging.js', label: 'sync-staging.js  (bandera noindex)' },
+  { file: 'sync-seo.js', label: 'sync-seo.js  (canonicals, sitemap y robots)' },
+  { file: 'check-links.js', label: 'check-links.js  (enlaces y recursos internos)' },
   { file: 'check-lang.js', label: 'check-lang.js  (diccionario ES/EN)' },
   { file: 'check-css.js', label: 'check-css.js   (las dos copias del CSS)' },
 ];
