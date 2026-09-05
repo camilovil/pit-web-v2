@@ -339,6 +339,11 @@
 
     // ══ FORO — páginas de publicación ═════════════════════════════════════
     '← Foro PIT': '← PIT Forum',
+    'Galería del curso': 'Course gallery',
+    'Imagen anterior': 'Previous image',
+    'Elegir imagen': 'Choose image',
+    'Imagen siguiente': 'Next image',
+    '5 piezas · usá las flechas o deslizá': '5 slides · use the arrows or swipe',
     'Pregunta de profesional': 'Question from a professional',   // RUNTIME
     'Por el Dr. Ricardo D. Frusso': 'By Dr. Ricardo D. Frusso',
     'M.N. 86.498 · Instructor autorizado PIT': 'M.N. 86.498 · Certified PIT instructor',

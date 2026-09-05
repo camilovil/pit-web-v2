@@ -321,6 +321,59 @@
 
 </div>
 
+<script>
+(function () {
+  var carousels = [].slice.call(document.querySelectorAll('.foro-carrusel'));
+  for (var c0 = 0; c0 < carousels.length; c0++) {
+    (function (carousel) {
+      var track = carousel.querySelector('.foro-carrusel-track');
+      var slides = [].slice.call(track ? track.querySelectorAll('img') : []);
+      var dots = [].slice.call(carousel.querySelectorAll('[data-carrusel-dot]'));
+      var prev = carousel.querySelector('[data-carrusel-prev]');
+      var next = carousel.querySelector('[data-carrusel-next]');
+      var count = carousel.querySelector('[data-carrusel-count]');
+      if (!track || !prev || !next || slides.length < 2) return;
+
+      function pos(slide) {
+        return track.scrollLeft + (slide.getBoundingClientRect().left - track.getBoundingClientRect().left);
+      }
+      function current() {
+        var index = 0, closest = Infinity;
+        for (var i = 0; i < slides.length; i++) {
+          var distance = Math.abs(pos(slides[i]) - track.scrollLeft);
+          if (distance < closest) { closest = distance; index = i; }
+        }
+        return index;
+      }
+      function paint(index) {
+        if (index == null) index = current();
+        for (var i = 0; i < dots.length; i++) dots[i].setAttribute('aria-current', i === index ? 'true' : 'false');
+        prev.disabled = index <= 0;
+        next.disabled = index >= slides.length - 1;
+        if (count) count.textContent = (index + 1) + ' / ' + slides.length;
+      }
+      function go(index) {
+        index = Math.max(0, Math.min(slides.length - 1, index));
+        track.scrollTo({ left: pos(slides[index]) });
+        paint(index);
+      }
+
+      prev.addEventListener('click', function () { go(current() - 1); });
+      next.addEventListener('click', function () { go(current() + 1); });
+      for (var d0 = 0; d0 < dots.length; d0++) {
+        (function (index) { dots[index].addEventListener('click', function () { go(index); }); })(d0);
+      }
+      var tick;
+      track.addEventListener('scroll', function () {
+        clearTimeout(tick);
+        tick = setTimeout(function () { paint(); }, 90);
+      }, { passive: true });
+      addEventListener('resize', function () { paint(); }, { passive: true });
+      paint(0);
+    })(carousels[c0]);
+  }
+})();
+</script>
 <script src="../assets/js/pit-forms.js?v=2"></script>
 <script src="../assets/js/pit-v2.js?v=2"></script>
 <script src="../assets/js/pit-motion.js?v=2"></script>
@@ -340,6 +393,6 @@
 </div></dialog>
 <script src="../assets/js/pit-privacy.js?v=2"></script>
 <!-- PIT-PRIVACY-UI:END -->
-<script src="../assets/js/pit-lang.js?v=6"></script>
+<script src="../assets/js/pit-lang.js?v=7"></script>
 </body>
 </html>

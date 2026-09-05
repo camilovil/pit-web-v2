@@ -181,11 +181,20 @@ function mdToHtml(body) {
       // desbordan mas. El min-width: 0 y el max-width: 100% del track son los
       // que evitan que empuje el ancho de la pagina en vez de scrollear adentro.
       const slides = srcs.map((src) => `<img src="${esc(src)}" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="scroll-snap-align: center; width: 300px; max-width: 76%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--pit-radius); flex: 0 0 auto; background: var(--pit-ink-05);">`).join('\n            ');
+      const dots = srcs.map((_, i) => `<button type="button" class="foro-carrusel-dot" data-carrusel-dot aria-label="${i + 1} / ${srcs.length}" aria-current="${i === 0 ? 'true' : 'false'}"></button>`).join('');
       return `<figure class="foro-carrusel" style="margin: 0 0 28px; max-width: 100%; min-width: 0;">
-          <div class="foro-carrusel-track" style="display: flex; gap: 14px; overflow-x: auto; max-width: 100%; min-width: 0; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: 2px 0 6px;">
+          <div class="foro-carrusel-track" role="region" aria-label="Galería del curso" tabindex="0" style="display: flex; gap: 14px; overflow-x: auto; max-width: 100%; min-width: 0; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: 2px 0 6px;">
             ${slides}
           </div>
-          <figcaption style="font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px;">${srcs.length} piezas · deslizá para verlas</figcaption>
+          <div class="foro-carrusel-controls">
+            <button type="button" class="foro-carrusel-arrow" data-carrusel-prev aria-label="Imagen anterior">←</button>
+            <div class="foro-carrusel-status">
+              <div class="foro-carrusel-dots" role="group" aria-label="Elegir imagen">${dots}</div>
+              <span class="foro-carrusel-count" data-carrusel-count aria-live="polite">1 / ${srcs.length}</span>
+            </div>
+            <button type="button" class="foro-carrusel-arrow" data-carrusel-next aria-label="Imagen siguiente">→</button>
+          </div>
+          <figcaption>${srcs.length} piezas · usá las flechas o deslizá</figcaption>
         </figure>`;
     }
 
@@ -303,13 +312,68 @@ ${extraCss}
 `;
 };
 
+const CARRUSEL_SCRIPT = `<script>
+(function () {
+  var carousels = [].slice.call(document.querySelectorAll('.foro-carrusel'));
+  for (var c0 = 0; c0 < carousels.length; c0++) {
+    (function (carousel) {
+      var track = carousel.querySelector('.foro-carrusel-track');
+      var slides = [].slice.call(track ? track.querySelectorAll('img') : []);
+      var dots = [].slice.call(carousel.querySelectorAll('[data-carrusel-dot]'));
+      var prev = carousel.querySelector('[data-carrusel-prev]');
+      var next = carousel.querySelector('[data-carrusel-next]');
+      var count = carousel.querySelector('[data-carrusel-count]');
+      if (!track || !prev || !next || slides.length < 2) return;
+
+      function pos(slide) {
+        return track.scrollLeft + (slide.getBoundingClientRect().left - track.getBoundingClientRect().left);
+      }
+      function current() {
+        var index = 0, closest = Infinity;
+        for (var i = 0; i < slides.length; i++) {
+          var distance = Math.abs(pos(slides[i]) - track.scrollLeft);
+          if (distance < closest) { closest = distance; index = i; }
+        }
+        return index;
+      }
+      function paint(index) {
+        if (index == null) index = current();
+        for (var i = 0; i < dots.length; i++) dots[i].setAttribute('aria-current', i === index ? 'true' : 'false');
+        prev.disabled = index <= 0;
+        next.disabled = index >= slides.length - 1;
+        if (count) count.textContent = (index + 1) + ' / ' + slides.length;
+      }
+      function go(index) {
+        index = Math.max(0, Math.min(slides.length - 1, index));
+        track.scrollTo({ left: pos(slides[index]) });
+        paint(index);
+      }
+
+      prev.addEventListener('click', function () { go(current() - 1); });
+      next.addEventListener('click', function () { go(current() + 1); });
+      for (var d0 = 0; d0 < dots.length; d0++) {
+        (function (index) { dots[index].addEventListener('click', function () { go(index); }); })(d0);
+      }
+      var tick;
+      track.addEventListener('scroll', function () {
+        clearTimeout(tick);
+        tick = setTimeout(function () { paint(); }, 90);
+      }, { passive: true });
+      addEventListener('resize', function () { paint(); }, { passive: true });
+      paint(0);
+    })(carousels[c0]);
+  }
+})();
+</script>`;
+
 const FOOT = (pre) => `
+${CARRUSEL_SCRIPT}
 <script src="${pre}assets/js/pit-forms.js?v=2"></script>
 <script src="${pre}assets/js/pit-v2.js?v=2"></script>
 <script src="${pre}assets/js/pit-motion.js?v=2"></script>
 <script src="${pre}assets/js/pit-chat.js?v=6"></script>
 <script src="${pre}assets/js/pit-scrolltop.js?v=2"></script>
-<script src="${pre}assets/js/pit-lang.js?v=6"></script>
+<script src="${pre}assets/js/pit-lang.js?v=7"></script>
 </body>
 </html>
 `;
@@ -346,6 +410,19 @@ function renderPost(post, posts, idx) {
   const carruselCss = /\[\[carrusel:/.test(post.body)
     ? `    .foro-carrusel-track { scrollbar-width: none; -ms-overflow-style: none; }
     .foro-carrusel-track::-webkit-scrollbar { display: none; }
+    .foro-carrusel-track:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 4px; border-radius: var(--pit-radius); }
+    .foro-carrusel-controls { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 14px; }
+    .foro-carrusel-arrow { width: 46px; height: 46px; flex: 0 0 46px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--pit-blue); border-radius: 999px; background: var(--pit-paper-pure); color: var(--pit-blue); font-size: 21px; line-height: 1; cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease, transform .2s ease; }
+    .foro-carrusel-arrow:hover:not(:disabled) { background: var(--pit-blue); color: #FFFFFF; transform: translateY(-1px); }
+    .foro-carrusel-arrow:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 3px; }
+    .foro-carrusel-arrow:disabled { opacity: .32; cursor: default; }
+    .foro-carrusel-status { min-width: 0; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .foro-carrusel-dots { display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .foro-carrusel-dot { width: 9px; height: 9px; padding: 0; border: 1px solid var(--pit-blue); border-radius: 999px; background: transparent; cursor: pointer; transition: width .2s ease, background .2s ease; }
+    .foro-carrusel-dot[aria-current="true"] { width: 24px; background: var(--pit-blue); }
+    .foro-carrusel-dot:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 3px; }
+    .foro-carrusel-count { font-family: var(--pit-font-mono); font-size: var(--txt-xs); color: var(--pit-ink-60); white-space: nowrap; }
+    .foro-carrusel figcaption { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: .06em; text-transform: uppercase; color: var(--pit-ink-40); margin-top: 10px; }
     @media (prefers-reduced-motion: no-preference) { .foro-carrusel-track { scroll-behavior: smooth; } }`
     : '';
   return HEAD(pre, `${post.titulo} — Foro PIT · Dr. Frusso`, post.resumen, carruselCss + '\n' + accionesCss, post.portada) + `
