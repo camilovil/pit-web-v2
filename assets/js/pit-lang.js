@@ -64,7 +64,7 @@
     'Link copiado': 'Link copied',   // RUNTIME
 
     // ── Chrome compartido: footer ─────────────────────────────────────────
-    'Curso gratis': 'Free course',
+    'Curso · Próximamente': 'Course · Coming soon',
     'Evidencia científica': 'Scientific evidence',
     'Curso Módulo I': 'Course · Module I',
     'Foro semanal': 'Weekly forum',
@@ -93,7 +93,7 @@
     'Permitir contenido externo': 'Allow external content',
     'Elegí si querés cargar servicios externos dentro de las páginas. Podés cambiar esta decisión cuando quieras.': 'Choose whether to load external services within pages. You can change this choice at any time.',
     'Funciones necesarias': 'Necessary functions',
-    'Idioma, avance del curso, seguridad, likes y tu elección de privacidad. Siempre activas.': 'Language, course progress, security, likes, and your privacy choice. Always active.',
+    'Idioma, seguridad, likes y tu elección de privacidad. Siempre activas.': 'Language, security, likes, and your privacy choice. Always active.',
     'Contenido externo': 'External content',
     'Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.': 'Google Maps and YouTube videos. When loaded, those providers receive technical data.',
     'Usar solo lo necesario': 'Use only what is necessary',
@@ -111,7 +111,7 @@
     'Cerrar el asistente': 'Close the assistant',   // RUNTIME
     'Conversación con el asistente': 'Conversation with the assistant',   // RUNTIME
     '¿Qué es PIT?': 'What is PIT?',   // RUNTIME
-    '¿Cómo empiezo el curso gratis?': 'How do I start the free course?',   // RUNTIME
+    '¿Cuándo estará disponible el curso?': 'When will the course be available?',   // RUNTIME
     'Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?': 'Hi 👋 I am the site assistant. I can explain what PIT is, how it works and which free resources are available. What would you like to know?',   // RUNTIME
     'Escribiendo…': 'Typing…',   // RUNTIME
     'El asistente no está disponible por ahora. Podés escribirnos o dejar tu pregunta en el foro, y te respondemos.': 'The assistant is unavailable right now. You can write to us or leave your question in the forum, and we will answer.',   // RUNTIME
@@ -157,11 +157,17 @@
     // Contenido gratuito
     'Contenido gratuito · Sin registro': 'Free content · No sign-up',
     'Aprendé sobre PIT, sin costo': 'Learn about PIT, at no cost',
-    'Todo el material educativo del método es abierto: el curso introductorio, los apuntes completos y el foro semanal.': 'All the educational material for the method is open: the introductory course, the full study notes and the weekly forum.',
-    'Curso gratis · 2 videos + autoevaluaciones': 'Free course · 2 videos + self-assessments',
+    'Los apuntes completos y el foro semanal ya están disponibles. El curso introductorio estará disponible próximamente.': 'The complete study notes and weekly forum are available now. The introductory course is coming soon.',
+    'Curso introductorio · Próximamente': 'Introductory course · Coming soon',
     'Introducción a PIT': 'Introduction to PIT',
-    'El método explicado por el Dr. Frusso, con autoevaluaciones y progreso guardado. Sin costo y sin registro.': 'The method explained by Dr. Frusso, with self-assessments and saved progress. Free and with no sign-up.',
-    'Empezar el curso →': 'Start the course →',
+    'Estamos terminando de editar los videos y el contenido. El acceso se habilitará cuando el curso esté completo.': 'We are finishing the videos and course content. Access will open when the course is complete.',
+    'Próximamente': 'Coming soon',
+    'Estamos terminando de editar los videos y el contenido para publicar el curso completo. El acceso se habilitará próximamente.': 'We are finishing the videos and content before publishing the complete course. Access will open soon.',
+    'Volver a los recursos': 'Back to resources',
+    'Descargar apuntes de PIT': 'Download the PIT study notes',
+    'Mientras tanto:': 'In the meantime:',
+    'podés consultar los apuntes de PIT y las respuestas del foro, que ya están disponibles sin registro.': 'you can read the PIT study notes and forum answers, which are already available without signing up.',
+    'Ir al foro': 'Go to the forum',
     'PDF · 80 páginas': 'PDF · 80 pages',
     'Anatomía, técnica y puntos de inyección para cada región.': 'Anatomy, technique and injection points for each region.',
     'Descargar apuntes →': 'Download the notes →',
@@ -369,7 +375,6 @@
     'El mecanismo, con el rigor que esperás.': 'The mechanism, with the rigor you expect.',
     'Evidencia científica publicada': 'Published scientific evidence',
     'Apuntes de PIT — 80 páginas (gratis)': 'PIT study notes — 80 pages (free)',
-    'Curso introductorio gratuito': 'Free introductory course',
     'Formarme en PIT →': 'Train in PIT →',
     'La técnica, en imágenes': 'The technique, in pictures',
     'Preguntas frecuentes →': 'FAQ →',

@@ -164,7 +164,7 @@ const FOOTER = `  <footer class="v2-footer">
     <div class="v2-footer-top">
       <nav class="v2-footer-links">
         <a href="que-es-pit.html">Qué es PIT</a>
-        <a href="curso-intro.html">Curso gratis</a>
+        <a href="curso-intro.html">Curso · Próximamente</a>
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>
@@ -245,9 +245,9 @@ const FOOT = `
 <script src="assets/js/pit-forms.js?v=2"></script>
 <script src="assets/js/pit-v2.js?v=2"></script>
 <script src="assets/js/pit-motion.js?v=2"></script>
-<script src="assets/js/pit-chat.js?v=5"></script>
+<script src="assets/js/pit-chat.js?v=6"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
-<script src="assets/js/pit-lang.js?v=4"></script>
+<script src="assets/js/pit-lang.js?v=5"></script>
 </body>
 </html>
 `;

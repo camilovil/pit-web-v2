@@ -6,7 +6,7 @@
   // El prompt de sistema del asistente vive en la función serverless
   // (api/chat.js), no acá — así no se puede manipular desde el navegador.
 
-  var SUGERIDAS = ['¿Qué es PIT?', '¿Duelen las inyecciones?', '¿Cómo empiezo el curso gratis?'];
+  var SUGERIDAS = ['¿Qué es PIT?', '¿Duelen las inyecciones?', '¿Cuándo estará disponible el curso?'];
 
   function tr(text) {
     return window.pitTranslate ? window.pitTranslate(text) : text;

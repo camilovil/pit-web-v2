@@ -11,6 +11,7 @@ const END = '<!-- PIT-NAV:END -->';
 // index.html es la home: home:true (usa '#contenido'), sin active, sin prefix.
 const TARGETS = [
   { file: 'index.html', opts: { home: true, active: null, prefix: '' } },
+  { file: 'curso-intro.html', opts: { home: false, active: null, prefix: '' } },
 ];
 
 let failed = false;
