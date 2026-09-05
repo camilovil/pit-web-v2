@@ -10,7 +10,12 @@ for (const rel of pages) {
   if (count('PIT-PRIVACY-UI:START') !== 1 || count('PIT-PRIVACY-UI:END') !== 1) errors.push(`${rel}: UI de privacidad ausente o duplicada`);
   if (count('assets/css/pit-privacy.css') !== 1 || count('assets/js/pit-privacy.js') !== 1) errors.push(`${rel}: assets de privacidad ausentes o duplicados`);
   if (html.includes('<footer class="v2-footer">')) {
+    const footer = html.match(/<footer class="v2-footer">[\s\S]*?<\/footer>/i)?.[0] || '';
     for (const anchor of ['#aviso-legal', '#privacidad', '#cookies', '#terminos']) if (!html.includes(`privacidad.html${anchor}`)) errors.push(`${rel}: falta enlace ${anchor}`);
+    for (const account of ['instagram.com/drfrussoricardo', 'instagram.com/escueladepit/']) {
+      if ((footer.split(account).length - 1) !== 1) errors.push(`${rel}: falta o está duplicado ${account} en el pie`);
+    }
+    if ((footer.match(/data-privacy-open/g) || []).length !== 1) errors.push(`${rel}: falta o está duplicado el botón Preferencias de privacidad en el pie`);
   }
   const active = html.replace(/<template\b[\s\S]*?<\/template>/gi, '');
   if (/<iframe\b[^>]+(?:google\.com\/maps|youtube(?:-nocookie)?\.com)/i.test(active)) errors.push(`${rel}: proveedor externo activo antes del consentimiento`);
