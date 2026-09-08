@@ -452,6 +452,11 @@
     'El video se carga desde YouTube y puede enviarle datos técnicos de tu visita.': 'The video loads from YouTube and may send it technical data about your visit.',
     'Cargar video': 'Load video',
     'Ver directamente en YouTube →': 'Watch directly on YouTube →',
+    // Contacto
+    'Teléfono': 'Phone',
+    'Turnos': 'Appointments',
+    'Sacar turno online →': 'Book an appointment online →',
+    '+54 9 11 5458-2558': '+54 9 11 5458-2558',
     // Errores del formulario de contacto
     'Escribí tu nombre para poder responderte': 'Write your name so we can reply',   // RUNTIME
     'Revisá el email: no parece una dirección válida': 'Check the email: it does not look like a valid address',   // RUNTIME
