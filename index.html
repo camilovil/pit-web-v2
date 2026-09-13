@@ -339,9 +339,9 @@
 
     /* ---- contenido gratuito destacado ---- */
     .v2-free { background: var(--v2-tint); border-radius: 28px; padding: clamp(32px, 4vw, 56px); }
-    .v2-free-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-weight: 500; font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-blue); background: #FFFFFF; border: 1px solid rgba(37,99,235,0.25); border-radius: 999px; padding: 8px 16px; }
-    .v2-free-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--v2-blue); }
-    .v2-free-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; align-items: stretch; }
+    .v2-free-tag { max-width: 100%; box-sizing: border-box; line-height: 1.5; display: inline-flex; align-items: center; gap: 8px; font-family: var(--pit-font-mono); font-weight: 500; font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-blue); background: #FFFFFF; border: 1px solid rgba(37,99,235,0.25); border-radius: 999px; padding: 8px 16px; }
+    .v2-free-tag::before { content: ''; flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--v2-blue); }
+    .v2-free-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 22px; align-items: stretch; }
     .v2-free-feature { display: flex; flex-direction: column; overflow: hidden; color: var(--v2-navy); }
     .v2-free-media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; }
     .v2-free-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
@@ -349,8 +349,11 @@
     .v2-free-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 50%; background: rgba(37,99,235,0.92); box-shadow: 0 12px 32px rgba(0,11,51,0.3); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; }
     .v2-free-play::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-38%, -50%); width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 19px solid #FFFFFF; }
     .v2-free-feature:hover .v2-free-play { transform: translate(-50%, -50%) scale(1.08); background: var(--v2-blue); }
-    .v2-free-badge { position: absolute; inset-inline-start: 14px; bottom: 12px; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 14px; }
+    .v2-free-badge { position: absolute; inset-inline: 16px; bottom: 16px; width: fit-content; max-width: calc(100% - 32px); box-sizing: border-box; line-height: 1.5; text-wrap: balance; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v2-navy); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 20px; padding: 10px 18px; }
     .v2-free-body { display: flex; flex-direction: column; flex: 1; padding: 28px 32px 30px; }
+    .v2-free-grid > *, .v2-free-side > * { min-width: 0; }
+    .v2-free-side .v2-card { padding: 28px 32px 30px; }
+    .v2-free .v2-btn { max-width: 100%; line-height: 1.35; text-align: center; }
     .v2-free-side { display: grid; grid-template-rows: 1fr 1fr; gap: 22px; }
     @media (max-width: 860px) {
       .v2-free-grid { grid-template-columns: 1fr; }
@@ -530,9 +533,10 @@
          entre si. Se les reserva el alto de dos lineas, que es el mas comun. */
       .v2-trust-item small { min-height: 33px; }
 
-      /* El badge del curso gratis entraba en dos renglones y ocupaba media
-         imagen. Un punto menos de cuerpo y menos aire lo dejan en su lugar. */
-      .v2-free-badge { font-size: var(--txt-2xs); padding: 7px 12px; line-height: 1.35; }
+      /* Un solo ritmo para las tres tarjetas: los márgenes anidados no
+         deben consumir el ancho disponible ni empujar los botones al borde. */
+      .v2-free { padding: 24px 20px; }
+      .v2-free-body, .v2-free-side .v2-card { padding: 24px; }
 
       /* El titulo de la tarjeta de curso llegaba hasta el borde del navy. */
       .v2-curso-tit { max-width: none; }
@@ -802,7 +806,7 @@
     <div class="v2-wrap">
       <div class="v2-free v2-reveal">
         <div style="display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 34px;">
-          <div style="flex: 1; min-width: 260px;">
+          <div style="flex: 1; min-width: 0;">
             <span class="v2-free-tag">Contenido gratuito · Sin registro</span>
             <h2 class="v2-title" style="margin-top: 16px;">Aprendé sobre PIT, sin costo</h2>
             <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 12px 0 0; max-width: 56ch;">Los apuntes completos y el foro semanal ya están disponibles. El curso introductorio estará disponible próximamente.</p>
@@ -821,13 +825,13 @@
             </span>
           </a>
           <div class="v2-free-side">
-            <a class="v2-card" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
+            <a class="v2-card" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">PDF · 80 páginas</span>
               <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">Apuntes de PIT</h3>
               <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Anatomía, técnica y puntos de inyección para cada región.</p>
               <span class="v2-btn v2-btn--navy" style="padding: 12px 22px; font-size: var(--txt-sm); margin-top: auto;">Descargar apuntes →</span>
             </a>
-            <a class="v2-card" href="foro.html" style="padding: 28px 30px; color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
+            <a class="v2-card" href="foro.html" style="color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">Foro · Cada semana</span>
               <h3 style="font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.02em; margin: 12px 0 8px;">El Dr. Frusso responde</h3>
               <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 18px;">Noticias, casos clínicos y tu pregunta respondida — sin datos personales.</p>
