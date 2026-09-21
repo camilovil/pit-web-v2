@@ -12,6 +12,11 @@
     block.replaceChildren(template.content.cloneNode(true));
   }
   function activateAll() { document.querySelectorAll('.pit-external').forEach(activate); }
+  // El aula del curso intro redibuja su <main> en cada leccion, asi que un
+  // video que aparece despues de la carga nunca pasaba por activateAll y se
+  // quedaba pidiendo un permiso que la persona ya habia dado. Se expone la
+  // misma funcion en vez de que esa pagina duplique la logica del template.
+  window.pitActivateExternal = function () { if (getChoice() === 'external') activateAll(); };
   function choose(value) {
     var wasExternal = getChoice() === 'external';
     setChoice(value);
