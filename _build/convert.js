@@ -164,7 +164,6 @@ const FOOTER = `  <footer class="v2-footer">
     <div class="v2-footer-top">
       <nav class="v2-footer-links">
         <a href="que-es-pit.html">Qué es PIT</a>
-        <a href="curso-intro.html">Curso · Próximamente</a>
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>

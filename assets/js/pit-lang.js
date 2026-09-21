@@ -64,7 +64,6 @@
     'Link copiado': 'Link copied',   // RUNTIME
 
     // ── Chrome compartido: footer ─────────────────────────────────────────
-    'Curso · Próximamente': 'Course · Coming soon',
     'Evidencia científica': 'Scientific evidence',
     'Curso Módulo I': 'Course · Module I',
     'Foro semanal': 'Weekly forum',
@@ -163,7 +162,6 @@
     'Curso introductorio · Próximamente': 'Introductory course · Coming soon',
     'Introducción a PIT': 'Introduction to PIT',
     'Estamos terminando de editar los videos y el contenido. El acceso se habilitará cuando el curso esté completo.': 'We are finishing the videos and course content. Access will open when the course is complete.',
-    'Próximamente': 'Coming soon',
     'Estamos terminando de editar los videos y el contenido para publicar el curso completo. El acceso se habilitará próximamente.': 'We are finishing the videos and content before publishing the complete course. Access will open soon.',
     'Volver a los recursos': 'Back to resources',
     'Descargar apuntes de PIT': 'Download the PIT study notes',
