@@ -148,6 +148,100 @@
     .ci-material { padding: 20px 24px; border-bottom: 1px solid var(--pit-ink-10); }
     .ci-material a { display: block; font-size: var(--txt-sm, 15px); line-height: 1.4; padding: 9px 0; }
     .ci-material > span { display: block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); }
+    /* ---- LA PUERTA ----
+       El cartel de proximamente no se borro: es el estado por defecto de la
+       pagina y lo que ve cualquiera que entre hoy. El aula esta abajo, con
+       hidden, y solo se destapa cuando los dos videos tienen id. Ver la nota
+       larga en el script.
+       .ci-aula es display:grid, que le gana a hidden: hay que apagarla a mano. */
+    .ci-aula[hidden] { display: none; }
+    main#pit-main section.course-soon {
+      min-height: min(760px, calc(100vh - 92px));
+      display: grid;
+      align-items: center;
+      background: linear-gradient(135deg, #000B33 0%, #142D75 58%, #2563EB 100%) !important;
+      border-radius: 0 !important;
+      color: #FFFFFF;
+      overflow: hidden;
+      position: relative;
+    }
+    .course-soon::after {
+      content: "";
+      position: absolute;
+      width: min(48vw, 620px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 50%;
+      right: -12vw;
+      top: -18vw;
+    }
+    .course-soon-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .75fr);
+      align-items: center;
+      gap: clamp(36px, 7vw, 96px);
+      padding-block: clamp(88px, 12vw, 150px);
+    }
+    .course-soon-copy { max-width: 690px; }
+    .course-soon-tag {
+      display: inline-flex;
+      padding: 9px 15px;
+      border: 1px solid rgba(255,255,255,.42);
+      border-radius: 999px;
+      font-family: var(--pit-font-mono);
+      font-size: var(--txt-xs);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .course-soon h1 {
+      max-width: 720px;
+      margin: 24px 0 22px;
+      font-size: clamp(46px, 7vw, 86px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+    .course-soon-lead {
+      max-width: 58ch;
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.6;
+    }
+    .course-soon-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .course-soon-actions .v2-btn { min-height: 48px; box-sizing: border-box; }
+    .course-soon-outline { border: 1px solid rgba(255,255,255,.55); color: #FFFFFF; }
+    .course-soon-outline:hover { color: #FFFFFF; border-color: #FFFFFF; }
+    .course-soon-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 34px;
+      box-shadow: 0 34px 80px rgba(0, 5, 30, .35);
+    }
+    .course-soon-note {
+      padding-block: 32px;
+      background: #F4F6FF;
+      color: var(--v2-navy);
+    }
+    .course-soon-note .v2-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .course-soon-note p { margin: 0; max-width: 72ch; line-height: 1.65; color: var(--v2-slate); }
+    @media (max-width: 760px) {
+      .course-soon { min-height: auto; }
+      .course-soon-grid { grid-template-columns: 1fr; padding-block: 72px 54px; }
+      .course-soon h1 { font-size: clamp(43px, 14vw, 64px); }
+      .course-soon-image { aspect-ratio: 16 / 11; border-radius: 26px; }
+      .course-soon-note .v2-wrap { align-items: flex-start; flex-direction: column; }
+      .course-soon-actions { display: grid; }
+      .course-soon-actions .v2-btn { width: 100%; text-align: center; }
+    }
   </style>
   <link rel="stylesheet" href="assets/css/pit-privacy.css?v=3">
 </head>
@@ -196,14 +290,38 @@
   <!-- PIT-NAV:END -->
 
   <main id="pit-main" tabindex="-1">
-    <div class="ci-aula m-stack0">
+    <div id="ci-gate">
+    <section class="course-soon">
+      <div class="v2-wrap course-soon-grid">
+        <div class="course-soon-copy">
+          <span class="course-soon-tag">Curso introductorio · Próximamente</span>
+          <h1>Introducción a PIT</h1>
+          <p class="course-soon-lead">Estamos terminando de editar los videos y el contenido para publicar el curso completo. El acceso se habilitará próximamente.</p>
+          <div class="course-soon-actions">
+            <a class="v2-btn v2-btn--white" href="index.html#contenido">Volver a los recursos</a>
+            <a class="v2-btn course-soon-outline" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf">Descargar apuntes de PIT</a>
+          </div>
+        </div>
+        <img class="course-soon-image" src="/img/DSC_0086.webp" alt="Dr. Ricardo D. Frusso en consultorio" loading="eager">
+      </div>
+    </section>
+
+    <section class="course-soon-note">
+      <div class="v2-wrap">
+        <p><strong>Mientras tanto:</strong> podés consultar los apuntes de PIT y las respuestas del foro, que ya están disponibles sin registro.</p>
+        <a class="v2-btn v2-btn--navy" href="foro.html">Ir al foro</a>
+      </div>
+    </section>
+    </div>
+
+    <div class="ci-aula m-stack0" hidden>
 
       <!-- ---- Temario, avance y material ---- -->
       <aside class="ci-side m-order2">
         <div class="ci-side-head">
           <p class="pit-eyebrow">Contenido del curso</p>
           <h1 class="ci-side-title">Introducción a PIT</h1>
-          <p class="ci-side-meta" id="ci-side-meta">6 lecciones · 2 videos · 2 autoevaluaciones · gratis</p>
+          <p class="ci-side-meta">6 lecciones · 2 videos · 2 autoevaluaciones · gratis</p>
           <!-- role="progressbar": la barra era un <div> decorativo y el porcentaje
                solo existia como texto suelto al lado. Con los aria-value* el
                avance del curso se puede consultar en cualquier momento. -->
@@ -255,6 +373,27 @@
     intro:      { id: '' },
     materiales: { id: '' }
   };
+
+  // ─── LA PUERTA ──────────────────────────────────────────────
+  // El curso completo ya esta escrito, pero cuatro de las seis lecciones no
+  // valen por si solas: entrar y encontrar dos videos vacios es peor que el
+  // cartel. Asi que el cartel sigue siendo el estado por defecto de la pagina
+  // — el que ve cualquiera que entre — y el aula espera atras, con hidden.
+  //
+  // PARA ABRIR EL CURSO: pegar los dos ids de YouTube arriba. Nada mas. La
+  // puerta se abre sola, el cartel se va y aparece el aula. No hay una segunda
+  // bandera que alguien pueda olvidarse de tocar: la condicion es tener los
+  // videos, que es exactamente lo que falta.
+  //
+  // Queda pendiente una sola cosa a mano, porque es HTML de otras paginas y no
+  // lo puede decidir este script: el copy del sitio (el pie de las catorce
+  // paginas, la tarjeta de la home y el enlace de Que es PIT) sigue diciendo
+  // "Proximamente". Esta anotado en el README, en "Abrir el curso introductorio".
+  var abierto = Object.keys(VIDEOS).every(function (k) { return !!VIDEOS[k].id; });
+  if (!abierto) return;
+
+  document.getElementById('ci-gate').remove();
+  document.querySelector('.ci-aula').hidden = false;
 
   // ─── EL PROGRAMA ───────────────────────────────────────────────────────
   // Curso corto y gratuito: qué es PIT, un paneo de las regiones, los dos
@@ -564,14 +703,6 @@
   }
 
   function renderHeader() {
-    // Mientras falte alguno de los dos videos, el temario no puede prometer
-    // "2 videos": el visitante llega a esas lecciones y no hay nada que ver.
-    // El programa igual los lista, con su estado real.
-    var faltaVideo = Object.keys(VIDEOS).some(function (k) { return !VIDEOS[k].id; });
-    document.getElementById('ci-side-meta').textContent = faltaVideo
-      ? '6 lecciones · 2 autoevaluaciones · gratis · videos en edición'
-      : '6 lecciones · 2 videos · 2 autoevaluaciones · gratis';
-
     var doneCount = state.done.filter(Boolean).length;
     var pct = Math.round((doneCount / LESSONS.length) * 100);
     document.getElementById('ci-progress-label').textContent = doneCount + '/' + LESSONS.length + ' · ' + pct + '%';

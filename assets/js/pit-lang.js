@@ -64,7 +64,7 @@
     'Link copiado': 'Link copied',   // RUNTIME
 
     // ── Chrome compartido: footer ─────────────────────────────────────────
-    'Curso introductorio': 'Introductory course',
+    'Curso · Próximamente': 'Course · Coming soon',
     'Evidencia científica': 'Scientific evidence',
     'Curso Módulo I': 'Course · Module I',
     'Foro semanal': 'Weekly forum',
@@ -159,11 +159,17 @@
     // Contenido gratuito
     'Contenido gratuito · Sin registro': 'Free content · No sign-up',
     'Aprendé sobre PIT, sin costo': 'Learn about PIT, at no cost',
-    'El curso introductorio, los apuntes completos y el foro semanal ya están disponibles, sin costo y sin registro.': 'The introductory course, the complete study notes and the weekly forum are all available, at no cost and with no sign-up.',
-    'Curso introductorio · Gratis': 'Introductory course · Free',
+    'Los apuntes completos y el foro semanal ya están disponibles. El curso introductorio estará disponible próximamente.': 'The complete study notes and weekly forum are available now. The introductory course is coming soon.',
+    'Curso introductorio · Próximamente': 'Introductory course · Coming soon',
     'Introducción a PIT': 'Introduction to PIT',
-    'Seis lecciones cortas: qué es PIT, las zonas que más se tratan, los materiales de trabajo y dos autoevaluaciones.': 'Six short lessons: what PIT is, the areas treated most often, the working materials and two self-assessments.',
-    'Empezar el curso →': 'Start the course →',
+    'Estamos terminando de editar los videos y el contenido. El acceso se habilitará cuando el curso esté completo.': 'We are finishing the videos and course content. Access will open when the course is complete.',
+    'Próximamente': 'Coming soon',
+    'Estamos terminando de editar los videos y el contenido para publicar el curso completo. El acceso se habilitará próximamente.': 'We are finishing the videos and content before publishing the complete course. Access will open soon.',
+    'Volver a los recursos': 'Back to resources',
+    'Descargar apuntes de PIT': 'Download the PIT study notes',
+    'Mientras tanto:': 'In the meantime:',
+    'podés consultar los apuntes de PIT y las respuestas del foro, que ya están disponibles sin registro.': 'you can read the PIT study notes and forum answers, which are already available without signing up.',
+    'Ir al foro': 'Go to the forum',
 
     // ══ AULA DEL CURSO INTRODUCTORIO (curso-intro.html) ════════════════
     // El temario, el material y el avance están en el HTML servido.
@@ -180,7 +186,6 @@
     // Todo lo demás lo escribe el aula desde su array LESSONS al dibujar cada
     // lección, así que no aparece en el HTML servido: va con RUNTIME. Si allá
     // se agrega o se reescribe una lección, la entrada de acá se mueve a mano.
-    '6 lecciones · 2 autoevaluaciones · gratis · videos en edición': '6 lessons · 2 self-assessments · free · videos being edited',   // RUNTIME
     'Lectura': 'Reading',   // RUNTIME
     'Video': 'Video',   // RUNTIME
     'Autoevaluación': 'Self-assessment',   // RUNTIME

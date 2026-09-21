@@ -228,7 +228,7 @@ const FOOTER = (pre) => `  <footer class="v2-footer">
     <div class="v2-footer-top">
       <nav class="v2-footer-links">
         <a href="${pre}que-es-pit.html">Qué es PIT</a>
-        <a href="${pre}curso-intro.html">Curso introductorio</a>
+        <a href="${pre}curso-intro.html">Curso · Próximamente</a>
         <a href="${pre}evidencia.html">Evidencia científica</a>
         <a href="${pre}curso-modulo-1.html">Curso Módulo I</a>
         <a href="${pre}foro.html">Foro semanal</a>
