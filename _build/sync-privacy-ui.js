@@ -17,7 +17,7 @@ ${standalone ? '<button type="button" class="pit-privacy-standalone" data-privac
   <div class="pit-privacy-choice"><strong>Contenido externo</strong><span>Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.</span></div>
   <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Usar solo lo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
 </div></dialog>
-<script src="${pre}assets/js/pit-privacy.js?v=2"></script>
+<script src="${pre}assets/js/pit-privacy.js?v=3"></script>
 <!-- PIT-PRIVACY-UI:END -->`; }
 
 const legal = pre => `<div class="v2-footer-legal">

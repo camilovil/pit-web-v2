@@ -23,6 +23,49 @@ del header en `vercel.json`. **No editar esos cinco lugares a mano: el build los
 Después de apagarlo, verificar: `curl -sI https://drricardofrusso.com | grep -i robots` no
 tiene que devolver nada, y `noindex` no tiene que aparecer en el HTML servido.
 
+### Abrir el curso introductorio
+`curso-intro.html` tiene las dos cosas: el **cartel de "Próximamente"**, que es lo que ve
+hoy cualquiera que entre, y **el aula completa** detrás, con `hidden`. El curso está
+escrito entero —seis lecciones, dos autoevaluaciones, apuntes y referencias— pero dos de
+las seis son video y los videos todavía se están editando. Entrar y encontrarlas vacías
+es peor que el cartel, así que la página no deja entrar.
+
+**La puerta es la constante `VIDEOS`, arriba del script de `curso-intro.html`:**
+
+```js
+var VIDEOS = {
+  intro:      { id: '' },     // ← id de YouTube del video de introducción
+  materiales: { id: '' }      // ← id de YouTube del instructivo de materiales
+};
+```
+
+Mientras alguno de los dos esté vacío, el script se corta antes de dibujar nada y queda el
+cartel. Con los dos ids puestos la puerta se abre sola: el cartel se borra del DOM, aparece
+el aula y cada video se arma con su bloque de consentimiento (`youtube-nocookie.com` dentro
+de un `<template>` inerte, el mismo componente del foro). No hay una segunda bandera que
+alguien pueda olvidarse de tocar — la condición es tener los videos, que es lo que falta.
+
+**Lo único que queda a mano** es el resto del sitio, que es HTML de otras páginas y el
+script del aula no puede decidir. Mientras el curso esté cerrado **ningún enlace del sitio
+lleva a `/curso-intro`**: mandar a alguien a un cartel es mandarlo a un callejón. Al abrirlo
+hay que reponer los caminos y cambiar el copy:
+
+| Dónde | Cómo está cerrado | Cómo va abierto |
+|---|---|---|
+| Pie de las 14 páginas (`_build/convert.js`, `_build/foro.js`, `index.html`, `curso-intro.html`, los dos `.dc.html`) | sin la fila del curso | `<a href="curso-intro.html">Curso introductorio</a>` |
+| Tarjeta de la home (`index.html`) | un `<div class="v2-card--inerte">`: anuncia y no navega, sin botón | vuelve a ser `<a href="curso-intro.html">` con el botón "Empezar el curso →" |
+| Badge y bajada de la tarjeta (`index.html`) | `Curso introductorio · Próximamente` | `Curso introductorio · Gratis` y el programa de seis lecciones |
+| Fila de *Qué es PIT* (`_dc-src/Que es PIT.dc.html`) | un `<div>` sin flecha | `<a>` con la flecha, y el badge en `· Gratis` |
+| Lo que sabe el asistente (`api/chat.js`) | "estará disponible próximamente" | el curso ya disponible |
+
+Cada una de esas frases es una clave del diccionario ES/EN, así que al cambiarlas hay que
+mover también `assets/js/pit-lang.js` — `check-lang.js` corta el build nombrando la clave
+huérfana si se olvida alguna, que es justamente para lo que está.
+
+`/curso-intro` sigue en el `sitemap.xml` y sin `noindex`, así que Google puede seguir
+mandando gente al cartel aunque el sitio no la mande. Si molesta, la palanca es la misma
+idea: excluirla en `_build/sync-seo.js` mientras `VIDEOS` esté vacío.
+
 ## Estructura
 - `index.html` + 10 subpáginas — HTML standalone, sin framework ni build para servir.
 - `assets/css/` — `fonts.css` (Space Grotesk + JetBrains Mono self-hosted), `ds.css`

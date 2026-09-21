@@ -64,7 +64,6 @@
     'Link copiado': 'Link copied',   // RUNTIME
 
     // ── Chrome compartido: footer ─────────────────────────────────────────
-    'Curso · Próximamente': 'Course · Coming soon',
     'Evidencia científica': 'Scientific evidence',
     'Curso Módulo I': 'Course · Module I',
     'Foro semanal': 'Weekly forum',
@@ -163,13 +162,109 @@
     'Curso introductorio · Próximamente': 'Introductory course · Coming soon',
     'Introducción a PIT': 'Introduction to PIT',
     'Estamos terminando de editar los videos y el contenido. El acceso se habilitará cuando el curso esté completo.': 'We are finishing the videos and course content. Access will open when the course is complete.',
-    'Próximamente': 'Coming soon',
     'Estamos terminando de editar los videos y el contenido para publicar el curso completo. El acceso se habilitará próximamente.': 'We are finishing the videos and content before publishing the complete course. Access will open soon.',
     'Volver a los recursos': 'Back to resources',
     'Descargar apuntes de PIT': 'Download the PIT study notes',
     'Mientras tanto:': 'In the meantime:',
     'podés consultar los apuntes de PIT y las respuestas del foro, que ya están disponibles sin registro.': 'you can read the PIT study notes and forum answers, which are already available without signing up.',
     'Ir al foro': 'Go to the forum',
+
+    // ══ AULA DEL CURSO INTRODUCTORIO (curso-intro.html) ════════════════
+    // El temario, el material y el avance están en el HTML servido.
+    'Contenido del curso': 'Course contents',
+    '6 lecciones · 2 videos · 2 autoevaluaciones · gratis': '6 lessons · 2 videos · 2 self-assessments · free',
+    'Avance del curso': 'Course progress',
+    'Material del curso': 'Course material',
+    'Apuntes de PIT — 80 páginas (PDF)': 'PIT study notes — 80 pages (PDF)',
+    'Referencias anatómicas (PDF)': 'Anatomical references (PDF)',
+    'Curso completado': 'Course completed',
+    '¿Querés profundizar? El Módulo I (Lumbalgia y Rodilla) te espera.': 'Want to go deeper? Module I (Low back pain and Knee) is waiting for you.',
+    'Ver el curso completo →': 'See the full course →',
+
+    // Todo lo demás lo escribe el aula desde su array LESSONS al dibujar cada
+    // lección, así que no aparece en el HTML servido: va con RUNTIME. Si allá
+    // se agrega o se reescribe una lección, la entrada de acá se mueve a mano.
+    'Lectura': 'Reading',   // RUNTIME
+    'Video': 'Video',   // RUNTIME
+    'Autoevaluación': 'Self-assessment',   // RUNTIME
+    'Completada': 'Completed',   // RUNTIME
+    '✓ Completada': '✓ Completed',   // RUNTIME
+    'Marcar como completada →': 'Mark as completed →',   // RUNTIME
+    'Siguiente lección →': 'Next lesson →',   // RUNTIME
+    'Corregir respuestas': 'Check answers',   // RUNTIME
+    'Reintentar': 'Try again',   // RUNTIME
+    'Autoevaluación aprobada': 'Self-assessment passed',   // RUNTIME
+    'Todavía no': 'Not yet',   // RUNTIME
+    'Quedó registrada como completada. Podés seguir con la próxima lección.': 'It is recorded as completed. You can move on to the next lesson.',   // RUNTIME
+    'Repasá la lección correspondiente y volvé a intentarlo — no hay límite de intentos.': 'Review the matching lesson and try again — there is no limit on attempts.',   // RUNTIME
+    'Respuesta correcta': 'Correct answer',   // RUNTIME
+    '✓ Correcta': '✓ Correct',   // RUNTIME
+    'Tu respuesta': 'Your answer',   // RUNTIME
+    'Video en edición': 'Video being edited',   // RUNTIME
+    'Este video se está terminando de editar. Mientras tanto podés seguir con las lecturas y las autoevaluaciones, y descargar los apuntes completos.': 'This video is still being edited. In the meantime you can carry on with the readings and the self-assessments, and download the complete study notes.',   // RUNTIME
+    'Qué es PIT y para qué sirve': 'What PIT is and what it is for',   // RUNTIME
+    'LECTURA · 4 MIN': 'READING · 4 MIN',   // RUNTIME
+    'LECTURA · 5 MIN': 'READING · 5 MIN',   // RUNTIME
+    'VIDEO': 'VIDEO',   // RUNTIME
+    '3 PREGUNTAS': '3 QUESTIONS',   // RUNTIME
+    'El método, explicado por el Dr. Frusso': 'The method, explained by Dr. Frusso',   // RUNTIME
+    'Las zonas que más se tratan': 'The areas treated most often',   // RUNTIME
+    'Autoevaluación · Conceptos de PIT': 'Self-assessment · PIT concepts',   // RUNTIME
+    'Materiales e instrumental para PIT': 'Materials and instruments for PIT',   // RUNTIME
+    'Autoevaluación · Materiales y preparación': 'Self-assessment · Materials and preparation',   // RUNTIME
+    'PIT (Perineural Injection Treatment) es un tratamiento mínimamente invasivo del dolor crónico, desarrollado por el Dr. John Lyftogt.': 'PIT (Perineural Injection Treatment) is a minimally invasive treatment for chronic pain, developed by Dr. John Lyftogt.',   // RUNTIME
+    'Cuando un dolor persiste durante meses, muchas veces el problema ya no está en el músculo ni en la articulación: está en el nervio que transmite la señal. Ese nervio se inflamó, se volvió hipersensible, y envía señales de dolor aunque el tejido esté sano.': 'When pain persists for months, the problem is often no longer in the muscle or the joint: it is in the nerve carrying the signal. That nerve became inflamed and hypersensitive, and it sends pain signals even though the tissue is healthy.',
+    'PIT actúa sobre ese nervio con pequeñas inyecciones de dextrosa al 5% debajo de la piel, sin corticoides, sin cirugía y sin interferir con ningún otro tratamiento en curso.': 'PIT acts on that nerve with small injections of 5% dextrose under the skin, with no corticosteroids, no surgery and no interference with any other ongoing treatment.',   // RUNTIME
+    'Qué se inyecta': 'What is injected',   // RUNTIME
+    'Dextrosa al 5% diluida en agua purificada, a un pH de 7.4 cercano al de la sangre. Sin corticoides, sin anestésicos y sin antiinflamatorios.': '5% dextrose diluted in purified water, at a pH of 7.4 close to that of blood. No corticosteroids, no anaesthetics and no anti-inflammatories.',   // RUNTIME
+    'Dónde se inyecta': 'Where it is injected',   // RUNTIME
+    'Debajo de la piel, sobre el nervio periférico sensibilizado. Aguja ultrafina y aplicación superficial: es un procedimiento de consultorio.': 'Under the skin, over the sensitised peripheral nerve. An ultra-fine needle and a superficial application: it is an office procedure.',   // RUNTIME
+    'Cuánto dura': 'How long it takes',   // RUNTIME
+    'Un tratamiento típico son 6 a 8 sesiones semanales. Cada sesión alarga el alivio de la anterior y baja el piso de dolor con el que arranca la siguiente.': 'A typical course of treatment is 6 to 8 weekly sessions. Each session lengthens the relief from the previous one and lowers the pain level the next one starts from.',   // RUNTIME
+    'Este curso es introductorio y gratuito: explica el método y el material de trabajo. La formación completa para aplicar la técnica es el Módulo I.': 'This course is introductory and free: it explains the method and the working materials. The complete training to apply the technique is Module I.',   // RUNTIME
+    'El Dr. Frusso presenta el método: por qué el dolor crónico muchas veces nace en un nervio periférico sensibilizado, qué hace PIT para desinflamarlo y qué vas a encontrar en este curso.': 'Dr. Frusso introduces the method: why chronic pain often starts in a sensitised peripheral nerve, what PIT does to calm it down, and what you will find in this course.',   // RUNTIME
+    'Un paneo general por las regiones que más aparecen en el consultorio, y por cómo se ordena una sesión de principio a fin.': 'An overview of the regions seen most often in the office, and of how a session runs from start to finish.',   // RUNTIME
+    'Dolor lumbar persistente. Es la consulta más frecuente y la región con la que abre el Módulo I.': 'Persistent low back pain. It is the most frequent reason for consultation and the region Module I opens with.',   // RUNTIME
+    'Dolor anterior, interno o externo de rodilla, con o sin artrosis de base.': 'Anterior, medial or lateral knee pain, with or without underlying osteoarthritis.',   // RUNTIME
+    'Dolor de cuello que muchas veces se extiende hacia la cabeza o el hombro.': 'Neck pain that often extends towards the head or the shoulder.',   // RUNTIME
+    'Dolor que limita levantar el brazo o apoyarse de ese lado para dormir.': 'Pain that makes it hard to raise the arm or to sleep on that side.',   // RUNTIME
+    'Codo': 'Elbow',
+    'Epicondilitis y epitrocleítis: el dolor de codo que no cede con reposo.': 'Lateral and medial epicondylitis: the elbow pain that does not settle with rest.',   // RUNTIME
+    'Tobillo': 'Ankle',
+    'Dolor que quedó después de un esguince o de una sobrecarga repetida.': 'Pain left behind after a sprain or repeated overload.',   // RUNTIME
+    'Se dialoga con la persona y se le pregunta cuándo, cómo y dónde comenzó el dolor.': 'The clinician talks with the person and asks when, how and where the pain began.',
+    'El paciente indica la zona donde le duele, lo que permite localizar el campo anatómico y determinar qué nervio está inflamado.': 'The patient points to the painful area, which locates the anatomical field and identifies which nerve is inflamed.',
+    'Se identifican por palpación los puntos donde el nervio está sensibilizado. Estos puntos se denominan «puntos de Valleix».': 'Palpation identifies the points where the nerve is sensitised. These are known as «Valleix points».',
+    'Se aplica dextrosa al 5% con una aguja ultrafina y de manera superficial, reduciendo al mínimo la posibilidad de experimentar dolor por la aplicación.': '5% dextrose is applied superficially with an ultra-fine needle, keeping any pain from the application itself to a minimum.',
+    'La lista no es cerrada: PIT se aplica sobre nervios periféricos superficiales, y eso abarca más regiones de las que entran en este paneo.': 'The list is not closed: PIT is applied over superficial peripheral nerves, and that covers more regions than fit into this overview.',   // RUNTIME
+    'Verificá que los conceptos de las dos primeras lecciones quedaron claros. Elegí una opción por pregunta y corregi al final. Necesitás al menos 2 correctas para aprobar.': 'Check that the concepts from the first two lessons are clear. Pick one option per question and check your answers at the end. You need at least 2 correct to pass.',   // RUNTIME
+    '¿Qué solución se utiliza en las inyecciones de PIT?': 'Which solution is used in PIT injections?',   // RUNTIME
+    'Corticoides': 'Corticosteroids',   // RUNTIME
+    'Dextrosa al 5%': '5% dextrose',   // RUNTIME
+    'Ácido hialurónico': 'Hyaluronic acid',   // RUNTIME
+    '¿Dónde actúa principalmente el tratamiento?': 'Where does the treatment mainly act?',   // RUNTIME
+    'En la articulación': 'In the joint',   // RUNTIME
+    'En el músculo': 'In the muscle',   // RUNTIME
+    'En el nervio periférico sensibilizado': 'In the sensitised peripheral nerve',   // RUNTIME
+    '¿Cuántas sesiones tiene un tratamiento típico?': 'How many sessions does a typical course of treatment have?',   // RUNTIME
+    'Una sola sesión': 'A single session',   // RUNTIME
+    'Entre 6 y 8 sesiones': 'Between 6 and 8 sessions',   // RUNTIME
+    'Más de 20 sesiones': 'More than 20 sessions',   // RUNTIME
+    'Instructivo filmado en consultorio: qué materiales se necesitan para aplicar PIT, cómo se prepara la solución de dextrosa al 5% y cómo se ordena la mesa de trabajo antes de una sesión.': 'A walkthrough filmed in the office: which materials are needed to apply PIT, how the 5% dextrose solution is prepared and how the work surface is laid out before a session.',   // RUNTIME
+    'Repasá el instructivo de materiales antes de responder. Elegí una opción por pregunta y corregi al final. Necesitás al menos 2 correctas para aprobar.': 'Review the materials walkthrough before answering. Pick one option per question and check your answers at the end. You need at least 2 correct to pass.',   // RUNTIME
+    'Las inyecciones de PIT son:': 'PIT injections are:',   // RUNTIME
+    'Intraarticulares profundas': 'Deep intra-articular',   // RUNTIME
+    'Subcutáneas y superficiales': 'Subcutaneous and superficial',   // RUNTIME
+    'Intramusculares': 'Intramuscular',   // RUNTIME
+    '¿Qué tipo de aguja se utiliza habitualmente?': 'Which type of needle is usually used?',   // RUNTIME
+    'Aguja ultrafina, de calibre 27 a 30G': 'An ultra-fine needle, 27 to 30G',   // RUNTIME
+    'Trocar de biopsia': 'A biopsy trocar',   // RUNTIME
+    'Cualquier aguja disponible': 'Any available needle',   // RUNTIME
+    '¿PIT es compatible con otros tratamientos en curso?': 'Is PIT compatible with other ongoing treatments?',   // RUNTIME
+    'No, hay que suspenderlos': 'No, they have to be stopped',   // RUNTIME
+    'Sí, es un tratamiento complementario': 'Yes, it is a complementary treatment',   // RUNTIME
+    'Solo con cirugía previa': 'Only with previous surgery',   // RUNTIME
+
     'PDF · 80 páginas': 'PDF · 80 pages',
     'Anatomía, técnica y puntos de inyección para cada región.': 'Anatomy, technique and injection points for each region.',
     'Descargar apuntes →': 'Download the notes →',
@@ -370,9 +465,6 @@
     // ══ RESTO DEL SITIO ═══════════════════════════════════════════════════
     // Cobertura PARCIAL: son las claves que seguían siendo válidas contra el
     // HTML actual. Estas páginas todavía no están traducidas al 100%.
-    // Opción de una autoevaluación del curso intro: el aula la escribe desde su
-    // array de preguntas, no está en el HTML servido.
-    'Glucosa al 5%': '5% glucose',   // RUNTIME
     'Cómo es una sesión': 'What a session is like',
     'Conversación con el paciente (anamnesis)': 'Talking with the patient (history taking)',
     'Identificación de la zona de dolor': 'Identifying the painful area',

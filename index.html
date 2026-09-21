@@ -316,6 +316,13 @@
     .v2-wrap { max-width: 1180px; margin: 0 auto; }
     .v2-card { background: #FFFFFF; border: 1px solid rgba(0,11,51,0.08); border-radius: var(--v2-radius); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.25s ease; }
     .v2-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(0,11,51,0.10); border-color: rgba(37,99,235,0.35); }
+    /* La tarjeta del curso ANUNCIA, no navega. Mientras el curso no este
+       abierto no es un enlace, asi que tampoco puede comportarse como uno:
+       sin cursor de mano, sin levantarse, sin acercar la foto. Un carton que
+       se mueve bajo el mouse y no lleva a ningun lado es una promesa rota. */
+    .v2-card--inerte { cursor: default; }
+    .v2-card--inerte:hover { transform: none; box-shadow: none; border-color: rgba(0,11,51,0.08); }
+    .v2-card--inerte:hover .v2-free-media img { transform: none; }
 
     /* ---- data module ---- */
     .v2-data { background: var(--v2-tint); border-radius: 28px; padding: clamp(32px, 4vw, 56px); }
@@ -813,7 +820,7 @@
           </div>
         </div>
         <div class="v2-free-grid">
-          <a class="v2-card v2-free-feature" href="curso-intro.html">
+          <div class="v2-card v2-card--inerte v2-free-feature">
             <span class="v2-free-media">
               <img src="/img/DSC_0086.webp" alt="El Dr. Frusso en consultorio — curso de introducción a PIT" loading="lazy">
               <span class="v2-free-badge">Curso introductorio · Próximamente</span>
@@ -821,9 +828,8 @@
             <span class="v2-free-body">
               <h3 style="font-size: var(--txt-xl); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px;">Introducción a PIT</h3>
               <p style="font-size: var(--txt-md); line-height: 1.7; color: var(--v2-slate); margin: 0 0 20px;">Estamos terminando de editar los videos y el contenido. El acceso se habilitará cuando el curso esté completo.</p>
-              <span class="v2-btn v2-btn--blue" style="align-self: flex-start;">Próximamente</span>
             </span>
-          </a>
+          </div>
           <div class="v2-free-side">
             <a class="v2-card" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="color: var(--v2-navy); display: flex; flex-direction: column; align-items: flex-start;">
               <span class="v2-eyebrow" style="color: var(--v2-blue);">PDF · 80 páginas</span>
@@ -1104,7 +1110,6 @@
     <div class="v2-footer-top">
       <nav class="v2-footer-links">
         <a href="que-es-pit.html">Qué es PIT</a>
-        <a href="curso-intro.html">Curso · Próximamente</a>
         <a href="evidencia.html">Evidencia científica</a>
         <a href="curso-modulo-1.html">Curso Módulo I</a>
         <a href="foro.html">Foro semanal</a>
@@ -1356,7 +1361,7 @@
   <div class="pit-privacy-choice"><strong>Contenido externo</strong><span>Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.</span></div>
   <div class="pit-privacy-actions"><button type="button" class="pit-privacy-btn" data-privacy-choice="necessary">Usar solo lo necesario</button><button type="button" class="pit-privacy-btn pit-privacy-btn--primary" data-privacy-choice="external">Permitir contenido externo</button></div>
 </div></dialog>
-<script src="assets/js/pit-privacy.js?v=2"></script>
+<script src="assets/js/pit-privacy.js?v=3"></script>
 <!-- PIT-PRIVACY-UI:END -->
 <script src="assets/js/pit-lang.js?v=7"></script>
 </body>
