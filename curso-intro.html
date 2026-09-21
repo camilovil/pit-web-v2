@@ -46,6 +46,12 @@
        --txt-xs 13 / --txt-sm 15 / --txt-md 17 / --txt-lg 21 / --txt-xl 24).
        Unica excepcion: el 34px del titular de la leccion, que es display y no
        parte de la escala de texto. */
+    /* LA FUENTE BASE DE LA PAGINA. ds.css no estiliza ni body ni h1: es todo
+       por clase. Por eso cada pagina la declara: las de convert.js en un <div>
+       envoltorio, la home en su body. Esta la tenia en la barra de aula que se
+       saco, y sin ella el titular, el texto y los enlaces del pie caian al
+       serif por defecto del navegador. */
+    body { font-family: var(--pit-font-sans); color: var(--pit-ink); }
     .ci-aula .pit-btn { border-radius: 999px; }
     .ci-aula a { color: var(--v2-blue, #2563EB); }
 
@@ -56,13 +62,19 @@
     .ci-aula { max-width: 1360px; margin: 0 auto; width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 360px 1fr; align-items: start; }
     .ci-side { border-right: 1px solid var(--pit-ink-10); background: var(--pit-paper-pure); align-self: stretch; }
     .ci-side-head { padding: 28px 24px 20px; border-bottom: 1px solid var(--pit-ink-10); }
-    .ci-side-title { font-size: var(--txt-lg, 21px); font-weight: 600; margin: 10px 0 6px; }
+    .ci-side-title { font-size: var(--txt-lg, 21px); font-weight: 600; letter-spacing: -0.02em; margin: 10px 0 6px; }
     .ci-side-meta { font-family: var(--pit-font-mono); font-size: var(--txt-2xs, 11px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pit-ink-40); margin: 0; }
     .ci-progress-wrap { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
     #ci-progress { flex: 1; height: 6px; background: var(--pit-ink-10); border-radius: 999px; overflow: hidden; }
     #ci-progress-fill { height: 100%; width: 0%; background: var(--pit-blue, #2563EB); border-radius: 999px; transition: width .3s ease; }
     #ci-progress-label { font-family: var(--pit-font-mono); font-size: var(--txt-xs, 13px); letter-spacing: 0.06em; color: var(--pit-ink-40); white-space: nowrap; }
     .ci-panel { padding: 36px 48px 64px; min-width: 0; }
+    /* El titular usa .pit-section-title, el mismo componente que titula las
+       secciones del resto del sitio: clamp(28px, 4vw, 48px) y -0.025em de
+       interletrado. Antes eran 34px fijos y sin apretar, y al lado de
+       cualquier otra pagina se notaba suelto. Solo se le repone el margen,
+       que el componente trae en cero. */
+    .ci-panel h1 { margin: 14px 0 24px; max-width: 26ch; }
     /* Entre los 820px donde pit-mobile.css apila y el escritorio, el temario de
        360px le dejaba al texto una columna de 340px. Se achica el temario, no
        la leccion. */
@@ -108,7 +120,12 @@
     .ci-lead { font-size: var(--txt-lg, 21px) !important; line-height: 1.55 !important; color: var(--pit-ink-80) !important; }
     .ci-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin: 28px 0 8px; }
     .ci-card { background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 20px 22px; }
-    .ci-card h3 { font-size: var(--txt-md, 17px); font-weight: 600; margin: 0 0 8px; }
+    .ci-card h3 { font-size: var(--txt-md, 17px); font-weight: 600; letter-spacing: -0.015em; margin: 0 0 8px; }
+    /* Un solo interletrado para todos los titulos del aula: -0.02em en los de
+       21px y -0.015em en los de 17px, que es como aprieta el resto del sitio.
+       Sueltos, al lado de cualquier otra pagina se notaban de otra familia. */
+    .ci-h2 { font-size: var(--txt-lg, 21px); font-weight: 600; letter-spacing: -0.02em; margin: 40px 0 0; }
+    .ci-q { font-size: var(--txt-md, 17px); font-weight: 600; letter-spacing: -0.015em; line-height: 1.35; margin: 8px 0 16px; }
     .ci-card p { font-size: var(--txt-sm, 15px); line-height: 1.55; color: var(--pit-ink-60); margin: 0; }
     .ci-steps { list-style: none; counter-reset: paso; display: grid; gap: 14px; margin: 24px 0 8px; padding: 0; max-width: 720px; }
     .ci-steps li { counter-increment: paso; display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
@@ -443,7 +460,7 @@
       html += '</div>';
     }
     if (cur.steps && cur.steps.length) {
-      html += '<h2 style="font-size: var(--txt-lg, 21px); font-weight: 600; margin: 40px 0 0;">' + esc(cur.stepsTitle) + '</h2>';
+      html += '<h2 class="ci-h2">' + esc(cur.stepsTitle) + '</h2>';
       html += '<ol class="ci-steps">';
       cur.steps.forEach(function (s) {
         html += '<li><span><strong>' + esc(s.h) + '</strong><span>' + esc(s.p) + '</span></span></li>';
@@ -465,7 +482,7 @@
     html += '<p class="pit-eyebrow" style="margin: 0;">Lección ' + String(a + 1).padStart(2, '0') + ' · ' + kindLabel(cur.kind) + '</p>';
     if (isDone) html += '<span class="pit-chip pit-chip--blue">✓ Completada</span>';
     html += '</div>';
-    html += '<h1 class="m-title" style="font-size: 34px; font-weight: 600; line-height: 1.12; margin: 14px 0 24px; max-width: 26ch;">' + esc(cur.title) + '</h1>';
+    html += '<h1 class="m-title pit-section-title">' + esc(cur.title) + '</h1>';
 
     if (cur.kind === 'read') {
       html += readBlock(cur);
@@ -493,7 +510,7 @@
         var gid = 'ci-q' + a + '-' + qi;
         html += '<div role="group" aria-labelledby="' + gid + '-t" style="background: var(--pit-paper-pure); border: 1px solid var(--pit-ink-10); border-radius: var(--pit-radius); padding: 24px 26px;">';
         html += '<span class="ci-qnum">Pregunta ' + (qi + 1) + ' de ' + cur.questions.length + '</span>';
-        html += '<h3 id="' + gid + '-t" style="font-size: var(--txt-md, 17px); font-weight: 600; line-height: 1.35; margin: 8px 0 16px;">' + esc(q.text) + '</h3>';
+        html += '<h3 class="ci-q" id="' + gid + '-t">' + esc(q.text) + '</h3>';
         html += '<div style="display: grid; gap: 10px;">';
         q.options.forEach(function (label, oi) {
           var isPicked = picked === oi;
