@@ -192,12 +192,15 @@ function mdToHtml(body) {
             ${slides}
           </div>
           <div class="foro-carrusel-controls">
-            <button type="button" class="foro-carrusel-arrow" data-carrusel-prev aria-label="Imagen anterior">←</button>
+            <!-- Flechas en SVG y no los caracteres ← →: esos se dibujan con la tipografía,
+                 salen finitos y desparejos dentro del círculo (mismo criterio que el
+                 carrusel de cursos de la home). -->
+            <button type="button" class="foro-carrusel-arrow" data-carrusel-prev aria-label="Imagen anterior"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
             <div class="foro-carrusel-status">
               <div class="foro-carrusel-dots" role="group" aria-label="Elegir imagen">${dots}</div>
               <span class="foro-carrusel-count" data-carrusel-count aria-live="polite">1 / ${srcs.length}</span>
             </div>
-            <button type="button" class="foro-carrusel-arrow" data-carrusel-next aria-label="Imagen siguiente">→</button>
+            <button type="button" class="foro-carrusel-arrow" data-carrusel-next aria-label="Imagen siguiente"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
           <figcaption>${srcs.length} piezas · usá las flechas o deslizá</figcaption>
         </figure>`;
@@ -426,10 +429,10 @@ function renderPost(post, posts, idx) {
     .foro-carrusel-track::-webkit-scrollbar { display: none; }
     .foro-carrusel-track:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 4px; border-radius: var(--pit-radius); }
     .foro-carrusel-controls { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 14px; }
-    .foro-carrusel-arrow { width: 46px; height: 46px; flex: 0 0 46px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--pit-blue); border-radius: 999px; background: var(--pit-paper-pure); color: var(--pit-blue); font-size: 21px; line-height: 1; cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease, transform .2s ease; }
+    .foro-carrusel-arrow { width: 46px; height: 46px; flex: 0 0 46px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid var(--pit-blue); border-radius: 999px; background: var(--pit-paper-pure); color: var(--pit-blue); font-size: 21px; line-height: 1; cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease, transform .2s ease; }
     .foro-carrusel-arrow:hover:not(:disabled) { background: var(--pit-blue); color: #FFFFFF; transform: translateY(-1px); }
     .foro-carrusel-arrow:focus-visible { outline: 2px solid var(--pit-blue); outline-offset: 3px; }
-    .foro-carrusel-arrow:disabled { opacity: .32; cursor: default; }
+    .foro-carrusel-arrow:disabled { opacity: .4; cursor: default; }
     .foro-carrusel-status { min-width: 0; display: flex; align-items: center; justify-content: center; gap: 12px; }
     .foro-carrusel-dots { display: flex; align-items: center; justify-content: center; gap: 6px; }
     .foro-carrusel-dot { width: 9px; height: 9px; padding: 0; border: 1px solid var(--pit-blue); border-radius: 999px; background: transparent; cursor: pointer; transition: width .2s ease, background .2s ease; }
