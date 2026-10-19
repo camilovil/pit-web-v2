@@ -136,6 +136,7 @@
     .jp-precios dl { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .jp-precios dt { font-size: var(--txt-sm); color: var(--pit-ink-60); }
     .jp-precios dd { margin: 4px 0 0; font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.01em; }
+    .jp-precios .jp-usd { display: block; font-size: var(--txt-sm); font-weight: 500; color: var(--v2-blue); margin-top: 2px; letter-spacing: 0; }
     .jp-precios dd small { display: block; font-size: var(--txt-xs); font-weight: 400; color: var(--pit-ink-60); margin-top: 2px; letter-spacing: 0; }
     .jp-precios p { grid-column: 2; margin: 6px 0 0; font-size: var(--txt-xs); line-height: 1.5; color: var(--pit-ink-60); }
     @media (max-width: 760px) {
@@ -514,9 +515,9 @@
       <div class="jp-precios" id="aranceles">
         <span class="jp-mono">Aranceles</span>
         <dl class="pit-stagger">
-          <div><dt>Presencial</dt><dd>$770.000</dd></div>
-          <div><dt>Virtual</dt><dd>$500.000</dd></div>
-          <div><dt>Rotación por consultorio</dt><dd>$300.000<small>Opcional · 4 horas · se suma a tu modalidad</small></dd></div>
+          <div><dt>Presencial</dt><dd>$770.000<span class="jp-usd">USD 500 desde el exterior</span></dd></div>
+          <div><dt>Virtual</dt><dd>$500.000<span class="jp-usd">USD 300 desde el exterior</span></dd></div>
+          <div><dt>Rotación por consultorio</dt><dd>$300.000<span class="jp-usd">USD 200 desde el exterior</span><small>Opcional · 4 horas · se suma a tu modalidad</small></dd></div>
         </dl>
         <p>El pago es total, por transferencia, y no tiene devolución. Los datos para transferir te los enviamos por mail cuando reservás tu lugar.</p>
       </div>
@@ -587,7 +588,7 @@
         </details>
         <details>
           <summary>¿Cuáles son los aranceles?</summary>
-          <p>Presencial $770.000 y virtual $500.000. La rotación por consultorio, opcional, suma $300.000 a cualquiera de las dos. El pago es total, por transferencia, y no tiene devolución. Escribinos a ricardo.frusso@gmail.com y te enviamos los datos para transferir y reservar tu lugar.</p>
+          <p>Presencial $770.000 y virtual $500.000. La rotación por consultorio, opcional, suma $300.000 a cualquiera de las dos. Desde el exterior: presencial USD 500, virtual USD 300 y rotación USD 200. El pago es total, por transferencia, y no tiene devolución. Escribinos a ricardo.frusso@gmail.com y te enviamos los datos para transferir y reservar tu lugar.</p>
         </details>
       </div>
     </div>

@@ -828,9 +828,18 @@ window.PIT_BOT = {
     "sale la presencial",
     "cuesta la virtual",
     "cuesta la presencial",
-    "sale el curso presencial"
+    "sale el curso presencial",
+    "dolares",
+    "dolar",
+    "usd",
+    "u$s",
+    "extranjero",
+    "extranjeros",
+    "exterior",
+    "otro pais",
+    "desde afuera"
    ],
-   "respuesta": "Presencial $770.000 y virtual $500.000. La rotación por consultorio, opcional, suma $300.000 a cualquiera de las dos. El pago es total, por transferencia, y no tiene devolución. Escribinos a ricardo.frusso@gmail.com y te enviamos los datos para transferir y reservar tu lugar.",
+   "respuesta": "Presencial $770.000 y virtual $500.000. La rotación por consultorio, opcional, suma $300.000 a cualquiera de las dos. Desde el exterior: presencial USD 500, virtual USD 300 y rotación USD 200. El pago es total, por transferencia, y no tiene devolución. Escribinos a ricardo.frusso@gmail.com y te enviamos los datos para transferir y reservar tu lugar.",
    "enlaces": [
     {
      "texto": "Ver la Jornada",
