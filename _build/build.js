@@ -9,6 +9,9 @@ const STEPS = [
   { file: 'convert.js', label: 'convert.js' },
   { file: 'foro.js', label: 'foro.js' },
   { file: 'sync-nav.js', label: 'sync-nav.js' },
+  // Lee faq.html y jornada-pit.html ya construidos (por eso va después de
+  // convert.js) y arma la base del asistente sin IA.
+  { file: 'sync-bot.js', label: 'sync-bot.js  (base del asistente: _content/bot.json + FAQ)' },
   // Va DESPUÉS de foro.js: ese paso valida el frontmatter y corta el build
   // si un post está mal escrito, así que acá los datos ya están validados.
   { file: 'sync-foro-home.js', label: 'sync-foro-home.js  (últimas del foro en la home)' },

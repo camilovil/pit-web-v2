@@ -56,7 +56,7 @@ hay que reponer los caminos y cambiar el copy:
 | Tarjeta de la home (`index.html`) | un `<div class="v2-card--inerte">`: anuncia y no navega, sin botón | vuelve a ser `<a href="curso-intro.html">` con el botón "Empezar el curso →" |
 | Badge y bajada de la tarjeta (`index.html`) | `Curso introductorio · Próximamente` | `Curso introductorio · Gratis` y el programa de seis lecciones |
 | Fila de *Qué es PIT* (`_dc-src/Que es PIT.dc.html`) | un `<div>` sin flecha | `<a>` con la flecha, y el badge en `· Gratis` |
-| Lo que sabe el asistente (`api/chat.js`) | "estará disponible próximamente" | el curso ya disponible |
+| Lo que responde el asistente (`_content/bot.json`, entrada `apuntes`) | "estará disponible próximamente" | el curso ya disponible |
 
 Cada una de esas frases es una clave del diccionario ES/EN, así que al cambiarlas hay que
 mover también `assets/js/pit-lang.js` — `check-lang.js` corta el build nombrando la clave
@@ -75,9 +75,8 @@ idea: excluirla en `_build/sync-seo.js` mientras `VIDEOS` esté vacío.
   **`index.html` no carga `pit-v2.css`** (tiene su propio `<style>` inline): los tokens
   y los componentes compartidos existen en **dos copias que se mueven juntas**. Ver
   HANDOFF.md → Arquitectura antes de tocar cualquier estilo global.
-- `assets/js/` — drawer (`pit-v2.js`), reveals (`pit-motion.js`), asistente IA
-  (`pit-chat.js`, backend listo en `api/chat.js`, esperando `ANTHROPIC_API_KEY` —
-  ver HANDOFF.md), toggle ES/EN (`pit-lang.js`, markup estático desde `_build/nav.js`),
+- `assets/js/` — drawer (`pit-v2.js`), reveals (`pit-motion.js`), asistente del
+  sitio (`pit-chat.js`, sin IA: ver "Asistente" más abajo), toggle ES/EN (`pit-lang.js`, markup estático desde `_build/nav.js`),
   botón volver arriba (`pit-scrolltop.js`).
 - `_dc-src/` — fuentes originales del proyecto de diseño (`.dc.html` completos y
   `cores/` con el contenido único por página).
@@ -234,13 +233,28 @@ bastante más que un `esc()`.
 - WhatsApp y horarios en Contacto (el mapa ya está embebido).
 - Año real de fundación de la Escuela de PIT (hoy figura 2026 por inferencia). Su enlace
   público ya apunta a `instagram.com/escueladepit/`.
-- Asistente IA: código listo (`api/chat.js` + `pit-chat.js`), solo falta cargar
-  `ANTHROPIC_API_KEY` en Vercel — ver HANDOFF.md → Pendiente.
 
 ## Cifras del sitio
-La duración del tratamiento es **6 a 8 sesiones** en todo el sitio, incluido el prompt
-de sistema del asistente IA (`api/chat.js`). Si cambia, se cambia en los 9 lugares y en
-el prompt; si no, el bot contesta algo distinto a lo que dice la página.
+La duración del tratamiento es **6 a 8 sesiones** en todo el sitio. El asistente la
+toma de la pregunta frecuente de `faq.html`, así que no hay una copia aparte que
+actualizar; si cambia, se cambia en los lugares del sitio y el próximo build la lleva al bot.
+
+## Asistente (sin IA)
+El botón "Preguntale a PIT" es un asistente de **preguntas y respuestas fijas**: no usa
+inteligencia artificial, no llama a ningún servicio y no tiene costo. Se decidió así en
+octubre de 2026 (antes había un backend con IA que nunca se activó y se retiró).
+- **Respuestas:** `_content/bot.json` (temas iniciales, respuestas escritas a mano y
+  palabras clave) **más las preguntas frecuentes publicadas** en `faq.html` y en
+  `jornada-pit.html`, que se leen del HTML construido: si cambia una respuesta en la
+  página, el bot la repite tal cual en el próximo build.
+- **Build:** `_build/sync-bot.js` junta todo en `assets/js/pit-bot-data.js` (generado, no
+  editar) y corta el build si un enlace no existe, si un tema apunta a una entrada que no
+  está o si una palabra clave quedó colgada de una pregunta que cambió de texto.
+- **Búsqueda:** en el navegador (`pit-chat.js`), sin tildes ni mayúsculas, por palabras
+  clave y por coincidencia con el texto de la pregunta. Si no encuentra nada, ofrece las
+  preguntas más parecidas y los enlaces a Contacto y al foro.
+- **Para agregar una respuesta:** sumar una entrada en `entradas` de `_content/bot.json`
+  con `id`, `pregunta`, `claves`, `respuesta` y `enlaces`, y correr el build.
 
 ## Deploy
 Vercel publica automáticamente `main` en el proyecto `pit-web-v2`. El dominio
@@ -268,7 +282,7 @@ antes de escribir una:
    hashes (se rompen con cada cambio de copy, salvo que los calcule el build) o `nonce`
    (necesita respuesta dinámica; hoy el sitio es estático).
 2. Listar los orígenes externos reales: `formspree.io`, `www.google.com/maps`,
-   `/_vercel/insights` y `/_vercel/speed-insights`, y lo que agregue el asistente IA.
+   `/_vercel/insights` y `/_vercel/speed-insights`.
 3. Desplegar primero en `Content-Security-Policy-Report-Only` y mirar los reportes con
    tráfico real antes de pasarla a modo bloqueante.
 Corolario mientras no haya CSP: lo que una CSP habría contenido hay que contenerlo en el

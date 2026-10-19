@@ -201,9 +201,8 @@ de su primera visita, recibiendo el HTML nuevo con los estilos viejos.
     pulgada): son hechos del método, no afirmaciones del consultorio.
 - **"6 a 8 sesiones" es la cifra ÚNICA del sitio.** Había tres distintas (4-6 en el módulo
   de patologías, 4 a 8 en FAQ/diccionario/qué-es-pit, 4-8 en el prompt del asistente, o sea
-  que el bot contestaba otra cosa). Unificada en los 9 lugares, **incluido el prompt de
-  sistema en `api/chat.js`** — si se cambia, se cambia ahí también o el asistente vuelve a
-  contradecir a la página. Los valores por patología ya no diferencian entre pestañas
+  que el bot contestaba otra cosa). Unificada en los 9 lugares. El asistente (sin IA desde
+  octubre de 2026) la toma de la FAQ publicada, así que ya no tiene una copia propia. Los valores por patología ya no diferencian entre pestañas
   (no venían de ninguna fuente); la duración de sesión sí sigue variando. Si Ricardo tiene
   rangos reales por región, se cambian ahí.
 - **Grafo de conocimiento** del proyecto en `../graphify-out/` (graph.html, GRAPH_REPORT.md).
@@ -268,17 +267,8 @@ necesitan chequeo visual.
 1. **Año de fundación de la Escuela de PIT** — hoy dice **2026 por inferencia** (la fundó
    hace poco). Está marcado para confirmar en un comentario del fuente y en el placeholder
    de validación al pie de la trayectoria.
-2. **Asistente IA** — **código listo, esperando la key.** Ya está la función
-   serverless `api/chat.js` (llama a Claude Haiku con la key server-side) y el
-   widget `assets/js/pit-chat.js` ya la consume vía `fetch('/api/chat')`. El
-   prompt de sistema y los límites (max_tokens 500, 12 turnos, largo por mensaje)
-   viven en el servidor, no en el frontend. Mientras no haya key, el asistente
-   responde en modo demo (no rompe nada). **Para activarlo:**
-   - Crear cuenta de API **separada** de claude.ai en console.anthropic.com
-     (se paga por uso), poner un tope de gasto mensual (~USD 10) y generar una key.
-   - En Vercel → proyecto pit-web-v2 → Settings → Environment Variables:
-     agregar `ANTHROPIC_API_KEY` con el valor de la key. Redeploy → queda andando.
-   - Modelo actual: `claude-haiku-4-5` (barato y rápido). Se cambia en `api/chat.js`.
+2. **Asistente** — resuelto sin IA (octubre de 2026): preguntas y respuestas fijas en
+   `_content/bot.json` más las FAQ publicadas. Ver README → "Asistente (sin IA)".
 3. **Activar Analytics** en Vercel → proyecto pit-web-v2 → pestaña Analytics → Enable.
 4. **Contenido de Ricardo** (los bloques incompletos están ocultos): 2-3 testimonios reales,
    video de bienvenida del curso + subir el de materiales, preguntas definitivas de las
@@ -313,4 +303,3 @@ verifica enlaces internos antes de cada publicación.
 - El sitio **no tiene CSP** a propósito (mucho CSS y JS inline). Ver README para lo que
   habría que medir antes de escribir una. Sí lleva `X-Content-Type-Options`,
   `Referrer-Policy` y `X-Frame-Options` en `vercel.json`.
-- La API key del asistente IA va en variable de entorno de Vercel, nunca en el repo/front.

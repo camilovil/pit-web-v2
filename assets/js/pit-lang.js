@@ -113,24 +113,22 @@
     'Mapas de Google y videos de YouTube. Al cargarlos, esos proveedores reciben datos técnicos.': 'Google Maps and YouTube videos. When loaded, those providers receive technical data.',
     'Usar solo lo necesario': 'Use only what is necessary',
 
-    // ── Chrome compartido: asistente IA y botón volver arriba ─────────────
+    // ── Chrome compartido: asistente y botón volver arriba ────────────────
     // El widget del chat lo arma entero pit-chat.js y el botón de volver arriba
     // lo arma pit-scrolltop.js: NINGUNA de estas cadenas está en el HTML
     // servido, todas son RUNTIME.
     'Abrir asistente sobre PIT': 'Open the PIT assistant',   // RUNTIME
     'Cerrar asistente sobre PIT': 'Close the PIT assistant',   // RUNTIME
     'Asistente PIT': 'PIT assistant',   // RUNTIME
+    'Preguntas frecuentes del sitio': 'Frequently asked questions',   // RUNTIME
+    'Otros temas': 'Other topics',   // RUNTIME
+    'No pude cargar las respuestas. Probá de nuevo en unos segundos, o escribinos desde Contacto.': 'I could not load the answers. Try again in a few seconds, or write to us from Contact.',   // RUNTIME
     'Preguntale a PIT': 'Ask PIT',   // RUNTIME
-    'IA · Respuestas educativas': 'AI · Educational answers',   // RUNTIME
     'No reemplaza una consulta médica': 'Not a substitute for medical advice',   // RUNTIME
     'Cerrar el asistente': 'Close the assistant',   // RUNTIME
     'Conversación con el asistente': 'Conversation with the assistant',   // RUNTIME
     '¿Qué es PIT?': 'What is PIT?',   // RUNTIME
-    '¿Cuándo estará disponible el curso?': 'When will the course be available?',   // RUNTIME
-    'Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?': 'Hi 👋 I am the site assistant. I can explain what PIT is, how it works and which free resources are available. What would you like to know?',   // RUNTIME
     'Escribiendo…': 'Typing…',   // RUNTIME
-    'El asistente no está disponible por ahora. Podés escribirnos o dejar tu pregunta en el foro, y te respondemos.': 'The assistant is unavailable right now. You can write to us or leave your question in the forum, and we will answer.',   // RUNTIME
-    'No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.': 'I could not answer right now. Try again in a few seconds or contact us through the Contact page.',   // RUNTIME
     'Ir a Contacto': 'Go to Contact',   // RUNTIME
     'Preguntar en el foro': 'Ask in the forum',   // RUNTIME
     'Ir a Contacto →': 'Go to Contact →',   // RUNTIME

@@ -1,12 +1,16 @@
-// PIT — Asistente IA flotante (consume /api/chat, función serverless de Vercel)
+// PIT — Asistente del sitio (sin IA): preguntas y respuestas fijas.
+//
+// Las respuestas NO se escriben acá: salen de _content/bot.json y de las
+// preguntas frecuentes publicadas (faq.html, jornada-pit.html), que
+// _build/sync-bot.js junta en assets/js/pit-bot-data.js. Este archivo solo
+// dibuja el widget, carga esa base la primera vez que alguien lo abre y busca
+// la respuesta que mejor coincide con lo que se escribió. No hay servidor ni
+// API: todo pasa en el navegador y no tiene costo.
 (function () {
   if (window.__pitChat) return;
   window.__pitChat = true;
 
-  // El prompt de sistema del asistente vive en la función serverless
-  // (api/chat.js), no acá — así no se puede manipular desde el navegador.
-
-  var SUGERIDAS = ['¿Qué es PIT?', '¿Duelen las inyecciones?', '¿Cuándo estará disponible el curso?'];
+  var DATOS = '/assets/js/pit-bot-data.js?v=1';
 
   function tr(text) {
     return window.pitTranslate ? window.pitTranslate(text) : text;
@@ -65,6 +69,38 @@
     '@media (max-width: 480px) { .pitchat-panel { inset-inline-end: 16px; inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { inset-inline-end: 20px; inset-inline-end: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); padding: 0; width: 56px; justify-content: center; } .pitchat-fab-label, .pitchat-fab-dot { display: none; } .pitchat-fab-icon { display: block; } .pitchat-close { width: 44px; height: 44px; flex: 0 0 44px; } }'
   ].join('\n');
 
+  // ── Búsqueda ─────────────────────────────────────────────────────────────
+  // Sin tildes, sin mayúsculas y sin signos: "¿Cuánto sale?" y "cuanto sale"
+  // son lo mismo. Las claves matchean también el comienzo de una palabra
+  // ("sesion" encuentra "sesiones").
+  function norm(t) {
+    return (' ' + String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ') + ' ').replace(/\s+/g, ' ');
+  }
+  var VACIAS = ' que de la el los las un una unos unas y o u en es son se me mi mis por para con como cual cuales cuanto cuanta cuantos a al del lo le les hay tiene tienen tengo puedo puede quiero queria saber sobre si no su sus te tu tus mas muy eso esto este esta estan ser hola buenas buen dia gracias favor pit ';
+  function palabras(t) {
+    return norm(t).trim().split(' ').filter(function (w) { return w.length > 2 && VACIAS.indexOf(' ' + w + ' ') === -1; });
+  }
+  function puntaje(e, q) {
+    var qn = norm(q), s = 0;
+    (e.claves || []).forEach(function (c) {
+      var cn = norm(c).trim();
+      if (cn && qn.indexOf(' ' + cn) !== -1) s += 2 + (cn.split(' ').length - 1) * 1.5;   // frase más larga, más peso
+    });
+    var pp = palabras(e.pregunta);
+    palabras(q).forEach(function (w) {
+      var raiz = w.slice(0, 5);
+      if (pp.some(function (x) { return x.slice(0, 5) === raiz; })) s += 1;
+    });
+    return s;
+  }
+  function buscar(base, q) {
+    return base.entradas
+      .map(function (e) { return { e: e, s: puntaje(e, q) }; })
+      .filter(function (x) { return x.s > 0; })
+      .sort(function (a, b) { return b.s - a.s; });
+  }
+
   function boot() {
     var style = document.createElement('style');
     style.textContent = css;
@@ -86,18 +122,16 @@
     panel.innerHTML =
       '<div class="pitchat-head">' +
         '<span class="pitchat-head-pipe" aria-hidden="true"></span>' +
-        '<span class="pitchat-head-title">' + tr('Asistente PIT') + '<small>' + tr('IA · Respuestas educativas') + '</small></span>' +
+        '<span class="pitchat-head-title">' + tr('Asistente PIT') + '<small>' + tr('Preguntas frecuentes del sitio') + '</small></span>' +
         '<button class="pitchat-close" type="button" aria-label="' + tr('Cerrar el asistente') + '"><span aria-hidden="true">×</span></button>' +
       '</div>' +
-      // role="log" + aria-live="polite": las respuestas del bot se agregan al
-      // DOM sin ningún aviso. Sin región viva, quien usa lector de pantalla
-      // escribe la pregunta y no se entera nunca de que llegó la respuesta.
-      // aria-relevant="additions" para que solo se anuncie lo nuevo (el
-      // "Escribiendo…" se borra al llegar la respuesta y no debe releerse).
+      // role="log" + aria-live="polite": las respuestas se agregan al DOM sin
+      // ningún aviso. Sin región viva, quien usa lector de pantalla escribe la
+      // pregunta y no se entera de que llegó la respuesta.
       '<div class="pitchat-msgs" role="log" aria-live="polite" aria-relevant="additions" aria-label="' + tr('Conversación con el asistente') + '"></div>' +
       '<div class="pitchat-sugs"></div>' +
       '<form class="pitchat-form">' +
-        '<input class="pitchat-input" type="text" aria-label="' + tr('Escribí tu pregunta sobre PIT') + '" placeholder="' + tr('Preguntá sobre PIT…') + '" maxlength="400">' +
+        '<input class="pitchat-input" type="text" aria-label="' + tr('Escribí tu pregunta sobre PIT') + '" placeholder="' + tr('Preguntá sobre PIT…') + '" maxlength="200" enterkeyhint="send">' +
         '<button class="pitchat-send" type="submit" aria-label="' + tr('Enviar pregunta') + '">→</button>' +
       '</form>' +
       '<div class="pitchat-note">' + tr('No reemplaza una consulta médica') + '</div>';
@@ -110,7 +144,7 @@
     var form = panel.querySelector('.pitchat-form');
     var input = panel.querySelector('.pitchat-input');
     var sendBtn = panel.querySelector('.pitchat-send');
-    var history = [];
+    var base = null;
     var busy = false;
 
     function add(role, text) {
@@ -122,91 +156,108 @@
       return d;
     }
 
-    function renderSugs() {
+    // Los enlaces salen de la base, que el build ya validó; igual se aceptan
+    // solo rutas internas y cada <a> se arma con textContent.
+    function addEnlaces(enlaces) {
+      if (!enlaces || !enlaces.length) return;
+      var box = document.createElement('div');
+      box.className = 'pitchat-enlaces';
+      enlaces.forEach(function (e) {
+        if (!e || typeof e.href !== 'string' || e.href.charAt(0) !== '/' || e.href.charAt(1) === '/') return;
+        var a = document.createElement('a');
+        a.className = 'pitchat-enlace';
+        a.href = e.href;
+        a.textContent = tr(e.texto) + ' →';
+        box.appendChild(a);
+      });
+      if (box.childNodes.length) { msgsEl.appendChild(box); msgsEl.scrollTop = msgsEl.scrollHeight; }
+    }
+
+    function porId(id) {
+      for (var i = 0; i < base.entradas.length; i++) if (base.entradas[i].id === id) return base.entradas[i];
+      return null;
+    }
+
+    // Botones de preguntas: cada uno tiene el texto que se muestra y la
+    // entrada que responde, así tocarlo nunca depende de la búsqueda.
+    function chips(lista) {
       sugsEl.innerHTML = '';
-      SUGERIDAS.forEach(function (q) {
-        var label = tr(q);
+      lista.forEach(function (c) {
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'pitchat-sug';
-        b.textContent = label;
-        b.addEventListener('click', function () { send(label); });
+        b.textContent = tr(c.texto);
+        b.addEventListener('click', function () {
+          if (c.id === '__temas') { temas(); return; }   // vuelve a mostrar los temas, sin responder nada
+          responder(c.texto, porId(c.id));
+        });
         sugsEl.appendChild(b);
       });
     }
+    function temas() { chips(base.temas); }
+    function relacionadas(e) {
+      var lista = (e.relacionadas || []).map(porId).filter(Boolean).slice(0, 3)
+        .map(function (r) { return { texto: r.pregunta, id: r.id }; });
+      lista.push({ texto: 'Otros temas', id: '__temas' });
+      chips(lista);
+    }
 
-    function send(text) {
-      text = (text || '').trim();
-      if (!text || busy) return;
+    function responder(pregunta, entrada) {
+      if (busy) return;
+      var preguntaEl = add('user', pregunta);
       busy = true;
       sendBtn.disabled = true;
       sugsEl.innerHTML = '';
-      add('user', text);
-      history.push({ role: 'user', content: text });
       var typing = add('bot typing', tr('Escribiendo…'));
-
-      // `enlaces` solo llega en las respuestas que arma el propio servidor
-      // (hoy: el aviso de que el asistente no está disponible). Nunca viene del
-      // modelo. Cada <a> se construye con createElement y textContent, así que
-      // ni el texto ni el href pueden inyectar markup.
-      var done = function (reply, enlaces) {
+      var resultados = entrada ? [] : buscar(base, pregunta);
+      if (!entrada && resultados.length && resultados[0].s >= 2) entrada = resultados[0].e;
+      // Una pausa corta para que la respuesta no aparezca de golpe.
+      setTimeout(function () {
         typing.remove();
-        add('bot', tr(reply));
-        if (Array.isArray(enlaces) && enlaces.length) {
-          var box = document.createElement('div');
-          box.className = 'pitchat-enlaces';
-          enlaces.forEach(function (e) {
-            if (!e || typeof e.href !== 'string' || typeof e.texto !== 'string') return;
-            // Solo rutas internas: nada que empiece por un esquema.
-            if (e.href.charAt(0) !== '/') return;
-            var a = document.createElement('a');
-            a.className = 'pitchat-enlace';
-            a.href = e.href;
-            a.textContent = tr(e.texto) + ' →';
-            box.appendChild(a);
-          });
-          if (box.childNodes.length) {
-            msgsEl.appendChild(box);
-            msgsEl.scrollTop = msgsEl.scrollHeight;
-          }
+        if (entrada) {
+          add('bot', entrada.respuesta);
+          addEnlaces(entrada.enlaces);
+          relacionadas(entrada);
+        } else {
+          add('bot', base.sin_respuesta);
+          var parecidas = resultados.slice(0, 3).map(function (r) { return { texto: r.e.pregunta, id: r.e.id }; });
+          if (parecidas.length) { parecidas.push({ texto: 'Otros temas', id: '__temas' }); chips(parecidas); }
+          else temas();
+          addEnlaces([{ texto: 'Escribinos', href: '/contacto' }, { texto: 'Preguntar en el foro', href: '/foro#pregunta' }]);
         }
-        history.push({ role: 'assistant', content: reply });
+        // Que se lea desde la pregunta: con una respuesta larga, quedarse
+        // abajo de todo obligaba a subir para encontrar dónde empezaba.
+        msgsEl.scrollTop += preguntaEl.getBoundingClientRect().top - msgsEl.getBoundingClientRect().top - 12;
         busy = false;
         sendBtn.disabled = false;
-        input.focus();
+      }, 380);
+    }
+
+    function cargar(listo) {
+      if (base) return listo();
+      var typing = add('bot typing', tr('Escribiendo…'));
+      var s = document.createElement('script');
+      s.src = DATOS;
+      s.onload = function () {
+        typing.remove();
+        base = window.PIT_BOT;
+        if (base) listo();
+        else add('bot', tr('No pude cargar las respuestas. Probá de nuevo en unos segundos, o escribinos desde Contacto.'));
       };
-
-      // Llama a la función serverless (/api/chat), que a su vez llama a la API
-      // de Anthropic con la key server-side. El prompt de sistema y los límites
-      // viven en el servidor; acá solo mandamos el historial de la charla.
-      fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history.slice(-12) })
-      }).then(function (r) {
-        return r.json().then(function (data) {
-          return { ok: r.ok, data: data };
-        });
-      }).then(function (res) {
-        if (!res.ok || !res.data || !res.data.reply) {
-          throw new Error('bad_response');
-        }
-        done(res.data.reply, res.data.enlaces);
-      }).catch(function () {
+      s.onerror = function () {
         typing.remove();
-        add('bot', tr('No pude responder en este momento. Probá de nuevo en unos segundos, o escribinos desde Contacto.'));
-        history.pop(); // quitamos el turno del usuario que no llegó a responderse
-        busy = false;
-        sendBtn.disabled = false;
-        input.focus();
-      });
+        add('bot', tr('No pude cargar las respuestas. Probá de nuevo en unos segundos, o escribinos desde Contacto.'));
+        s.remove();
+      };
+      document.head.appendChild(s);
     }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var v = input.value;
+      var v = input.value.trim();
+      if (!v || busy) return;
       input.value = '';
-      send(v);
+      cargar(function () { responder(v, null); });
     });
 
     // El estado abierto/cerrado se refleja en aria-expanded del FAB: sin eso el
@@ -225,14 +276,14 @@
       var open = !panel.classList.contains('open');
       setOpen(open);
       if (open && !msgsEl.children.length) {
-        add('bot', tr('Hola 👋 Soy el asistente del sitio. Puedo contarte qué es PIT, cómo funciona y qué recursos gratuitos hay. ¿Qué querés saber?'));
-        renderSugs();
+        cargar(function () { add('bot', base.saludo); temas(); });
       }
-      if (open) input.focus();
+      // En el celular no se enfoca el campo al abrir: abriría el teclado y
+      // taparía los botones de temas, que es por donde empieza casi todo el mundo.
+      if (open && window.matchMedia && matchMedia('(hover: hover)').matches) input.focus();
     });
     panel.querySelector('.pitchat-close').addEventListener('click', close);
-    // Escape cierra: es un panel flotante que tapa contenido y hasta ahora la
-    // única forma de salir era encontrar la × con el mouse o con Tab.
+    // Escape cierra: es un panel flotante que tapa contenido.
     panel.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' || e.key === 'Esc') { e.stopPropagation(); close(); }
     });

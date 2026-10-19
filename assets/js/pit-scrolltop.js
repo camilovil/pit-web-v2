@@ -1,4 +1,4 @@
-// PIT — Botón "volver arriba", apilado sobre el FAB del asistente IA.
+// PIT — Botón "volver arriba", apilado sobre el FAB del asistente.
 // Aparece recién al bajar scroll; respeta prefers-reduced-motion.
 (function () {
   if (window.__pitScrollTop) return;
