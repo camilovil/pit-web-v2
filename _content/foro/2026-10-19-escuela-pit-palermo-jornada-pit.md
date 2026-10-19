@@ -11,6 +11,7 @@ lectura: 3
 tags: Escuela PIT, Cursos, Noticias
 resumen: La Escuela PIT abre su sede en Palermo, en Gurruchaga 2426. La inauguramos el sábado 14 de noviembre con la Jornada P.I.T., un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso, presencial o virtual.
 portada: /img/jornada/practica.webp
+seguiLeyendoExcluir: curso-salta-miembros-inferiores, curso-jujuy-dorso-lumbar, curso-tucuman-cabeza-cuello-hombro
 ---
 La Escuela PIT tiene una nueva sede en Palermo, en **Gurruchaga 2426**. Es un espacio pensado para formar profesionales en PIT con lo que más cuesta encontrar en un curso: práctica de cerca, con pacientes reales.
 

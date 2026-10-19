@@ -112,6 +112,11 @@ function validar(posts) {
       }
     }
 
+    // --- seguiLeyendoExcluir (opcional): slugs que no se sugieren al pie ---
+    for (const slug of excluidos(p)) {
+      if (!posts.some(o => o.slug === slug)) err(p, 'seguiLeyendoExcluir', `"${slug}" no es el slug de ninguna publicación`);
+    }
+
     // --- links e imágenes del cuerpo: esquema permitido ---
     let m;
     const links = /\[([^\]]+)\]\(([^)]+)\)/g;
@@ -378,11 +383,20 @@ ${CARRUSEL_SCRIPT}
 </html>
 `;
 
+// Campo opcional `seguiLeyendoExcluir: slug, slug` del frontmatter: publicaciones
+// que NO se sugieren en "Seguí leyendo" de ese post. Lo usa la nota de la Escuela
+// PIT Palermo para no mostrar los cursos del NOA de septiembre al lado de la
+// Jornada: el lector podía entender que la Jornada era allá.
+function excluidos(p) {
+  return String(p.seguiLeyendoExcluir || '').split(',').map(x => x.trim()).filter(Boolean);
+}
+
 // ---------- página de publicación ----------
 function renderPost(post, posts, idx) {
   const pre = '../';
   const older = posts[idx + 1];
-  const others = posts.filter(p => p !== post).slice(0, 3);
+  const fuera = excluidos(post);
+  const others = posts.filter(p => p !== post && !fuera.includes(p.slug)).slice(0, 3);
   const isQA = post.tipo === 'qa';
   const byline = isQA ? 'Responde el Dr. Ricardo D. Frusso' : 'Por el Dr. Ricardo D. Frusso';
   // CAT_SHORT/AUD/CAT salen de las tablas de este archivo (y validar() ya
