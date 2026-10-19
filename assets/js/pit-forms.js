@@ -16,7 +16,12 @@
   // comparten form: se distinguen por el _subject y el campo `tipo` de cada envío.
   var ENDPOINTS = {
     foro:     'https://formspree.io/f/xykvrdad',
-    contacto: 'https://formspree.io/f/xykvrdad'
+    contacto: 'https://formspree.io/f/xykvrdad',
+    // Jornada P.I.T.: form PROPIO en Formspree cuyo destino es
+    // ricardo.frusso@gmail.com (el mail de la campaña). Mientras diga
+    // REEMPLAZAR, el formulario de /jornada-pit abre el mail de la persona con
+    // la consulta ya escrita en vez de enviar (ver _dc-src/cores/jornada-pit.html).
+    jornada:  'https://formspree.io/f/REEMPLAZAR-JORNADA'
   };
 
   function configured(url) {

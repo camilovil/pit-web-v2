@@ -6,7 +6,7 @@
        secundaria (bloque chico debajo de las modalidades, nunca en el titular;
        pedido del cliente del 19.10.2026), los datos de pago (alias, titular)
        NUNCA: se mandan por privado al reservar. Nunca "te habilita", sin emojis
-       ni signos de exclamación, CTA único "Más info →", y nunca el número de
+       ni signos de exclamación, CTA "Más info" (sin flecha, pedido del cliente), y nunca el número de
        cupo: solo "cupos limitados". */
     .jp { --jp-bone: #FAFAF7; color: var(--pit-ink); }
     .jp-wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
@@ -133,14 +133,51 @@
     .jp-faq details p { margin: 0 0 20px; font-size: var(--txt-sm); line-height: 1.6; color: var(--pit-ink-60); max-width: 70ch; }
 
     /* ---- más info: el cierre ---- */
-    .jp-final { background: var(--v2-navy); color: #FFFFFF; border-radius: 28px; padding: clamp(36px, 6vw, 72px); display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+    .jp-final { background: var(--v2-navy); color: #FFFFFF; border-radius: 28px; padding: clamp(24px, 5vw, 64px); display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
     .jp-final .jp-mono { color: #9DB7F5; }
     .jp-final h2 { color: #FFFFFF; }
     .jp-final p { color: rgba(255,255,255,0.85); font-size: var(--txt-md); line-height: 1.6; margin: 16px 0 0; max-width: 46ch; }
     .jp-mail { display: inline-block; margin-top: 22px; font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; color: #7FA6FF; overflow-wrap: anywhere; }
     .jp-mail:hover { color: #FFFFFF; }
-    .jp-final-acc { display: grid; gap: 12px; justify-items: stretch; }
-    .jp-final-acc .v2-btn { width: 100%; padding: 18px 28px; font-size: var(--txt-md); }
+    .jp-final-acc { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .jp-btn-cta { padding: 17px 36px; font-size: var(--txt-md); letter-spacing: -0.005em; box-shadow: 0 10px 26px rgba(37,99,235,0.35); }
+
+    /* ---- formulario de consulta (Formspree vía pit-forms.js → ricardo.frusso@gmail.com) ---- */
+    .jp-form, .jp-ok { background: #FFFFFF; color: var(--pit-ink); border-radius: 20px; padding: clamp(24px, 3vw, 34px); box-sizing: border-box; width: 100%; min-width: 0; }
+    .jp-form[hidden], .jp-ok[hidden] { display: none; }
+    .jp-form h3, .jp-ok h3 { font-size: var(--txt-xl); margin: 0; letter-spacing: -0.01em; }
+    .jp-form > p { margin: 6px 0 20px; font-size: var(--txt-sm); line-height: 1.5; color: var(--pit-ink-60); }
+    .jp-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .jp-fld { display: grid; gap: 6px; min-width: 0; }
+    .jp-fld--full { grid-column: 1 / -1; }
+    .jp-fld label, .jp-fld legend { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pit-ink-60); padding: 0; }
+    .jp-fld label small { text-transform: none; letter-spacing: 0; font-family: var(--pit-font-sans); color: var(--pit-ink-40); }
+    /* 16px en mobile: con menos, iOS Safari hace zoom a toda la página al enfocar el campo. */
+    .jp-fld input, .jp-fld textarea { font-family: var(--pit-font-sans); font-size: 16px; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: 12px; background: #FFFFFF; color: var(--pit-ink); outline: none; width: 100%; box-sizing: border-box; }
+    @media (min-width: 640px) { .jp-fld input, .jp-fld textarea { font-size: var(--txt-sm); } }
+    .jp-fld input:focus, .jp-fld textarea:focus { border-color: var(--v2-blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+    .jp-fld [aria-invalid="true"] { border-color: var(--pit-error); }
+    .jp-fld textarea { resize: vertical; min-height: 84px; }
+    fieldset.jp-fld { border: 0; margin: 0; padding: 0; }
+    .jp-opciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .jp-fld .jp-opcion { position: relative; font-family: var(--pit-font-sans); text-transform: none; letter-spacing: 0; font-size: inherit; }
+    .jp-opcion input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+    .jp-opcion span { display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--pit-ink-20); font-size: var(--txt-sm); font-weight: 500; color: var(--pit-ink); transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+    .jp-opcion input:checked + span { background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
+    .jp-opcion input:focus-visible + span { outline: 3px solid rgba(37,99,235,0.45); outline-offset: 2px; }
+    .jp-check { display: flex; gap: 10px; align-items: flex-start; font-size: var(--txt-sm); line-height: 1.45; cursor: pointer; }
+    .jp-check input { width: 20px; height: 20px; margin: 0; flex: 0 0 auto; accent-color: var(--v2-blue); }
+    .jp-enviar { width: 100%; margin-top: 18px; padding: 17px 28px; font-size: var(--txt-md); }
+    .jp-enviar[disabled] { opacity: 0.7; cursor: wait; }
+    .jp-hint { font-size: var(--txt-sm); line-height: 1.5; color: var(--pit-error); margin-top: 10px; }
+    .jp-hint:empty { display: none; }
+    .jp-priv { display: block; margin-top: 12px; font-size: var(--txt-xs); line-height: 1.5; color: var(--pit-ink-40); }
+    .jp-gotcha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .jp-ok { border: 2px solid var(--v2-blue); }
+    .jp-ok-icono { width: 44px; height: 44px; border-radius: 50%; background: var(--v2-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .jp-ok p { margin: 10px 0 0; font-size: var(--txt-sm); line-height: 1.6; color: var(--pit-ink-60); }
+    .jp-ok b { color: var(--pit-ink); overflow-wrap: anywhere; }
+    .jp-ok .jp-otra { margin-top: 18px; background: none; border: 0; padding: 0; color: var(--v2-blue); font: inherit; font-size: var(--txt-sm); font-weight: 600; cursor: pointer; border-bottom: 1px solid currentColor; }
     .jp-linkbtn { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF; background: none; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 14px 18px; cursor: pointer; text-align: center; }
     .jp-linkbtn:hover { border-color: #FFFFFF; color: #FFFFFF; }
     .jp-legal { font-size: var(--txt-xs); color: var(--pit-ink-40); line-height: 1.6; margin: 24px 0 0; max-width: 80ch; }
@@ -161,6 +198,7 @@
       .jp-datos { grid-template-columns: 1fr; }
       .jp-doc { grid-template-columns: 1fr; }
       .jp-ctas .v2-btn { flex: 1 1 100%; }
+      .jp-campos { grid-template-columns: 1fr; }
     }
 </style>
 <div class="jp">
@@ -182,7 +220,7 @@
           <div><dt>Para quién</dt><dd>Médicos de todos los niveles<small>No hace falta experiencia previa en PIT</small></dd></div>
         </dl>
         <div class="jp-ctas">
-          <a class="v2-btn v2-btn--blue" href="#mas-info">Más info →</a>
+          <a class="v2-btn v2-btn--blue jp-btn-cta" href="#mas-info">Más info</a>
           <a class="v2-btn jp-btn-ghost" href="#programa">Ver el programa</a>
           <span class="jp-cupos">Cupos limitados</span>
         </div>
@@ -387,13 +425,50 @@
         <div>
           <span class="jp-mono">Cupos limitados</span>
           <h2 class="jp-h2">Reservá tu lugar en la Jornada P.I.T.</h2>
-          <p>Escribinos y te enviamos los pasos para inscribirte, los datos para transferir y toda la información de la modalidad que elijas.</p>
-          <a class="jp-mail" href="mailto:ricardo.frusso@gmail.com">ricardo.frusso@gmail.com</a>
+          <p>Dejanos tus datos y te enviamos por mail los pasos para inscribirte, los datos para transferir y toda la información de la modalidad que elijas.</p>
+          <p style="margin-top: 22px; font-size: var(--txt-sm);">También podés escribirnos directo a</p>
+          <a class="jp-mail" href="mailto:ricardo.frusso@gmail.com?subject=Jornada%20P.I.T.%20%C2%B7%20M%C3%A1s%20info" style="margin-top: 6px;">ricardo.frusso@gmail.com</a>
+          <div class="jp-final-acc">
+            <button type="button" class="jp-linkbtn" data-jp-copiar="ricardo.frusso@gmail.com">Copiar el mail</button>
+            <a class="jp-linkbtn" id="jp-compartir" href="https://wa.me/?text=Jornada%20P.I.T.%20%C2%B7%20s%C3%A1bado%2014.11%20%C2%B7%20Escuela%20PIT%2C%20sede%20Palermo%0Ahttps%3A%2F%2Fdrricardofrusso.com%2Fjornada-pit" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+          </div>
         </div>
-        <div class="jp-final-acc">
-          <a class="v2-btn v2-btn--blue" id="jp-mailto" href="mailto:ricardo.frusso@gmail.com?subject=Jornada%20P.I.T.%20%C2%B7%20M%C3%A1s%20info">Más info →</a>
-          <button type="button" class="jp-linkbtn" data-jp-copiar="ricardo.frusso@gmail.com">Copiar el mail</button>
-          <a class="jp-linkbtn" id="jp-compartir" href="https://wa.me/?text=Jornada%20P.I.T.%20%C2%B7%20s%C3%A1bado%2014.11%20%C2%B7%20Escuela%20PIT%2C%20sede%20Palermo%0Ahttps%3A%2F%2Fdrricardofrusso.com%2Fjornada-pit" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+
+        <div>
+          <form class="jp-form" id="jp-form" novalidate>
+            <h3>Pedí más información</h3>
+            <p>Te respondemos por mail a la brevedad.</p>
+            <div class="jp-campos">
+              <div class="jp-fld"><label for="jp-nombre">Nombre y apellido</label><input id="jp-nombre" name="nombre" type="text" autocomplete="name" required></div>
+              <div class="jp-fld"><label for="jp-email">Email</label><input id="jp-email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+              <div class="jp-fld"><label for="jp-esp">Especialidad</label><input id="jp-esp" name="especialidad" type="text"></div>
+              <div class="jp-fld"><label for="jp-tel">Teléfono <small>(opcional)</small></label><input id="jp-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel"></div>
+              <fieldset class="jp-fld jp-fld--full">
+                <legend>Modalidad que te interesa</legend>
+                <div class="jp-opciones">
+                  <label class="jp-opcion"><input type="radio" name="modalidad" value="Presencial" checked><span>Presencial</span></label>
+                  <label class="jp-opcion"><input type="radio" name="modalidad" value="Virtual"><span>Virtual</span></label>
+                  <label class="jp-opcion"><input type="radio" name="modalidad" value="Todavía no sé"><span>Todavía no sé</span></label>
+                </div>
+              </fieldset>
+              <label class="jp-check jp-fld--full"><input type="checkbox" id="jp-rot" name="rotacion"><span>Me interesa sumar la rotación por consultorio</span></label>
+              <div class="jp-fld jp-fld--full"><label for="jp-msg">Consulta <small>(opcional)</small></label><textarea id="jp-msg" name="mensaje" rows="3"></textarea></div>
+            </div>
+            <!-- Trampa para bots: un campo invisible que una persona nunca completa.
+                 Formspree descarta el envío si _gotcha llega con texto. -->
+            <div class="jp-gotcha" aria-hidden="true"><label for="jp-gotcha">No completar</label><input id="jp-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
+            <button type="submit" class="v2-btn v2-btn--blue jp-enviar">Más info</button>
+            <div class="jp-hint" id="jp-hint" role="alert"></div>
+            <span class="jp-priv">Usamos tus datos solo para responderte sobre la Jornada. <a href="privacidad.html">Política de privacidad</a>.</span>
+          </form>
+          <!-- tabindex="-1": al enviarse el formulario desaparece; el foco pasa a
+               este panel para que se anuncie la confirmación. -->
+          <div class="jp-ok" id="jp-ok" tabindex="-1" hidden>
+            <div class="jp-ok-icono"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+            <h3 id="jp-ok-tit">Recibimos tu consulta.</h3>
+            <p id="jp-ok-txt">Te respondemos por mail con los pasos para inscribirte.</p>
+            <button type="button" class="jp-otra" id="jp-otra">Enviar otra consulta</button>
+          </div>
         </div>
       </div>
       <p class="jp-legal">El certificado acredita la participación en la Jornada y no habilita por sí mismo la práctica. La aplicación de inyecciones queda reservada a profesionales habilitados.</p>
@@ -402,14 +477,85 @@
 
 </div>
 <script>
-  // "Más info →" abre el mail con el asunto y un pedido ya armado, para que la
-  // persona solo complete sus datos. Se arma acá y no en el href para que el
-  // HTML quede legible; sin JS el link igual abre el mail con el asunto.
   (function () {
-    var cuerpo = 'Hola, quiero recibir más información sobre la Jornada P.I.T. del sábado 14 de noviembre.\n\n'
-      + 'Nombre:\nEspecialidad:\nModalidad que me interesa (presencial o virtual):\n¿Me interesa la rotación por consultorio? (sí o no):\n';
-    var a = document.getElementById('jp-mailto');
-    if (a) a.href += '&body=' + encodeURIComponent(cuerpo);
+    // ── Formulario "Pedí más información" ─────────────────────────────────
+    // Envía con pit-forms.js al form de Formspree de la Jornada, que reenvía a
+    // ricardo.frusso@gmail.com (el mail de la campaña, no el del consultorio).
+    // Si ese endpoint todavía no está configurado (modo demo), NO se muestra
+    // "Recibimos tu consulta": se abre el mail de la persona con la consulta ya
+    // escrita, para que nunca se pierda un interesado.
+    var form = document.getElementById('jp-form');
+    var ok = document.getElementById('jp-ok');
+    if (form && ok) {
+      var $ = function (id) { return document.getElementById(id); };
+      var nombre = $('jp-nombre'), email = $('jp-email'), hint = $('jp-hint');
+      var btn = form.querySelector('.jp-enviar');
+      var DESTINO = 'ricardo.frusso@gmail.com';
+
+      var limpiar = function () {
+        hint.textContent = '';
+        [nombre, email].forEach(function (c) { c.removeAttribute('aria-invalid'); c.removeAttribute('aria-describedby'); });
+      };
+      var error = function (campo, msg) {
+        limpiar(); hint.textContent = msg;
+        if (campo) { campo.setAttribute('aria-invalid', 'true'); campo.setAttribute('aria-describedby', 'jp-hint'); campo.focus(); }
+      };
+      [nombre, email].forEach(function (c) { c.addEventListener('input', function () { if (c.getAttribute('aria-invalid')) limpiar(); }); });
+
+      // El texto de la confirmación se arma con nodos, no con innerHTML: lleva
+      // el email que escribió la persona.
+      var mostrarOk = function (titulo, antes, negrita, despues) {
+        $('jp-ok-tit').textContent = titulo;
+        var p = $('jp-ok-txt'); p.textContent = antes;
+        var b = document.createElement('b'); b.textContent = negrita; p.appendChild(b);
+        p.appendChild(document.createTextNode(despues));
+        form.hidden = true; ok.hidden = false; ok.focus();
+      };
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!nombre.value.trim()) { error(nombre, 'Escribí tu nombre para poder responderte.'); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { error(email, 'Revisá el email: no parece una dirección válida.'); return; }
+        limpiar();
+        var mod = form.querySelector('input[name="modalidad"]:checked');
+        var datos = {
+          _subject: 'Jornada P.I.T. · consulta de ' + nombre.value.trim(),
+          _gotcha: $('jp-gotcha').value,
+          tipo: 'jornada-pit',
+          nombre: nombre.value.trim(),
+          email: email.value.trim(),
+          especialidad: $('jp-esp').value.trim(),
+          telefono: $('jp-tel').value.trim(),
+          modalidad: mod ? mod.value : '',
+          rotacion: $('jp-rot').checked ? 'Sí, le interesa' : 'No marcó',
+          mensaje: $('jp-msg').value.trim()
+        };
+        var porMail = function () {
+          var cuerpo = 'Hola, quiero recibir más información sobre la Jornada P.I.T. del sábado 14 de noviembre.\n\n'
+            + 'Nombre: ' + datos.nombre + '\nEmail: ' + datos.email + '\nEspecialidad: ' + datos.especialidad
+            + '\nTeléfono: ' + datos.telefono + '\nModalidad: ' + datos.modalidad
+            + '\nRotación por consultorio: ' + datos.rotacion + (datos.mensaje ? '\n\n' + datos.mensaje : '') + '\n';
+          location.href = 'mailto:' + DESTINO + '?subject=' + encodeURIComponent(datos._subject) + '&body=' + encodeURIComponent(cuerpo);
+          mostrarOk('Tu consulta está lista para enviar.', 'Se abrió tu programa de mail con la consulta escrita: solo tenés que enviarla. Si no se abrió, escribinos a ', DESTINO, '.');
+        };
+
+        btn.disabled = true; btn.textContent = 'Enviando…';
+        var envio = window.pitSubmit ? window.pitSubmit('jornada', datos) : Promise.resolve({ ok: false });
+        envio.then(function (r) {
+          btn.disabled = false; btn.textContent = 'Más info';
+          if (r.ok && !r.demo) {
+            if (window.va) window.va('event', { name: 'Jornada consulta' });
+            mostrarOk('Recibimos tu consulta.', 'Te respondemos a ', datos.email, ' con los pasos para inscribirte. Si no ves el mail, revisá la carpeta de spam.');
+            form.reset();
+          } else if (r.demo) {
+            porMail();
+          } else {
+            error(null, 'No se pudo enviar. Probá de nuevo o escribinos a ' + DESTINO + '.');
+          }
+        });
+      });
+      $('jp-otra').addEventListener('click', function () { ok.hidden = true; form.hidden = false; nombre.focus(); });
+    }
 
     // Copiar el mail: para quien está en una computadora sin cliente de correo
     // configurado, donde el mailto no abre nada.

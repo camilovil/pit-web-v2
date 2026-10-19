@@ -56,7 +56,7 @@
     // ── Jornada P.I.T.: aviso del hero y sección de la home ──────────────
     'Para médicos': 'For physicians',
     'Jornada P.I.T. · sábado 14.11': 'Jornada P.I.T. · Saturday 14.11',
-    'Más info →': 'More info →',
+    'Más info': 'More info',
     'Ver la Jornada P.I.T.': 'See the Jornada P.I.T.',
     'Sábado 14.11 · Inauguración Escuela PIT, sede Palermo': 'Saturday 14.11 · Opening of the Escuela PIT Palermo campus',
     'Un día de práctica con pacientes reales, junto al Dr. Ricardo D. Frusso.': 'A day of hands-on practice with real patients, alongside Dr. Ricardo D. Frusso.',
