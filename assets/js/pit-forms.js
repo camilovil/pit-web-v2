@@ -17,11 +17,12 @@
   var ENDPOINTS = {
     foro:     'https://formspree.io/f/xykvrdad',
     contacto: 'https://formspree.io/f/xykvrdad',
-    // Jornada P.I.T.: form PROPIO en Formspree cuyo destino es
-    // ricardo.frusso@gmail.com (el mail de la campaña). Mientras diga
-    // REEMPLAZAR, el formulario de /jornada-pit abre el mail de la persona con
-    // la consulta ya escrita en vez de enviar (ver _dc-src/cores/jornada-pit.html).
-    jornada:  'https://formspree.io/f/REEMPLAZAR-JORNADA'
+    // Jornada P.I.T.: form PROPIO, en una cuenta de Formspree aparte registrada
+    // con ricardo.frusso@gmail.com (el mail de la campaña), porque el plan
+    // gratis admite solo dos mails vinculados por cuenta. Si este endpoint
+    // vuelve a decir REEMPLAZAR, el formulario de /jornada-pit abre el mail de
+    // la persona con la consulta ya escrita (ver _dc-src/cores/jornada-pit.html).
+    jornada:  'https://formspree.io/f/xeaewlvl'
   };
 
   function configured(url) {
