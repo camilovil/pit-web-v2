@@ -623,7 +623,17 @@
       "pagar",
       "pago",
       "transferencia",
-      "cuotas"
+      "cuotas",
+      "sale la jornada",
+      "cuesta la jornada",
+      "precio de la jornada",
+      "valor de la jornada",
+      "arancel de la jornada",
+      "sale la virtual",
+      "sale la presencial",
+      "cuesta la virtual",
+      "cuesta la presencial",
+      "sale el curso presencial"
     ]
   }
 }

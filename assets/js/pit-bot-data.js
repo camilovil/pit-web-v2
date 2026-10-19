@@ -818,7 +818,17 @@ window.PIT_BOT = {
     "pagar",
     "pago",
     "transferencia",
-    "cuotas"
+    "cuotas",
+    "sale la jornada",
+    "cuesta la jornada",
+    "precio de la jornada",
+    "valor de la jornada",
+    "arancel de la jornada",
+    "sale la virtual",
+    "sale la presencial",
+    "cuesta la virtual",
+    "cuesta la presencial",
+    "sale el curso presencial"
    ],
    "respuesta": "Presencial $770.000 y virtual $500.000. La rotación por consultorio, opcional, suma $300.000 a cualquiera de las dos. El pago es total, por transferencia, y no tiene devolución. Escribinos a ricardo.frusso@gmail.com y te enviamos los datos para transferir y reservar tu lugar.",
    "enlaces": [
