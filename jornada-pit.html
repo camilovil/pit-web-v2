@@ -166,7 +166,11 @@
     .jp-faq details p { margin: 0 0 20px; font-size: var(--txt-sm); line-height: 1.6; color: var(--pit-ink-60); max-width: 70ch; }
 
     /* ---- más info: el cierre ---- */
-    .jp-final { background: var(--v2-navy); color: #FFFFFF; border-radius: 28px; padding: clamp(24px, 5vw, 64px); display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+    .jp-final { background: var(--v2-navy); color: #FFFFFF; border-radius: 28px; padding: clamp(24px, 5vw, 64px); display: grid; grid-template-columns: 0.9fr 1.1fr; grid-template-areas: "intro form" "extra form"; column-gap: clamp(28px, 4vw, 56px); row-gap: 8px; align-items: center; }
+    .jp-final-intro { grid-area: intro; align-self: end; }
+    .jp-final-extra { grid-area: extra; align-self: start; }
+    .jp-final-extra p { margin-top: 14px; }
+    .jp-final-form { grid-area: form; min-width: 0; }
     .jp-final .jp-mono { color: #9DB7F5; }
     .jp-final h2 { color: #FFFFFF; }
     .jp-final p { color: rgba(255,255,255,0.85); font-size: var(--txt-md); line-height: 1.6; margin: 16px 0 0; max-width: 46ch; }
@@ -233,6 +237,8 @@
 
     @media (max-width: 900px) {
       .jp-hero-grid, .jp-prog-grid, .jp-final { grid-template-columns: 1fr; }
+      /* En una columna: título, formulario y recién después el contacto directo. */
+      .jp-final { grid-template-areas: "intro" "form" "extra"; row-gap: 24px; }
       .jp-flyer { max-width: 420px; transform: none; }
       .jp-incluye { grid-template-columns: 1fr 1fr; }
       .jp-sticky { position: static; }
@@ -244,10 +250,37 @@
       .jp-item--top { grid-column: auto; }
       .jp-rot { grid-template-columns: 1fr; }
       .jp-rot-tag { justify-self: start; }
-      .jp-datos { grid-template-columns: 1fr; }
+      /* Dos columnas también en el celular: apiladas, las cuatro filas
+         empujaban el botón y el flyer fuera del primer pantallazo. */
+      .jp-datos { grid-template-columns: 1fr 1fr; margin-top: 26px; }
+      .jp-datos > div { padding: 12px 10px 12px 0; }
+      .jp-datos dd { font-size: 15px; line-height: 1.3; }
+      .jp-datos dd small { font-size: 13px; line-height: 1.35; margin-top: 3px; }
+      .jp-hero-sub { margin-top: 16px; }
+      .jp-ctas { margin-top: 24px; }
       .jp-doc { grid-template-columns: 1fr; }
       .jp-ctas .v2-btn { flex: 1 1 100%; }
       .jp-campos { grid-template-columns: 1fr; }
+      /* Formulario en el celular: menos marco alrededor (la caja azul y la
+         tarjeta blanca sumaban dos márgenes y lo dejaban angosto), etiquetas
+         más legibles y todo con altura cómoda para el dedo. */
+      .jp-final { padding: 26px 14px 22px; border-radius: 24px; }
+      .jp-final-intro, .jp-final-extra { padding: 0 8px; }
+      .jp-final h2 { font-size: 30px; }
+      .jp-final-intro p { font-size: var(--txt-sm); margin-top: 12px; }
+      .jp-form, .jp-ok { padding: 22px 18px; border-radius: 18px; }
+      .jp-form h3 { font-size: 21px; }
+      .jp-form > p { margin-bottom: 16px; }
+      .jp-campos { gap: 16px; }
+      .jp-fld label, .jp-fld legend { font-size: 12px; color: var(--pit-ink-80); }
+      .jp-fld input { min-height: 50px; padding: 13px 14px; }
+      .jp-opciones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+      .jp-fld .jp-opcion span { width: 100%; box-sizing: border-box; justify-content: center; text-align: center; min-height: 50px; padding: 4px 6px; font-size: 14px; line-height: 1.15; border-radius: 14px; }
+      .jp-check { min-height: 52px; align-items: center; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: 14px; }
+      .jp-check:has(input:checked) { border-color: var(--v2-blue); background: var(--v2-tint); }
+      .jp-enviar { min-height: 56px; margin-top: 20px; }
+      .jp-final-acc .jp-linkbtn { flex: 1 1 auto; text-align: center; }
+      .jp-mail { font-size: 20px; }
     }
 
   </style>
@@ -521,11 +554,14 @@
   <section class="jp-sec" id="mas-info" style="scroll-margin-top: 100px;">
     <div class="jp-wrap">
       <div class="jp-final">
-        <div>
+        <div class="jp-final-intro">
           <span class="jp-mono">Cupos limitados</span>
           <h2 class="jp-h2">Reservá tu lugar en la Jornada P.I.T.</h2>
           <p>Dejanos tus datos y te enviamos por mail los pasos para inscribirte, los datos para transferir y toda la información de la modalidad que elijas.</p>
-          <p style="margin-top: 22px; font-size: var(--txt-sm);">También podés escribirnos directo a</p>
+        </div>
+
+        <div class="jp-final-extra">
+          <p style="font-size: var(--txt-sm);">También podés escribirnos directo a</p>
           <a class="jp-mail" href="mailto:ricardo.frusso@gmail.com?subject=Jornada%20P.I.T.%20%C2%B7%20M%C3%A1s%20info" style="margin-top: 6px;">ricardo.frusso@gmail.com</a>
           <div class="jp-final-acc">
             <button type="button" class="jp-linkbtn" data-jp-copiar="ricardo.frusso@gmail.com">Copiar el mail</button>
@@ -533,21 +569,21 @@
           </div>
         </div>
 
-        <div>
+        <div class="jp-final-form">
           <form class="jp-form" id="jp-form" novalidate>
             <h3>Pedí más información</h3>
             <p>Te respondemos por mail a la brevedad.</p>
             <div class="jp-campos">
-              <div class="jp-fld"><label for="jp-nombre">Nombre y apellido</label><input id="jp-nombre" name="nombre" type="text" autocomplete="name" required></div>
-              <div class="jp-fld"><label for="jp-email">Email</label><input id="jp-email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
-              <div class="jp-fld"><label for="jp-esp">Especialidad</label><input id="jp-esp" name="especialidad" type="text"></div>
-              <div class="jp-fld"><label for="jp-tel">Teléfono <small>(opcional)</small></label><input id="jp-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel"></div>
+              <div class="jp-fld"><label for="jp-nombre">Nombre y apellido</label><input id="jp-nombre" name="nombre" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" required></div>
+              <div class="jp-fld"><label for="jp-email">Email</label><input id="jp-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" required></div>
+              <div class="jp-fld"><label for="jp-esp">Especialidad</label><input id="jp-esp" name="especialidad" type="text" autocapitalize="sentences" enterkeyhint="next"></div>
+              <div class="jp-fld"><label for="jp-tel">Teléfono <small>(opcional)</small></label><input id="jp-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next"></div>
               <fieldset class="jp-fld jp-fld--full">
                 <legend>Modalidad que te interesa</legend>
                 <div class="jp-opciones">
                   <label class="jp-opcion"><input type="radio" name="modalidad" value="Presencial" checked><span>Presencial</span></label>
                   <label class="jp-opcion"><input type="radio" name="modalidad" value="Virtual"><span>Virtual</span></label>
-                  <label class="jp-opcion"><input type="radio" name="modalidad" value="Todavía no sé"><span>Todavía no sé</span></label>
+                  <label class="jp-opcion"><input type="radio" name="modalidad" value="A definir"><span>A definir</span></label>
                 </div>
               </fieldset>
               <label class="jp-check jp-fld--full"><input type="checkbox" id="jp-rot" name="rotacion"><span>Me interesa sumar la rotación por consultorio</span></label>
