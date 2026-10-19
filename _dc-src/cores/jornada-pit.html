@@ -105,11 +105,13 @@
     .jp-precios dd { margin: 4px 0 0; font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.01em; }
     .jp-precios .jp-usd { display: block; font-size: var(--txt-sm); font-weight: 500; color: var(--v2-blue); margin-top: 2px; letter-spacing: 0; }
     .jp-precios dd small { display: block; font-size: var(--txt-xs); font-weight: 400; color: var(--pit-ink-60); margin-top: 2px; letter-spacing: 0; }
+    .jp-precios-cta { grid-column: 2; justify-self: start; margin-top: 12px; }
     .jp-precios p { grid-column: 2; margin: 6px 0 0; font-size: var(--txt-xs); line-height: 1.5; color: var(--pit-ink-60); }
     @media (max-width: 760px) {
       .jp-precios { grid-template-columns: 1fr; }
       .jp-precios dl { grid-template-columns: 1fr; gap: 12px; }
       .jp-precios p { grid-column: auto; }
+      .jp-precios-cta { grid-column: auto; justify-self: stretch; }
     }
 
     /* ---- fotos de jornadas anteriores (sin nombrar ciudades: confunde dónde es el curso) ---- */
@@ -441,6 +443,7 @@
           <div><dt>Rotación por consultorio</dt><dd>$300.000<span class="jp-usd">USD 200 desde el exterior</span><small>Opcional · 4 horas · se suma a tu modalidad</small></dd></div>
         </dl>
         <p>El pago es total, por transferencia, y no tiene devolución. Los datos para transferir te los enviamos por mail cuando reservás tu lugar.</p>
+        <a class="v2-btn v2-btn--blue jp-btn-cta jp-precios-cta" href="#mas-info" data-jp-al-form>Reservar mi lugar</a>
       </div>
     </div>
   </section>
@@ -599,6 +602,14 @@
       new IntersectionObserver(function (es) { es.forEach(function (e) { vistos.form = e.isIntersecting; }); actualizar(); }, { rootMargin: '0px 0px -30% 0px' })
         .observe(destino);
     }
+
+    // "Reservar mi lugar": además de bajar al formulario, deja el cursor en el
+    // primer campo para completarlo y enviarlo sin buscar dónde empezar.
+    document.querySelectorAll('[data-jp-al-form]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setTimeout(function () { var n = document.getElementById('jp-nombre'); if (n && !n.closest('[hidden]')) n.focus({ preventScroll: true }); }, 450);
+      });
+    });
 
     // ── Formulario "Pedí más información" ─────────────────────────────────
     // Envía con pit-forms.js al form de Formspree de la Jornada, que reenvía a

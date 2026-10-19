@@ -9,7 +9,14 @@ const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><s
 // resto. Después del evento, volver al CTA de siempre:
 //   const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Descargar apuntes', variant: 'navy' };
 // y correr el build. Los apuntes siguen enlazados en la home y en el pie.
-const CTA = { href: '/jornada-pit', label: 'Jornada P.I.T. · 14.11', variant: 'blue' };
+const CTA = { href: '/jornada-pit', label: 'Jornada P.I.T.', variant: 'blue', fecha: ['14', 'NOV'] };
+
+// Con `fecha`, el botón lleva la fecha en un círculo blanco a la izquierda (mismo
+// diseño que el aviso de la home). Los estilos van inline a propósito: el nav se
+// inyecta también en curso-intro.html, que no carga pit-v2.css.
+const ctaInner = (grande) => !CTA.fecha ? CTA.label
+  : `<span aria-hidden="true" style="flex: 0 0 auto; width: ${grande ? 40 : 34}px; height: ${grande ? 40 : 34}px; border-radius: 50%; background: #FFFFFF; color: #2563EB; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1;"><b style="font-size: ${grande ? 15 : 13}px; font-weight: 700;">${CTA.fecha[0]}</b><small style="font-family: var(--pit-font-mono, ui-monospace, monospace); font-size: ${grande ? 8 : 7}px; letter-spacing: 0.1em; margin-top: 1px;">${CTA.fecha[1]}</small></span>${CTA.label}`;
+const ctaStyle = (base) => !CTA.fecha ? base : base.replace(/padding: [^;]+;/, 'padding: 5px 20px 5px 5px; gap: 10px;');
 
 // Toggle de idioma ES/EN. Markup ESTÁTICO a propósito (antes se inyectaba por JS
 // con setInterval, causando un "pop-in" visible y layout shift en la barra —
@@ -65,7 +72,7 @@ ${headerLinks}
     </nav>
     <!-- El fallback del token es necesario: curso-intro.html no carga
          pit-v2.css, así que ahí --txt-sm no estaría definido. -->
-    <a class="v2-btn v2-btn--${CTA.variant} v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">${CTA.label}</a>
+    <a class="v2-btn v2-btn--${CTA.variant} v2-nav-cta" href="${CTA.href}" style="${ctaStyle('padding: 12px 22px; font-size: var(--txt-sm, 15px);')}">${ctaInner(false)}</a>
     ${LANG_TOGGLE('v2-nav-cta')}
     <!-- aria-controls + aria-expanded: el burger abre y cierra #v2-drawer, pero
          se anunciaba siempre igual ("Abrir menú") estuviera abierto o cerrado.
@@ -76,7 +83,7 @@ ${headerLinks}
   </header>
   <nav class="v2-drawer" id="v2-drawer">
 ${drawerLinks}
-    <a class="v2-btn v2-btn--${CTA.variant}" href="${CTA.href}" style="border-bottom: none;">${CTA.label}</a>
+    <a class="v2-btn v2-btn--${CTA.variant}" href="${CTA.href}" style="${ctaStyle('padding: 15px 28px; border-bottom: none;')}${CTA.fecha ? ' justify-content: center;' : ''}">${ctaInner(true)}</a>
     ${LANG_TOGGLE('v2-lang-toggle--drawer')}
   </nav>`;
 }

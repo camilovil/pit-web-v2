@@ -138,11 +138,13 @@
     .jp-precios dd { margin: 4px 0 0; font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.01em; }
     .jp-precios .jp-usd { display: block; font-size: var(--txt-sm); font-weight: 500; color: var(--v2-blue); margin-top: 2px; letter-spacing: 0; }
     .jp-precios dd small { display: block; font-size: var(--txt-xs); font-weight: 400; color: var(--pit-ink-60); margin-top: 2px; letter-spacing: 0; }
+    .jp-precios-cta { grid-column: 2; justify-self: start; margin-top: 12px; }
     .jp-precios p { grid-column: 2; margin: 6px 0 0; font-size: var(--txt-xs); line-height: 1.5; color: var(--pit-ink-60); }
     @media (max-width: 760px) {
       .jp-precios { grid-template-columns: 1fr; }
       .jp-precios dl { grid-template-columns: 1fr; gap: 12px; }
       .jp-precios p { grid-column: auto; }
+      .jp-precios-cta { grid-column: auto; justify-self: stretch; }
     }
 
     /* ---- fotos de jornadas anteriores (sin nombrar ciudades: confunde dónde es el curso) ---- */
@@ -334,7 +336,7 @@
     </nav>
     <!-- El fallback del token es necesario: curso-intro.html no carga
          pit-v2.css, así que ahí --txt-sm no estaría definido. -->
-    <a class="v2-btn v2-btn--blue v2-nav-cta" href="/jornada-pit" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Jornada P.I.T. · 14.11</a>
+    <a class="v2-btn v2-btn--blue v2-nav-cta" href="/jornada-pit" style="padding: 5px 20px 5px 5px; gap: 10px; font-size: var(--txt-sm, 15px);"><span aria-hidden="true" style="flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; background: #FFFFFF; color: #2563EB; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1;"><b style="font-size: 13px; font-weight: 700;">14</b><small style="font-family: var(--pit-font-mono, ui-monospace, monospace); font-size: 7px; letter-spacing: 0.1em; margin-top: 1px;">NOV</small></span>Jornada P.I.T.</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -354,7 +356,7 @@
     <a href="foro.html">Foro</a>
     <a href="curso-modulo-1.html">Curso</a>
     <a href="contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--blue" href="/jornada-pit" style="border-bottom: none;">Jornada P.I.T. · 14.11</a>
+    <a class="v2-btn v2-btn--blue" href="/jornada-pit" style="padding: 5px 20px 5px 5px; gap: 10px; border-bottom: none; justify-content: center;"><span aria-hidden="true" style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: #FFFFFF; color: #2563EB; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1;"><b style="font-size: 15px; font-weight: 700;">14</b><small style="font-family: var(--pit-font-mono, ui-monospace, monospace); font-size: 8px; letter-spacing: 0.1em; margin-top: 1px;">NOV</small></span>Jornada P.I.T.</a>
     <span class="v2-lang-toggle v2-lang-toggle--drawer">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -522,6 +524,7 @@
           <div><dt>Rotación por consultorio</dt><dd>$300.000<span class="jp-usd">USD 200 desde el exterior</span><small>Opcional · 4 horas · se suma a tu modalidad</small></dd></div>
         </dl>
         <p>El pago es total, por transferencia, y no tiene devolución. Los datos para transferir te los enviamos por mail cuando reservás tu lugar.</p>
+        <a class="v2-btn v2-btn--blue jp-btn-cta jp-precios-cta" href="#mas-info" data-jp-al-form>Reservar mi lugar</a>
       </div>
     </div>
   </section>
@@ -680,6 +683,14 @@
       new IntersectionObserver(function (es) { es.forEach(function (e) { vistos.form = e.isIntersecting; }); actualizar(); }, { rootMargin: '0px 0px -30% 0px' })
         .observe(destino);
     }
+
+    // "Reservar mi lugar": además de bajar al formulario, deja el cursor en el
+    // primer campo para completarlo y enviarlo sin buscar dónde empezar.
+    document.querySelectorAll('[data-jp-al-form]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setTimeout(function () { var n = document.getElementById('jp-nombre'); if (n && !n.closest('[hidden]')) n.focus({ preventScroll: true }); }, 450);
+      });
+    });
 
     // ── Formulario "Pedí más información" ─────────────────────────────────
     // Envía con pit-forms.js al form de Formspree de la Jornada, que reenvía a
