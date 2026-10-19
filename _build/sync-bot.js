@@ -61,7 +61,9 @@ const PROVISORIA = /placeholder|a definir con|\[\[/i;
 const provisorias = [];
 const preguntasFaq = new Set();
 for (const pag of PAGINAS_FAQ) {
-  const html = fs.readFileSync(path.join(ROOT, pag.archivo), 'utf8');
+  // Sin los comentarios: una pregunta comentada en la página no está publicada
+  // y tampoco tiene que aparecer en el bot.
+  const html = fs.readFileSync(path.join(ROOT, pag.archivo), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
   const re = /<details>\s*<summary>([\s\S]*?)<\/summary>\s*<(div|p)>([\s\S]*?)<\/\2>\s*<\/details>/g;
   let m, n = 0;
   while ((m = re.exec(html))) {

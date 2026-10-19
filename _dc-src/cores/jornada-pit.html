@@ -148,6 +148,8 @@
     .jp-final p { color: rgba(255,255,255,0.85); font-size: var(--txt-md); line-height: 1.6; margin: 16px 0 0; max-width: 46ch; }
     .jp-mail { display: inline-block; margin-top: 22px; font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; color: #7FA6FF; overflow-wrap: anywhere; }
     .jp-mail:hover { color: #FFFFFF; }
+    /* Área de toque cómoda en el celular: el texto solo medía 26px de alto. */
+    @media (max-width: 640px) { .jp-mail { padding: 10px 0; } .jp-final-extra .jp-mail { margin-top: 0; } }
     .jp-final-acc { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
     .jp-btn-cta { padding: 17px 36px; font-size: var(--txt-md); letter-spacing: -0.005em; box-shadow: 0 10px 26px rgba(37,99,235,0.35); }
 

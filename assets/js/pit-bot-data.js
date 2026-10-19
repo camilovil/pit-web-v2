@@ -266,8 +266,8 @@ window.PIT_BOT = {
     }
    ],
    "relacionadas": [
-    "obra-social",
-    "sesion"
+    "sesion",
+    "¿Cuántas sesiones voy a necesitar?"
    ]
   },
   {
@@ -440,39 +440,6 @@ window.PIT_BOT = {
    "relacionadas": [
     "que-es-pit",
     "¿Tiene efectos secundarios o contraindicaciones?"
-   ]
-  },
-  {
-   "id": "obra-social",
-   "tema": "consultorio",
-   "pregunta": "¿Lo cubre mi obra social o prepaga?",
-   "claves": [
-    "obra social",
-    "prepaga",
-    "cobertura",
-    "cubre",
-    "osde",
-    "swiss medical",
-    "galeno",
-    "medicus",
-    "pami",
-    "ioma",
-    "reintegro",
-    "factura",
-    "cuanto cuesta la consulta",
-    "precio de la consulta",
-    "valor de la consulta"
-   ],
-   "respuesta": "La cobertura y el valor de la consulta dependen de cada caso: consultalo al pedir el turno, por teléfono al +54 9 11 5458-2558 o por mail a ricardo.frusso@hospitalitaliano.org.ar.",
-   "enlaces": [
-    {
-     "texto": "Contacto y turnos",
-     "href": "/contacto"
-    }
-   ],
-   "relacionadas": [
-    "turnos",
-    "sesion"
    ]
   },
   {
