@@ -67,6 +67,25 @@
     '.pitchat-send:disabled { background: #BFC7D6; cursor: default; transform: none; }',
     '.pitchat-note { font-size: var(--txt-2xs, 11px); color: #5F6C78; text-align: center; padding: 0 12px 10px; background: transparent; border-top: none; }',
     '@media (max-width: 480px) { .pitchat-panel { inset-inline-end: 16px; inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); bottom: 96px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } .pitchat-fab { inset-inline-end: 20px; inset-inline-end: calc(20px + env(safe-area-inset-right, 0px)); bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); padding: 0; width: 56px; justify-content: center; } .pitchat-fab-label, .pitchat-fab-dot { display: none; } .pitchat-fab-icon { display: block; } .pitchat-close { width: 44px; height: 44px; flex: 0 0 44px; } }'
+    // ── Celular: hoja a pantalla completa ─────────────────────────────────
+    // Flotando abajo a la derecha, con el teclado abierto el panel quedaba
+    // aplastado contra el borde de arriba y el campo para escribir quedaba
+    // detrás del teclado. Ahora ocupa la pantalla y su alto lo fija el JS con
+    // visualViewport (lo que queda visible encima del teclado). Los temas van
+    // en una sola fila deslizable para no comerse el espacio de la charla.
+    , '@media (max-width: 640px) {' +
+      ' .pitchat-panel { top: 0; left: 0; right: 0; bottom: auto; inset-inline-end: 0; width: 100%; max-width: none; height: 100vh; height: 100dvh; max-height: none; border: 0; border-radius: 0; background: #F5F7FB; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }' +
+      ' .pitchat-head { padding: 14px 14px 14px 18px; padding-top: calc(14px + env(safe-area-inset-top, 0px)); }' +
+      ' .pitchat-msgs { padding: 16px 14px; }' +
+      ' .pitchat-msg { max-width: 88%; font-size: 16px; }' +
+      ' .pitchat-sugs { flex-wrap: nowrap; overflow-x: auto; padding: 4px 14px 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }' +
+      ' .pitchat-sugs::-webkit-scrollbar { display: none; }' +
+      ' .pitchat-sug { flex: 0 0 auto; white-space: nowrap; font-size: 14px; }' +
+      ' .pitchat-form { padding: 10px 12px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); background: #FFFFFF; }' +
+      ' .pitchat-note { display: none; }' +
+      ' html.pitchat-abierto, html.pitchat-abierto body { overflow: hidden; }' +
+      ' html.pitchat-abierto .pitchat-fab, html.pitchat-abierto .pit-scrolltop { display: none; }' +
+    ' }'
   ].join('\n');
 
   // ── Búsqueda ─────────────────────────────────────────────────────────────
@@ -262,8 +281,26 @@
 
     // El estado abierto/cerrado se refleja en aria-expanded del FAB: sin eso el
     // botón se anuncia igual esté el panel abierto o cerrado.
+    // Celular: el panel ocupa lo que se ve encima del teclado. visualViewport
+    // es lo único que informa ese alto en iOS y en Android (100vh no cambia
+    // cuando aparece el teclado).
+    var celu = window.matchMedia ? matchMedia('(max-width: 640px)') : null;
+    var vv = window.visualViewport;
+    function ajustar() {
+      if (!celu || !celu.matches || !vv || !panel.classList.contains('open')) {
+        panel.style.height = ''; panel.style.top = '';
+        return;
+      }
+      panel.style.height = vv.height + 'px';
+      panel.style.top = vv.offsetTop + 'px';
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    }
+    if (vv) { vv.addEventListener('resize', ajustar); vv.addEventListener('scroll', ajustar); }
+
     function setOpen(open) {
       panel.classList.toggle('open', open);
+      document.documentElement.classList.toggle('pitchat-abierto', open && !!celu && celu.matches);
+      ajustar();
       fab.setAttribute('aria-expanded', open ? 'true' : 'false');
       fab.setAttribute('aria-label', tr(open ? 'Cerrar asistente sobre PIT' : 'Abrir asistente sobre PIT'));
     }

@@ -42,7 +42,7 @@ window.PIT_BOT = {
     "noviembre",
     "escuela pit palermo"
    ],
-   "respuesta": "Es un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso: el sábado 14 de noviembre, de 9:15 a 17:30 hs, en la Escuela PIT, sede Palermo (Gurruchaga 2426, CABA). Ese día se inaugura la sede. Es para médicos de todos los niveles y se puede cursar presencial o virtual. Te llevás la clase grabada y todo el material. Cupos limitados.",
+   "respuesta": "Es un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso: el sábado 14 de noviembre, de 9:15 a 17:30 hs, en la Escuela PIT, sede Palermo (Gurruchaga 2426, CABA). Ese día se inaugura la sede. Es para médicos de todos los niveles y se puede cursar presencial o virtual. Te llevás la clase grabada, los apuntes y el certificado. Cupos limitados.",
    "enlaces": [
     {
      "texto": "Ver la Jornada",
@@ -128,7 +128,7 @@ window.PIT_BOT = {
     "comida",
     "certificado jornada"
    ],
-   "respuesta": "En las dos modalidades: la clase grabada completa, el kit PIT (crema de dextrosa al 25%, bibliografía y apuntes), el certificado digital de participación y un descuento en los cursos online. La modalidad presencial incluye además el almuerzo y la merienda.",
+   "respuesta": "En las dos modalidades: la clase grabada completa, los apuntes, la bibliografía, el certificado digital y un descuento en los cursos online. La presencial suma el kit PIT completo, con la crema de dextrosa al 25%, y el almuerzo y la merienda.",
    "enlaces": [
     {
      "texto": "Ver la Jornada",
@@ -727,7 +727,7 @@ window.PIT_BOT = {
     "vivo lejos",
     "lejos"
    ],
-   "respuesta": "Las dos modalidades siguen el mismo programa e incluyen la clase grabada completa, el kit PIT y el certificado. En la presencial estás en la sala, hacés la primera práctica entre participantes y compartís almuerzo y merienda con el grupo.",
+   "respuesta": "Las dos modalidades siguen el mismo programa e incluyen la clase grabada completa, los apuntes, la bibliografía y el certificado. En la presencial estás en la sala, hacés la primera práctica entre participantes, compartís almuerzo y merienda con el grupo y recibís el kit PIT completo, con la crema de dextrosa al 25%.",
    "enlaces": [
     {
      "texto": "Ver la Jornada",
@@ -769,7 +769,7 @@ window.PIT_BOT = {
     "me llevo",
     "que me dan"
    ],
-   "respuesta": "La clase grabada completa, el kit PIT (crema de dextrosa al 25%, bibliografía y apuntes), el certificado digital y un descuento en los cursos online del Dr. Frusso.",
+   "respuesta": "En las dos modalidades: la clase grabada completa, los apuntes, la bibliografía, el certificado digital y un descuento en los cursos online del Dr. Frusso. En la presencial, además, el kit PIT completo con la crema de dextrosa al 25%, y el almuerzo y la merienda.",
    "enlaces": [
     {
      "texto": "Ver la Jornada",

@@ -206,6 +206,19 @@
       .jp .pit-stagger.pit-in > *:hover { transition-delay: 0s; }
     }
 
+    /* ---- botón fijo "Más info" (solo celular) ----
+       Aparece cuando el "Más info" del hero ya no se ve y se esconde al llegar
+       al formulario. Va a la izquierda del botón del asistente (56px, a 20px
+       del borde) y a su misma altura, para no taparlo. */
+    .jp-fijo { display: none; }
+    @media (max-width: 640px) {
+      .jp-fijo { display: flex; position: fixed; z-index: 940; left: 16px; right: 88px; bottom: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); height: 56px; align-items: center; justify-content: center; border-radius: 999px; background: var(--v2-blue); color: #FFFFFF; font-weight: 600; font-size: var(--txt-md); box-shadow: 0 14px 34px rgba(37,99,235,0.45); transform: translateY(140%); opacity: 0; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease; pointer-events: none; }
+      .jp-fijo.is-visible { transform: none; opacity: 1; pointer-events: auto; }
+      .jp-fijo:hover, .jp-fijo:focus-visible { color: #FFFFFF; }
+      html.pitchat-abierto .jp-fijo { display: none; }
+    }
+    @media (max-width: 640px) and (prefers-reduced-motion: reduce) { .jp-fijo { transition: none; } }
+
     @media (max-width: 900px) {
       .jp-hero-grid, .jp-prog-grid, .jp-final { grid-template-columns: 1fr; }
       /* En una columna: título, formulario y recién después el contacto directo. */
@@ -219,6 +232,17 @@
     @media (max-width: 640px) {
       .jp-incluye, .jp-mods, .jp-dos { grid-template-columns: 1fr; }
       .jp-item--top { grid-column: auto; }
+      /* Tarjetas de "Qué incluye" compactas: ícono a la izquierda y texto al
+         lado. Con el ícono arriba, las seis apiladas ocupaban casi tres
+         pantallas. */
+      .jp-item { display: grid; grid-template-columns: 32px 1fr; column-gap: 14px; align-items: start; padding: 18px 18px 18px 16px; }
+      .jp-item svg { width: 30px; height: 30px; grid-row: span 3; margin-top: 2px; }
+      .jp-item h3, .jp-item--top h3 { margin: 0; font-size: 18px; }
+      .jp-item p, .jp-item--top p { margin-top: 4px; font-size: var(--txt-sm); }
+      .jp-badge { justify-self: start; margin-top: 10px; }
+      .jp-incluye { gap: 10px; margin-top: 20px; }
+      .jp-grupo { margin: 28px 0 -8px; }
+      .jp-grupo + .jp-incluye { margin-top: 18px; }
       .jp-rot { grid-template-columns: 1fr; }
       .jp-rot-tag { justify-self: start; }
       /* Dos columnas también en el celular: apiladas, las cuatro filas
@@ -548,9 +572,31 @@
     </div>
   </section>
 
+  <a class="jp-fijo" href="#mas-info" id="jp-fijo" aria-hidden="true" tabindex="-1">Más info</a>
 </div>
 <script>
   (function () {
+    // ── Botón fijo "Más info" en el celular ───────────────────────────────
+    // Se muestra mientras ni el "Más info" del hero ni el formulario están a
+    // la vista. aria-hidden y tabindex acompañan su visibilidad: oculto, no
+    // tiene que existir para el teclado ni para el lector de pantalla.
+    var fijo = document.getElementById('jp-fijo');
+    var heroCta = document.querySelector('.jp-ctas');
+    var destino = document.getElementById('mas-info');
+    if (fijo && heroCta && destino && 'IntersectionObserver' in window) {
+      var vistos = { hero: true, form: false };
+      var actualizar = function () {
+        var mostrar = !vistos.hero && !vistos.form;
+        fijo.classList.toggle('is-visible', mostrar);
+        fijo.setAttribute('aria-hidden', String(!mostrar));
+        fijo.tabIndex = mostrar ? 0 : -1;
+      };
+      new IntersectionObserver(function (es) { es.forEach(function (e) { vistos[e.target === heroCta ? 'hero' : 'form'] = e.isIntersecting; }); actualizar(); })
+        .observe(heroCta);
+      new IntersectionObserver(function (es) { es.forEach(function (e) { vistos.form = e.isIntersecting; }); actualizar(); }, { rootMargin: '0px 0px -30% 0px' })
+        .observe(destino);
+    }
+
     // ── Formulario "Pedí más información" ─────────────────────────────────
     // Envía con pit-forms.js al form de Formspree de la Jornada, que reenvía a
     // ricardo.frusso@gmail.com (el mail de la campaña, no el del consultorio).
