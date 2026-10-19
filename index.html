@@ -240,6 +240,10 @@
     .v2-jornada { background: var(--v2-navy); color: #FFFFFF; border-radius: 36px; max-width: 1228px; margin: 0 auto; box-sizing: border-box; padding: clamp(36px, 5vw, 64px); display: grid; grid-template-columns: 0.75fr 1.25fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
     .v2-jornada-flyer { display: block; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.45); transform: rotate(-1.5deg); line-height: 0; }
     .v2-jornada-flyer img { width: 100%; height: auto; display: block; }
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .v2-jornada-flyer { transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease; }
+      .v2-jornada-flyer:hover, .v2-jornada-flyer:focus-visible { transform: rotate(0deg) translateY(-12px) scale(1.015); box-shadow: 0 40px 90px rgba(0,0,0,0.55); }
+    }
     .v2-jornada .v2-eyebrow { color: #9DB7F5; }
     .v2-jornada h2 { font-weight: 700; font-size: clamp(40px, 6vw, 76px); line-height: 0.98; letter-spacing: -0.04em; margin: 16px 0 0; }
     .v2-jornada h2 span { color: #5B8CFF; }

@@ -66,6 +66,13 @@
     .jp-cupos { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
     .jp-flyer { display: block; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.45); transform: rotate(1.5deg); }
     .jp-flyer img { display: block; width: 100%; height: auto; }
+    /* Al pasar el mouse el flyer se levanta y se endereza. Solo en equipos con
+       mouse (en el celular el "hover" queda pegado después del toque) y sin
+       movimiento para quien lo tiene desactivado en el sistema. */
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .jp-flyer { transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease; }
+      .jp-flyer:hover, .jp-flyer:focus-visible { transform: rotate(0deg) translateY(-12px) scale(1.015); box-shadow: 0 44px 100px rgba(0,0,0,0.55); }
+    }
 
     /* ---- franja "te llevás" ---- */
     .jp-llevas { background: var(--v2-blue); color: #FFFFFF; padding: clamp(40px, 6vw, 72px) 0; }
