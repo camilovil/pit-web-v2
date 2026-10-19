@@ -101,6 +101,15 @@
     .jp-prog span { display: block; font-size: var(--txt-sm); color: var(--pit-ink-60); margin-top: 2px; }
     .jp-prog .jp-region b { color: var(--v2-navy); }
     .jp-prog .jp-pausa b { font-weight: 500; color: var(--pit-ink-60); }
+    /* Cronograma desplegable: cerrado muestra los primeros cuatro momentos y
+       un botón. La clase .is-cerrado la pone el script; sin JS se ve completo. */
+    .jp-prog.is-cerrado li:nth-child(n+5) { display: none; }
+    .jp-prog.is-cerrado li:nth-child(4) { -webkit-mask-image: linear-gradient(#000 30%, transparent); mask-image: linear-gradient(#000 30%, transparent); }
+    .jp-prog-toggle { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 14px 22px; border-radius: 999px; border: 1.5px solid var(--v2-blue); background: #FFFFFF; color: var(--v2-blue); font-family: var(--pit-font-sans); font-size: var(--txt-sm); font-weight: 600; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
+    .jp-prog-toggle:hover { background: var(--v2-blue); color: #FFFFFF; }
+    .jp-prog-toggle svg { transition: transform 0.25s ease; }
+    .jp-prog-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+    .jp-prog-toggle[hidden] { display: none; }
     .jp-nota { margin-top: 24px; padding: 18px 20px; border-radius: var(--pit-radius); background: var(--v2-tint); font-size: var(--txt-sm); line-height: 1.55; }
     .jp-sticky { position: sticky; top: 120px; }
 
@@ -317,7 +326,8 @@
         <p class="jp-lead">Cabeza y cuello, miembro superior, tronco y fibromialgia, abdomen y pelvis, y miembro inferior.</p>
         <p class="jp-nota">Cada bloque dura una hora: <b>20 minutos de anatomía y 40 de tratamiento en vivo</b> con un paciente real.</p>
       </div>
-      <ol class="jp-prog">
+      <div>
+      <ol class="jp-prog" id="jp-prog">
         <li class="jp-pausa"><time>09:00</time><div><b>Convocatoria</b><span>Acreditación, kit y café</span></div></li>
         <li><time>09:15</time><div><b>Bienvenida y fundamentos de PIT</b></div></li>
         <li class="jp-region"><time>10:00</time><div><b>Bloque 1 · Cabeza y cuello</b><span>Anatomía y paciente real</span></div></li>
@@ -330,6 +340,8 @@
         <li class="jp-region"><time>16:00</time><div><b>Bloque 5 · Miembro inferior</b><span>Anatomía y paciente real</span></div></li>
         <li><time>17:00</time><div><b>Preguntas, cierre y certificados</b><span>Hasta las 17:30</span></div></li>
       </ol>
+      <button type="button" class="jp-prog-toggle" aria-controls="jp-prog" aria-expanded="true" hidden><span>Ver menos</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      </div>
     </div>
   </section>
 
@@ -490,6 +502,29 @@
         else { var t = document.createElement('textarea'); t.value = txt; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} t.remove(); }
       });
     });
+
+    // Cronograma desplegable. Arranca cerrado; el link "Ver el programa" del
+    // hero lo abre al llegar, porque quien lo toca quiere verlo entero.
+    var prog = document.getElementById('jp-prog');
+    var tg = document.querySelector('.jp-prog-toggle');
+    if (prog && tg) {
+      var label = tg.querySelector('span');
+      var poner = function (abierto) {
+        prog.classList.toggle('is-cerrado', !abierto);
+        tg.setAttribute('aria-expanded', String(abierto));
+        label.textContent = abierto ? 'Ver menos' : 'Ver el cronograma completo';
+      };
+      poner(false);
+      tg.hidden = false;
+      tg.addEventListener('click', function () {
+        var abrir = tg.getAttribute('aria-expanded') !== 'true';
+        poner(abrir);
+        if (!abrir) document.getElementById('programa').scrollIntoView({ block: 'start' });
+      });
+      document.querySelectorAll('a[href="#programa"]').forEach(function (l) {
+        l.addEventListener('click', function () { poner(true); });
+      });
+    }
 
     // En el celular, "Compartir" usa la hoja nativa (WhatsApp, Telegram, mail...);
     // en la computadora queda el link a WhatsApp Web.
