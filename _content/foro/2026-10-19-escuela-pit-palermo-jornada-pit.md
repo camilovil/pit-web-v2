@@ -26,7 +26,7 @@ Es para **médicos de todos los niveles**. No hace falta experiencia previa en P
 
 ## Presencial o virtual
 
-Se puede cursar de forma **presencial**, en la sede de Palermo, o **virtual**, a distancia y con el mismo programa. Las dos modalidades incluyen la **clase grabada completa**, para repasar cada región las veces que quieras, y el **kit PIT**: crema de dextrosa al 25%, bibliografía y apuntes. Suman el certificado digital de participación y un descuento en los cursos online. La presencial incluye además el **almuerzo y la merienda** con el grupo.
+Se puede cursar de forma **presencial**, en la sede de Palermo, o **virtual**, a distancia y con el mismo programa. Las dos modalidades incluyen la **clase grabada completa**, para repasar cada región las veces que quieras, los **apuntes y la bibliografía**, el certificado digital de participación y un descuento en los cursos online. La presencial suma el **kit PIT completo**, con la crema de dextrosa al 25%, y el **almuerzo y la merienda** con el grupo.
 
 Como extra opcional, y para cualquiera de las dos modalidades, está la **rotación por consultorio**: 4 horas de práctica en vivo con el Dr. Frusso en su consultorio.
 

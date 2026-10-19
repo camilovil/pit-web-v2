@@ -57,6 +57,10 @@
     .jp-item--top h3 { font-size: var(--txt-xl); }
     .jp-item--top p { color: rgba(255,255,255,0.82); font-size: var(--txt-md); }
     .jp-item--almuerzo { background: var(--v2-tint); border-color: #C9D8FB; }
+    .jp-incluye--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .jp-incluye--2 .jp-item--top { grid-column: auto; }
+    .jp-grupo { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--pit-ink-60); margin: 36px 0 -24px; }
+    .jp-grupo + .jp-incluye { margin-top: 36px; }
     .jp-badge { display: inline-block; font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--v2-blue); color: #FFFFFF; margin-top: 12px; }
 
     /* ---- programa ---- */
@@ -285,7 +289,7 @@
   <!-- ============ TE LLEVÁS ============ -->
   <section class="jp-llevas">
     <div class="jp-wrap">
-      <p>Te llevás la clase grabada y todo el material.<small>Repasá cada región las veces que quieras, con la bibliografía, los apuntes y la crema de dextrosa al 25% del kit de bienvenida.</small></p>
+      <p>Te llevás la clase grabada, los apuntes y el certificado.<small>Repasá cada región las veces que quieras. En la modalidad presencial, además, el kit PIT completo con la crema de dextrosa al 25%.</small></p>
     </div>
   </section>
 
@@ -294,22 +298,21 @@
     <div class="jp-wrap">
       <span class="jp-mono" style="color: var(--v2-blue);">Qué incluye la inscripción</span>
       <h2 class="jp-h2">Todo lo que te llevás de la Jornada.</h2>
-      <div class="jp-incluye pit-stagger">
+      <!-- Dos grupos a propósito: el kit PIT completo (con la crema) y el
+           almuerzo son SOLO de la presencial; la virtual tiene clase grabada,
+           apuntes, bibliografía y certificado. Que no se lea como que el kit
+           llega a las dos. -->
+      <p class="jp-grupo">En las dos modalidades</p>
+      <div class="jp-incluye jp-incluye--2 pit-stagger">
         <div class="jp-item jp-item--top">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>
           <h3>Clase grabada completa</h3>
-          <p>La Jornada entera, para repasar cada región, cada marcaje y cada aplicación las veces que quieras. En las dos modalidades.</p>
+          <p>La Jornada entera, para repasar cada región, cada marcaje y cada aplicación las veces que quieras.</p>
         </div>
         <div class="jp-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1.5 13h-13z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
-          <h3>Kit PIT completo</h3>
-          <p>Crema de dextrosa al 25%, bibliografía y apuntes.</p>
-        </div>
-        <div class="jp-item jp-item--almuerzo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2 1-3 3.5-3 7h3"/></svg>
-          <h3>Almuerzo y merienda</h3>
-          <p>Incluidos en la modalidad presencial. Café en la acreditación.</p>
-          <span class="jp-badge">Incluido</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+          <h3>Apuntes y bibliografía</h3>
+          <p>El contenido de estudio de cada región.</p>
         </div>
         <div class="jp-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 9h10M7 12h6"/><path d="M15 17l1 4 2-1.5 2 1.5 1-4"/></svg>
@@ -320,6 +323,21 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
           <h3>Descuento en los cursos online</h3>
           <p>Para seguir formándote con el Dr. Frusso después de la Jornada.</p>
+        </div>
+      </div>
+      <p class="jp-grupo">Además, en la presencial</p>
+      <div class="jp-incluye jp-incluye--2 pit-stagger">
+        <div class="jp-item jp-item--almuerzo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1.5 13h-13z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+          <h3>Kit PIT completo</h3>
+          <p>El kit de bienvenida, con la crema de dextrosa al 25%.</p>
+          <span class="jp-badge">Presencial</span>
+        </div>
+        <div class="jp-item jp-item--almuerzo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2 1-3 3.5-3 7h3"/></svg>
+          <h3>Almuerzo y merienda</h3>
+          <p>Con el grupo, en la sede. Café en la acreditación.</p>
+          <span class="jp-badge">Presencial</span>
         </div>
       </div>
     </div>
@@ -366,7 +384,8 @@
             <li>Estás en la sala: ves la anatomía y el tratamiento de cerca.</li>
             <li>Hacés la primera práctica entre participantes.</li>
             <li>Almuerzo y merienda con el grupo.</li>
-            <li>Clase grabada, kit PIT y certificado.</li>
+            <li>Kit PIT completo, con la crema de dextrosa al 25%.</li>
+            <li>Clase grabada, apuntes, bibliografía y certificado.</li>
           </ul>
         </div>
         <div class="jp-mod">
@@ -375,7 +394,7 @@
           <ul>
             <li>Seguís la Jornada a distancia, con el mismo programa.</li>
             <li>Las cinco regiones, con anatomía y tratamiento en vivo.</li>
-            <li>Clase grabada, kit PIT y certificado.</li>
+            <li>Clase grabada, apuntes, bibliografía y certificado.</li>
           </ul>
         </div>
         <div class="jp-mod jp-rot">
@@ -447,7 +466,7 @@
         </details>
         <details>
           <summary>¿Qué diferencia hay entre presencial y virtual?</summary>
-          <p>Las dos modalidades siguen el mismo programa e incluyen la clase grabada completa, el kit PIT y el certificado. En la presencial estás en la sala, hacés la primera práctica entre participantes y compartís almuerzo y merienda con el grupo.</p>
+          <p>Las dos modalidades siguen el mismo programa e incluyen la clase grabada completa, los apuntes, la bibliografía y el certificado. En la presencial estás en la sala, hacés la primera práctica entre participantes, compartís almuerzo y merienda con el grupo y recibís el kit PIT completo, con la crema de dextrosa al 25%.</p>
         </details>
         <details>
           <summary>¿Qué es la rotación por consultorio?</summary>
@@ -455,7 +474,7 @@
         </details>
         <details>
           <summary>¿Qué me llevo?</summary>
-          <p>La clase grabada completa, el kit PIT (crema de dextrosa al 25%, bibliografía y apuntes), el certificado digital y un descuento en los cursos online del Dr. Frusso.</p>
+          <p>En las dos modalidades: la clase grabada completa, los apuntes, la bibliografía, el certificado digital y un descuento en los cursos online del Dr. Frusso. En la presencial, además, el kit PIT completo con la crema de dextrosa al 25%, y el almuerzo y la merienda.</p>
         </details>
         <details>
           <summary>¿El certificado me permite aplicar PIT?</summary>

@@ -63,7 +63,7 @@
     'Cinco regiones del cuerpo, de 9:15 a 17:30 hs': 'Five body regions, 9:15 am to 5:30 pm',
     'Presencial o virtual': 'In person or online',
     'Médicos de todos los niveles': 'Physicians of all levels',
-    'Te llevás la clase grabada y todo el material': 'You take home the recorded class and all the materials',
+    'Te llevás la clase grabada y los apuntes': 'You take home the recorded class and the study notes',
     'Cupos limitados': 'Limited places',
     // Los estados que solo existen en runtime (etiquetas que alterna el JS,
     // mensajes de error, estado vacío del archivo) NO aparecen en el HTML

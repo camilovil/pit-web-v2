@@ -49,7 +49,7 @@ const PAGES = [
   // pieza del evento y no la genérica del sitio.
   { mode: 'core', src: 'cores/jornada-pit.html', out: 'jornada-pit.html', active: null,
     title: 'Jornada P.I.T. · Sábado 14.11 · Escuela PIT, sede Palermo — Dr. Frusso',
-    desc: 'Un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso. Cinco regiones, presencial o virtual, para médicos de todos los niveles. Te llevás la clase grabada y todo el material.',
+    desc: 'Un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso. Cinco regiones, presencial o virtual, para médicos de todos los niveles. Te llevás la clase grabada, los apuntes y el certificado.',
     og: 'https://drricardofrusso.com/img/jornada/og.jpg' },
   { mode: 'core', src: 'cores/privacidad.html', out: 'privacidad.html', active: null,
     title: 'Información legal y privacidad — Dr. Ricardo D. Frusso',
