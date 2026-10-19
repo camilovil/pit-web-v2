@@ -35,10 +35,12 @@
     /* Jornada P.I.T. — landing del evento del sábado 14.11 (inauguración de la
        Escuela PIT, sede Palermo). Es el link que se manda por WhatsApp: su
        og:image (img/jornada/og.jpg) es la vista previa que aparece en el chat.
-       REGLAS DEL CLIENTE que esta página respeta: los aranceles NO se publican
-       (se mandan por mail a quien escribe), nunca "te habilita", sin emojis ni
-       signos de exclamación, CTA único "Más info →", y nunca el número de cupo:
-       solo "cupos limitados". */
+       REGLAS que esta página respeta: los aranceles van como información
+       secundaria (bloque chico debajo de las modalidades, nunca en el titular;
+       pedido del cliente del 19.10.2026), los datos de pago (alias, titular)
+       NUNCA: se mandan por privado al reservar. Nunca "te habilita", sin emojis
+       ni signos de exclamación, CTA único "Más info →", y nunca el número de
+       cupo: solo "cupos limitados". */
     .jp { --jp-bone: #FAFAF7; color: var(--pit-ink); }
     .jp-wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
     .jp-mono { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; }
@@ -107,6 +109,20 @@
     .jp-rot p { margin: 10px 0 0; font-size: var(--txt-md); line-height: 1.55; color: rgba(255,255,255,0.85); max-width: 62ch; }
     .jp-rot .jp-mono { color: #9DB7F5; }
     .jp-rot-tag { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 16px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.5); white-space: nowrap; }
+
+    /* ---- aranceles: información secundaria, no compite con el resto ---- */
+    .jp-precios { margin-top: 28px; background: #FFFFFF; border-radius: var(--pit-radius); padding: 24px 28px; display: grid; grid-template-columns: auto 1fr; gap: 8px 40px; align-items: start; }
+    .jp-precios .jp-mono { color: var(--v2-blue); padding-top: 4px; }
+    .jp-precios dl { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .jp-precios dt { font-size: var(--txt-sm); color: var(--pit-ink-60); }
+    .jp-precios dd { margin: 4px 0 0; font-size: var(--txt-lg); font-weight: 600; letter-spacing: -0.01em; }
+    .jp-precios dd small { display: block; font-size: var(--txt-xs); font-weight: 400; color: var(--pit-ink-60); margin-top: 2px; letter-spacing: 0; }
+    .jp-precios p { grid-column: 2; margin: 6px 0 0; font-size: var(--txt-xs); line-height: 1.5; color: var(--pit-ink-60); }
+    @media (max-width: 760px) {
+      .jp-precios { grid-template-columns: 1fr; }
+      .jp-precios dl { grid-template-columns: 1fr; gap: 12px; }
+      .jp-precios p { grid-column: auto; }
+    }
 
     /* ---- fotos de jornadas anteriores (sin nombrar ciudades: confunde dónde es el curso) ---- */
     .jp-fotos { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 12px; margin-top: 40px; }
@@ -344,6 +360,15 @@
           <span class="jp-rot-tag">Se suma a tu modalidad</span>
         </div>
       </div>
+      <div class="jp-precios" id="aranceles">
+        <span class="jp-mono">Aranceles</span>
+        <dl>
+          <div><dt>Presencial</dt><dd>$770.000</dd></div>
+          <div><dt>Virtual</dt><dd>$500.000</dd></div>
+          <div><dt>Rotación por consultorio</dt><dd>$300.000<small>Opcional · 4 horas · se suma a tu modalidad</small></dd></div>
+        </dl>
+        <p>El pago es total, por transferencia, y no tiene devolución. Los datos para transferir te los enviamos por mail cuando reservás tu lugar.</p>
+      </div>
     </div>
   </section>
 
@@ -411,7 +436,7 @@
         </details>
         <details>
           <summary>¿Cuáles son los aranceles?</summary>
-          <p>Escribinos a ricardo.frusso@gmail.com y te enviamos los aranceles de cada modalidad y de la rotación, junto con los pasos para inscribirte.</p>
+          <p>Presencial $770.000 y virtual $500.000. La rotación por consultorio, opcional, suma $300.000 a cualquiera de las dos. El pago es total, por transferencia, y no tiene devolución. Escribinos a ricardo.frusso@gmail.com y te enviamos los datos para transferir y reservar tu lugar.</p>
         </details>
       </div>
     </div>
@@ -424,7 +449,7 @@
         <div>
           <span class="jp-mono">Cupos limitados</span>
           <h2 class="jp-h2">Reservá tu lugar en la Jornada P.I.T.</h2>
-          <p>Escribinos y te enviamos los aranceles, los pasos para inscribirte y toda la información de la modalidad que elijas.</p>
+          <p>Escribinos y te enviamos los pasos para inscribirte, los datos para transferir y toda la información de la modalidad que elijas.</p>
           <a class="jp-mail" href="mailto:ricardo.frusso@gmail.com">ricardo.frusso@gmail.com</a>
         </div>
         <div class="jp-final-acc">
