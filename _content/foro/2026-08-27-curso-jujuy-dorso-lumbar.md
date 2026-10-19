@@ -11,15 +11,6 @@ lectura: 3
 tags: Cursos, Noticias
 resumen: Segunda parada del recorrido por el noroeste, en el Consejo de Médicos de Jujuy. Teoría de PIT enfocada en la zona dorso-lumbar y práctica con personas con dolor crónico.
 portada: /img/cursos/jujuy-aviso.webp
-eventoFecha: 2026-09-05
-eventoFechaLabel: Sábado 05/09 · 08:30 a 13:00 hs
-eventoLugar: Consejo de Médicos de Jujuy · La Reina Mora 656
-eventoZona: San Salvador de Jujuy
-eventoModalidad: Presencial y virtual en vivo
-eventoWhatsapp: +54 9 387 541-0469
-eventoImagen: /img/cursos/jujuy-nervios.webp
-eventoTema: Zona dorso-lumbar
-eventoAcento: "#C05A2B"
 ---
 De la ciudad de Salta partiré para San Salvador de Jujuy, otra hermosa capital del noroeste argentino donde tendré la posibilidad de presentar la técnica PIT del Dr. Lyftogt.
 

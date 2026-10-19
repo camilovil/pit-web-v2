@@ -11,16 +11,6 @@ lectura: 3
 tags: Cursos, Noticias
 resumen: Primera parada del recorrido por el noroeste argentino. Jornada teórico-práctica sobre Lyftogt PIT aplicado al miembro inferior, con cupo limitado por la instancia práctica.
 portada: /img/cursos/salta-aviso.webp
-eventoFecha: 2026-09-04
-eventoFechaLabel: Viernes 04/09 · 14 a 20 hs
-eventoLugar: Ciudad de Salta
-eventoZona: Salta
-eventoModalidad: Presencial y virtual en vivo
-eventoWhatsapp: +54 9 387 541-0469
-eventoEmail: cursopitsalta@gmail.com
-eventoImagen: /img/cursos/salta-nervios.webp
-eventoTema: Miembros inferiores
-eventoAcento: "#2B5CE6"
 ---
 Arranca en la ciudad de Salta un recorrido de tres encuentros por el noroeste argentino. Esta primera jornada es teórico-práctica y se centra en el **dolor de miembros inferiores**: dextrosa al 5% sobre nervios superficiales sensibilizados.
 

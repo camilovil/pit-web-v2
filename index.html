@@ -229,6 +229,31 @@
        comían el espacio de la franja de respaldos. min() lo ata al menor de
        ancho y alto disponibles. */
     .v2-hero h1 { color: #FFFFFF; font-weight: 600; font-size: clamp(36px, min(6.2vw, 7.6vh), 72px); line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 clamp(14px, 2vh, 20px); max-width: 20ch; text-wrap: balance; }
+    /* Aviso de la Jornada P.I.T. arriba del título (campaña hasta el 14.11.2026).
+       Para retirarlo: borrar el <a class="v2-hero-anuncio"> del hero, esta regla
+       y la sección <!-- JORNADA P.I.T. --> de más abajo. */
+    .v2-hero-anuncio { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 0 0 clamp(16px, 2.4vh, 26px); padding: 8px 8px 8px 16px; border-radius: 26px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(8px); color: #FFFFFF; font-size: var(--txt-sm); font-weight: 500; line-height: 1.3; }
+    .v2-hero-anuncio:hover { background: rgba(255,255,255,0.26); color: #FFFFFF; }
+    .v2-hero-anuncio-tag { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+    .v2-hero-anuncio b { font-weight: 600; background: #FFFFFF; color: var(--v2-blue); padding: 7px 14px; border-radius: 999px; }
+    /* Sección de la Jornada P.I.T. (campaña hasta el 14.11.2026). */
+    .v2-jornada { background: var(--v2-navy); color: #FFFFFF; border-radius: 36px; max-width: 1228px; margin: 0 auto; box-sizing: border-box; padding: clamp(36px, 5vw, 64px); display: grid; grid-template-columns: 0.75fr 1.25fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+    .v2-jornada-flyer { display: block; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.45); transform: rotate(-1.5deg); line-height: 0; }
+    .v2-jornada-flyer img { width: 100%; height: auto; display: block; }
+    .v2-jornada .v2-eyebrow { color: #9DB7F5; }
+    .v2-jornada h2 { font-weight: 700; font-size: clamp(40px, 6vw, 76px); line-height: 0.98; letter-spacing: -0.04em; margin: 16px 0 0; }
+    .v2-jornada h2 span { color: #5B8CFF; }
+    .v2-jornada-sub { font-size: clamp(18px, 1.8vw, 22px); line-height: 1.45; color: rgba(255,255,255,0.9); margin: 18px 0 0; max-width: 34ch; }
+    .v2-jornada-datos { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .v2-jornada-datos li { position: relative; padding-left: 20px; font-size: var(--txt-sm); font-weight: 600; line-height: 1.5; color: #FFFFFF; }
+    .v2-jornada-datos li::before { content: ""; position: absolute; left: 0; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: #5B8CFF; }
+    .v2-jornada-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 30px; }
+    .v2-jornada-cupos { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+    @media (max-width: 860px) {
+      .v2-jornada { grid-template-columns: 1fr; border-radius: 28px; }
+      .v2-jornada-flyer { max-width: 360px; transform: none; }
+      .v2-jornada-datos { grid-template-columns: 1fr; }
+    }
     .v2-hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6; max-width: 56ch; margin: 0 0 clamp(22px, 3.4vh, 34px); }
     .v2-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2; }
     /* La foto era lo más pesado del hero (416px fijos) y la razón principal de
@@ -478,7 +503,7 @@
       .v2-stagger.in > *:nth-child(4) { transition-delay: 0.3s; }
       .v2-stagger.in > *:nth-child(5) { transition-delay: 0.4s; }
       .v2-stagger.in > *:nth-child(6) { transition-delay: 0.5s; }
-      .v2-hero-eyebrow, .v2-hero h1, .v2-hero-sub, .v2-hero-ctas, .v2-hero-photo { opacity: 0; transform: translateY(24px); animation: v2-up 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
+      .v2-hero-anuncio, .v2-hero-eyebrow, .v2-hero h1, .v2-hero-sub, .v2-hero-ctas, .v2-hero-photo { opacity: 0; transform: translateY(24px); animation: v2-up 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
       .v2-hero h1 { animation-delay: 0.12s; }
       .v2-hero-sub { animation-delay: 0.24s; }
       .v2-hero-ctas { animation-delay: 0.36s; }
@@ -688,7 +713,7 @@
     </nav>
     <!-- El fallback del token es necesario: curso-intro.html no carga
          pit-v2.css, así que ahí --txt-sm no estaría definido. -->
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Descargar apuntes</a>
+    <a class="v2-btn v2-btn--blue v2-nav-cta" href="/jornada-pit" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">Jornada P.I.T. · 14.11</a>
     <span class="v2-lang-toggle v2-nav-cta">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -708,7 +733,7 @@
     <a href="foro.html">Foro</a>
     <a href="curso-modulo-1.html">Curso</a>
     <a href="contacto.html">Contacto</a>
-    <a class="v2-btn v2-btn--navy" href="/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf" style="border-bottom: none;">Descargar apuntes</a>
+    <a class="v2-btn v2-btn--blue" href="/jornada-pit" style="border-bottom: none;">Jornada P.I.T. · 14.11</a>
     <span class="v2-lang-toggle v2-lang-toggle--drawer">
       <button class="lang-btn lang-active" data-lang="es" type="button">ES</button>
       <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -724,6 +749,7 @@
 
   <!-- ============ HERO ============ -->
   <section class="v2-hero">
+    <a class="v2-hero-anuncio" href="jornada-pit.html"><span class="v2-hero-anuncio-tag">Para médicos</span>Jornada P.I.T. · sábado 14.11 <b>Más info →</b></a>
     <span class="v2-eyebrow v2-hero-eyebrow">PIT · Neuroproloterapia · Dr. Ricardo D. Frusso</span>
     <h1>Tratar el dolor desde el nervio</h1>
     <p class="v2-hero-sub">PIT es un tratamiento que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión. Su creador es el Dr. John Lyftogt.</p>
@@ -777,6 +803,33 @@
         <span class="v2-trust-logo v2-trust-logo--square v2-trust-logo--chip"><img src="/img/logos/uba.png" alt="Universidad de Buenos Aires" width="68" height="68" decoding="async"></span>
         <small>Formación universitaria · 1992</small>
       </a>
+    </div>
+  </section>
+
+  <!-- ============ JORNADA P.I.T. ============ -->
+  <!-- Campaña hasta el 14.11.2026: va primero, antes de la bifurcación, porque
+       durante este mes la Jornada es lo más importante del sitio. Para
+       retirarla, borrar esta sección y el aviso del hero. -->
+  <section class="v2-section" id="jornada-pit">
+    <div class="v2-jornada v2-reveal">
+      <a class="v2-jornada-flyer" href="jornada-pit.html" aria-label="Ver la Jornada P.I.T.">
+        <img src="/img/jornada/flyer-sm.webp" width="640" height="800" alt="" loading="lazy" decoding="async">
+      </a>
+      <div>
+        <span class="v2-eyebrow">Sábado 14.11 · Inauguración Escuela PIT, sede Palermo</span>
+        <h2>Jornada <span>P.I.T.</span></h2>
+        <p class="v2-jornada-sub">Un día de práctica con pacientes reales, junto al Dr. Ricardo D. Frusso.</p>
+        <ul class="v2-jornada-datos">
+          <li>Cinco regiones del cuerpo, de 9:15 a 17:30 hs</li>
+          <li>Presencial o virtual</li>
+          <li>Médicos de todos los niveles</li>
+          <li>Te llevás la clase grabada y todo el material</li>
+        </ul>
+        <div class="v2-jornada-ctas">
+          <a class="v2-btn v2-btn--blue" href="jornada-pit.html">Más info →</a>
+          <span class="v2-jornada-cupos">Cupos limitados</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -858,6 +911,18 @@
             <span class="v2-foro-tit">Dos proyectos en desarrollo: un dispositivo de autotratamiento y un gel con dextrosa</span>
             <span class="v2-foro-leer">Leer →</span>
           </a>
+          <a class="v2-foro-row" href="foro/curso-tucuman-cabeza-cuello-hombro.html">
+            <span class="v2-foro-fecha">S35 · 29 ago</span>
+            <span class="v2-foro-cat">Noticias · Prof.</span>
+            <span class="v2-foro-tit">Curso en Tucumán: el dolor de la cabeza, el cuello y el hombro con Lyftogt PIT</span>
+            <span class="v2-foro-leer">Leer →</span>
+          </a>
+          <a class="v2-foro-row" href="foro/curso-jujuy-dorso-lumbar.html">
+            <span class="v2-foro-fecha">S35 · 27 ago</span>
+            <span class="v2-foro-cat">Noticias · Prof.</span>
+            <span class="v2-foro-tit">Curso en Jujuy: tratamiento del dolor de la zona dorso-lumbar con Lyftogt PIT</span>
+            <span class="v2-foro-leer">Leer →</span>
+          </a>
         </div>
         <!-- PIT-FORO-HOME:END -->
       </div>
@@ -874,83 +939,6 @@
        dirigido al paciente (patologías, testimonios, preguntas frecuentes).
        El curso online del Módulo I sigue cerrando la página: ese no vence. -->
   <!-- PIT-CURSOS-HOME:START — lo escribe _build/sync-cursos-home.js desde los posts del foro con campos evento*. No editar a mano: se regenera en cada build. -->
-  <section class="v2-section" id="cursos-presenciales">
-    <div class="v2-wrap">
-      <div class="v2-reveal">
-        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px;">
-          <div>
-            <span class="v2-eyebrow" style="color: var(--v2-blue);">Próximos cursos</span>
-            <h2 class="v2-title" style="margin-top: 14px;">Formación presencial, con práctica sobre pacientes reales</h2>
-          </div>
-          <a class="v2-btn v2-btn--linea" href="foro.html">Ver todo el foro →</a>
-        </div>
-
-        <div class="v2-cursos-track" id="v2-cursos-track" role="region" aria-label="Próximos cursos" tabindex="0">
-            <a class="v2-curso" href="foro/curso-salta-miembros-inferiores.html" style="--acento: #2B5CE6;">
-              <span class="v2-curso-foto"><img src="/img/cursos/salta-nervios.webp" alt="" loading="lazy" decoding="async"></span>
-              <span class="v2-curso-cuerpo">
-                <span class="v2-curso-top">
-                  <span class="v2-curso-zona">Salta</span>
-                  <span class="v2-curso-tema">Miembros inferiores</span>
-                </span>
-                <h3 class="v2-curso-tit">Curso en Salta: el dolor de miembros inferiores, desde los nervios</h3>
-                <span class="v2-curso-datos">
-                  <span><small>Fecha y hora</small><b>Viernes 04/09 · 14 a 20 hs</b></span>
-                  <span><small>Lugar</small><b>Ciudad de Salta</b></span>
-                  <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
-                  <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469<br>cursopitsalta@gmail.com</b></span>
-                </span>
-                <span class="v2-curso-cta">Ver el curso →</span>
-              </span>
-            </a>
-            <a class="v2-curso" href="foro/curso-jujuy-dorso-lumbar.html" style="--acento: #C05A2B;">
-              <span class="v2-curso-foto"><img src="/img/cursos/jujuy-nervios.webp" alt="" loading="lazy" decoding="async"></span>
-              <span class="v2-curso-cuerpo">
-                <span class="v2-curso-top">
-                  <span class="v2-curso-zona">San Salvador de Jujuy</span>
-                  <span class="v2-curso-tema">Zona dorso-lumbar</span>
-                </span>
-                <h3 class="v2-curso-tit">Curso en Jujuy: tratamiento del dolor de la zona dorso-lumbar con Lyftogt PIT</h3>
-                <span class="v2-curso-datos">
-                  <span><small>Fecha y hora</small><b>Sábado 05/09 · 08:30 a 13:00 hs</b></span>
-                  <span><small>Lugar</small><b>Consejo de Médicos de Jujuy · La Reina Mora 656</b></span>
-                  <span><small>Modalidad</small><b>Presencial y virtual en vivo</b></span>
-                  <span><small>Inscripción por WhatsApp</small><b>+54 9 387 541-0469</b></span>
-                </span>
-                <span class="v2-curso-cta">Ver el curso →</span>
-              </span>
-            </a>
-            <a class="v2-curso" href="foro/curso-tucuman-cabeza-cuello-hombro.html" style="--acento: #157A57;">
-              <span class="v2-curso-foto"><img src="/img/cursos/tucuman-nervios.webp" alt="" loading="lazy" decoding="async"></span>
-              <span class="v2-curso-cuerpo">
-                <span class="v2-curso-top">
-                  <span class="v2-curso-zona">Tucumán</span>
-                  <span class="v2-curso-tema">Cabeza, cuello y hombro</span>
-                </span>
-                <h3 class="v2-curso-tit">Curso en Tucumán: el dolor de la cabeza, el cuello y el hombro con Lyftogt PIT</h3>
-                <span class="v2-curso-datos">
-                  <span><small>Fecha y hora</small><b>Martes 08/09 · 08:30 a 15:00 hs</b></span>
-                  <span><small>Lugar</small><b>San Miguel de Tucumán</b></span>
-                  <span><small>Modalidad</small><b>Presencial y virtual</b></span>
-                  <span><small>Inscripción por WhatsApp</small><b>+54 9 381 597-6087</b></span>
-                </span>
-                <span class="v2-curso-cta">Ver el curso →</span>
-              </span>
-            </a>
-        </div>
-
-        <div class="v2-cursos-nav">
-          <button type="button" class="v2-cursos-btn" data-curso-prev aria-label="Curso anterior"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button type="button" class="v2-cursos-btn" data-curso-next aria-label="Curso siguiente"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-          <div class="v2-cursos-dots">
-            <button type="button" class="v2-cursos-dot" data-curso-dot="0" aria-current="true" aria-label="Ir al curso de Salta"></button>
-            <button type="button" class="v2-cursos-dot" data-curso-dot="1" aria-current="false" aria-label="Ir al curso de San Salvador de Jujuy"></button>
-            <button type="button" class="v2-cursos-dot" data-curso-dot="2" aria-current="false" aria-label="Ir al curso de Tucumán"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- PIT-CURSOS-HOME:END -->
 
   <!-- ============ DATA MODULE ============ -->
@@ -1349,6 +1337,7 @@
 <script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=6"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
+<script src="assets/js/pit-jornada.js?v=1"></script>
 <!-- PIT-PRIVACY-UI:START -->
 
 <aside class="pit-privacy-banner" data-privacy-banner hidden aria-label="Aviso de privacidad">

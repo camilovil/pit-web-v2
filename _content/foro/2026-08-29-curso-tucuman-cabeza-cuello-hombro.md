@@ -11,15 +11,6 @@ lectura: 3
 tags: Cursos, Noticias
 resumen: Último destino del recorrido por el noroeste. Tres zonas anatómicamente complejas y con alta densidad nerviosa, con teoría por la mañana y práctica con pacientes reales.
 portada: /img/cursos/tucuman-aviso.webp
-eventoFecha: 2026-09-08
-eventoFechaLabel: Martes 08/09 · 08:30 a 15:00 hs
-eventoLugar: San Miguel de Tucumán
-eventoZona: Tucumán
-eventoModalidad: Presencial y virtual
-eventoWhatsapp: +54 9 381 597-6087
-eventoImagen: /img/cursos/tucuman-nervios.webp
-eventoTema: Cabeza, cuello y hombro
-eventoAcento: "#157A57"
 ---
 Finalmente llegaré a San Miguel de Tucumán como último destino en este recorrido apasionante por el noroeste argentino. Allí presentaré mi curso sobre la técnica de PIT del Dr. Lyftogt.
 

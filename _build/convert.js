@@ -44,6 +44,13 @@ const PAGES = [
   { mode: 'core', src: 'cores/sobre-el-dr-frusso.html', out: 'sobre-el-dr-frusso.html', active: 'sobre',
     title: 'Sobre el Dr. Ricardo D. Frusso — 30+ años en dolor crónico',
     desc: 'Médico de Familia (UBA, 1992), 30+ años en el Hospital Italiano de Buenos Aires, instructor autorizado de PIT para América Latina desde 2015.' },
+  // Landing de la Jornada P.I.T. (14.11.2026). Es el link que se manda por
+  // WhatsApp: `og` pisa la imagen de vista previa para que el chat muestre la
+  // pieza del evento y no la genérica del sitio.
+  { mode: 'core', src: 'cores/jornada-pit.html', out: 'jornada-pit.html', active: null,
+    title: 'Jornada P.I.T. · Sábado 14.11 · Escuela PIT, sede Palermo — Dr. Frusso',
+    desc: 'Un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso. Cinco regiones, presencial o virtual, para médicos de todos los niveles. Te llevás la clase grabada y todo el material.',
+    og: 'https://drricardofrusso.com/img/jornada/og.jpg' },
   { mode: 'core', src: 'cores/privacidad.html', out: 'privacidad.html', active: null,
     title: 'Información legal y privacidad — Dr. Ricardo D. Frusso',
     desc: 'Aviso legal, privacidad, cookies, términos de uso y aviso médico del sitio del Dr. Ricardo D. Frusso.' },
@@ -216,7 +223,7 @@ ${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${p.title}">
   <meta property="og:description" content="${p.desc}">
-  <meta property="og:image" content="https://drricardofrusso.com/img/og-image.png">
+  <meta property="og:image" content="${p.og || 'https://drricardofrusso.com/img/og-image.png'}">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">
@@ -246,6 +253,7 @@ const FOOT = `
 <script src="assets/js/pit-motion.js?v=2"></script>
 <script src="assets/js/pit-chat.js?v=6"></script>
 <script src="assets/js/pit-scrolltop.js?v=2"></script>
+<script src="assets/js/pit-jornada.js?v=1"></script>
 <script src="assets/js/pit-lang.js?v=7"></script>
 </body>
 </html>

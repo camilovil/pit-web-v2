@@ -372,6 +372,7 @@ ${CARRUSEL_SCRIPT}
 <script src="${pre}assets/js/pit-motion.js?v=2"></script>
 <script src="${pre}assets/js/pit-chat.js?v=6"></script>
 <script src="${pre}assets/js/pit-scrolltop.js?v=2"></script>
+<script src="${pre}assets/js/pit-jornada.js?v=1"></script>
 <script src="${pre}assets/js/pit-lang.js?v=7"></script>
 </body>
 </html>

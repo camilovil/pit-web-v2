@@ -4,7 +4,12 @@
 
 const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span>';
 
-const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Descargar apuntes' };
+// CTA de la barra. Hasta el 14.11.2026 es la Jornada P.I.T. (campaña del mes:
+// tiene que ser lo más visible del sitio), en azul para que se despegue del
+// resto. Después del evento, volver al CTA de siempre:
+//   const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Descargar apuntes', variant: 'navy' };
+// y correr el build. Los apuntes siguen enlazados en la home y en el pie.
+const CTA = { href: '/jornada-pit', label: 'Jornada P.I.T. · 14.11', variant: 'blue' };
 
 // Toggle de idioma ES/EN. Markup ESTÁTICO a propósito (antes se inyectaba por JS
 // con setInterval, causando un "pop-in" visible y layout shift en la barra —
@@ -60,7 +65,7 @@ ${headerLinks}
     </nav>
     <!-- El fallback del token es necesario: curso-intro.html no carga
          pit-v2.css, así que ahí --txt-sm no estaría definido. -->
-    <a class="v2-btn v2-btn--navy v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">${CTA.label}</a>
+    <a class="v2-btn v2-btn--${CTA.variant} v2-nav-cta" href="${CTA.href}" style="padding: 12px 22px; font-size: var(--txt-sm, 15px);">${CTA.label}</a>
     ${LANG_TOGGLE('v2-nav-cta')}
     <!-- aria-controls + aria-expanded: el burger abre y cierra #v2-drawer, pero
          se anunciaba siempre igual ("Abrir menú") estuviera abierto o cerrado.
@@ -71,7 +76,7 @@ ${headerLinks}
   </header>
   <nav class="v2-drawer" id="v2-drawer">
 ${drawerLinks}
-    <a class="v2-btn v2-btn--navy" href="${CTA.href}" style="border-bottom: none;">${CTA.label}</a>
+    <a class="v2-btn v2-btn--${CTA.variant}" href="${CTA.href}" style="border-bottom: none;">${CTA.label}</a>
     ${LANG_TOGGLE('v2-lang-toggle--drawer')}
   </nav>`;
 }
