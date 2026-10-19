@@ -182,6 +182,22 @@
     .jp-linkbtn:hover { border-color: #FFFFFF; color: #FFFFFF; }
     .jp-legal { font-size: var(--txt-xs); color: var(--pit-ink-40); line-height: 1.6; margin: 24px 0 0; max-width: 80ch; }
 
+    /* ---- animaciones: las mismas del resto del sitio ----
+       Entrada del hero con .pit-enter y aparición en cascada con .pit-stagger
+       (pit-motion.css + pit-motion.js). Acá solo el levantar de las tarjetas
+       al pasar el mouse, igual que .pit-card. */
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .jp-item, .jp-mod, .jp-card, .jp-fotos img {
+        transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1);
+      }
+      .jp-item:hover, .jp-mod:hover, .jp-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,11,51,0.10); }
+      .jp-item--top:hover, .jp-rot:hover { box-shadow: 0 18px 40px rgba(0,11,51,0.30); }
+      .jp-fotos img:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 18px 40px rgba(0,11,51,0.18); }
+      /* El stagger le pone a cada hijo un retraso de entrada; sin esto, el
+         levantar al pasar el mouse también esperaría ese retraso. */
+      .jp .pit-stagger.pit-in > *:hover { transition-delay: 0s; }
+    }
+
     @media (max-width: 900px) {
       .jp-hero-grid, .jp-prog-grid, .jp-final { grid-template-columns: 1fr; }
       .jp-flyer { max-width: 420px; transform: none; }
@@ -210,24 +226,26 @@
   <section class="jp-hero" style="background: var(--pit-ink);">
     <div class="jp-wrap jp-hero-grid">
       <div>
-        <span class="jp-mono">Inauguración Escuela PIT · Sede Palermo</span>
-        <h1>Jornada <span>P.I.T.</span></h1>
-        <p class="jp-hero-sub">Un día de práctica con pacientes reales, junto al Dr. Ricardo D. Frusso.</p>
-        <dl class="jp-datos">
+        <span class="jp-mono pit-enter pit-enter-1" style="display: inline-block;">Inauguración Escuela PIT · Sede Palermo</span>
+        <h1 class="pit-enter pit-enter-1">Jornada <span>P.I.T.</span></h1>
+        <p class="jp-hero-sub pit-enter pit-enter-2">Un día de práctica con pacientes reales, junto al Dr. Ricardo D. Frusso.</p>
+        <dl class="jp-datos pit-stagger">
           <div><dt>Cuándo</dt><dd>Sábado 14 de noviembre<small>9:15 a 17:30 hs · convocatoria 9:00</small></dd></div>
           <div><dt>Dónde</dt><dd>Escuela PIT, sede Palermo<small>Gurruchaga 2426, CABA</small></dd></div>
           <div><dt>Modalidad</dt><dd>Presencial o virtual<small>El mismo programa en las dos</small></dd></div>
           <div><dt>Para quién</dt><dd>Médicos de todos los niveles<small>No hace falta experiencia previa en PIT</small></dd></div>
         </dl>
-        <div class="jp-ctas">
+        <div class="jp-ctas pit-enter pit-enter-3">
           <a class="v2-btn v2-btn--blue jp-btn-cta" href="#mas-info">Más info</a>
           <a class="v2-btn jp-btn-ghost" href="#programa">Ver el programa</a>
           <span class="jp-cupos">Cupos limitados</span>
         </div>
       </div>
+      <div class="pit-enter pit-enter-3">
       <a class="jp-flyer" href="/img/jornada/flyer.webp" target="_blank" rel="noopener" aria-label="Ver el flyer de la Jornada P.I.T. en grande">
         <img src="/img/jornada/flyer.webp" width="1080" height="1350" alt="Flyer de la Jornada P.I.T.: sábado 14.11, 9:15 a 17:30 hs, Gurruchaga 2426, Palermo, presencial o virtual, para médicos de todos los niveles.">
       </a>
+      </div>
     </div>
   </section>
 
@@ -243,7 +261,7 @@
     <div class="jp-wrap">
       <span class="jp-mono" style="color: var(--v2-blue);">Qué incluye la inscripción</span>
       <h2 class="jp-h2">Todo lo que te llevás de la Jornada.</h2>
-      <div class="jp-incluye">
+      <div class="jp-incluye pit-stagger">
         <div class="jp-item jp-item--top">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>
           <h3>Clase grabada completa</h3>
@@ -284,7 +302,7 @@
         <p class="jp-nota">Cada bloque dura una hora: <b>20 minutos de anatomía y 40 de tratamiento en vivo</b> con un paciente real.</p>
       </div>
       <div>
-      <ol class="jp-prog" id="jp-prog">
+      <ol class="jp-prog pit-stagger" id="jp-prog">
         <li class="jp-pausa"><time>09:00</time><div><b>Convocatoria</b><span>Acreditación, kit y café</span></div></li>
         <li><time>09:15</time><div><b>Bienvenida y fundamentos de PIT</b></div></li>
         <li class="jp-region"><time>10:00</time><div><b>Bloque 1 · Cabeza y cuello</b><span>Anatomía y paciente real</span></div></li>
@@ -307,7 +325,7 @@
     <div class="jp-wrap">
       <span class="jp-mono" style="color: var(--v2-blue);">Dos modalidades</span>
       <h2 class="jp-h2">Presencial o virtual: elegí cómo cursar.</h2>
-      <div class="jp-mods">
+      <div class="jp-mods pit-stagger">
         <div class="jp-mod">
           <span class="jp-mono" style="color: var(--v2-blue);">01</span>
           <h3>Presencial</h3>
@@ -338,7 +356,7 @@
       </div>
       <div class="jp-precios" id="aranceles">
         <span class="jp-mono">Aranceles</span>
-        <dl>
+        <dl class="pit-stagger">
           <div><dt>Presencial</dt><dd>$770.000</dd></div>
           <div><dt>Virtual</dt><dd>$500.000</dd></div>
           <div><dt>Rotación por consultorio</dt><dd>$300.000<small>Opcional · 4 horas · se suma a tu modalidad</small></dd></div>
@@ -353,7 +371,7 @@
     <div class="jp-wrap">
       <span class="jp-mono" style="color: var(--v2-blue);">Así son las jornadas</span>
       <h2 class="jp-h2">Anatomía, marcaje y tratamiento en vivo.</h2>
-      <div class="jp-fotos">
+      <div class="jp-fotos pit-stagger">
         <img class="jp-f1" src="/img/jornada/paciente.webp" width="900" height="1125" alt="El Dr. Frusso conversa con un paciente frente al grupo antes del tratamiento." loading="lazy" decoding="async">
         <img class="jp-f2" src="/img/jornada/practica.webp" width="1800" height="1181" alt="El Dr. Frusso aplica PIT en la pierna de un paciente." loading="lazy" decoding="async">
         <img class="jp-f3" src="/img/jornada/anatomia.webp" width="900" height="1125" alt="Participantes frente a la proyección de campos anatómicos y dermatomas." loading="lazy" decoding="async">
@@ -365,7 +383,7 @@
 
   <!-- ============ DOCENTE + SEDE ============ -->
   <section class="jp-sec" style="padding-top: 0;">
-    <div class="jp-wrap jp-dos">
+    <div class="jp-wrap jp-dos pit-stagger">
       <div class="jp-card jp-doc">
         <img src="/img/DSC_0016.webp" alt="El Dr. Ricardo D. Frusso" loading="lazy" decoding="async">
         <div>
@@ -389,7 +407,7 @@
     <div class="jp-wrap" style="max-width: 900px;">
       <span class="jp-mono" style="color: var(--v2-blue);">Preguntas frecuentes</span>
       <h2 class="jp-h2">Antes de anotarte</h2>
-      <div class="jp-faq">
+      <div class="jp-faq pit-stagger">
         <details>
           <summary>¿Necesito experiencia previa en PIT?</summary>
           <p>No. La Jornada es para médicos de todos los niveles: arrancamos por los fundamentos y la anatomía de cada región.</p>
