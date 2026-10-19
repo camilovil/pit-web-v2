@@ -232,10 +232,21 @@
     /* Aviso de la Jornada P.I.T. arriba del título (campaña hasta el 14.11.2026).
        Para retirarlo: borrar el <a class="v2-hero-anuncio"> del hero, esta regla
        y la sección <!-- JORNADA P.I.T. --> de más abajo. */
-    .v2-hero-anuncio { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 0 0 clamp(16px, 2.4vh, 26px); padding: 8px 8px 8px 16px; border-radius: 26px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(8px); color: #FFFFFF; font-size: var(--txt-sm); font-weight: 500; line-height: 1.3; }
-    .v2-hero-anuncio:hover { background: rgba(255,255,255,0.26); color: #FFFFFF; }
-    .v2-hero-anuncio-tag { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
-    .v2-hero-anuncio b { font-weight: 600; background: #FFFFFF; color: var(--v2-blue); padding: 7px 14px; border-radius: 999px; }
+    /* Chip de evento: fecha en un bloque azul, nombre y bajada en dos líneas
+       cortas y una flecha. Entra en un solo renglón también en el celular
+       (la versión anterior, una píldora de texto, se partía en dos renglones
+       y quedaba como una caja que competía con el título). */
+    .v2-hero-anuncio { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; box-sizing: border-box; margin: 0 0 clamp(18px, 2.6vh, 28px); padding: 6px 6px 6px 6px; border-radius: 999px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,11,51,0.18); color: #FFFFFF; text-align: left; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease, box-shadow 0.3s ease; }
+    .v2-hero-anuncio:hover { color: #FFFFFF; background: rgba(255,255,255,0.28); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,11,51,0.25); }
+    .v2-anuncio-fecha { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; background: var(--v2-blue); color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; box-shadow: 0 4px 12px rgba(37,99,235,0.45); }
+    .v2-anuncio-fecha b { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+    .v2-anuncio-fecha small { font-family: var(--pit-font-mono); font-size: 9px; letter-spacing: 0.12em; margin-top: 2px; }
+    .v2-anuncio-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .v2-anuncio-txt b { font-size: var(--txt-sm); font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
+    .v2-anuncio-txt small { font-size: 12px; color: rgba(255,255,255,0.88); white-space: nowrap; }
+    .v2-anuncio-flecha { flex: 0 0 auto; width: 36px; height: 36px; margin-left: 4px; border-radius: 50%; background: #FFFFFF; color: var(--v2-blue); display: flex; align-items: center; justify-content: center; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    .v2-hero-anuncio:hover .v2-anuncio-flecha { transform: translateX(2px); }
+    @media (max-width: 370px) { .v2-hero-anuncio { gap: 10px; } .v2-anuncio-txt small { font-size: 11px; } .v2-anuncio-flecha { width: 32px; height: 32px; margin-left: 0; } }
     /* Sección de la Jornada P.I.T. (campaña hasta el 14.11.2026). */
     .v2-jornada { background: var(--v2-navy); color: #FFFFFF; border-radius: 36px; max-width: 1228px; margin: 0 auto; box-sizing: border-box; padding: clamp(36px, 5vw, 64px); display: grid; grid-template-columns: 0.75fr 1.25fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
     .v2-jornada-flyer { display: block; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.45); transform: rotate(-1.5deg); line-height: 0; }
@@ -753,7 +764,11 @@
 
   <!-- ============ HERO ============ -->
   <section class="v2-hero">
-    <a class="v2-hero-anuncio" href="jornada-pit.html"><span class="v2-hero-anuncio-tag">Para médicos</span>Jornada P.I.T. · sábado 14.11 <b>Más info</b></a>
+    <a class="v2-hero-anuncio" href="jornada-pit.html" aria-label="Jornada P.I.T., sábado 14 de noviembre, para médicos. Más información">
+      <span class="v2-anuncio-fecha" aria-hidden="true"><b>14</b><small>NOV</small></span>
+      <span class="v2-anuncio-txt" aria-hidden="true"><b>Jornada P.I.T.</b><small>Para médicos · presencial o virtual</small></span>
+      <span class="v2-anuncio-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
     <span class="v2-eyebrow v2-hero-eyebrow">PIT · Neuroproloterapia · Dr. Ricardo D. Frusso</span>
     <h1>Tratar el dolor desde el nervio</h1>
     <p class="v2-hero-sub">PIT es un tratamiento que actúa donde nace el dolor. El alivio suele sentirse desde la primera sesión. Su creador es el Dr. John Lyftogt.</p>

@@ -54,8 +54,8 @@
     //   'Descargar apuntes': 'Download the notes',
 
     // ── Jornada P.I.T.: aviso del hero y sección de la home ──────────────
-    'Para médicos': 'For physicians',
-    'Jornada P.I.T. · sábado 14.11': 'Jornada P.I.T. · Saturday 14.11',
+    'Para médicos · presencial o virtual': 'For physicians · in person or online',
+    'Jornada P.I.T., sábado 14 de noviembre, para médicos. Más información': 'Jornada P.I.T., Saturday 14 November, for physicians. More information',
     'Más info': 'More info',
     'Ver la Jornada P.I.T.': 'See the Jornada P.I.T.',
     'Sábado 14.11 · Inauguración Escuela PIT, sede Palermo': 'Saturday 14.11 · Opening of the Escuela PIT Palermo campus',
