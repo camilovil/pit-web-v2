@@ -132,12 +132,17 @@
 
     /* ---- preguntas ---- */
     .jp-faq { margin-top: 32px; border-top: 2px solid var(--pit-ink); }
-    .jp-faq details { border-bottom: 1px solid var(--pit-ink-10); }
+    /* Pregunta abierta = tarjeta blanca. El margen negativo hace que el texto siga
+       alineado con las preguntas cerradas y que la tarjeta se extienda a los costados.
+       Pisa la sombra suelta que pit-v2.css le pone a todo details[open]. */
+    .jp-faq details { border-bottom: 1px solid var(--pit-ink-10); margin: 0 -20px; padding: 0 20px; border-radius: 0; transition: background 0.2s ease, box-shadow 0.2s ease; }
+    .jp-faq details[open] { border-radius: 16px; background: #FFFFFF; border-bottom-color: transparent; box-shadow: 0 12px 32px rgba(0,11,51,0.07); margin-top: 8px; margin-bottom: 8px; }
+    .jp-faq details:has(+ details[open]) { border-bottom-color: transparent; }
     .jp-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; font-size: var(--txt-md); font-weight: 600; }
     .jp-faq summary::-webkit-details-marker { display: none; }
     .jp-faq summary::after { content: "+"; font-family: var(--pit-font-mono); color: var(--v2-blue); font-size: 22px; line-height: 1; transition: transform 0.2s ease; }
     .jp-faq details[open] summary::after { transform: rotate(45deg); }
-    .jp-faq details p { margin: 0 0 20px; font-size: var(--txt-sm); line-height: 1.6; color: var(--pit-ink-60); max-width: 70ch; }
+    .jp-faq details p { margin: -4px 0 0; padding: 0 0 22px; font-size: var(--txt-md); line-height: 1.6; color: var(--pit-ink-60); max-width: 72ch; }
 
     /* ---- más info: el cierre ---- */
     .jp-final { background: var(--v2-navy); color: #FFFFFF; border-radius: 28px; padding: clamp(24px, 5vw, 64px); display: grid; grid-template-columns: 0.9fr 1.1fr; grid-template-areas: "intro form" "extra form"; column-gap: clamp(28px, 4vw, 56px); row-gap: 8px; align-items: center; }
@@ -261,6 +266,7 @@
       .jp-doc { grid-template-columns: 1fr; }
       .jp-ctas .v2-btn { flex: 1 1 100%; }
       .jp-campos { grid-template-columns: 1fr; }
+      .jp-faq details { margin-left: -12px; margin-right: -12px; padding-left: 12px; padding-right: 12px; }
       /* Formulario en el celular: menos marco alrededor (la caja azul y la
          tarjeta blanca sumaban dos márgenes y lo dejaban angosto), etiquetas
          más legibles y todo con altura cómoda para el dedo. */
