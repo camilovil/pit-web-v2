@@ -48,17 +48,17 @@
     'Curso': 'Course',
     'Contacto': 'Contact',
     'Dr. Ricardo D. Frusso — inicio': 'Dr. Ricardo D. Frusso — home',
-    // El CTA de la barra es la Jornada P.I.T. hasta el 14.11.2026 (ver
+    // El CTA de la barra es la Jornada P.I.T. hasta el 15.11.2026 (ver
     // _build/nav.js). "Jornada P.I.T." es el nombre del evento y no se
     // traduce. Al volver al CTA de siempre, reponer:
     //   'Descargar apuntes': 'Download the notes',
 
     // ── Jornada P.I.T.: aviso del hero y sección de la home ──────────────
     'Para médicos · presencial o virtual': 'For physicians · in person or online',
-    'Jornada P.I.T., sábado 14 de noviembre, para médicos. Más información': 'Jornada P.I.T., Saturday 14 November, for physicians. More information',
+    'Jornada P.I.T., domingo 15 de noviembre, para médicos. Más información': 'Jornada P.I.T., Sunday 15 November, for physicians. More information',
     'Más info': 'More info',
     'Ver la Jornada P.I.T.': 'See the Jornada P.I.T.',
-    'Sábado 14.11 · Inauguración Escuela PIT, sede Palermo': 'Saturday 14.11 · Opening of the Escuela PIT Palermo campus',
+    'Domingo 15.11 · Inauguración Escuela PIT, sede Palermo': 'Sunday 15.11 · Opening of the Escuela PIT Palermo campus',
     'Un día de práctica con pacientes reales, junto al Dr. Ricardo D. Frusso.': 'A day of hands-on practice with real patients, alongside Dr. Ricardo D. Frusso.',
     'Cinco regiones del cuerpo, de 9:15 a 17:30 hs': 'Five body regions, 9:15 am to 5:30 pm',
     'Presencial o virtual': 'In person or online',

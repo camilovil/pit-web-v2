@@ -1,7 +1,7 @@
 <style data-page>
-    /* Jornada P.I.T. — landing del evento del sábado 14.11 (inauguración de la
+    /* Jornada P.I.T. — landing del evento del domingo 15.11 (inauguración de la
        Escuela PIT, sede Palermo). Es el link que se manda por WhatsApp: su
-       og:image (img/jornada/og.jpg) es la vista previa que aparece en el chat.
+       og:image (img/jornada/og-15.jpg; el nombre cambia con la fecha para que WhatsApp no muestre la vieja en caché) es la vista previa que aparece en el chat.
        REGLAS que esta página respeta: los aranceles van como información
        secundaria (bloque chico debajo de las modalidades, nunca en el titular;
        pedido del cliente del 19.10.2026), los datos de pago (alias, titular)
@@ -296,7 +296,7 @@
         <h1 class="pit-enter pit-enter-1">Jornada <span>P.I.T.</span></h1>
         <p class="jp-hero-sub pit-enter pit-enter-2">Un día de práctica con pacientes reales, junto al Dr. Ricardo D. Frusso.</p>
         <dl class="jp-datos pit-stagger">
-          <div><dt>Cuándo</dt><dd>Sábado 14 de noviembre<small>9:15 a 17:30 hs · convocatoria 9:00</small></dd></div>
+          <div><dt>Cuándo</dt><dd>Domingo 15 de noviembre<small>9:15 a 17:30 hs · convocatoria 9:00</small></dd></div>
           <div><dt>Dónde</dt><dd>Escuela PIT, sede Palermo<small>Gurruchaga 2426, CABA</small></dd></div>
           <div><dt>Modalidad</dt><dd>Presencial o virtual<small>El mismo programa en las dos</small></dd></div>
           <div><dt>Para quién</dt><dd>Médicos de todos los niveles<small>No hace falta experiencia previa en PIT</small></dd></div>
@@ -309,7 +309,7 @@
       </div>
       <div class="pit-enter pit-enter-3">
       <a class="jp-flyer" href="/img/jornada/flyer.webp" target="_blank" rel="noopener" aria-label="Ver el flyer de la Jornada P.I.T. en grande">
-        <img src="/img/jornada/flyer.webp" width="1080" height="1350" alt="Flyer de la Jornada P.I.T.: sábado 14.11, 9:15 a 17:30 hs, Gurruchaga 2426, Palermo, presencial o virtual, para médicos de todos los niveles.">
+        <img src="/img/jornada/flyer.webp" width="1080" height="1350" alt="Flyer de la Jornada P.I.T.: domingo 15.11, 9:15 a 17:30 hs, Gurruchaga 2426, Palermo, presencial o virtual, para médicos de todos los niveles.">
       </a>
       </div>
     </div>
@@ -376,7 +376,7 @@
   <section class="jp-sec" id="programa" style="padding-top: 0; scroll-margin-top: 100px;">
     <div class="jp-wrap jp-prog-grid">
       <div class="jp-sticky">
-        <span class="jp-mono" style="color: var(--v2-blue);">Programa del sábado 14.11</span>
+        <span class="jp-mono" style="color: var(--v2-blue);">Programa del domingo 15.11</span>
         <h2 class="jp-h2">Cinco regiones del cuerpo en un día.</h2>
         <p class="jp-lead">Cabeza y cuello, miembro superior, tronco y fibromialgia, abdomen y pelvis, y miembro inferior.</p>
         <p class="jp-nota">Cada bloque dura una hora: <b>20 minutos de anatomía y 40 de tratamiento en vivo</b> con un paciente real.</p>
@@ -479,7 +479,7 @@
         <span class="jp-mono">Dónde</span>
         <h3>Escuela PIT, sede Palermo</h3>
         <a class="jp-dir" href="https://www.google.com/maps/search/?api=1&amp;query=Gurruchaga+2426,+CABA" target="_blank" rel="noopener">Gurruchaga 2426, Palermo, CABA</a>
-        <p>La Jornada del 14 de noviembre es también la inauguración de la nueva sede de la Escuela PIT en Palermo. La convocatoria es a las 9:00: acreditación, kit de bienvenida y café.</p>
+        <p>La Jornada del 15 de noviembre es también la inauguración de la nueva sede de la Escuela PIT en Palermo. La convocatoria es a las 9:00: acreditación, kit de bienvenida y café.</p>
       </div>
     </div>
   </section>
@@ -533,7 +533,7 @@
           <a class="jp-mail" href="mailto:ricardo.frusso@gmail.com?subject=Jornada%20P.I.T.%20%C2%B7%20M%C3%A1s%20info" style="margin-top: 6px;">ricardo.frusso@gmail.com</a>
           <div class="jp-final-acc">
             <button type="button" class="jp-linkbtn" data-jp-copiar="ricardo.frusso@gmail.com">Copiar el mail</button>
-            <a class="jp-linkbtn" id="jp-compartir" href="https://wa.me/?text=Jornada%20P.I.T.%20%C2%B7%20s%C3%A1bado%2014.11%20%C2%B7%20Escuela%20PIT%2C%20sede%20Palermo%0Ahttps%3A%2F%2Fdrricardofrusso.com%2Fjornada-pit" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+            <a class="jp-linkbtn" id="jp-compartir" href="https://wa.me/?text=Jornada%20P.I.T.%20%C2%B7%20domingo%2015.11%20%C2%B7%20Escuela%20PIT%2C%20sede%20Palermo%0Ahttps%3A%2F%2Fdrricardofrusso.com%2Fjornada-pit" target="_blank" rel="noopener">Compartir por WhatsApp</a>
           </div>
         </div>
 
@@ -664,7 +664,7 @@
           mensaje: $('jp-msg').value.trim()
         };
         var porMail = function () {
-          var cuerpo = 'Hola, quiero recibir más información sobre la Jornada P.I.T. del sábado 14 de noviembre.\n\n'
+          var cuerpo = 'Hola, quiero recibir más información sobre la Jornada P.I.T. del domingo 15 de noviembre.\n\n'
             + 'Nombre: ' + datos.nombre + '\nEmail: ' + datos.email + '\nEspecialidad: ' + datos.especialidad
             + '\nTeléfono: ' + datos.telefono + '\nModalidad: ' + datos.modalidad
             + '\nRotación por consultorio: ' + datos.rotacion + (datos.mensaje ? '\n\n' + datos.mensaje : '') + '\n';
@@ -731,7 +731,7 @@
       c.textContent = 'Compartir esta página';
       c.addEventListener('click', function (e) {
         e.preventDefault();
-        navigator.share({ title: 'Jornada P.I.T. · sábado 14.11', text: 'Jornada P.I.T. · sábado 14.11 · Escuela PIT, sede Palermo', url: 'https://drricardofrusso.com/jornada-pit' }).catch(function () {});
+        navigator.share({ title: 'Jornada P.I.T. · domingo 15.11', text: 'Jornada P.I.T. · domingo 15.11 · Escuela PIT, sede Palermo', url: 'https://drricardofrusso.com/jornada-pit' }).catch(function () {});
       });
     }
   })();

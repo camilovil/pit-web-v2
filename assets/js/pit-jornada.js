@@ -1,4 +1,4 @@
-// PIT — pop-up de la Jornada P.I.T. (sábado 14.11.2026)
+// PIT — pop-up de la Jornada P.I.T. (domingo 15.11.2026)
 //
 // QUÉ HACE
 // Al entrar a cualquier página del sitio muestra el flyer de la Jornada con un
@@ -16,7 +16,7 @@
 // (o poner FIN en una fecha pasada).
 (function () {
   'use strict';
-  var FIN = Date.UTC(2026, 10, 15, 3);           // 15.11.2026 00:00 en Buenos Aires
+  var FIN = Date.UTC(2026, 10, 16, 3);           // 16.11.2026 00:00 en Buenos Aires (el día después)
   var KEY = 'pit-jornada-popup';
   var CADA = 24 * 60 * 60 * 1000;                // vuelve a aparecer al día siguiente
   var DEMORA = 1200;
@@ -63,9 +63,9 @@
     d.setAttribute('aria-labelledby', 'pj-tit');
     d.innerHTML = ''
       + '<div class="pj-card">'
-      + '<h2 class="pj-sr" id="pj-tit">Jornada P.I.T. · sábado 14 de noviembre</h2>'
+      + '<h2 class="pj-sr" id="pj-tit">Jornada P.I.T. · domingo 15 de noviembre</h2>'
       + '<a class="pj-flyer" href="/jornada-pit" data-pj-ir>'
-      + '<img src="/img/jornada/flyer-sm.webp" width="640" height="800" alt="Jornada P.I.T., inauguración de la Escuela PIT, sede Palermo. Un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso. Sábado 14.11, 9:15 a 17:30 hs, presencial o virtual, para médicos de todos los niveles.">'
+      + '<img src="/img/jornada/flyer-sm.webp" width="640" height="800" alt="Jornada P.I.T., inauguración de la Escuela PIT, sede Palermo. Un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso. Domingo 15.11, 9:15 a 17:30 hs, presencial o virtual, para médicos de todos los niveles.">'
       + '</a>'
       + '<button type="button" class="pj-x" data-pj-cerrar aria-label="Cerrar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'
       + '<div class="pj-acc">'

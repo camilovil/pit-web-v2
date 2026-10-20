@@ -4,12 +4,12 @@
 
 const LOGO_HTML = '<span class="pit-logo"><span class="pit-logo-dr">Dr.</span><span class="pit-logo-pipe" aria-hidden="true"></span><span class="pit-logo-name"><span>Ricardo D.</span><span>Frusso</span></span></span>';
 
-// CTA de la barra. Hasta el 14.11.2026 es la Jornada P.I.T. (campaña del mes:
+// CTA de la barra. Hasta el 15.11.2026 es la Jornada P.I.T. (campaña del mes:
 // tiene que ser lo más visible del sitio), en azul para que se despegue del
 // resto. Después del evento, volver al CTA de siempre:
 //   const CTA = { href: '/docs/Apuntes-PIT-Neuroproloterapia-Dr-Frusso.pdf', label: 'Descargar apuntes', variant: 'navy' };
 // y correr el build. Los apuntes siguen enlazados en la home y en el pie.
-const CTA = { href: '/jornada-pit', label: 'Jornada P.I.T.', variant: 'blue', fecha: ['14', 'NOV'] };
+const CTA = { href: '/jornada-pit', label: 'Jornada P.I.T.', variant: 'blue', fecha: ['15', 'NOV'] };
 
 // Con `fecha`, el botón lleva la fecha en un círculo blanco a la izquierda (mismo
 // diseño que el aviso de la home). Los estilos van inline a propósito: el nav se

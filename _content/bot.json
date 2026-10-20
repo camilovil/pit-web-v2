@@ -4,7 +4,7 @@
   "sin_respuesta": "No encontré una respuesta para eso. Probá con otras palabras, elegí una de estas preguntas, o escribinos y te respondemos.",
   "temas": [
     {
-      "texto": "Jornada P.I.T. · 14.11",
+      "texto": "Jornada P.I.T. · 15.11",
       "id": "jornada-que-es"
     },
     {
@@ -35,13 +35,14 @@
         "taller",
         "evento",
         "inauguracion",
-        "14 de noviembre",
-        "14 11",
-        "sabado 14",
+        "15 de noviembre",
+        "15 11",
+        "domingo 15",
         "noviembre",
-        "escuela pit palermo"
+        "escuela pit palermo",
+        "domingo"
       ],
-      "respuesta": "Es un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso: el sábado 14 de noviembre, de 9:15 a 17:30 hs, en la Escuela PIT, sede Palermo (Gurruchaga 2426, CABA). Ese día se inaugura la sede. Es para médicos de todos los niveles y se puede cursar presencial o virtual. Te llevás la clase grabada, los apuntes y el certificado. Cupos limitados.",
+      "respuesta": "Es un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso: el domingo 15 de noviembre, de 9:15 a 17:30 hs, en la Escuela PIT, sede Palermo (Gurruchaga 2426, CABA). Ese día se inaugura la sede. Es para médicos de todos los niveles y se puede cursar presencial o virtual. Te llevás la clase grabada, los apuntes y el certificado. Cupos limitados.",
       "enlaces": [
         {
           "texto": "Ver la Jornada",
@@ -287,7 +288,7 @@
         "medicos",
         "estudiar"
       ],
-      "respuesta": "Sí. El curso online PIT · Módulo I (Lumbalgia y Rodilla) tiene casos clínicos reales filmados en consultorio, acceso permanente y certificado: USD 97.99, pago único en Hotmart, con garantía de 7 días y 10% de descuento con el cupón PIT10OFF. Además, el sábado 14 de noviembre es la Jornada P.I.T., un día de práctica presencial o virtual.",
+      "respuesta": "Sí. El curso online PIT · Módulo I (Lumbalgia y Rodilla) tiene casos clínicos reales filmados en consultorio, acceso permanente y certificado: USD 97.99, pago único en Hotmart, con garantía de 7 días y 10% de descuento con el cupón PIT10OFF. Además, el domingo 15 de noviembre es la Jornada P.I.T., un día de práctica presencial o virtual.",
       "enlaces": [
         {
           "texto": "Curso Módulo I",
@@ -398,7 +399,7 @@
         "sede",
         "fundadores"
       ],
-      "respuesta": "Es la escuela de formación en el método que fundaron el Dr. Frusso, el Dr. Heno Pigerl y las doctoras María Paz Caruso y María Julia Aparicio, para profesionales de la salud de toda la región. El sábado 14 de noviembre inaugura su sede en Palermo, en Gurruchaga 2426, con la Jornada P.I.T.",
+      "respuesta": "Es la escuela de formación en el método que fundaron el Dr. Frusso, el Dr. Heno Pigerl y las doctoras María Paz Caruso y María Julia Aparicio, para profesionales de la salud de toda la región. El domingo 15 de noviembre inaugura su sede en Palermo, en Gurruchaga 2426, con la Jornada P.I.T.",
       "enlaces": [
         {
           "texto": "Leer la nota",
