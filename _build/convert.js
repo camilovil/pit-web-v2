@@ -223,7 +223,7 @@ ${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${p.title}">
   <meta property="og:description" content="${p.desc}">
-  <meta property="og:image" content="${p.og || 'https://drricardofrusso.com/img/og-image.png'}">
+  <meta property="og:image" content="${p.og || 'https://drricardofrusso.com/img/og-pit.jpg'}">
   <meta property="og:locale" content="es_AR">
   <meta property="og:site_name" content="PIT · Dr. Frusso">
   <meta name="twitter:card" content="summary_large_image">

@@ -278,7 +278,7 @@ const HEAD = (pre, rawTitle, rawDesc, extraCss = '', portada = '') => {
   // `portada` viene del frontmatter y ya pasó por urlSegura() en validar().
   const ogImg = portada && portada.startsWith('/')
     ? `https://drricardofrusso.com${portada}`
-    : (portada || 'https://drricardofrusso.com/img/og-image.png');
+    : (portada || 'https://drricardofrusso.com/img/og-pit.jpg');
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
