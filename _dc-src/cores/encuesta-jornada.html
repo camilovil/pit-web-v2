@@ -1,0 +1,180 @@
+<style data-page>
+    /* Encuesta de la Jornada P.I.T. Se llega por el QR del programa impreso
+       (dorso, tarjeta "Tu opinión"). No figura en el menú ni en el sitemap. */
+    .en-hero { padding: clamp(56px, 8vw, 96px) 24px clamp(40px, 6vw, 64px); color: #FFFFFF; }
+    .en-wrap { max-width: 720px; margin: 0 auto; min-width: 0; }
+    .en-kicker { font-family: var(--pit-font-mono); font-size: var(--txt-2xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--v2-sky, #6C97F7); margin: 0; }
+    .en-hero h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.05; letter-spacing: -0.03em; margin: 14px 0 0; color: #FFFFFF; }
+    .en-hero p { font-size: var(--txt-md); line-height: 1.55; color: rgba(255,255,255,0.78); margin: 16px 0 0; max-width: 56ch; }
+    .en-body { padding: clamp(28px, 5vw, 56px) 24px clamp(64px, 9vw, 110px); background: var(--pit-paper); }
+
+    .en-form, .en-ok { background: #FFFFFF; color: var(--pit-ink); border: 1px solid var(--pit-ink-10); border-radius: 20px; padding: clamp(22px, 3.4vw, 36px); box-sizing: border-box; }
+    .en-form[hidden], .en-ok[hidden] { display: none; }
+    /* Cada pregunta es un div (no fieldset: el borde de un fieldset se corta
+       alrededor del legend). Los grupos de opciones llevan role="radiogroup". */
+    .en-preg { padding: 0 0 24px; min-width: 0; }
+    .en-preg + .en-preg { padding-top: 24px; border-top: 1px solid var(--pit-ink-10); }
+    .en-tit { display: block; margin: 0; font-size: var(--txt-md); font-weight: 600; line-height: 1.4; color: var(--pit-ink); }
+    .en-tit small { font-weight: 400; color: var(--pit-ink-40); }
+    .en-ayuda { display: flex; justify-content: space-between; max-width: 300px; margin-top: 8px; font-size: var(--txt-xs); color: var(--pit-ink-40); }
+
+    .en-opciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .en-opcion { position: relative; }
+    .en-opcion input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+    .en-opcion span { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; min-width: 46px; padding: 0 16px; box-sizing: border-box; border-radius: 999px; border: 1px solid var(--pit-ink-20); font-size: var(--txt-sm); font-weight: 600; color: var(--pit-ink); transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+    .en-escala .en-opcion span { padding: 0; width: 52px; }
+    .en-opcion input:checked + span { background: var(--v2-navy); border-color: var(--v2-navy); color: #FFFFFF; }
+    .en-opcion input:focus-visible + span { outline: 3px solid rgba(37,99,235,0.45); outline-offset: 2px; }
+
+    /* 16px en mobile: con menos, iOS Safari hace zoom a toda la página al enfocar el campo. */
+    .en-preg textarea, .en-preg input[type="text"] { display: block; width: 100%; box-sizing: border-box; margin-top: 12px; font-family: var(--pit-font-sans); font-size: 16px; line-height: 1.5; padding: 12px 14px; border: 1px solid var(--pit-ink-20); border-radius: 12px; background: #FFFFFF; color: var(--pit-ink); outline: none; }
+    .en-preg textarea { resize: vertical; min-height: 96px; }
+    @media (min-width: 640px) { .en-preg textarea, .en-preg input[type="text"] { font-size: var(--txt-sm); } }
+    .en-preg textarea:focus, .en-preg input[type="text"]:focus { border-color: var(--v2-blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+    .en-check { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: var(--txt-sm); line-height: 1.45; cursor: pointer; }
+    .en-check input { width: 20px; height: 20px; margin: 0; flex: 0 0 auto; accent-color: var(--v2-blue); }
+
+    .en-enviar { width: 100%; padding: 17px 28px; font-size: var(--txt-md); }
+    .en-enviar[disabled] { opacity: 0.7; cursor: wait; }
+    .en-hint { font-size: var(--txt-sm); line-height: 1.5; color: var(--pit-error); margin-top: 10px; }
+    .en-hint:empty { display: none; }
+    .en-priv { display: block; margin-top: 12px; font-size: var(--txt-xs); line-height: 1.5; color: var(--pit-ink-40); }
+    .en-gotcha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    .en-ok { border: 2px solid var(--v2-blue); }
+    .en-ok-icono { width: 44px; height: 44px; border-radius: 50%; background: var(--v2-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .en-ok h2 { font-size: var(--txt-xl); margin: 0; letter-spacing: -0.01em; }
+    .en-ok p { margin: 10px 0 0; font-size: var(--txt-sm); line-height: 1.6; color: var(--pit-ink-60); }
+    .en-ok-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+    @media (max-width: 560px) {
+      .en-hero, .en-body { padding-left: 16px; padding-right: 16px; }
+      .en-form, .en-ok { padding: 22px 18px; border-radius: 18px; }
+      .en-escala .en-opcion span { width: 48px; }
+    }
+</style>
+
+<section class="en-hero" style="background: var(--pit-ink);">
+  <div class="en-wrap">
+    <p class="en-kicker">Jornada P.I.T. · domingo 15.11.2026</p>
+    <h1>¿Cómo te fue en la Jornada?</h1>
+    <p>Son cinco preguntas, te lleva un minuto. Nos ayuda a mejorar las próximas.</p>
+  </div>
+</section>
+
+<section class="en-body">
+  <div class="en-wrap">
+    <form class="en-form" id="en-form" novalidate>
+      <div class="en-preg" role="radiogroup" aria-labelledby="en-q1">
+        <p class="en-tit" id="en-q1">¿Cómo participaste?</p>
+        <div class="en-opciones">
+          <label class="en-opcion"><input type="radio" name="modalidad" value="Presencial"><span>Presencial</span></label>
+          <label class="en-opcion"><input type="radio" name="modalidad" value="Virtual"><span>Virtual</span></label>
+        </div>
+      </div>
+
+      <div class="en-preg" role="radiogroup" aria-labelledby="en-q2">
+        <p class="en-tit" id="en-q2">En general, ¿cómo calificás la Jornada?</p>
+        <div class="en-opciones en-escala">
+          <label class="en-opcion"><input type="radio" name="general" value="1"><span>1</span></label>
+          <label class="en-opcion"><input type="radio" name="general" value="2"><span>2</span></label>
+          <label class="en-opcion"><input type="radio" name="general" value="3"><span>3</span></label>
+          <label class="en-opcion"><input type="radio" name="general" value="4"><span>4</span></label>
+          <label class="en-opcion"><input type="radio" name="general" value="5"><span>5</span></label>
+        </div>
+        <div class="en-ayuda" aria-hidden="true"><span>Mala</span><span>Excelente</span></div>
+      </div>
+
+      <div class="en-preg" role="radiogroup" aria-labelledby="en-q3">
+        <p class="en-tit" id="en-q3">¿Qué tan útil te resulta para tu práctica?</p>
+        <div class="en-opciones en-escala">
+          <label class="en-opcion"><input type="radio" name="utilidad" value="1"><span>1</span></label>
+          <label class="en-opcion"><input type="radio" name="utilidad" value="2"><span>2</span></label>
+          <label class="en-opcion"><input type="radio" name="utilidad" value="3"><span>3</span></label>
+          <label class="en-opcion"><input type="radio" name="utilidad" value="4"><span>4</span></label>
+          <label class="en-opcion"><input type="radio" name="utilidad" value="5"><span>5</span></label>
+        </div>
+        <div class="en-ayuda" aria-hidden="true"><span>Poco útil</span><span>Muy útil</span></div>
+      </div>
+
+      <div class="en-preg">
+        <label class="en-tit" for="en-mas">¿Qué fue lo que más te sirvió? <small>(opcional)</small></label>
+        <textarea id="en-mas" name="lo_que_mas_sirvio" rows="3"></textarea>
+      </div>
+
+      <div class="en-preg">
+        <label class="en-tit" for="en-mejorar">¿Qué mejorarías o qué te gustaría ver en una próxima jornada? <small>(opcional)</small></label>
+        <textarea id="en-mejorar" name="a_mejorar" rows="3"></textarea>
+      </div>
+
+      <div class="en-preg">
+        <label class="en-tit" for="en-nombre">Tu nombre <small>(opcional)</small></label>
+        <input id="en-nombre" name="nombre" type="text" autocomplete="name" autocapitalize="words">
+        <label class="en-check"><input type="checkbox" id="en-testimonio" name="testimonio"><span>Pueden usar mi comentario como testimonio, con mi nombre.</span></label>
+      </div>
+
+      <!-- Trampa para bots: un campo invisible que una persona nunca completa.
+           Formspree descarta el envío si _gotcha llega con texto. -->
+      <div class="en-gotcha" aria-hidden="true"><label for="en-gotcha">No completar</label><input id="en-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" class="v2-btn v2-btn--blue en-enviar">Enviar mi opinión</button>
+      <div class="en-hint" id="en-hint" role="alert"></div>
+      <span class="en-priv">Las respuestas llegan solo al equipo del Dr. Frusso. <a href="privacidad.html">Política de privacidad</a>.</span>
+    </form>
+
+    <!-- tabindex="-1": al enviarse el formulario desaparece; el foco pasa a
+         este panel para que se anuncie la confirmación. -->
+    <div class="en-ok" id="en-ok" tabindex="-1" hidden>
+      <div class="en-ok-icono"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+      <h2>¡Gracias por tu opinión!</h2>
+      <p>La clase grabada, los apuntes y el certificado te llegan por mail en los próximos días.</p>
+      <div class="en-ok-links">
+        <a class="v2-btn v2-btn--blue" href="curso-modulo-1.html">Ver el curso online · Módulo I</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    // Envía con pit-forms.js al form de Formspree de la Jornada (el mismo de
+    // "Pedí más información", que llega a ricardo.frusso@gmail.com); se
+    // distingue por el _subject y el campo `tipo`.
+    var form = document.getElementById('en-form');
+    var ok = document.getElementById('en-ok');
+    if (!form || !ok) return;
+    var $ = function (id) { return document.getElementById(id); };
+    var hint = $('en-hint'), btn = form.querySelector('.en-enviar');
+    var DESTINO = 'ricardo.frusso@gmail.com';
+    var marcado = function (n) { var r = form.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ''; };
+
+    form.addEventListener('change', function () { hint.textContent = ''; });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!marcado('general')) { hint.textContent = 'Elegí una calificación general del 1 al 5.'; form.querySelector('input[name="general"]').focus(); return; }
+      hint.textContent = '';
+      var nombre = $('en-nombre').value.trim();
+      var datos = {
+        _subject: 'Encuesta Jornada P.I.T. · ' + (nombre || 'anónima') + ' · ' + marcado('general') + '/5',
+        _gotcha: $('en-gotcha').value,
+        tipo: 'encuesta-jornada',
+        modalidad: marcado('modalidad') || 'Sin responder',
+        calificacion_general: marcado('general') + '/5',
+        utilidad_para_la_practica: marcado('utilidad') ? marcado('utilidad') + '/5' : 'Sin responder',
+        lo_que_mas_sirvio: $('en-mas').value.trim(),
+        a_mejorar: $('en-mejorar').value.trim(),
+        nombre: nombre,
+        testimonio: $('en-testimonio').checked ? 'Sí, autoriza a usarlo con su nombre' : 'No'
+      };
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      var envio = window.pitSubmit ? window.pitSubmit('jornada', datos) : Promise.resolve({ ok: false });
+      envio.then(function (r) {
+        btn.disabled = false; btn.textContent = 'Enviar mi opinión';
+        if (r.ok) {
+          if (window.va) window.va('event', { name: 'Encuesta Jornada' });
+          form.hidden = true; ok.hidden = false; ok.focus();
+        } else {
+          hint.textContent = 'No se pudo enviar. Probá de nuevo o escribinos a ' + DESTINO + '.';
+        }
+      });
+    });
+  })();
+</script>

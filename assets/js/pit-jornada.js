@@ -22,7 +22,7 @@
   var DEMORA = 1200;
 
   if (Date.now() >= FIN) return;
-  if (/\/jornada-pit(\.html)?\/?$/.test(location.pathname)) return;
+  if (/\/(jornada-pit|encuesta-jornada)(\.html)?\/?$/.test(location.pathname)) return;
   if (!window.HTMLDialogElement) return;
 
   function visto() { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } }

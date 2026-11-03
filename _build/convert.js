@@ -51,6 +51,11 @@ const PAGES = [
     title: 'Jornada P.I.T. · Domingo 15.11 · Escuela PIT, sede Palermo — Dr. Frusso',
     desc: 'Un día de práctica con pacientes reales junto al Dr. Ricardo D. Frusso. Cinco regiones, presencial o virtual, para médicos de todos los niveles. Te llevás la clase grabada, los apuntes y el certificado.',
     og: 'https://drricardofrusso.com/img/jornada/og-15b.jpg' },
+  // Encuesta de la Jornada: se llega por el QR del programa impreso. noindex y
+  // fuera del sitemap (SKIP en sync-seo.js): es solo para quienes asistieron.
+  { mode: 'core', src: 'cores/encuesta-jornada.html', out: 'encuesta-jornada.html', active: null, noindex: true,
+    title: 'Encuesta · Jornada P.I.T. — Dr. Ricardo D. Frusso',
+    desc: 'Contanos cómo te fue en la Jornada P.I.T. del domingo 15 de noviembre.' },
   { mode: 'core', src: 'cores/privacidad.html', out: 'privacidad.html', active: null,
     title: 'Información legal y privacidad — Dr. Ricardo D. Frusso',
     desc: 'Aviso legal, privacidad, cookies, términos de uso y aviso médico del sitio del Dr. Ricardo D. Frusso.' },
@@ -219,7 +224,7 @@ const HEAD = (p, extraCss) => `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="${p.desc}">
-${NOINDEX_META}  <meta name="author" content="Dr. Ricardo D. Frusso">
+${NOINDEX_META || (p.noindex ? '  <meta name="robots" content="noindex, nofollow">\n' : '')}  <meta name="author" content="Dr. Ricardo D. Frusso">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${p.title}">
   <meta property="og:description" content="${p.desc}">

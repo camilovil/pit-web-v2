@@ -9,7 +9,7 @@ const { STAGING } = require('./site');
 
 const ROOT = path.join(__dirname, '..');
 const ORIGIN = 'https://drricardofrusso.com';
-const SKIP = new Set(['certificado.html']);
+const SKIP = new Set(['certificado.html', 'encuesta-jornada.html']);
 
 function pages() {
   const rootPages = fs.readdirSync(ROOT)
